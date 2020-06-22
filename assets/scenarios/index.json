@@ -1,0 +1,28 @@
+{
+  "scenarios": [
+    {
+      "id": "tutorial_id",
+      "name": "Tutorial",
+      "image": "",
+      "code": "tuto",
+      "linkedFile": "tutorial.json",
+      "description": "Ceci est un tutoriel destiné à vous apprendre comment fonctionne l'application et le jeu."
+    },
+    {
+      "id": "duke_treasure_easy_id",
+      "name": "Le trésor des ducs (facile)",
+      "image": "",
+      "code": "bretagne",
+      "linkedFile": "tutorial.json",
+      "description": ""
+    },
+    {
+      "id": "duke_treasure_normal_id",
+      "name": "Le trésor des ducs (normal)",
+      "image": "",
+      "code": "bretagne",
+      "linkedFile": "tutorial.json",
+      "description": ""
+    }
+  ]
+}

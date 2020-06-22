@@ -1,0 +1,178 @@
+{
+  "details": {
+    "title": "Tutorial",
+    "duration": 10
+  },
+  "tracks": [
+    {
+      "id": 46,
+      "title": "Coffre ouvert",
+      "description": "Contre le mur se trouve un coffre ouvert.",
+      "found_description": "Bravo ! Le coffre est ouvert !",
+      "image": "assets/images/tutorial/opened_furniture.png",
+      "loots": [
+        {
+          "interaction_text": "Fouiller le coffre",
+          "type": "item",
+          "id": 16
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Courant rétabli",
+      "description": "Le courant est rétabli, peut-être cela aura-t-il un effet dans la pièce ?",
+      "found_description": "Le courant est rétabli à présent ! Peut-être cela aura-t-il un effet dans la pièce ?",
+      "image": "assets/images/tutorial/electricity_back.jpg"
+    },
+    {
+      "id": 48,
+      "title": "Ecran allumé",
+      "description": "L'écran s'est allumé, il doit servir pour sortir.",
+      "image": "assets/images/tutorial/tv_on.png"
+    },
+    {
+      "id": 1,
+      "title": "Sortie",
+      "description": "Vous avez réussi à sortir de la pièce !",
+      "end_track": true
+    }
+  ],
+  "items": [
+    {
+      "id": 11,
+      "title": "Clé",
+      "description": "Une simple clé",
+      "found_description": "Accroché à un mur, vous trouvez une simple clé. Ce qu'elle ouvre ne doit pas être loin.",
+      "image": "assets/images/tutorial/key.png"
+    },
+    {
+      "id": 16,
+      "title": "Fil électrique",
+      "description": "Un fil électrique de 10cm avec des embouts en forme d'anneaux.",
+      "found_description": "Au fond du coffre, vous trouvez un fil électrique. Il fait une dizaine de centimètre et possède des embouts en forme d'anneaux.",
+      "image": "assets/images/tutorial/electric_cable.png"
+    }
+  ],
+  "codes": [
+    {
+      "code": "16",
+      "loot": {
+        "type": "item",
+        "id": 16
+      }
+    },
+    {
+      "code": "9327",
+      "loot": {
+        "type": "track",
+        "id": 1
+      }
+    }
+  ],
+  "mechanisms": [
+    {
+      "name": "Coffre",
+      "id": 35,
+      "states": [
+        {
+          "id": 1,
+          "description": "Un coffre fermé à clé",
+          "start": true,
+          "image": "assets/images/tutorial/closed_furniture.png"
+        },
+        {
+          "id": 2,
+          "end_track": 46
+        }
+      ],
+      "transitions": [
+        {
+          "state_id": 1,
+          "expected_item": 11,
+          "transition_to": 2
+        }
+      ]
+    },
+    {
+      "name": "Panneau électrique",
+      "id": 69,
+      "states": [
+        {
+          "id": 1,
+          "description": "Une grille avec des picots séparés de 5 cm.",
+          "image": "assets/images/tutorial/electric_board.png",
+          "start": true
+        },
+        {
+          "id": 2,
+          "description": "Comment le fil doit être placé ?",
+          "image": "assets/images/tutorial/electric_board_connect.png"
+        },
+        {
+          "id": 3,
+          "end_track": 25
+        }
+      ],
+      "transitions": [
+        {
+          "state_id": 1,
+          "expected_item": 16,
+          "transition_to": 2
+        },
+        {
+          "state_id": 2,
+          "expected_code": "CD",
+          "transition_to": 3
+        }
+      ]
+    },
+    {
+      "name": "Ecran",
+      "id": 42,
+      "states": [
+        {
+          "id": 1,
+          "description": "Un écran. Il n'y a pas de courant",
+          "start": true,
+          "image": "assets/images/tutorial/tv_off.png"
+        },
+        {
+          "id": 2,
+          "end_track": 48
+        }
+      ],
+      "transitions": [
+        {
+          "state_id": 1,
+          "expected_track": 25,
+          "transition_to": 2
+        }
+      ]
+    },
+    {
+      "name": "Porte",
+      "id": 21,
+      "states": [
+        {
+          "id": 1,
+          "description": "C'est la porte de sortie. Elle est commandé par un digicode.",
+          "start": true,
+          "image": "assets/images/tutorial/exit_door.png"
+        },
+        {
+          "id": 2,
+          "end_track": 1
+        }
+      ],
+      "transitions": [
+        {
+          "state_id": 1,
+          "expected_code": "9327",
+          "transition_to": 2
+        }
+      ]
+    }
+  ]
+}
+
