@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 
 import '../../injection.dart';
 
-class InventoryDetailsScreen extends StatelessWidget {
+class InventoryDetailsFragment extends StatelessWidget {
   static const routeName = "/details";
 
   static NavigationIntent navigate(ScenarioElementDesc desc,
@@ -27,15 +27,7 @@ class InventoryDetailsScreen extends StatelessWidget {
         .settings
         .arguments;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-          title: Text(desc.title),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          centerTitle: true),
-      body: ScenarioElementView(desc: desc),
-    );
+    return ScenarioElementView(desc: desc);
   }
 }
 

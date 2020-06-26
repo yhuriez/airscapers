@@ -46,7 +46,7 @@ class InventoryTracksScreen extends StatelessWidget {
     return InkWell(
       onTap: (){
         final desc = ScenarioElementDesc.fromTrack(track, found: true);
-        Navigator.of(context).pushNamed(InventoryDetailsScreen.routeName, arguments: desc);
+        Navigator.of(context).pushNamed(InventoryDetailsFragment.routeName, arguments: desc);
       },
       child: Center(
         child: Row(

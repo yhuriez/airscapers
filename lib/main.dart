@@ -1,6 +1,7 @@
 import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/home/end_screen.dart';
 import 'package:airscaper/views/home/home_scenario_screen.dart';
+import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/timer_bloc.dart';
 import 'package:airscaper/views/init/scenario_choose_screen.dart';
@@ -58,11 +59,11 @@ class MainApp extends StatelessWidget {
           ScenarioStartScreen.routeName: (context) => ScenarioStartScreen(),
 
           // Home
-          HomeScenarioScreen.routeName: (context) => HomeScenarioScreen(),
-          ScanScreen.routeName: (context) => ScanScreen(),
-          InventoryItemsScreen.routeName: (context) => InventoryItemsScreen(),
-          InventoryTracksScreen.routeName: (context) => InventoryTracksScreen(),
-          InventoryDetailsScreen.routeName: (context) => InventoryDetailsScreen(),
+          HomeScenarioScreen.routeName: (context) => HomeScreen(),
+          ScanFragment.routeName: (context) => ScanFragment(),
+//          InventoryItemsScreen.routeName: (context) => InventoryItemsScreen(),
+//          InventoryTracksScreen.routeName: (context) => InventoryTracksScreen(),
+//          InventoryDetailsScreen.routeName: (context) => InventoryDetailsScreen(),
 
           // Mechanism
           MechanismScreen.routeName: (context) => MechanismScreen(),

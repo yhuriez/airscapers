@@ -17,28 +17,19 @@ class InventoryItemsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     bool isWithResult = ModalRoute.of(context).settings.arguments ?? false;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-          title: Text("Inventaire"),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          centerTitle: true),
-      body: FutureBuilder<List<ScenarioItem>>(
-          future: _loadItemsUseCase.execute(),
-          builder: (context, snapshot) {
-            final items = snapshot.data ?? [];
-            return InventoryItemGrid(
-              items: items,
-              onItemClicked: (context, item) {
-                onItemClicked(context, item, isWithResult);
-              },
-            );
-          }),
-    );
+    return FutureBuilder<List<ScenarioItem>>(
+        future: _loadItemsUseCase.execute(),
+        builder: (context, snapshot) {
+          final items = snapshot.data ?? [];
+          return InventoryItemGrid(
+            items: items,
+            onItemClicked: (context, item) {
+              onItemClicked(context, item, isWithResult);
+            },
+          );
+        });
   }
 
   onItemClicked(BuildContext context, ScenarioItem item, bool isWithResult) {
@@ -47,7 +38,7 @@ class InventoryItemsScreen extends StatelessWidget {
     } else {
       final desc = ScenarioElementDesc.fromItem(item, found: true);
       Navigator.of(context)
-          .pushNamed(InventoryDetailsScreen.routeName, arguments: desc);
+          .pushNamed(InventoryDetailsFragment.routeName, arguments: desc);
     }
   }
 }

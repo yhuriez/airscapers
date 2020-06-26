@@ -63,7 +63,7 @@ class InterpretLinkUseCase {
           await _addLootUseCase.execute(scenarioTrack.loots);
         }
 
-        return InventoryDetailsScreen.navigate(
+        return InventoryDetailsFragment.navigate(
             ScenarioElementDesc.fromTrack(scenarioTrack));
       }
     } else {
@@ -85,7 +85,7 @@ class InterpretLinkUseCase {
         return createDialogNavigationIntent(
             "Objet déjà trouvé", "Vous possédez déjà cet objet");
       } else {
-        return InventoryDetailsScreen.navigate(
+        return InventoryDetailsFragment.navigate(
             ScenarioElementDesc.fromItem(scenarioItem, found: false));
       }
     } else {

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
 import '../../injection.dart';
 
-class ScanScreen extends StatelessWidget {
+class ScanFragment extends StatelessWidget {
+
   static const routeName = "/scan";
 
   final InterpretLinkUseCase interpretLinkUseCase = sl();
@@ -16,21 +17,13 @@ class ScanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("Scanner un élément"),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: Column(
+    return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           createScannerButton(context),
           createCodeField(context),
         ],
-      ),
-    );
+      );
   }
 
   Widget createScannerButton(BuildContext context) => Padding(

@@ -29,7 +29,7 @@ class _ARSClockState extends State<ARSClock> {
 
         final durationLeft = Duration(seconds: state.durationLeft);
         final textValue = formatDuration(durationLeft);
-        return Text(textValue, style: TextStyle(fontSize: 80));
+        return Text(textValue, style: TextStyle(fontSize: 80, color: Colors.white));
       },
     );
   }

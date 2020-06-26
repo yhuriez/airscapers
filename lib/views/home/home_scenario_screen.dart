@@ -14,7 +14,6 @@ import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 import '../../injection.dart';
@@ -156,7 +155,7 @@ class HomeScreenContent extends StatelessWidget {
 
   onScanDebugClicked(BuildContext context) {
     if(kDebugMode) {
-      Navigator.of(context).pushNamed(ScanScreen.routeName);
+      Navigator.of(context).pushNamed(ScanFragment.routeName);
     }
   }
 

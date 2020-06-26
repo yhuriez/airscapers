@@ -143,7 +143,7 @@ class MechanismFinishedUseCase {
 
     await _inventory.insertTrack(track.id);
 
-    return InventoryDetailsScreen.navigate(
+    return InventoryDetailsFragment.navigate(
         ScenarioElementDesc.fromTrack(track));
   }
 }
