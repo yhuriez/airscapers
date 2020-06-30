@@ -40,7 +40,7 @@ class InterpretLinkUseCase {
     final scenarioMechanism = _repository.getMechanism(id);
 
     if (scenarioMechanism != null) {
-      return MechanismScreen.navigate(scenarioMechanism);
+      return MechanismFragment.navigate(scenarioMechanism);
     } else {
       return createDialogNavigationIntent(
           "QR code invalide", "Ce QR code n'existe pas pour ce scénario");

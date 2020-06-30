@@ -1,6 +1,6 @@
 import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/home/end_screen.dart';
-import 'package:airscaper/views/home/home_scenario_screen.dart';
+import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/timer_bloc.dart';
@@ -30,7 +30,7 @@ Future<void> main() async {
   if (initResponse is NoScenarioResponse) {
     initialRoute = ChooseScenarioScreen.routeName;
   } else if (initResponse is HasScenarioResponse) {
-    initialRoute = HomeScenarioScreen.routeName;
+    initialRoute = HomeScreen.routeName;
   }
 
   CatcherOptions debugOptions =
@@ -59,14 +59,14 @@ class MainApp extends StatelessWidget {
           ScenarioStartScreen.routeName: (context) => ScenarioStartScreen(),
 
           // Home
-          HomeScenarioScreen.routeName: (context) => HomeScreen(),
+          HomeScreen.routeName: (context) => HomeScreen(),
           ScanFragment.routeName: (context) => ScanFragment(),
 //          InventoryItemsScreen.routeName: (context) => InventoryItemsScreen(),
 //          InventoryTracksScreen.routeName: (context) => InventoryTracksScreen(),
 //          InventoryDetailsScreen.routeName: (context) => InventoryDetailsScreen(),
 
           // Mechanism
-          MechanismScreen.routeName: (context) => MechanismScreen(),
+          MechanismFragment.routeName: (context) => MechanismFragment(),
           CodeScreen.routeName: (context) => CodeScreen(),
           GameOverScreen.routeName: (context) => GameOverScreen()
         },

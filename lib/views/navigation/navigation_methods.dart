@@ -1,4 +1,4 @@
-import 'package:airscaper/views/home/home_scenario_screen.dart';
+import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ bool Function(Route<dynamic>) getBackStackPredicate(
   } else if (behavior == BackStackBehavior.NO_BACK_STACK) {
     return (it) {
       print("-- Back name:" + it.settings.name);
-      return it.settings.name == HomeScenarioScreen.routeName;
+      return it.settings.name == HomeScreen.routeName;
     };
   }
   return (it) => true;

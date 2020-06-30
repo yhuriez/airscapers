@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import '../../injection.dart';
 import '../code/code_screen.dart';
 
-class MechanismScreen extends StatelessWidget {
+class MechanismFragment extends StatelessWidget {
   static const routeName = "/mechanism";
 
   static NavigationIntent navigate(ScenarioMechanism mechanism,
@@ -24,16 +24,7 @@ class MechanismScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ScenarioMechanism mechanism = ModalRoute.of(context).settings.arguments;
 
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            title: Text(mechanism.name),
-            elevation: 0,
-            backgroundColor: Colors.white,
-            centerTitle: true),
-        body: MechanismStateRepresentation(
-          mechanism: mechanism,
-        ));
+    return MechanismStateRepresentation(mechanism: mechanism,);
   }
 }
 
@@ -89,7 +80,7 @@ class _MechanismStateRepresentationState
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(_state.description, style: TextStyle(fontSize: 16)),
+              child: Text(_state.description, style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           ),
         ),

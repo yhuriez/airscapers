@@ -38,12 +38,13 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
         child: Container(
           decoration: BoxDecoration(
+            color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(6.0)),
               border: Border.all(color: Colors.black12)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, backgroundColor: Colors.white),
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: widget.hint ?? ""),
                 validator: (value) {

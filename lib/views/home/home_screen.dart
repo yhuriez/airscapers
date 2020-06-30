@@ -6,7 +6,9 @@ import 'package:airscaper/views/home/end_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
+import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:airscaper/views/navigation/utils.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +19,12 @@ import '../../injection.dart';
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
   ScanFragment.routeName: (BuildContext context) => ScanFragment(),
-  InventoryDetailsFragment.routeName: (BuildContext context) =>
-      InventoryDetailsFragment()
+  InventoryDetailsFragment.routeName: (BuildContext context) => InventoryDetailsFragment(),
+  MechanismFragment.routeName: (BuildContext context) => MechanismFragment()
 };
 
 class HomeScreen extends StatelessWidget {
-  static const routeName = "/home_bis";
+  static const routeName = "/home";
 
   final StartScenarioUseCase _startScenarioUseCase = sl();
 
@@ -67,9 +69,12 @@ class HomeScreen extends StatelessWidget {
 
 /// Visual content of the home page
 class HomeScreenContent extends StatelessWidget {
+
   final EndScenarioUseCase _endScenarioUseCase = sl();
   final ParseLinkUseCase _parseLinkUseCase = sl();
   final InterpretLinkUseCase _interpretLinkUseCase = sl();
+
+  final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -87,18 +92,25 @@ class HomeScreenContent extends StatelessWidget {
         ),
 
         // Main view
-        Expanded(child: _createHomeNavigation()),
+        Expanded(child: _createHomeNavigation(context)),
 
         // Inventory
       ],
     );
   }
 
-  Widget _createHomeNavigation() {
-    return Navigator(
-        initialRoute: MainScanFragment.routeName,
-        onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
-            settings: settings, builder: homeRouteBuilders[settings.name]));
+  Widget _createHomeNavigation(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        _homeNavigatorKey.currentState.maybePop();
+        return false;
+      },
+      child: Navigator(
+          key: _homeNavigatorKey,
+          initialRoute: MainScanFragment.routeName,
+          onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
+              settings: settings, builder: homeRouteBuilders[settings.name])),
+    );
   }
 
   doGameOverScreen(BuildContext context) async {

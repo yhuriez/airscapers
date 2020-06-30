@@ -3,7 +3,7 @@ import 'package:airscaper/model/entities/scenario_reference.dart';
 import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
-import 'package:airscaper/views/home/home_scenario_screen.dart';
+import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/timer_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +61,7 @@ class ScenarioStartScreen extends StatelessWidget {
   }
 
   onConfirm(BuildContext context){
-    Navigator.pushNamedAndRemoveUntil(context, HomeScenarioScreen.routeName, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
   }
 }
 

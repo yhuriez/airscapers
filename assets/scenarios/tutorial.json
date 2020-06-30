@@ -15,6 +15,11 @@
           "interaction_text": "Fouiller le coffre",
           "type": "item",
           "id": 16
+        },
+        {
+          "interaction_text": "Fouiller le tiroir",
+          "type": "track",
+          "id": 25
         }
       ]
     },
