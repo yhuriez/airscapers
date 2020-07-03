@@ -2,20 +2,20 @@ import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_loot.dart';
 import 'package:airscaper/model/entities/scenario_track.dart';
 import 'package:airscaper/model/inventory_local_source.dart';
-import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/usecases/link_use_cases.dart';
-import 'package:airscaper/views/navigation/navigation_intent.dart';
-import 'package:airscaper/views/navigation/navigation_link.dart';
-import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddLootUseCase {
   final InventoryLocalSource _localSource;
 
   AddLootUseCase(this._localSource);
 
-  Future<AddLootResponse> execute(Iterable<ScenarioLoot> loots) async {
+  Future<AddLootResponse> execute(BuildContext context, Iterable<ScenarioLoot> loots) async {
     var existingElement = false;
+
+    // ignore: close_sinks
+    final inventoryBloc = BlocProvider.of<InventoryBloc>(context);
 
     try {
       await Future.forEach(loots, (loot) async {
@@ -25,9 +25,11 @@ class AddLootUseCase {
             existingElement = true;
           }
         } else if (loot.type == itemKey) {
-          final result = await _localSource.insertItem(loot.id);
-          if (result == -1) {
+          final result = await _localSource.loadItem(loot.id);
+          if (result != null) {
             existingElement = true;
+          } else {
+            inventoryBloc.add(AddItemInventoryEvent(loot.id));
           }
         }
       });
@@ -44,58 +46,7 @@ class AddLootUseCase {
 
 enum AddLootResponse { ADDED, ALREADY_FOUND, ERROR }
 
-class LoadTracksUseCase {
-  final ScenarioRepository _repository;
-  final InventoryLocalSource _localSource;
 
-  LoadTracksUseCase(this._repository, this._localSource);
-
-  Future<List<ScenarioTrack>> execute() async {
-    final inventoryTrackIds =
-        (await _localSource.loadAllTracks()).map((e) => e.id).toList();
-    return _repository.tracks
-        .where((track) => inventoryTrackIds.contains(track.id))
-        .toList();
-  }
-}
-
-class LoadItemsUseCase {
-  final ScenarioRepository _repository;
-  final InventoryLocalSource _localSource;
-
-  LoadItemsUseCase(this._repository, this._localSource);
-
-  Future<List<ScenarioItem>> execute() async {
-    final inventoryItemIds =
-        (await _localSource.loadUnusedItems()).map((e) => e.id).toList();
-    return _repository.items
-        .where((item) => inventoryItemIds.contains(item.id))
-        .toList();
-  }
-}
-
-class CodeInputUseCase {
-  final ScenarioRepository _repository;
-  final InterpretLinkUseCase _interpretLinkUseCase;
-
-  CodeInputUseCase(this._repository, this._interpretLinkUseCase);
-
-  Future<NavigationIntent> execute(String code) async {
-    final scenarioCode =
-        _repository.codes.firstWhere((element) => element.code == code);
-    if (scenarioCode != null) {
-      final loot = scenarioCode.loot;
-      if (loot == null) {
-        return createDialogNavigationIntent(
-            "Fausse piste", "Ce code ne correspond à rien");
-      }
-      return await _interpretLinkUseCase.execute(NavigationLink.fromLoot(loot));
-    } else {
-      return createDialogNavigationIntent(
-          "Fausse piste", "Ce code ne correspond à rien");
-    }
-  }
-}
 
 class FilterAvailableLootUseCase {
   final InventoryLocalSource _inventory;

@@ -4,7 +4,7 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/home/home_screen.dart';
-import 'package:airscaper/views/home/timer_bloc.dart';
+import 'package:airscaper/views/home/bloc/timer_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,7 +70,7 @@ class ScenarioCodeInput extends StatefulWidget {
   final Function(BuildContext) confirmCallback;
   final ScenarioReference scenario;
 
-  final startScenarioUseCase = sl<RegisterScenarioUseCase>();
+  final registerScenarioUseCase = sl<RegisterScenarioUseCase>();
 
   ScenarioCodeInput({Key key, @required this.confirmCallback, @required this.scenario})
       : super(key: key);
@@ -104,7 +104,7 @@ class _ScenarioCodeInputState extends State<ScenarioCodeInput> {
   );
 
   onStartClicked(BuildContext context, String value) async {
-      await widget.startScenarioUseCase.execute(context, widget.scenario);
+      await widget.registerScenarioUseCase.execute(context, widget.scenario);
 
       widget.confirmCallback(context);
   }

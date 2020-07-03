@@ -1,6 +1,5 @@
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/model/entities/element_description.dart';
-import 'package:airscaper/usecases/inventory_use_cases.dart';
+import 'package:airscaper/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
@@ -66,7 +65,7 @@ class CodeScreen extends StatelessWidget {
       if (isWithResult) {
         Navigator.of(context).pop(value);
       } else {
-        final intent = await _codeInputUseCase.execute(value);
+        final intent = await _codeInputUseCase.execute(context, value);
         navigateTo(context, intent);
       }
     }

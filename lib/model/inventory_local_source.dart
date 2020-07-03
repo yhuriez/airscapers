@@ -13,9 +13,22 @@ class InventoryLocalSource {
         .get();
   }
 
+  Future<InventoryItem> loadItem(int id) {
+    return (db.doSelect(db.inventoryItems)
+        ..where((it) => it.id.equals(id)))
+        .getSingle();
+  }
+
   Future<List<InventoryTrack>> loadAllTracks() {
     return db.doSelect(db.inventoryTracks).get();
   }
+
+  Future<InventoryTrack> loadTrack(int id) {
+    return (db.doSelect(db.inventoryTracks)
+        ..where((it) => it.id.equals(id)))
+        .getSingle();
+  }
+
 
   Future<InventoryMechanismState> loadMechanismState(int mechanismId) {
     return (db.doSelect(db.inventoryMechanismStates)

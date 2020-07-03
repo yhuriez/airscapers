@@ -1,4 +1,4 @@
-import 'package:airscaper/views/home/timer_bloc.dart';
+import 'package:airscaper/views/home/bloc/timer_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_indicators/progress_indicators.dart';

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:airscaper/model/database.dart';
 import 'package:airscaper/model/entities/scenario.dart';
 import 'package:airscaper/model/entities/scenario_code.dart';
 import 'package:airscaper/model/entities/scenario_index.dart';
@@ -34,6 +35,13 @@ class ScenarioRepository {
 
   ScenarioItem getItem(int itemId) =>
       items.firstWhere((element) => element.id == itemId, orElse: () => null);
+
+  List<ScenarioItem> getItems(List<InventoryItem> inventoryItems) =>
+      items.where((scenarioItem) {
+        return inventoryItems.any((item) {
+          return scenarioItem.id == item.id;
+        });
+      } ).toList();
 
   ScenarioTrack getTrack(int trackId) =>
       tracks.firstWhere((element) => element.id == trackId, orElse: () => null);

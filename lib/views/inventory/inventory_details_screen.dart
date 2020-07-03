@@ -168,7 +168,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
 
 
   onLootClicked(ScenarioLoot loot) async {
-    final intent = await widget._interpretLinkUseCase.execute(NavigationLink.fromLoot(loot));
+    final intent = await widget._interpretLinkUseCase.execute(context, NavigationLink.fromLoot(loot));
     await Navigator.of(context).pushNamed(intent.screenName, arguments: intent.arguments);
 
     refreshLoots();

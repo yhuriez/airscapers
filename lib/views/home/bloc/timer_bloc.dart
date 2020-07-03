@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/usecases/init_use_cases.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../injection.dart';
+import '../../../injection.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final ScenarioRepository _repository = sl();

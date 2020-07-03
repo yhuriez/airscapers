@@ -1,22 +1,16 @@
 import 'package:airscaper/usecases/init_use_cases.dart';
+import 'package:airscaper/views/code/code_screen.dart';
 import 'package:airscaper/views/home/end_screen.dart';
 import 'package:airscaper/views/home/home_screen.dart';
-import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
-import 'package:airscaper/views/home/timer_bloc.dart';
 import 'package:airscaper/views/init/scenario_choose_screen.dart';
 import 'package:airscaper/views/init/scenario_start_screen.dart';
-import 'package:airscaper/views/inventory/inventory_details_screen.dart';
-import 'package:airscaper/views/inventory/inventory_items_screen.dart';
-import 'package:airscaper/views/inventory/inventory_tracks_screen.dart';
-import 'package:airscaper/views/code/code_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:catcher/core/catcher.dart';
 import 'package:catcher/handlers/console_handler.dart';
 import 'package:catcher/mode/dialog_report_mode.dart';
 import 'package:catcher/model/catcher_options.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'injection.dart';
 
@@ -46,40 +40,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: initProviders(),
-      child: MaterialApp(
-        navigatorKey: Catcher.navigatorKey,
-        title: 'Airscapers',
-        theme: ThemeData(primaryColor: Colors.white, accentColor: Colors.black),
-        debugShowCheckedModeBanner: false,
-        routes: {
-          // init
-          ChooseScenarioScreen.routeName: (context) => ChooseScenarioScreen(),
-          ScenarioStartScreen.routeName: (context) => ScenarioStartScreen(),
+    return MaterialApp(
+      navigatorKey: Catcher.navigatorKey,
+      title: 'Airscapers',
+      theme: ThemeData(primaryColor: Colors.white, accentColor: Colors.black),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        // init
+        ChooseScenarioScreen.routeName: (context) => ChooseScenarioScreen(),
+        ScenarioStartScreen.routeName: (context) => ScenarioStartScreen(),
 
-          // Home
-          HomeScreen.routeName: (context) => HomeScreen(),
-          ScanFragment.routeName: (context) => ScanFragment(),
-//          InventoryItemsScreen.routeName: (context) => InventoryItemsScreen(),
-//          InventoryTracksScreen.routeName: (context) => InventoryTracksScreen(),
-//          InventoryDetailsScreen.routeName: (context) => InventoryDetailsScreen(),
-
-          // Mechanism
-          MechanismFragment.routeName: (context) => MechanismFragment(),
-          CodeScreen.routeName: (context) => CodeScreen(),
-          GameOverScreen.routeName: (context) => GameOverScreen()
-        },
-        initialRoute: initialRoute,
-      ),
+        // Home
+        HomeScreen.routeName: (context) => HomeScreen(),
+        ScanFragment.routeName: (context) => ScanFragment(),
+        GameOverScreen.routeName: (context) => GameOverScreen()
+      },
+      initialRoute: initialRoute,
     );
-  }
-
-  List<BlocProvider> initProviders() {
-    return [
-      BlocProvider<TimerBloc>(
-        create: (context) => TimerBloc(),
-      )
-    ];
   }
 }

@@ -59,7 +59,7 @@ class ScanFragment extends StatelessWidget {
   onValidClicked(BuildContext context, String value) async {
     final link = _parseLinkUseCase.execute(value);
     if (link != null) {
-      final intent = await interpretLinkUseCase.execute(link);
+      final intent = await interpretLinkUseCase.execute(context, link);
       navigateReplaceTo(context, intent);
     } else {
       navigateShowDialog(

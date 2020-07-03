@@ -58,7 +58,7 @@ class MainScanFragment extends StatelessWidget {
 
     final link = _parseLinkUseCase.execute(cameraScanResult);
     if(link != null) {
-      final intent = await _interpretLinkUseCase.execute(link);
+      final intent = await _interpretLinkUseCase.execute(context, link);
       navigateTo(context, intent);
     } else {
       navigateShowDialog(

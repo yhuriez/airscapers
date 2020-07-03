@@ -5,6 +5,11 @@ import 'package:airscaper/model/inventory_local_source.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
+import 'package:airscaper/views/navigation/navigation_link.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:flutter/material.dart';
+
+import 'link_use_cases.dart';
 
 class LoadCurrentMechanismStateUseCase {
   final InventoryLocalSource _inventory;
@@ -145,5 +150,29 @@ class MechanismFinishedUseCase {
 
     return InventoryDetailsFragment.navigate(
         ScenarioElementDesc.fromTrack(track));
+  }
+}
+
+
+class CodeInputUseCase {
+  final ScenarioRepository _repository;
+  final InterpretLinkUseCase _interpretLinkUseCase;
+
+  CodeInputUseCase(this._repository, this._interpretLinkUseCase);
+
+  Future<NavigationIntent> execute(BuildContext context, String code) async {
+    final scenarioCode =
+    _repository.codes.firstWhere((element) => element.code == code);
+    if (scenarioCode != null) {
+      final loot = scenarioCode.loot;
+      if (loot == null) {
+        return createDialogNavigationIntent(
+            "Fausse piste", "Ce code ne correspond à rien");
+      }
+      return await _interpretLinkUseCase.execute(context, NavigationLink.fromLoot(loot));
+    } else {
+      return createDialogNavigationIntent(
+          "Fausse piste", "Ce code ne correspond à rien");
+    }
   }
 }

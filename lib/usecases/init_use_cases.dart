@@ -1,11 +1,11 @@
 import 'package:airscaper/common/ars_result.dart';
 import 'package:airscaper/model/entities/scenario_reference.dart';
 import 'package:airscaper/model/inventory_local_source.dart';
-import 'package:airscaper/model/managers/timer_manager.dart';
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/views/home/timer_bloc.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
+import 'package:airscaper/views/home/bloc/timer_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Init application
@@ -92,6 +92,7 @@ class StartScenarioUseCase {
     }
 
     BlocProvider.of<TimerBloc>(context).add(InitTimerEvent());
+    BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
 
     return ARSResult.success(true);
   }
@@ -114,15 +115,14 @@ class InitStartDateUseCase {
   }
 }
 
-
 /// Reset all scenario local data
 class EndScenarioUseCase {
-
   final ScenarioSharedPrefs _sharedPrefs;
   final ScenarioRepository _repository;
   final InventoryLocalSource _inventoryLocalSource;
 
-  EndScenarioUseCase(this._sharedPrefs, this._repository, this._inventoryLocalSource);
+  EndScenarioUseCase(
+      this._sharedPrefs, this._repository, this._inventoryLocalSource);
 
   Future<bool> execute() async {
     await _sharedPrefs.clear();

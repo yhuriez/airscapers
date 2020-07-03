@@ -10,6 +10,7 @@ import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_link.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:flutter/material.dart';
 
 class InterpretLinkUseCase {
   final ScenarioRepository _repository;
@@ -17,18 +18,18 @@ class InterpretLinkUseCase {
 
   InterpretLinkUseCase(this._repository, this._addLootUseCase);
 
-  Future<NavigationIntent> execute(NavigationLink link) async {
+  Future<NavigationIntent> execute(BuildContext context, NavigationLink link) async {
     if (link.route == mechanismKey) {
       // Mechanism
       return _interpretMechanism(link.id);
 
     } else if (link.route == trackKey) {
       // Track
-      return _interpretTrack(link.id);
+      return _interpretTrack(context, link.id);
 
     } else if (link.route == itemKey) {
       // Item
-      return _interpretItem(link.id);
+      return _interpretItem(context, link.id);
 
     } else {
       return createDialogNavigationIntent(
@@ -47,12 +48,12 @@ class InterpretLinkUseCase {
     }
   }
 
-  Future<NavigationIntent> _interpretTrack(int id) async {
+  Future<NavigationIntent> _interpretTrack(BuildContext context, int id) async {
     final scenarioTrack = _repository.getTrack(id);
 
     if (scenarioTrack != null) {
       final loot = ScenarioLoot(trackKey, id);
-      final response = await _addLootUseCase.execute([loot]);
+      final response = await _addLootUseCase.execute(context, [loot]);
 
       if (response == AddLootResponse.ERROR) {
         return createDialogNavigationIntent(
@@ -60,7 +61,7 @@ class InterpretLinkUseCase {
       } else {
         // Add track's loots if there is some
         if (scenarioTrack.loots != null) {
-          await _addLootUseCase.execute(scenarioTrack.loots);
+          await _addLootUseCase.execute(context, scenarioTrack.loots);
         }
 
         return InventoryDetailsFragment.navigate(
@@ -72,12 +73,12 @@ class InterpretLinkUseCase {
     }
   }
 
-  Future<NavigationIntent> _interpretItem(int id) async {
+  Future<NavigationIntent> _interpretItem(BuildContext context, int id) async {
     final scenarioItem = _repository.getItem(id);
 
     if (scenarioItem != null) {
       final loot = ScenarioLoot(itemKey, id);
-      final response = await _addLootUseCase.execute([loot]);
+      final response = await _addLootUseCase.execute(context, [loot]);
       if (response == AddLootResponse.ERROR) {
         return createDialogNavigationIntent(
             "Erreur", "Une erreur est survenue");

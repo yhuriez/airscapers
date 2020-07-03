@@ -1,10 +1,5 @@
-import 'package:airscaper/model/entities/element_description.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/usecases/mechanism_use_cases.dart';
-import 'package:airscaper/views/common/ars_icon_button.dart';
-import 'package:airscaper/views/inventory/inventory_details_screen.dart';
-import 'package:airscaper/views/inventory/inventory_items_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +27,6 @@ class MechanismStateRepresentation extends StatefulWidget {
   final ScenarioMechanism mechanism;
 
   MechanismCodeInputUseCase get _mechanismCodeInputUseCase => sl();
-
-  MechanismItemSelectUseCase get _mechanismItemSelectUseCase => sl();
 
   LoadCurrentMechanismStateUseCase get _loadCurrentMechanismStateUseCase =>
       sl();
@@ -83,15 +76,6 @@ class _MechanismStateRepresentationState
               child: Text(_state.description, style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           ),
-        ),
-        Flexible(
-          flex: 2,
-          child: MechanismButtonBar(
-            mechanism: widget.mechanism,
-            onCodeClicked: onCodeClicked,
-            onInventoryClicked: onInventoryClicked,
-            onClueClicked: onClueClicked,
-          ),
         )
       ],
     );
@@ -103,21 +87,6 @@ class _MechanismStateRepresentationState
     if (codeResult != null) {
       final MechanismState newState = await widget._mechanismCodeInputUseCase
           .execute(mechanism, codeResult);
-      if (newState != null) {
-        refreshState(context, givenState: newState);
-      } else {
-        final intent = createDialogNavigationIntent("", "Rien ne se passe");
-        navigateTo(context, intent);
-      }
-    }
-  }
-
-  onInventoryClicked(BuildContext context, ScenarioMechanism mechanism) async {
-    final item = await Navigator.of(context)
-        .pushNamed(InventoryItemsScreen.routeName, arguments: true);
-    if (item != null) {
-      final MechanismState newState =
-          await widget._mechanismItemSelectUseCase.execute(mechanism, item);
       if (newState != null) {
         refreshState(context, givenState: newState);
       } else {
@@ -146,55 +115,5 @@ class _MechanismStateRepresentationState
         _state = newState;
       });
     }
-  }
-}
-
-class MechanismButtonBar extends StatelessWidget {
-  final ScenarioMechanism mechanism;
-  final Function(BuildContext, ScenarioMechanism) onCodeClicked;
-  final Function(BuildContext, ScenarioMechanism) onInventoryClicked;
-  final Function(BuildContext, ScenarioMechanism) onClueClicked;
-
-  const MechanismButtonBar(
-      {Key key,
-      this.mechanism,
-      this.onCodeClicked,
-      this.onInventoryClicked,
-      this.onClueClicked})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-            child: Center(
-                child: ARSIconButton(
-                    text: "Code",
-                    onClick: (context) {
-                      onCodeClicked(context, mechanism);
-                    },
-                    backgroundColor: Colors.red,
-                    icon: Icons.dialpad))),
-        Expanded(
-            child: Center(
-                child: ARSIconButton(
-                    text: "Inventaire",
-                    onClick: (context) {
-                      onInventoryClicked(context, mechanism);
-                    },
-                    backgroundColor: Colors.blue,
-                    icon: Icons.work))),
-        Expanded(
-            child: Center(
-                child: ARSIconButton(
-                    text: "Indice",
-                    onClick: (context) {
-                      onClueClicked(context, mechanism);
-                    },
-                    backgroundColor: Colors.orange,
-                    icon: Icons.wb_incandescent))),
-      ],
-    );
   }
 }
