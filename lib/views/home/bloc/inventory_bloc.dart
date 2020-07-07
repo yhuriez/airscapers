@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../injection.dart';
 
 class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
-
   final ScenarioRepository _repository = sl();
   final InventoryLocalSource _localSource = sl();
 
@@ -19,28 +18,39 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
   @override
   Stream<InventoryState> mapEventToState(InventoryEvent event) async* {
     try {
+      // Init item
       if (event is InitInventoryEvent) {
         final items = await _localSource.loadUnusedItems();
-        final scenarioItems= _repository.getItems(items);
+        final scenarioItems = _repository.getItems(items);
         yield InventoryState(items: scenarioItems);
 
-
+        // Remove item
       } else if (event is RemoveItemInventoryEvent) {
         await _localSource.updateItemUsed(event.itemId);
 
         var newItems = state.items ?? [];
         newItems.removeWhere((it) => it.id == event.itemId);
-        yield InventoryState(items: newItems);
+        yield state.clone(items: newItems);
 
-
+        // Add item
       } else if (event is AddItemInventoryEvent) {
         final id = await _localSource.insertItem(event.itemId);
         final scenarioItem = _repository.getItem(id);
 
         final newItems = (state.items ?? []) + [scenarioItem];
-        yield InventoryState(items: newItems);
+        yield state.clone(items: newItems);
 
+        // Select item
+      } else if (event is SelectItemInventoryEvent) {
+        if(state.selectedItem == event.itemId) {
+          // -1 instead of null to make clone works (null values are replaced
+          // by current state value)
+          yield state.clone(selectedItem: -1);
+        } else {
+          yield state.clone(selectedItem: event.itemId);
+        }
 
+        // Clear inventory
       } else if (event is ClearInventoryEvent) {
         await _localSource.clear();
         yield InventoryState(items: []);
@@ -71,13 +81,28 @@ class RemoveItemInventoryEvent extends InventoryEvent {
   RemoveItemInventoryEvent(this.itemId);
 }
 
-class ClearInventoryEvent extends InventoryEvent {}
+class SelectItemInventoryEvent extends InventoryEvent {
+  final int itemId;
 
+  SelectItemInventoryEvent(this.itemId);
+}
+
+class ClearInventoryEvent extends InventoryEvent {}
 
 /// STATE
 class InventoryState {
   final List<ScenarioItem> items;
   final bool loading;
+  final int selectedItem;
 
-  InventoryState({this.items, this.loading = false});
+  InventoryState(
+      {this.items, this.loading = false, this.selectedItem});
+
+  InventoryState clone(
+          {List<ScenarioItem> items, bool loading, int selectedItem}) =>
+      InventoryState(
+          items: items ?? this.items,
+          loading: loading ?? this.loading,
+          selectedItem: selectedItem ?? this.selectedItem
+      );
 }

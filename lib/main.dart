@@ -1,11 +1,9 @@
 import 'package:airscaper/usecases/init_use_cases.dart';
-import 'package:airscaper/views/code/code_screen.dart';
 import 'package:airscaper/views/home/end_screen.dart';
 import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/init/scenario_choose_screen.dart';
 import 'package:airscaper/views/init/scenario_start_screen.dart';
-import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:catcher/core/catcher.dart';
 import 'package:catcher/handlers/console_handler.dart';
 import 'package:catcher/mode/dialog_report_mode.dart';

@@ -1,5 +1,4 @@
 import 'package:airscaper/common/helpers.dart';
-import 'package:airscaper/model/entities/scenario_loot.dart';
 
 const String mechanismKey = "mechanism";
 
@@ -7,23 +6,19 @@ class ScenarioMechanism {
   int _id;
   String _name;
   List<MechanismState> _states;
-  List<MechanismTransition> _transitions;
 
   int get id => _id;
+
   String get name => _name;
 
   List<MechanismState> get states => _states;
 
-  List<MechanismTransition> get transitions => _transitions;
-
-  ScenarioMechanism(this._id, this._states, this._transitions);
+  ScenarioMechanism(this._id, this._states);
 
   ScenarioMechanism.map(dynamic obj) {
     this._id = obj["id"];
     this._name = obj["name"];
     this._states = mapTypedList(obj["states"], (it) => MechanismState.map(it));
-    this._transitions =
-        mapTypedList(obj["transitions"], (it) => MechanismTransition.map(it));
   }
 
   Map<String, dynamic> toMap() {
@@ -31,12 +26,7 @@ class ScenarioMechanism {
     map["id"] = _id;
     map["name"] = _name;
     map["states"] = _states;
-    map["transitions"] = _transitions;
     return map;
-  }
-
-  List<MechanismTransition> getTransitionsForState(int stateId) {
-    return transitions.where((element) => element.stateId == stateId).toList();
   }
 }
 
@@ -46,6 +36,8 @@ class MechanismState {
   String _image;
   bool _start;
   int _endTrack;
+  List<MechanismTransition> _transitions;
+  String _codeHint;
 
   String get description => _description;
 
@@ -59,8 +51,12 @@ class MechanismState {
 
   int get endTrack => _endTrack;
 
-  MechanismState(this._description, this._id,
-      this._image, this._start, this._endTrack);
+  String get codeHint => _codeHint;
+
+  List<MechanismTransition> get transitions => _transitions;
+
+  MechanismState(this._description, this._id, this._image, this._start,
+      this._endTrack, this._transitions, this._codeHint);
 
   MechanismState.map(dynamic obj) {
     this._id = obj["id"];
@@ -68,6 +64,9 @@ class MechanismState {
     this._description = obj["description"];
     this._image = obj["image"];
     this._endTrack = obj["end_track"];
+    this._transitions =
+        mapTypedList(obj["transitions"], (it) => MechanismTransition.map(it));
+    this._codeHint = obj["code_hint"];
   }
 
   Map<String, dynamic> toMap() {
@@ -77,6 +76,8 @@ class MechanismState {
     map["image"] = _image;
     map["start"] = _start;
     map["end_track"] = _endTrack;
+    map["transitions"] = _transitions;
+    map["code_hint"] = _codeHint;
     return map;
   }
 }
@@ -92,7 +93,7 @@ class MechanismTransition {
   String get expectedCode => _expectedCode;
 
   int get expectedItemId => _expectedItem;
-  
+
   int get expectedTrack => _expectedTrack;
 
   int get stateId => _stateId;
@@ -101,8 +102,8 @@ class MechanismTransition {
 
   String get triggerType => _triggerType;
 
-  MechanismTransition(this._expectedCode, this._expectedItem, this._expectedTrack, this._stateId,
-      this._transitionTo);
+  MechanismTransition(this._expectedCode, this._expectedItem,
+      this._expectedTrack, this._stateId, this._transitionTo);
 
   MechanismTransition.map(dynamic obj) {
     this._expectedCode = obj["expected_code"];

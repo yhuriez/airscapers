@@ -23,7 +23,6 @@ Future<void> init() async {
   sl.registerLazySingleton<EndScenarioUseCase>(() => EndScenarioUseCase(sl(), sl(), sl()));
 
   sl.registerLazySingleton<AddLootUseCase>(() => AddLootUseCase(sl()));
-  sl.registerLazySingleton<CodeInputUseCase>(() => CodeInputUseCase(sl(), sl()));
   sl.registerLazySingleton<FilterAvailableLootUseCase>(() => FilterAvailableLootUseCase(sl()));
 
   sl.registerLazySingleton<InterpretLinkUseCase>(() => InterpretLinkUseCase(sl(), sl()));

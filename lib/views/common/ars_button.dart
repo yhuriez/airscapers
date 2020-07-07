@@ -33,14 +33,17 @@ class ARSButton extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
             image: backgroundImage,
-            borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 6.0)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(borderRadius ?? 6.0)),
             color: backgroundColor),
         child: InkWell(
           onTap: () {
             onClick(context);
           },
-          onLongPress: (){
-            onLongClick(context);
+          onLongPress: () {
+            if (onLongClick != null) {
+              onLongClick(context);
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

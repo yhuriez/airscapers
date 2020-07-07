@@ -124,9 +124,9 @@ class HomeScreenContent extends StatelessWidget {
 
   Widget createInventory(BuildContext context) {
     return BlocBuilder<InventoryBloc, InventoryState>(
-      builder: (context, snapshot) {
-        final List<ScenarioItem> items = snapshot.items ?? [];
-        return ARSGrid(items: items);
+      builder: (context, state) {
+        final List<ScenarioItem> items = state.items ?? [];
+        return ARSGrid(items: items, selectedItem: state.selectedItem,);
       },
     );
   }

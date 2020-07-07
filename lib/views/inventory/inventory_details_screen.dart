@@ -4,8 +4,6 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/usecases/inventory_use_cases.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
-import 'package:airscaper/views/home/home_screen.dart';
-import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/init/scenario_choose_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_link.dart';
@@ -42,6 +40,7 @@ class ScenarioElementView extends StatefulWidget {
 }
 
 class _ScenarioElementViewState extends State<ScenarioElementView> {
+
   List<ScenarioLoot> availableLoots;
 
   @override
@@ -67,14 +66,12 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
         Center(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child:
-                Text(widget.desc.description, style: TextStyle(fontSize: 16, color: Colors.white)),
+            child: Text(widget.desc.description,
+                style: TextStyle(fontSize: 16, color: Colors.white)),
           ),
         ),
         (widget.desc.end) ? endButton : Container(),
-        (widget.desc.loots != null)
-            ? searchButton
-            : continueButton,
+        (availableLoots != null && availableLoots.isNotEmpty) ? searchButton : continueButton,
       ],
     );
   }
@@ -92,8 +89,9 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
       );
 
   onContinueButtonClicked(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        MainScanFragment.routeName, (route) => false);
+    Navigator.of(context).pop();
+//    Navigator.of(context)
+//        .pushNamedAndRemoveUntil(MainScanFragment.routeName, (route) => false);
   }
 
   Widget get endButton => Padding(
@@ -118,7 +116,6 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   Widget get searchButton => FutureBuilder<List<ScenarioLoot>>(
       future: widget._filterAvailableLootUseCase.execute(availableLoots),
       builder: (context, snapshot) {
-
         if (snapshot.data == null) return Container();
 
         return Padding(
@@ -134,42 +131,30 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
         );
       });
 
-
   onSearchClicked(BuildContext context, List<ScenarioLoot> loots) {
-    if(loots.length > 1) {
-      showModalBottomSheet(context: context, builder: (bsContext) {
-
-        final lootsButtons = loots
-            .where((it) => it.interactionText != null)
-            .map((loot) => createLootButton(loot))
-            .toList();
-
-        return Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-          child: Column(children: lootsButtons),
-        );
-      });
+    if (loots.length > 1) {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          barrierColor: Colors.black45,
+          child: SearchContent(
+            loots: loots,
+            onLootClicked: (loot) {
+              Navigator.of(context, rootNavigator: true).pop();
+              onLootClicked(loot);
+            },
+          ));
     } else {
       // If only one loot, directly go to this one
       onLootClicked(loots.first);
     }
   }
 
-  Widget createLootButton(ScenarioLoot loot) => Padding(
-    padding: const EdgeInsets.only(top: 16.0),
-    child: ARSButton(
-        onClick: (context) => onLootClicked(loot),
-        text: Text(
-          loot.interactionText,
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.green),
-  );
-
-
   onLootClicked(ScenarioLoot loot) async {
-    final intent = await widget._interpretLinkUseCase.execute(context, NavigationLink.fromLoot(loot));
-    await Navigator.of(context).pushNamed(intent.screenName, arguments: intent.arguments);
+    final intent = await widget._interpretLinkUseCase
+        .execute(context, NavigationLink.fromLoot(loot));
+    await Navigator.of(context)
+        .pushNamed(intent.screenName, arguments: intent.arguments);
 
     refreshLoots();
   }
@@ -181,4 +166,40 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
       availableLoots = newLoots;
     });
   }
+}
+
+class SearchContent extends StatelessWidget {
+  final List<ScenarioLoot> loots;
+  final Function(ScenarioLoot) onLootClicked;
+
+  const SearchContent({Key key, this.loots, this.onLootClicked})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Material(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: loots
+                  .where((it) => it.interactionText != null)
+                  .map((loot) => createLootButton(loot))
+                  .toList()),
+        ),
+      ),
+    );
+  }
+
+  Widget createLootButton(ScenarioLoot loot) => Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: ARSButton(
+            onClick: (context) => onLootClicked(loot),
+            text: Text(
+              loot.interactionText,
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.green),
+      );
 }

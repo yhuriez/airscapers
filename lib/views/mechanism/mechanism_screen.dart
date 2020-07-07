@@ -1,32 +1,42 @@
+import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/views/common/ars_button.dart';
+import 'package:airscaper/views/common/ars_code_text_field.dart';
+import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../injection.dart';
-import '../code/code_screen.dart';
 
 class MechanismFragment extends StatelessWidget {
   static const routeName = "/mechanism";
 
   static NavigationIntent navigate(ScenarioMechanism mechanism,
-          {BackStackBehavior backStackBehavior}) =>
+      {BackStackBehavior backStackBehavior}) =>
       NavigationIntent(routeName, mechanism,
           backStackBehavior: backStackBehavior);
 
   @override
   Widget build(BuildContext context) {
-    ScenarioMechanism mechanism = ModalRoute.of(context).settings.arguments;
+    ScenarioMechanism mechanism = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
 
     return MechanismStateRepresentation(mechanism: mechanism,);
   }
 }
 
 class MechanismStateRepresentation extends StatefulWidget {
+
   final ScenarioMechanism mechanism;
 
-  MechanismCodeInputUseCase get _mechanismCodeInputUseCase => sl();
+  MechanismCodeInputUseCase get _codeInputUseCase => sl();
+
+  MechanismItemSelectUseCase get _itemSelectUseCase => sl();
 
   LoadCurrentMechanismStateUseCase get _loadCurrentMechanismStateUseCase =>
       sl();
@@ -43,6 +53,7 @@ class MechanismStateRepresentation extends StatefulWidget {
 
 class _MechanismStateRepresentationState
     extends State<MechanismStateRepresentation> {
+  
   MechanismState _state;
 
   @override
@@ -62,37 +73,105 @@ class _MechanismStateRepresentationState
         (_state.image == null)
             ? Container()
             : Flexible(
-                flex: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Image.asset(_state.image),
-                ),
-              ),
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: createImage(context),
+          ),
+        ),
         Flexible(
           flex: 3,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(_state.description, style: TextStyle(fontSize: 16, color: Colors.white)),
+              child: Text(_state.description,
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
           ),
-        )
+        ),
+
+        // Interaction
+        createInteraction(context)
+
       ],
     );
   }
 
-  onCodeClicked(BuildContext context, ScenarioMechanism mechanism) async {
-    final codeResult = await Navigator.of(context)
-        .pushNamed(CodeScreen.routeName, arguments: true);
+  Widget createImage(BuildContext context) =>
+      BlocBuilder<InventoryBloc, InventoryState>(
+        builder: (context, state) {
+          final selectedId = state.selectedItem;
+          return InkWell(
+            onTap: () => onImageClicked(context, selectedId),
+            child: Image.asset(_state.image),
+          );
+        },
+      );
+
+  Widget createInteraction(BuildContext context) {
+    if(_state.codeHint != null) {
+      return createCodeField(context);
+    } else {
+      return backButton;
+    }
+  }
+
+  Widget get backButton => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+    child: ARSButton(
+      onClick: onContinueButtonClicked,
+      text: Text(
+        "Retour",
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.green,
+    ),
+  );
+
+  onContinueButtonClicked(BuildContext context) {
+    Navigator.of(context).pop();
+//    Navigator.of(context)
+//        .pushNamedAndRemoveUntil(MainScanFragment.routeName, (route) => false);
+  }
+
+  Widget createCodeField(BuildContext context) {
+    return ARSCodeTextField(
+      confirmBuilder: createConfirmButton,
+      callback: (context, textValue) => onCodeClicked(context, textValue),
+      acceptedValues: [],
+      hint: "Entrez le code",
+      validationErrorMessage: "Code invalide",
+    );
+  }
+
+  Widget createConfirmButton(Function(BuildContext) clickListener) => Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: ARSButton(
+      text: Text("Valider", style: TextStyle(color: Colors.white),),
+      onClick: clickListener,
+      height: 60,
+      backgroundColor: startButtonColor,
+    ),
+  );
+
+
+  onCodeClicked(BuildContext context, String codeResult) async {
     if (codeResult != null) {
-      final MechanismState newState = await widget._mechanismCodeInputUseCase
-          .execute(mechanism, codeResult);
+      final MechanismState newState = await widget._codeInputUseCase
+          .execute(context, widget.mechanism, codeResult);
       if (newState != null) {
         refreshState(context, givenState: newState);
       } else {
         final intent = createDialogNavigationIntent("", "Rien ne se passe");
         navigateTo(context, intent);
       }
+    }
+  }
+
+  onImageClicked(BuildContext context, int selectedId) async {
+    final MechanismState result = await widget._itemSelectUseCase.execute(context, widget.mechanism, selectedId);
+    if(result != null) {
+      refreshState(context, givenState: result);
     }
   }
 
@@ -109,7 +188,6 @@ class _MechanismStateRepresentationState
       final intent = await widget._mechanismFinishedUseCase
           .execute(widget.mechanism, newState);
       navigateReplaceTo(context, intent);
-
     } else {
       setState(() {
         _state = newState;

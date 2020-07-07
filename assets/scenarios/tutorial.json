@@ -17,9 +17,9 @@
           "id": 16
         },
         {
-          "interaction_text": "Fouiller le tiroir",
-          "type": "track",
-          "id": 25
+          "interaction_text": "Etudier le coffre",
+          "type": "item",
+          "id": 35
         }
       ]
     },
@@ -57,22 +57,14 @@
       "description": "Un fil électrique de 10cm avec des embouts en forme d'anneaux.",
       "found_description": "Au fond du coffre, vous trouvez un fil électrique. Il fait une dizaine de centimètre et possède des embouts en forme d'anneaux.",
       "image": "assets/images/tutorial/electric_cable.png"
-    }
-  ],
-  "codes": [
-    {
-      "code": "16",
-      "loot": {
-        "type": "item",
-        "id": 16
-      }
     },
     {
-      "code": "9327",
-      "loot": {
-        "type": "track",
-        "id": 1
-      }
+      "id": 35,
+      "title": "Une étrange indication",
+      "description": "Une étrange indication sur le côté du coffre.",
+      "found_description": "Sur le côté du coffre se trouve une étrange indication...",
+      "image": "assets/images/tutorial/furniture_clue.png",
+      "is_track": true
     }
   ],
   "mechanisms": [
@@ -84,18 +76,17 @@
           "id": 1,
           "description": "Un coffre fermé à clé",
           "start": true,
-          "image": "assets/images/tutorial/closed_furniture.png"
+          "image": "assets/images/tutorial/closed_furniture.png",
+          "transitions": [
+            {
+              "expected_item": 11,
+              "transition_to": 2
+            }
+          ]
         },
         {
           "id": 2,
           "end_track": 46
-        }
-      ],
-      "transitions": [
-        {
-          "state_id": 1,
-          "expected_item": 11,
-          "transition_to": 2
         }
       ]
     },
@@ -107,28 +98,30 @@
           "id": 1,
           "description": "Une grille avec des picots séparés de 5 cm.",
           "image": "assets/images/tutorial/electric_board.png",
-          "start": true
+          "start": true,
+          "transitions": [
+            {
+              "expected_item": 16,
+              "transition_to": 2
+            }
+          ]
         },
         {
           "id": 2,
           "description": "Comment le fil doit être placé ?",
-          "image": "assets/images/tutorial/electric_board_connect.png"
+          "image": "assets/images/tutorial/electric_board_connect.png",
+          "code_hint": "Ex: AB",
+          "transitions": [
+            {
+              "expected_code": "CD",
+              "transition_to": 3,
+              "removed_items": [35]
+            }
+          ]
         },
         {
           "id": 3,
           "end_track": 25
-        }
-      ],
-      "transitions": [
-        {
-          "state_id": 1,
-          "expected_item": 16,
-          "transition_to": 2
-        },
-        {
-          "state_id": 2,
-          "expected_code": "CD",
-          "transition_to": 3
         }
       ]
     },
@@ -140,18 +133,17 @@
           "id": 1,
           "description": "Un écran. Il n'y a pas de courant",
           "start": true,
-          "image": "assets/images/tutorial/tv_off.png"
+          "image": "assets/images/tutorial/tv_off.png",
+          "transitions": [
+            {
+              "expected_track": 25,
+              "transition_to": 2
+            }
+          ]
         },
         {
           "id": 2,
           "end_track": 48
-        }
-      ],
-      "transitions": [
-        {
-          "state_id": 1,
-          "expected_track": 25,
-          "transition_to": 2
         }
       ]
     },
@@ -161,20 +153,20 @@
       "states": [
         {
           "id": 1,
-          "description": "C'est la porte de sortie. Elle est commandé par un digicode.",
+          "description": "C'est la porte de sortie. Elle est commandée par un digicode.",
           "start": true,
-          "image": "assets/images/tutorial/exit_door.png"
+          "image": "assets/images/tutorial/exit_door.png",
+          "code_hint": "Ex: 1234",
+          "transitions": [
+            {
+              "expected_code": "9327",
+              "transition_to": 2
+            }
+          ]
         },
         {
           "id": 2,
           "end_track": 1
-        }
-      ],
-      "transitions": [
-        {
-          "state_id": 1,
-          "expected_code": "9327",
-          "transition_to": 2
         }
       ]
     }

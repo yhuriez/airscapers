@@ -1,15 +1,12 @@
 import 'package:airscaper/model/entities/element_description.dart';
-import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/inventory_local_source.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
+import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
-import 'package:airscaper/views/navigation/navigation_link.dart';
-import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
-
-import 'link_use_cases.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoadCurrentMechanismStateUseCase {
   final InventoryLocalSource _inventory;
@@ -35,7 +32,7 @@ class LoadCurrentMechanismStateUseCase {
 
   Future<MechanismState> _updateStateIfTransitionAvailable(
       ScenarioMechanism mechanism, MechanismState currentState) async {
-    final trackTransitions = mechanism.transitions
+    final trackTransitions = currentState.transitions
         .where((element) =>
             element.stateId == currentState.id && element.expectedTrack != null)
         .toList();
@@ -70,18 +67,18 @@ class MechanismCodeInputUseCase {
       this._stateTransitionUseCase, this._loadCurrentMechanismStateUseCase);
 
   Future<MechanismState> execute(
-      ScenarioMechanism mechanism, String code) async {
+      BuildContext context, ScenarioMechanism mechanism, String code) async {
     final currentState =
         await _loadCurrentMechanismStateUseCase.execute(mechanism);
-    final availableTransitions =
-        mechanism.getTransitionsForState(currentState.id);
 
-    final nextTransition = availableTransitions.firstWhere((transition) {
-      return code.toLowerCase() == transition.expectedCode.toLowerCase();
+    final nextTransition = currentState.transitions.firstWhere((transition) {
+      return transition.expectedCode != null &&
+          code.toLowerCase() == transition.expectedCode.toLowerCase();
     }, orElse: () => null);
 
     if (nextTransition != null) {
-      return await _stateTransitionUseCase.execute(mechanism, nextTransition);
+      return await _stateTransitionUseCase.execute(
+          context, mechanism, nextTransition);
     }
     return null;
   }
@@ -95,18 +92,17 @@ class MechanismItemSelectUseCase {
       this._stateTransitionUseCase, this._loadCurrentMechanismStateUseCase);
 
   Future<MechanismState> execute(
-      ScenarioMechanism mechanism, ScenarioItem item) async {
+      BuildContext context, ScenarioMechanism mechanism, int itemId) async {
     final currentState =
         await _loadCurrentMechanismStateUseCase.execute(mechanism);
-    final availableTransitions =
-        mechanism.getTransitionsForState(currentState.id);
 
-    final nextTransition = availableTransitions.firstWhere((transition) {
-      return item != null && item.id == transition.expectedItemId;
+    final nextTransition = currentState.transitions.firstWhere((transition) {
+      return itemId != null && itemId == transition.expectedItemId;
     }, orElse: () => null);
 
     if (nextTransition != null) {
-      return await _stateTransitionUseCase.execute(mechanism, nextTransition, item: item);
+      return await _stateTransitionUseCase
+          .execute(context, mechanism, nextTransition, itemId: itemId);
     }
     return null;
   }
@@ -118,18 +114,19 @@ class StateTransitionUseCase {
 
   StateTransitionUseCase(this._inventory, this._currentMechanismStateUseCase);
 
-  Future<MechanismState> execute(
-      ScenarioMechanism mechanism,
-      MechanismTransition transition,
-      { ScenarioItem item }) async {
+  Future<MechanismState> execute(BuildContext context,
+      ScenarioMechanism mechanism, MechanismTransition transition,
+      {int itemId}) async {
     final newStateId = transition.transitionTo;
 
     // Update current state for given mechanism
     await _inventory.insertOrUpdateMechanismState(mechanism.id, newStateId);
 
     // If item used for transition, mark item as used in database
-    if(item != null) {
-      await _inventory.updateItemUsed(item.id);
+    if (itemId != null) {
+      // ignore: close_sinks
+      final InventoryBloc inventoryBloc = BlocProvider.of(context);
+      inventoryBloc.add(RemoveItemInventoryEvent(itemId));
     }
 
     return await _currentMechanismStateUseCase.execute(mechanism);
@@ -150,29 +147,5 @@ class MechanismFinishedUseCase {
 
     return InventoryDetailsFragment.navigate(
         ScenarioElementDesc.fromTrack(track));
-  }
-}
-
-
-class CodeInputUseCase {
-  final ScenarioRepository _repository;
-  final InterpretLinkUseCase _interpretLinkUseCase;
-
-  CodeInputUseCase(this._repository, this._interpretLinkUseCase);
-
-  Future<NavigationIntent> execute(BuildContext context, String code) async {
-    final scenarioCode =
-    _repository.codes.firstWhere((element) => element.code == code);
-    if (scenarioCode != null) {
-      final loot = scenarioCode.loot;
-      if (loot == null) {
-        return createDialogNavigationIntent(
-            "Fausse piste", "Ce code ne correspond à rien");
-      }
-      return await _interpretLinkUseCase.execute(context, NavigationLink.fromLoot(loot));
-    } else {
-      return createDialogNavigationIntent(
-          "Fausse piste", "Ce code ne correspond à rien");
-    }
   }
 }

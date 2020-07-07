@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:airscaper/model/database.dart';
 import 'package:airscaper/model/entities/scenario.dart';
-import 'package:airscaper/model/entities/scenario_code.dart';
 import 'package:airscaper/model/entities/scenario_index.dart';
 import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_track.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/entities/scenario_reference.dart';
+import 'package:airscaper/model/entities/scenario_track.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -26,8 +25,6 @@ class ScenarioRepository {
   List<ScenarioTrack> get tracks => _scenario?.tracks ?? [];
 
   List<ScenarioMechanism> get mechanisms => _scenario?.mechanisms ?? [];
-
-  List<ScenarioCode> get codes => _scenario?.codes ?? [];
 
   bool get isIndexInit => _index != null;
 
@@ -48,9 +45,6 @@ class ScenarioRepository {
 
   ScenarioMechanism getMechanism(int mechanismId) => mechanisms
       .firstWhere((element) => element.id == mechanismId, orElse: () => null);
-
-  ScenarioCode getMatchingCode(String code) =>
-      codes.firstWhere((element) => element.code == code, orElse: () => null);
 
   Future<bool> initIndex(BuildContext context) async {
     try {
