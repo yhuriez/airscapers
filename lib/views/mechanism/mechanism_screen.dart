@@ -15,23 +15,21 @@ class MechanismFragment extends StatelessWidget {
   static const routeName = "/mechanism";
 
   static NavigationIntent navigate(ScenarioMechanism mechanism,
-      {BackStackBehavior backStackBehavior}) =>
+          {BackStackBehavior backStackBehavior}) =>
       NavigationIntent(routeName, mechanism,
           backStackBehavior: backStackBehavior);
 
   @override
   Widget build(BuildContext context) {
-    ScenarioMechanism mechanism = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    ScenarioMechanism mechanism = ModalRoute.of(context).settings.arguments;
 
-    return MechanismStateRepresentation(mechanism: mechanism,);
+    return MechanismStateRepresentation(
+      mechanism: mechanism,
+    );
   }
 }
 
 class MechanismStateRepresentation extends StatefulWidget {
-
   final ScenarioMechanism mechanism;
 
   MechanismCodeInputUseCase get _codeInputUseCase => sl();
@@ -53,7 +51,6 @@ class MechanismStateRepresentation extends StatefulWidget {
 
 class _MechanismStateRepresentationState
     extends State<MechanismStateRepresentation> {
-  
   MechanismState _state;
 
   @override
@@ -70,29 +67,14 @@ class _MechanismStateRepresentationState
 
     return Column(
       children: <Widget>[
-        (_state.image == null)
-            ? Container()
-            : Flexible(
-          flex: 5,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: createImage(context),
-          ),
-        ),
-        Flexible(
-          flex: 3,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(_state.description,
-                  style: TextStyle(fontSize: 16, color: Colors.white)),
-            ),
-          ),
-        ),
+        // Image
+        if (_state.image == null) Container() else createImage(context),
+
+        // Text description
+        createText(context),
 
         // Interaction
         createInteraction(context)
-
       ],
     );
   }
@@ -108,8 +90,16 @@ class _MechanismStateRepresentationState
         },
       );
 
+  Widget createText(BuildContext context) => Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(_state.description,
+              style: TextStyle(fontSize: 16, color: Colors.white)),
+        ),
+      );
+
   Widget createInteraction(BuildContext context) {
-    if(_state.codeHint != null) {
+    if (_state.codeHint != null) {
       return createCodeField(context);
     } else {
       return backButton;
@@ -117,16 +107,16 @@ class _MechanismStateRepresentationState
   }
 
   Widget get backButton => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-    child: ARSButton(
-      onClick: onContinueButtonClicked,
-      text: Text(
-        "Retour",
-        style: TextStyle(color: Colors.white),
-      ),
-      backgroundColor: Colors.green,
-    ),
-  );
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: ARSButton(
+          onClick: onContinueButtonClicked,
+          text: Text(
+            "Retour",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+        ),
+      );
 
   onContinueButtonClicked(BuildContext context) {
     Navigator.of(context).pop();
@@ -145,15 +135,17 @@ class _MechanismStateRepresentationState
   }
 
   Widget createConfirmButton(Function(BuildContext) clickListener) => Padding(
-    padding: const EdgeInsets.all(16.0),
-    child: ARSButton(
-      text: Text("Valider", style: TextStyle(color: Colors.white),),
-      onClick: clickListener,
-      height: 60,
-      backgroundColor: startButtonColor,
-    ),
-  );
-
+        padding: const EdgeInsets.all(16.0),
+        child: ARSButton(
+          text: Text(
+            "Valider",
+            style: TextStyle(color: Colors.white),
+          ),
+          onClick: clickListener,
+          height: 60,
+          backgroundColor: startButtonColor,
+        ),
+      );
 
   onCodeClicked(BuildContext context, String codeResult) async {
     if (codeResult != null) {
@@ -169,8 +161,9 @@ class _MechanismStateRepresentationState
   }
 
   onImageClicked(BuildContext context, int selectedId) async {
-    final MechanismState result = await widget._itemSelectUseCase.execute(context, widget.mechanism, selectedId);
-    if(result != null) {
+    final MechanismState result = await widget._itemSelectUseCase
+        .execute(context, widget.mechanism, selectedId);
+    if (result != null) {
       refreshState(context, givenState: result);
     }
   }
