@@ -2,8 +2,8 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/home/end_screen.dart';
 import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
-import 'package:airscaper/views/init/scenario_choose_screen.dart';
-import 'package:airscaper/views/init/scenario_start_screen.dart';
+import 'package:airscaper/views/init/start_scenario_screen.dart';
+import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:catcher/core/catcher.dart';
 import 'package:catcher/handlers/console_handler.dart';
 import 'package:catcher/mode/dialog_report_mode.dart';
@@ -20,7 +20,7 @@ Future<void> main() async {
 
   var initialRoute;
   if (initResponse is NoScenarioResponse) {
-    initialRoute = ChooseScenarioScreen.routeName;
+    initialRoute = WelcomeScreen.routeName;
   } else if (initResponse is HasScenarioResponse) {
     initialRoute = HomeScreen.routeName;
   }
@@ -41,12 +41,12 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: Catcher.navigatorKey,
       title: 'Airscapers',
-      theme: ThemeData(primaryColor: Colors.white, accentColor: Colors.black),
+      theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
       debugShowCheckedModeBanner: false,
       routes: {
         // init
-        ChooseScenarioScreen.routeName: (context) => ChooseScenarioScreen(),
-        ScenarioStartScreen.routeName: (context) => ScenarioStartScreen(),
+        WelcomeScreen.routeName: (context) => WelcomeScreen(),
+        StartScenarioScreen.routeName: (context) => StartScenarioScreen(),
 
         // Home
         HomeScreen.routeName: (context) => HomeScreen(),

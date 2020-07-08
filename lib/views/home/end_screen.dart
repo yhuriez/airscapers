@@ -1,8 +1,6 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/views/common/ars_button.dart';
-import 'package:airscaper/views/init/scenario_choose_screen.dart';
-import 'package:airscaper/views/navigation/navigation_intent.dart';
-import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class GameOverScreen extends StatelessWidget {
@@ -38,6 +36,6 @@ class GameOverScreen extends StatelessWidget {
     Future.delayed(
         Duration.zero,
         () => Navigator.of(context).pushNamedAndRemoveUntil(
-            ChooseScenarioScreen.routeName, (route) => false));
+            WelcomeScreen.routeName, (route) => false));
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ARSCodeTextField extends StatefulWidget {
-  final Widget Function(Function(BuildContext)) confirmBuilder;
   final List<String> acceptedValues;
   final Function(BuildContext, String) callback;
   final String hint;
@@ -9,7 +8,6 @@ class ARSCodeTextField extends StatefulWidget {
 
   const ARSCodeTextField(
       {Key key,
-      @required this.confirmBuilder,
       this.acceptedValues = const [],
       this.callback,
       this.hint,
@@ -28,38 +26,59 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: <Widget>[_codeInput, widget.confirmBuilder(onConfirmClicked)],
+      child: Row(
+        children: <Widget>[
+          Expanded(child: _codeInput),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: createConfirmButton(context),
+          )
+        ],
       ),
     );
   }
 
-  Widget get _codeInput => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(6.0)),
-              border: Border.all(color: Colors.black12)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-                style: TextStyle(fontSize: 16.0, backgroundColor: Colors.white),
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: widget.hint ?? ""),
-                validator: (value) {
-                  if (widget.acceptedValues.isNotEmpty &&
-                      !widget.acceptedValues.contains(value.toLowerCase())) {
-                    return widget.validationErrorMessage ?? "Erreur";
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  inputValue = value;
-                }),
-          ),
-        ),
-      );
+  Widget get _codeInput => Container(
+    decoration: borderDecoration,
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+          style: TextStyle(fontSize: 16.0, backgroundColor: Colors.white),
+          decoration: InputDecoration(
+              border: InputBorder.none, hintText: widget.hint ?? ""),
+          validator: (value) {
+            if (widget.acceptedValues.isNotEmpty &&
+                !widget.acceptedValues.contains(value.toLowerCase())) {
+              return widget.validationErrorMessage ?? "Erreur";
+            }
+            return null;
+          },
+          onSaved: (value) {
+            inputValue = value;
+          }),
+    ),
+  );
+
+  Widget createConfirmButton(BuildContext context) => SizedBox(
+    width: 66,
+    height: 66,
+    child: Container(
+      decoration: borderDecoration,
+      child: InkWell(
+        onTap: () => onConfirmClicked(context),
+        child: Center(
+                  child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: Image.asset("assets/images/common/check.png"))),
+      ),
+    ),
+  );
+
+  BoxDecoration get borderDecoration => BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.all(Radius.circular(6.0)),
+      border: Border.all(color: Colors.black12));
 
   onConfirmClicked(BuildContext context) {
     if (_formKey.currentState.validate()) {

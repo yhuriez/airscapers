@@ -38,7 +38,6 @@ class ScanFragment extends StatelessWidget {
 
   Widget createCodeField(BuildContext context) {
     return ARSCodeTextField(
-      confirmBuilder: createConfirmButton,
       callback: onValidClicked,
       acceptedValues: [],
       hint: "Entrez le code",

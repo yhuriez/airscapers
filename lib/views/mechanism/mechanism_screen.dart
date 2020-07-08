@@ -126,7 +126,6 @@ class _MechanismStateRepresentationState
 
   Widget createCodeField(BuildContext context) {
     return ARSCodeTextField(
-      confirmBuilder: createConfirmButton,
       callback: (context, textValue) => onCodeClicked(context, textValue),
       acceptedValues: [],
       hint: "Entrez le code",

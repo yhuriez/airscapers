@@ -4,7 +4,7 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/usecases/inventory_use_cases.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
-import 'package:airscaper/views/init/scenario_choose_screen.dart';
+import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_link.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +110,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     await widget._endScenarioUseCase.execute();
 
     Navigator.of(context).pushNamedAndRemoveUntil(
-        ChooseScenarioScreen.routeName, (route) => false);
+        WelcomeScreen.routeName, (route) => false);
   }
 
   Widget get searchButton => FutureBuilder<List<ScenarioLoot>>(

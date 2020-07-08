@@ -62,6 +62,8 @@ dependencies:
   # to manage qr code (bis)
   barcode_scan: ^3.0.1
 
+  flutter_keyboard_visibility: ^3.2.1
+
 
 dev_dependencies:
   flutter_test:

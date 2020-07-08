@@ -1,4 +1,5 @@
 import 'package:airscaper/common/ars_result.dart';
+import 'package:airscaper/model/entities/scenario.dart';
 import 'package:airscaper/model/entities/scenario_reference.dart';
 import 'package:airscaper/model/inventory_local_source.dart';
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
@@ -95,6 +96,18 @@ class StartScenarioUseCase {
     BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
 
     return ARSResult.success(true);
+  }
+}
+
+/// Provide the list of all available scenario
+class LoadAllScenariosUseCase {
+  final ScenarioRepository _repository;
+
+  LoadAllScenariosUseCase(this._repository);
+
+  Map<String, ScenarioReference> execute() {
+    return Map.fromIterable(_repository.scenarios,
+        key: (it) => it.code, value: (it) => it);
   }
 }
 

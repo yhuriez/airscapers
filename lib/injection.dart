@@ -21,6 +21,7 @@ Future<void> init() async {
   sl.registerLazySingleton<InitStartDateUseCase>(() => InitStartDateUseCase(sl()));
   sl.registerLazySingleton<StartScenarioUseCase>(() => StartScenarioUseCase(sl(), sl()));
   sl.registerLazySingleton<EndScenarioUseCase>(() => EndScenarioUseCase(sl(), sl(), sl()));
+  sl.registerLazySingleton<LoadAllScenariosUseCase>(() => LoadAllScenariosUseCase(sl()));
 
   sl.registerLazySingleton<AddLootUseCase>(() => AddLootUseCase(sl()));
   sl.registerLazySingleton<FilterAvailableLootUseCase>(() => FilterAvailableLootUseCase(sl()));
