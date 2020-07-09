@@ -9,13 +9,14 @@ class GameOverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: Column(
         children: [
           Expanded(
               child: Center(
             child: Text(
               "Le temps est écoulé",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: textColor),
             ),
           )),
           Padding(

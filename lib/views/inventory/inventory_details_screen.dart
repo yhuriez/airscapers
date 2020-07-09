@@ -54,22 +54,26 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        // Image
         (widget.desc.imageUrl == null)
             ? Container()
-            : Flexible(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Image.asset(widget.desc.imageUrl),
-                ),
-              ),
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Text(widget.desc.description,
-                style: TextStyle(fontSize: 16, color: Colors.white)),
+            : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Image.asset(widget.desc.imageUrl),
+            ),
+
+        // Text
+        Expanded(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(widget.desc.description,
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
+            ),
           ),
         ),
+
+        // Button
         (widget.desc.end) ? endButton : Container(),
         (availableLoots != null && availableLoots.isNotEmpty) ? searchButton : continueButton,
       ],

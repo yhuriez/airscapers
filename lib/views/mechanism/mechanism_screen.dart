@@ -36,8 +36,7 @@ class MechanismStateRepresentation extends StatefulWidget {
 
   MechanismItemSelectUseCase get _itemSelectUseCase => sl();
 
-  LoadCurrentMechanismStateUseCase get _loadCurrentMechanismStateUseCase =>
-      sl();
+  LoadCurrentMechanismStateUseCase get _loadMechanismStateUseCase => sl();
 
   MechanismFinishedUseCase get _mechanismFinishedUseCase => sl();
 
@@ -71,7 +70,7 @@ class _MechanismStateRepresentationState
         if (_state.image == null) Container() else createImage(context),
 
         // Text description
-        createText(context),
+        Expanded(child: createText(context)),
 
         // Interaction
         createInteraction(context)
@@ -173,8 +172,7 @@ class _MechanismStateRepresentationState
 
   refreshState(BuildContext context, {MechanismState givenState}) async {
     final newState = givenState ??
-        await widget._loadCurrentMechanismStateUseCase
-            .execute(widget.mechanism);
+        await widget._loadMechanismStateUseCase.execute(widget.mechanism);
 
     if (newState.end) {
       final intent = await widget._mechanismFinishedUseCase
