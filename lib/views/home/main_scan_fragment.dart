@@ -45,21 +45,26 @@ class MainScanFragment extends StatelessWidget {
   }
 
 
-  onScanDebugClicked(BuildContext context) {
-    if(kDebugMode) {
-      Navigator.of(context).pushNamed(ScanFragment.routeName);
+  onScanDebugClicked(BuildContext context) async {
+    if (kDebugMode) {
+      final scanResult = await Navigator.of(context).pushNamed(ScanFragment.routeName);
+      parseLink(context, scanResult);
     }
   }
 
-
   onStartBarcodeScanner(BuildContext context) async {
     var result = await BarcodeScanner.scan();
-    var cameraScanResult = result.rawContent;
+    var scanResult = result.rawContent;
 
-    final link = _parseLinkUseCase.execute(cameraScanResult);
-    if(link != null) {
+    parseLink(context, scanResult);
+  }
+
+  parseLink(BuildContext context, String scanResult) async {
+    final link = _parseLinkUseCase.execute(scanResult);
+    if (link != null) {
       final intent = await _interpretLinkUseCase.execute(context, link);
       navigateTo(context, intent);
+
     } else {
       navigateShowDialog(
           context,

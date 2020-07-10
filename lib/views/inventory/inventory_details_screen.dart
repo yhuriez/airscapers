@@ -12,7 +12,12 @@ import 'package:flutter/material.dart';
 import '../../injection.dart';
 
 class InventoryDetailsFragment extends StatelessWidget {
+
   static const routeName = "/details";
+
+  final ScenarioElementDesc desc;
+
+  const InventoryDetailsFragment({Key key, this.desc}) : super(key: key);
 
   static NavigationIntent navigate(ScenarioElementDesc desc,
           {BackStackBehavior backStackBehavior}) =>
@@ -22,7 +27,9 @@ class InventoryDetailsFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     ScenarioElementDesc desc = ModalRoute.of(context).settings.arguments;
 
-    return ScenarioElementView(desc: desc);
+    return Scaffold(
+        backgroundColor: Colors.transparent,
+        body: ScenarioElementView(desc: desc));
   }
 }
 
@@ -40,7 +47,6 @@ class ScenarioElementView extends StatefulWidget {
 }
 
 class _ScenarioElementViewState extends State<ScenarioElementView> {
-
   List<ScenarioLoot> availableLoots;
 
   @override
@@ -58,9 +64,9 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
         (widget.desc.imageUrl == null)
             ? Container()
             : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Image.asset(widget.desc.imageUrl),
-            ),
+                padding: const EdgeInsets.all(16.0),
+                child: Image.asset(widget.desc.imageUrl),
+              ),
 
         // Text
         Expanded(
@@ -75,7 +81,9 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
 
         // Button
         (widget.desc.end) ? endButton : Container(),
-        (availableLoots != null && availableLoots.isNotEmpty) ? searchButton : continueButton,
+        (availableLoots != null && availableLoots.isNotEmpty)
+            ? searchButton
+            : continueButton,
       ],
     );
   }
@@ -113,8 +121,8 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   onEndedClicked(BuildContext context) async {
     await widget._endScenarioUseCase.execute();
 
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        WelcomeScreen.routeName, (route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(WelcomeScreen.routeName, (route) => false);
   }
 
   Widget get searchButton => FutureBuilder<List<ScenarioLoot>>(

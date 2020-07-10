@@ -11,7 +11,7 @@ import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
-import 'package:airscaper/views/navigation/alpha_material_route.dart';
+import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
@@ -152,7 +152,7 @@ class HomeScreenContent extends StatelessWidget {
       child: Navigator(
           key: _homeNavigatorKey,
           initialRoute: MainScanFragment.routeName,
-          onGenerateRoute: (RouteSettings settings) => AlphaPageRoute(
+          onGenerateRoute: (RouteSettings settings) => FadeBPageRoute(
               settings: settings, builder: homeRouteBuilders[settings.name])),
     );
   }
@@ -164,27 +164,5 @@ class HomeScreenContent extends StatelessWidget {
         Duration.zero,
         () => Navigator.of(context)
             .pushReplacementNamed(GameOverScreen.routeName));
-  }
-
-  onScanDebugClicked(BuildContext context) {
-    if (kDebugMode) {
-      Navigator.of(context).pushNamed(ScanFragment.routeName);
-    }
-  }
-
-  onStartBarcodeScanner(BuildContext context) async {
-    var result = await BarcodeScanner.scan();
-    var cameraScanResult = result.rawContent;
-
-    final link = _parseLinkUseCase.execute(cameraScanResult);
-    if (link != null) {
-      final intent = await _interpretLinkUseCase.execute(context, link);
-      navigateTo(context, intent);
-    } else {
-      navigateShowDialog(
-          context,
-          DialogArguments(
-              "Code invalide", "Ce code n'existe pas dans l'application"));
-    }
   }
 }
