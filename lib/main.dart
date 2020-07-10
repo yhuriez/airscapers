@@ -4,6 +4,7 @@ import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/init/start_scenario_screen.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
+import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:catcher/core/catcher.dart';
 import 'package:catcher/handlers/console_handler.dart';
 import 'package:catcher/mode/dialog_report_mode.dart';
@@ -34,7 +35,18 @@ Future<void> main() async {
 class MainApp extends StatelessWidget {
   final String initialRoute;
 
-  const MainApp({Key key, this.initialRoute}) : super(key: key);
+  static final routes = {
+    // init
+    WelcomeScreen.routeName: (context) => WelcomeScreen(),
+    StartScenarioScreen.routeName: (context) => StartScenarioScreen(),
+
+    // Home
+    HomeScreen.routeName: (context) => HomeScreen(),
+    ScanFragment.routeName: (context) => ScanFragment(),
+    GameOverScreen.routeName: (context) => GameOverScreen()
+  };
+
+  MainApp({Key key, this.initialRoute}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +55,8 @@ class MainApp extends StatelessWidget {
       title: 'Airscapers',
       theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
       debugShowCheckedModeBanner: false,
-      routes: {
-        // init
-        WelcomeScreen.routeName: (context) => WelcomeScreen(),
-        StartScenarioScreen.routeName: (context) => StartScenarioScreen(),
-
-        // Home
-        HomeScreen.routeName: (context) => HomeScreen(),
-        ScanFragment.routeName: (context) => ScanFragment(),
-        GameOverScreen.routeName: (context) => GameOverScreen()
-      },
+      onGenerateRoute: (RouteSettings settings) => FadeBPageRoute(
+          settings: settings, builder: routes[settings.name]),
       initialRoute: initialRoute,
     );
   }

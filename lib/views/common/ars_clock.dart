@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class ARSClock extends StatefulWidget {
-
   final Function(BuildContext) onEnd;
 
   const ARSClock({Key key, this.onEnd}) : super(key: key);
@@ -29,7 +28,13 @@ class _ARSClockState extends State<ARSClock> {
 
         final durationLeft = Duration(seconds: state.durationLeft);
         final textValue = formatDuration(durationLeft);
-        return Text(textValue, style: TextStyle(fontSize: 80, color: Colors.white));
+
+        return Text(textValue,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: Colors.white));
       },
     );
   }

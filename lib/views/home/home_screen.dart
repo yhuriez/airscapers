@@ -1,7 +1,8 @@
 import 'package:airscaper/common/ars_result.dart';
+import 'package:airscaper/common/colors.dart';
+import 'package:airscaper/model/entities/element_description.dart';
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/usecases/init_use_cases.dart';
-import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_grid.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
@@ -12,9 +13,6 @@ import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
-import 'package:airscaper/views/navigation/navigation_methods.dart';
-import 'package:barcode_scan/platform_wrapper.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -40,7 +38,6 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(create: (context) => TimerBloc()),
         BlocProvider(create: (context) => InventoryBloc()),
       ],
-
       child: SafeArea(
           child: KeyboardVisibilityProvider(child: HomeScreenLoader())),
     );
@@ -66,37 +63,44 @@ class HomeScreenLoader extends StatelessWidget {
             return loadingView;
           }
 
-          return Scaffold(
-              backgroundColor: Colors.black,
-              body: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: HomeScreenContent(),
-              ));
+          return Material(
+            child: Container(
+                color: backgroundColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: HomeScreenContent(),
+                )),
+          );
         });
   }
 
-  Widget createErrorView(String errorCode) => Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-          child: Text(
-        errorCode,
-        style: TextStyle(fontSize: 20),
-      )));
-
-  Widget get loadingView => Container(
-        color: Colors.white,
+  Widget createErrorView(String errorCode) => Material(
+    child: Container(
+        color: backgroundColor,
         child: Center(
-          child: JumpingDotsProgressIndicator(
-              numberOfDots: 4, fontSize: 40.0, dotSpacing: 2.0),
+            child: Text(
+          errorCode,
+          style: TextStyle(fontSize: 20),
+        ))),
+  );
+
+  Widget get loadingView => Material(
+    child: Container(
+          color: backgroundColor,
+          child: Center(
+            child: JumpingDotsProgressIndicator(
+                color: textColor,
+                numberOfDots: 4,
+                fontSize: 40.0,
+                dotSpacing: 2.0),
+          ),
         ),
-      );
+  );
 }
 
 /// Visual content of the home page
 class HomeScreenContent extends StatelessWidget {
   final EndScenarioUseCase _endScenarioUseCase = sl();
-  final ParseLinkUseCase _parseLinkUseCase = sl();
-  final InterpretLinkUseCase _interpretLinkUseCase = sl();
 
   final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey();
 
@@ -105,21 +109,10 @@ class HomeScreenContent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        // Clock
-        (KeyboardVisibilityProvider.isKeyboardVisible(context))
-            ? Container()
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                    height: 80,
-                    child: ARSClock(
-                      onEnd: doGameOverScreen,
-                    )),
-              ),
-
         // Main view
-        Expanded(child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24.0),
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.only(bottom: 24.0),
           child: _createHomeNavigation(context),
         )),
 
@@ -135,9 +128,18 @@ class HomeScreenContent extends StatelessWidget {
     return BlocBuilder<InventoryBloc, InventoryState>(
       builder: (context, state) {
         final List<ScenarioItem> items = state.items ?? [];
-        return ARSGrid(
-          items: items,
-          selectedItem: state.selectedItem,
+        final selectedItem = items.firstWhere(
+            (it) => it.id == state.selectedItem,
+            orElse: () => null);
+
+        return Column(
+          children: [
+            _createBottomBar(context, selectedItem),
+            ARSGrid(
+                items: items,
+                selectedItem: state.selectedItem,
+                onItemClicked: _startItemScreen),
+          ],
         );
       },
     );
@@ -157,6 +159,38 @@ class HomeScreenContent extends StatelessWidget {
     );
   }
 
+  Widget _createBottomBar(BuildContext context, ScenarioItem selectedItem) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          // Selected item name
+          (selectedItem == null)
+              ? Container()
+              : Text(
+                  selectedItem.title,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      color: textColor),
+                ),
+
+          // Spacing components
+          Spacer(),
+
+          // Clock
+          (KeyboardVisibilityProvider.isKeyboardVisible(context))
+              ? Container()
+              : ARSClock(
+                  onEnd: doGameOverScreen,
+                ),
+        ],
+      ),
+    );
+  }
+
   doGameOverScreen(BuildContext context) async {
     await _endScenarioUseCase.execute();
 
@@ -164,5 +198,12 @@ class HomeScreenContent extends StatelessWidget {
         Duration.zero,
         () => Navigator.of(context)
             .pushReplacementNamed(GameOverScreen.routeName));
+  }
+
+  _startItemScreen(BuildContext context, ScenarioItem selectedItem) {
+    if(selectedItem.isTrack) {
+      _homeNavigatorKey.currentState.pushNamed(InventoryDetailsFragment.routeName,
+          arguments: ScenarioElementDesc.fromItem(selectedItem));
+    }
   }
 }

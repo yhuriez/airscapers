@@ -8,12 +8,14 @@ const GRID_ITEM_PER_PAGE = 5;
 const double GRID_HEIGHT = 60;
 
 class ARSGrid extends StatelessWidget {
-
   final List<ScenarioItem> items;
   final int selectedItem;
+  final Function(BuildContext, ScenarioItem) onItemClicked;
+
   final _controller = PageController();
 
-  ARSGrid({Key key, this.items, this.selectedItem}) : super(key: key);
+  ARSGrid({Key key, this.items, this.selectedItem, this.onItemClicked})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +37,14 @@ class ARSGrid extends StatelessWidget {
         ? GRID_ITEM_PER_PAGE
         : GRID_ITEM_PER_PAGE - (items.length % GRID_ITEM_PER_PAGE);
 
-    final imageItems =
-    items.map((item) => ARSGridImageItem(item: item, selected: item.id == selectedItem,)).toList();
+    final imageItems = items
+        .map((item) => ARSGridImageItem(
+            item: item,
+            selected: item.id == selectedItem,
+            onItemClicked: onItemClicked))
+        .toList();
     final emptyItems =
-    List.generate(missingItems, (index) => ARSGridEmptyItem());
+        List.generate(missingItems, (index) => ARSGridEmptyItem());
 
     final List<Widget> allItems = ([...imageItems, ...emptyItems]).toList();
 
@@ -47,16 +53,18 @@ class ARSGrid extends StatelessWidget {
 }
 
 class ARSGridPage extends StatelessWidget {
-
   final List<Widget> children;
 
   const ARSGridPage({Key key, this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.black,
-        child: Row(children: children,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,));
+    return Container(
+        color: Colors.black,
+        child: Row(
+          children: children,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ));
   }
 }
 
@@ -81,13 +89,14 @@ class ARSGridEmptyItem extends StatelessWidget {
 class ARSGridImageItem extends StatelessWidget {
   final ScenarioItem item;
   final bool selected;
+  final Function(BuildContext, ScenarioItem) onItemClicked;
 
-  const ARSGridImageItem({Key key, this.item, this.selected = false})
+  const ARSGridImageItem(
+      {Key key, @required this.item, this.selected = false, this.onItemClicked})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     // ignore: close_sinks
     final bloc = BlocProvider.of<InventoryBloc>(context);
 
@@ -106,24 +115,19 @@ class ARSGridImageItem extends StatelessWidget {
   }
 
   Widget createContent(BuildContext context, InventoryBloc bloc) => AspectRatio(
-    aspectRatio: 1,
-    child: InkWell(
-      onTap: (){
-        bloc.add(SelectItemInventoryEvent(item.id));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: ExactAssetImage(item.image),
-              fit: BoxFit.fill
+        aspectRatio: 1,
+        child: InkWell(
+          onTap: () {
+            bloc.add(SelectItemInventoryEvent(item.id));
+            onItemClicked(context, item);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: ExactAssetImage(item.image), fit: BoxFit.fill),
+              borderRadius: BorderRadius.circular(6),
+            ),
           ),
-          borderRadius: BorderRadius.circular(6),
-//                border: (this.selected) ? Border.all(
-//                  color: Colors.teal,
-//                  width: 3.0
-//                ) : null
         ),
-      ),
-    ),
-  );
+      );
 }

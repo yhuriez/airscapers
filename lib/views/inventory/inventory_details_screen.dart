@@ -4,6 +4,7 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/usecases/inventory_use_cases.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
+import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_link.dart';
@@ -27,9 +28,9 @@ class InventoryDetailsFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     ScenarioElementDesc desc = ModalRoute.of(context).settings.arguments;
 
-    return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: ScenarioElementView(desc: desc));
+    return ARSScaffold(
+        title: desc.title,
+        child: ScenarioElementView(desc: desc));
   }
 }
 

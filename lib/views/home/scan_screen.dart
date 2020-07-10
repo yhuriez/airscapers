@@ -2,20 +2,20 @@ import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
+import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../../injection.dart';
 
 class ScanFragment extends StatelessWidget {
-
   static const routeName = "/scan";
 
   final InterpretLinkUseCase interpretLinkUseCase = sl();
-  final ParseLinkUseCase _parseLinkUseCase = sl();
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: createCodeField(context));
+    return ARSScaffold(
+        title: "Scan Debug", child: Center(child: createCodeField(context)));
   }
 
   Widget createCodeField(BuildContext context) {
@@ -30,7 +30,10 @@ class ScanFragment extends StatelessWidget {
   Widget createConfirmButton(Function(BuildContext) clickListener) => Padding(
         padding: const EdgeInsets.all(16.0),
         child: ARSButton(
-          text: Text("Valider", style: TextStyle(color: Colors.white),),
+          text: Text(
+            "Valider",
+            style: TextStyle(color: Colors.white),
+          ),
           onClick: clickListener,
           height: 60,
           backgroundColor: startButtonColor,
