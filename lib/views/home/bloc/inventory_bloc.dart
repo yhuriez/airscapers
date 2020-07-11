@@ -25,11 +25,13 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
         yield InventoryState(items: scenarioItems);
 
         // Remove item
-      } else if (event is RemoveItemInventoryEvent) {
-        await _localSource.updateItemUsed(event.itemId);
+      } else if (event is RemoveItemsInventoryEvent) {
+        await Future.forEach(event.itemIds, (id) async {
+          await _localSource.updateItemUsed(id);  
+        });
 
         var newItems = state.items ?? [];
-        newItems.removeWhere((it) => it.id == event.itemId);
+        newItems.removeWhere((it) => event.itemIds.contains(it.id));
         yield state.clone(items: newItems);
 
         // Add item
@@ -75,10 +77,10 @@ class AddItemInventoryEvent extends InventoryEvent {
   AddItemInventoryEvent(this.itemId);
 }
 
-class RemoveItemInventoryEvent extends InventoryEvent {
-  final int itemId;
+class RemoveItemsInventoryEvent extends InventoryEvent {
+  final List<int> itemIds;
 
-  RemoveItemInventoryEvent(this.itemId);
+  RemoveItemsInventoryEvent(this.itemIds);
 }
 
 class SelectItemInventoryEvent extends InventoryEvent {

@@ -190,16 +190,22 @@ class SearchContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Material(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-          child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: loots
-                  .where((it) => it.interactionText != null)
-                  .map((loot) => createLootButton(loot))
-                  .toList()),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Center(
+        child: Material(
+          color: Colors.black87,
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: loots
+                      .where((it) => it.interactionText != null)
+                      .map((loot) => createLootButton(loot))
+                      .toList()),
+            ),
+          ),
         ),
       ),
     );

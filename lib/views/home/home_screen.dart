@@ -100,6 +100,7 @@ class HomeScreenLoader extends StatelessWidget {
 
 /// Visual content of the home page
 class HomeScreenContent extends StatelessWidget {
+
   final EndScenarioUseCase _endScenarioUseCase = sl();
 
   final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey();

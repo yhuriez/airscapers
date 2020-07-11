@@ -33,8 +33,7 @@ class LoadCurrentMechanismStateUseCase {
   Future<MechanismState> _updateStateIfTransitionAvailable(
       ScenarioMechanism mechanism, MechanismState currentState) async {
     final trackTransitions = currentState.transitions
-        .where((element) =>
-            element.stateId == currentState.id && element.expectedTrack != null)
+        .where((element) => element.expectedTrack != null)
         .toList();
 
     if (trackTransitions != null && trackTransitions.isNotEmpty) {
@@ -114,22 +113,34 @@ class StateTransitionUseCase {
 
   StateTransitionUseCase(this._inventory, this._currentMechanismStateUseCase);
 
-  Future<MechanismState> execute(BuildContext context,
-      ScenarioMechanism mechanism, MechanismTransition transition,
+  Future<MechanismState> execute(
+      BuildContext context,
+      ScenarioMechanism mechanism,
+      MechanismTransition transition,
       {int itemId}) async {
     final newStateId = transition.transitionTo;
 
     // Update current state for given mechanism
     await _inventory.insertOrUpdateMechanismState(mechanism.id, newStateId);
 
+    // ignore: close_sinks
+    final InventoryBloc inventoryBloc = BlocProvider.of(context);
+
+    List<int> removedItems = [];
+
     // If item used for transition, mark item as used in database
     if (itemId != null) {
-      // ignore: close_sinks
-      final InventoryBloc inventoryBloc = BlocProvider.of(context);
-      inventoryBloc.add(RemoveItemInventoryEvent(itemId));
+      removedItems += [itemId];
     }
 
+    // Delete items that are no more useful
+    if(transition.removedItems != null) {
+      removedItems += transition.removedItems;
+    }
 
+    if(removedItems.isNotEmpty) {
+      inventoryBloc.add(RemoveItemsInventoryEvent(removedItems));
+    }
 
     return await _currentMechanismStateUseCase.execute(mechanism);
   }

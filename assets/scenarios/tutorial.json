@@ -65,6 +65,13 @@
       "found_description": "Sur le côté du coffre se trouve une étrange indication...",
       "image": "assets/images/tutorial/furniture_clue.png",
       "is_track": true
+    },
+    {
+      "id": 42,
+      "title": "Télévision allumée",
+      "description": "L'écran s'est allumé, un code est apparu dessus.",
+      "image": "assets/images/tutorial/tv_on.png",
+      "is_track": true
     }
   ],
   "mechanisms": [
@@ -160,7 +167,8 @@
           "transitions": [
             {
               "expected_code": "9327",
-              "transition_to": 2
+              "transition_to": 2,
+              "removed_items": [42]
             }
           ]
         },

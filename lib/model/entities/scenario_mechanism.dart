@@ -88,7 +88,7 @@ class MechanismTransition {
   int _expectedTrack;
   int _stateId;
   int _transitionTo;
-  String _triggerType;
+  List<int> _removedItems;
 
   String get expectedCode => _expectedCode;
 
@@ -100,10 +100,11 @@ class MechanismTransition {
 
   int get transitionTo => _transitionTo;
 
-  String get triggerType => _triggerType;
+  List<int> get removedItems => _removedItems;
+
 
   MechanismTransition(this._expectedCode, this._expectedItem,
-      this._expectedTrack, this._stateId, this._transitionTo);
+      this._expectedTrack, this._stateId, this._transitionTo, this._removedItems);
 
   MechanismTransition.map(dynamic obj) {
     this._expectedCode = obj["expected_code"];
@@ -111,6 +112,7 @@ class MechanismTransition {
     this._expectedTrack = obj["expected_track"];
     this._stateId = obj["state_id"];
     this._transitionTo = obj["transition_to"];
+    this._removedItems = mapTypedList(obj["removed_items"], (it) => it as int);
   }
 
   Map<String, dynamic> toMap() {
@@ -120,6 +122,7 @@ class MechanismTransition {
     map["expected_track"] = _expectedTrack;
     map["state_id"] = _stateId;
     map["transition_to"] = _transitionTo;
+    map["removed_items"] = _removedItems;
     return map;
   }
 }
