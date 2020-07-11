@@ -154,7 +154,7 @@ class HomeScreenContent extends StatelessWidget {
       child: Navigator(
           key: _homeNavigatorKey,
           initialRoute: MainScanFragment.routeName,
-          onGenerateRoute: (RouteSettings settings) => FadeBPageRoute(
+          onGenerateRoute: (RouteSettings settings) => FadeBlackPageRoute(
               settings: settings, builder: homeRouteBuilders[settings.name])),
     );
   }

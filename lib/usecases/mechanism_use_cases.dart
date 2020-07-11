@@ -129,6 +129,8 @@ class StateTransitionUseCase {
       inventoryBloc.add(RemoveItemInventoryEvent(itemId));
     }
 
+
+
     return await _currentMechanismStateUseCase.execute(mechanism);
   }
 }

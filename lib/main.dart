@@ -46,7 +46,7 @@ class MainApp extends StatelessWidget {
     GameOverScreen.routeName: (context) => GameOverScreen()
   };
 
-  MainApp({Key key, this.initialRoute}) : super(key: key);
+  const MainApp({Key key, this.initialRoute}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +55,9 @@ class MainApp extends StatelessWidget {
       title: 'Airscapers',
       theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: (RouteSettings settings) => FadeBPageRoute(
-          settings: settings, builder: routes[settings.name]),
+      routes: routes,
+//      onGenerateRoute: (RouteSettings settings) => FadeBPageRoute(
+//          settings: settings, builder: routes[settings.name]),
       initialRoute: initialRoute,
     );
   }
