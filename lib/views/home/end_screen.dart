@@ -1,10 +1,16 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
 class GameOverScreen extends StatelessWidget {
+
   static const routeName = "/gameover";
+
+  static Route<dynamic> createRoute() {
+    return createFadeRoute(GameOverScreen(), GameOverScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class GameOverScreen extends StatelessWidget {
   onBackHomePressed(BuildContext context) {
     Future.delayed(
         Duration.zero,
-        () => Navigator.of(context).pushNamedAndRemoveUntil(
-            WelcomeScreen.routeName, (route) => false));
+        () => Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+            WelcomeScreen.createRoute(), (route) => false));
   }
 }

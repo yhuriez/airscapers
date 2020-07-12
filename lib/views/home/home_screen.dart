@@ -13,6 +13,7 @@ import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -29,7 +30,12 @@ final homeRouteBuilders = {
 };
 
 class HomeScreen extends StatelessWidget {
+
   static const routeName = "/home";
+
+  static Route<dynamic> createRoute() {
+    return createFadeRoute(HomeScreen(), HomeScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,8 @@
-import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'fade_page_route.dart';
 
 const String dialogRouteName = "dialog";
 
@@ -9,14 +10,8 @@ navigateTo(BuildContext context, NavigationIntent intent) {
   if (intent.screenName == dialogRouteName) {
     navigateShowDialog(context, intent.arguments);
   } else {
-    if (intent.backStackBehavior != null) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          intent.screenName, getBackStackPredicate(intent.backStackBehavior),
-          arguments: intent.arguments);
-    } else {
-      Navigator.of(context)
-          .pushNamed(intent.screenName, arguments: intent.arguments);
-    }
+    Navigator.of(context)
+        .pushNamed(intent.screenName, arguments: intent.arguments);
   }
 }
 
@@ -33,19 +28,6 @@ createDialogNavigationIntent(String title, String message) {
   return NavigationIntent(dialogRouteName, DialogArguments(title, message));
 }
 
-bool Function(Route<dynamic>) getBackStackPredicate(
-    BackStackBehavior behavior) {
-  if (behavior == BackStackBehavior.NO_BACK_STACK) {
-    return (it) => false;
-  } else if (behavior == BackStackBehavior.NO_BACK_STACK) {
-    return (it) {
-      print("-- Back name:" + it.settings.name);
-      return it.settings.name == HomeScreen.routeName;
-    };
-  }
-  return (it) => true;
-}
-
 navigateShowDialog(BuildContext context, DialogArguments arguments) {
   showDialog(
       context: context,
@@ -53,6 +35,12 @@ navigateShowDialog(BuildContext context, DialogArguments arguments) {
         arguments: arguments,
       ));
 }
+
+FadeBlackPageRoute createFadeRoute(Widget child, String name,
+        {Object arguments}) =>
+    FadeBlackPageRoute(
+        builder: (context) => child,
+        settings: RouteSettings(name: name, arguments: arguments));
 
 class DialogArguments {
   final String title;
@@ -89,7 +77,8 @@ class DialogContent extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 18)),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text(arguments.message, style: TextStyle(fontSize: 15)),
+                  child:
+                      Text(arguments.message, style: TextStyle(fontSize: 15)),
                 )
               ],
             ),

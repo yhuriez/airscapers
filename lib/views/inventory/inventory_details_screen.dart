@@ -13,24 +13,21 @@ import 'package:flutter/material.dart';
 import '../../injection.dart';
 
 class InventoryDetailsFragment extends StatelessWidget {
-
   static const routeName = "/details";
 
   final ScenarioElementDesc desc;
 
   const InventoryDetailsFragment({Key key, this.desc}) : super(key: key);
 
-  static NavigationIntent navigate(ScenarioElementDesc desc,
-          {BackStackBehavior backStackBehavior}) =>
-      NavigationIntent(routeName, desc, backStackBehavior: backStackBehavior);
+  static NavigationIntent navigate(ScenarioElementDesc desc) =>
+      NavigationIntent(routeName, desc);
 
   @override
   Widget build(BuildContext context) {
     ScenarioElementDesc desc = ModalRoute.of(context).settings.arguments;
 
     return ARSScaffold(
-        title: desc.title,
-        child: ScenarioElementView(desc: desc));
+        title: desc.title, child: ScenarioElementView(desc: desc));
   }
 }
 
@@ -194,7 +191,8 @@ class SearchContent extends StatelessWidget {
           color: Colors.black87,
           child: Container(
             child: Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+              padding:
+                  const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
               child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: loots

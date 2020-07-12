@@ -4,13 +4,19 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/init/start_scenario_screen.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../injection.dart';
 
 class WelcomeScreen extends StatelessWidget {
+
   static const routeName = "/choose";
+
+  static Route<dynamic> createRoute() {
+    return createFadeRoute(WelcomeScreen(), WelcomeScreen.routeName);
+  }
 
   final InitScenarioIndexUseCase _initScenarioIndexUseCase = sl();
 
@@ -75,7 +81,8 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: ARSCodeTextField(
                 acceptedValues: scenarios.map((it) => it.code).toList(),
-                callback: (context, code) => onCodeValidated(context, code, scenarios),
+                callback: (context, code) =>
+                    onCodeValidated(context, code, scenarios),
                 hint: "Entrez le code de votre scénario",
                 validationErrorMessage: "Ce code n'existe pas",
               ),
@@ -104,9 +111,10 @@ class WelcomeScreen extends StatelessWidget {
         ),
       );
 
-  onCodeValidated(BuildContext context, String code, List<ScenarioReference> scenarios) {
+  onCodeValidated(
+      BuildContext context, String code, List<ScenarioReference> scenarios) {
     final scenario = scenarios.firstWhere((element) => element.code == code);
-    if(scenario != null) {
+    if (scenario != null) {
       goToScenarioStart(context, scenario);
     }
   }
@@ -116,7 +124,6 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   goToScenarioStart(BuildContext context, ScenarioReference scenario) {
-    Navigator.pushNamed(context, StartScenarioScreen.routeName,
-        arguments: StartScenarioParameter(scenario));
+    Navigator.of(context, rootNavigator: true).push(StartScenarioScreen.createRoute(scenario));
   }
 }

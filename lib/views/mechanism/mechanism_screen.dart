@@ -15,10 +15,8 @@ import '../../injection.dart';
 class MechanismFragment extends StatelessWidget {
   static const routeName = "/mechanism";
 
-  static NavigationIntent navigate(ScenarioMechanism mechanism,
-          {BackStackBehavior backStackBehavior}) =>
-      NavigationIntent(routeName, mechanism,
-          backStackBehavior: backStackBehavior);
+  static NavigationIntent navigate(ScenarioMechanism mechanism) =>
+      NavigationIntent(routeName, mechanism);
 
   @override
   Widget build(BuildContext context) {
