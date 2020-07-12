@@ -1,4 +1,5 @@
 import 'package:airscaper/common/colors.dart';
+import 'package:airscaper/model/entities/element_description.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
@@ -8,12 +9,18 @@ class GameOverScreen extends StatelessWidget {
 
   static const routeName = "/gameover";
 
-  static Route<dynamic> createRoute() {
-    return createFadeRoute(GameOverScreen(), GameOverScreen.routeName);
+  static Route<dynamic> createRoute({ScenarioElementDesc desc}) {
+    return createFadeRoute(GameOverScreen(), GameOverScreen.routeName, arguments: desc);
   }
 
   @override
   Widget build(BuildContext context) {
+
+    ScenarioElementDesc desc = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Column(
