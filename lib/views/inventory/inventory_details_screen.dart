@@ -80,11 +80,10 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
           ),
         ),
 
-        // Button
-        (widget.desc.end) ? endButton : Container(),
+        // Button,
         (availableLoots != null && availableLoots.isNotEmpty)
             ? searchButton
-            : continueButton,
+            : (widget.desc.end) ? endButton : continueButton,
       ],
     );
   }
@@ -103,8 +102,6 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
 
   onContinueButtonClicked(BuildContext context) {
     Navigator.of(context).pop();
-//    Navigator.of(context)
-//        .pushNamedAndRemoveUntil(MainScanFragment.routeName, (route) => false);
   }
 
   Widget get endButton => Padding(
@@ -122,7 +119,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   onEndedClicked(BuildContext context) async {
     await widget._endScenarioUseCase.execute();
 
-    Navigator.of(context)
+    Navigator.of(context, rootNavigator: true)
         .pushNamedAndRemoveUntil(WelcomeScreen.routeName, (route) => false);
   }
 
