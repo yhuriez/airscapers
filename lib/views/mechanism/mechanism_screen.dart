@@ -1,12 +1,10 @@
-import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
-import 'package:airscaper/views/common/ars_inner_shadow.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
-import 'package:airscaper/views/common/ars_white_shadow.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
+import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +20,10 @@ class MechanismFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScenarioMechanism mechanism = ModalRoute.of(context).settings.arguments;
+    ScenarioMechanism mechanism = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
 
     return ARSScaffold(
       title: mechanism.name,
@@ -68,39 +69,25 @@ class _MechanismStateRepresentationState
       return Container();
     }
 
-    return Column(
-      children: <Widget>[
-        // Image
-        if (_state.image == null) Container() else Expanded(child: _createImageBox(context)),
-
-        // Item box
-        _createItemBox(context)
-      ],
+    return ARSDetailsBox(
+      imageContainerBuilder: _createImageBox,
+      interactionsBuilder: _createInteraction,
+      imageUrl: _state.image,
+      description: _state.description,
     );
   }
 
-  Widget _createImageBox(BuildContext context) => BlocBuilder<InventoryBloc, InventoryState>(
-    builder: (context, state) {
-      final selectedId = state.selectedItem;
-      return InkWell(
-        onTap: () => _onItemUsed(context, selectedId),
-        child: _createDragTarget(
-            context,
-            ARSInnerShadow(
-              color: Colors.black,
-              offset: Offset(20, 20),
-              child: _createImageAsset(context),
-            )),
+  Widget _createImageBox(BuildContext context, Widget child) =>
+      BlocBuilder<InventoryBloc, InventoryState>(
+        builder: (context, state) {
+          final selectedId = state.selectedItem;
+          return InkWell(
+            onTap: () => _onItemUsed(context, selectedId),
+            child: _createDragTarget(
+                context, child),
+          );
+        },
       );
-    },
-  );
-
-  Widget _createImageAsset(BuildContext context) {
-    return Image.asset(
-      _state.image,
-      fit: BoxFit.fill,
-    );
-  }
 
   Widget _createDragTarget(BuildContext context, Widget child) {
     List<int> acceptedIds = _state.transitions
@@ -119,31 +106,6 @@ class _MechanismStateRepresentationState
     );
   }
 
-  Widget _createItemBox(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(36.0),
-      child: ARSWhiteShadow(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Text description
-            _createText(context),
-            // Interaction
-            _createInteraction(context)
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _createText(BuildContext context) => Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(_state.description,
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-        ),
-      );
-
   Widget _createInteraction(BuildContext context) {
     if (_state.codeHint != null) {
       return _createCodeField(context);
@@ -152,7 +114,8 @@ class _MechanismStateRepresentationState
     }
   }
 
-  Widget get _backButton => Padding(
+  Widget get _backButton =>
+      Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ARSButton(
           onClick: _onContinueButtonClicked,
@@ -176,19 +139,6 @@ class _MechanismStateRepresentationState
       validationErrorMessage: "Code invalide",
     );
   }
-
-  Widget _createConfirmButton(Function(BuildContext) clickListener) => Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ARSButton(
-          text: Text(
-            "Valider",
-            style: TextStyle(color: Colors.white),
-          ),
-          onClick: clickListener,
-          height: 60,
-          backgroundColor: startButtonColor,
-        ),
-      );
 
   _onCodeClicked(BuildContext context, String codeResult) async {
     if (codeResult != null) {

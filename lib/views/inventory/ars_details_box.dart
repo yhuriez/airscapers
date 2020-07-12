@@ -20,6 +20,7 @@ class ARSDetailsBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         // Image
         (this.imageUrl == null)
@@ -36,9 +37,11 @@ class ARSDetailsBox extends StatelessWidget {
   Widget _createImage(BuildContext context) => ARSInnerShadow(
         color: Colors.black,
         offset: Offset(20, 20),
-        child: Image.asset(
-          this.imageUrl,
-          fit: BoxFit.fill,
+        child: SizedBox.expand(
+          child: Image.asset(
+            this.imageUrl,
+            fit: BoxFit.fill,
+          ),
         ),
       );
 

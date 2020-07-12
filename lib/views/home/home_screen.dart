@@ -136,14 +136,17 @@ class HomeScreenContent extends StatelessWidget {
             (it) => it.id == state.selectedItem,
             orElse: () => null);
 
-        return Column(
-          children: [
-            _createBottomBar(context, selectedItem),
-            ARSGrid(
-                items: items,
-                selectedItem: state.selectedItem,
-                onItemClicked: _startItemScreen),
-          ],
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              _createBottomBar(context, selectedItem),
+              ARSGrid(
+                  items: items,
+                  selectedItem: state.selectedItem,
+                  onItemClicked: _startItemScreen),
+            ],
+          ),
         );
       },
     );
