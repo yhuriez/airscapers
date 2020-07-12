@@ -37,6 +37,7 @@ class MechanismState {
   bool _start;
   int _endTrack;
   List<MechanismTransition> _transitions;
+  List<MechanismClue> _clues;
   String _codeHint;
 
   String get description => _description;
@@ -55,6 +56,8 @@ class MechanismState {
 
   List<MechanismTransition> get transitions => _transitions;
 
+  List<MechanismClue> get clues => _clues;
+
   MechanismState(this._description, this._id, this._image, this._start,
       this._endTrack, this._transitions, this._codeHint);
 
@@ -66,6 +69,8 @@ class MechanismState {
     this._endTrack = obj["end_track"];
     this._transitions =
         mapTypedList(obj["transitions"], (it) => MechanismTransition.map(it));
+    this._clues =
+        mapTypedList(obj["clues"], (it) => MechanismClue.map(it));
     this._codeHint = obj["code_hint"];
   }
 
@@ -78,6 +83,7 @@ class MechanismState {
     map["end_track"] = _endTrack;
     map["transitions"] = _transitions;
     map["code_hint"] = _codeHint;
+    map["clues"] = _clues;
     return map;
   }
 }
@@ -125,4 +131,25 @@ class MechanismTransition {
     map["removed_items"] = _removedItems;
     return map;
   }
+}
+
+
+class MechanismClue {
+  int id;
+  String description;
+
+  MechanismClue({this.id, this.description});
+
+  MechanismClue.map(dynamic obj) {
+    id = obj["id"];
+    description = obj["description"];
+  }
+
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{};
+    map["id"] = id;
+    map["description"] = description;
+    return map;
+  }
+
 }

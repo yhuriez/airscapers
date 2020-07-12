@@ -81,9 +81,15 @@
       "states": [
         {
           "id": 1,
-          "description": "Un coffre fermé à clé",
+          "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus ou bien en cliquant sur un objet, puis sur le coffre.",
           "start": true,
           "image": "assets/images/tutorial/furniture_closed.png",
+          "clues": [
+            {
+              "id": 351,
+              "description": "Une clé est nécessaire pour ouvrir le coffre."
+            }
+          ],
           "transitions": [
             {
               "expected_item": 11,
@@ -106,6 +112,12 @@
           "description": "Une grille avec des picots séparés de 5 cm.",
           "image": "assets/images/tutorial/electric_board.png",
           "start": true,
+          "clues": [
+            {
+              "id": 6911,
+              "description": "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
+            }
+          ],
           "transitions": [
             {
               "expected_item": 16,
@@ -115,9 +127,19 @@
         },
         {
           "id": 2,
-          "description": "Comment le fil doit être placé ?",
+          "description": "Comment le fil doit être placé ?\n\nVous pouvez résoudre cette énigme en entrant les lettres à relier dans le bon ordre.",
           "image": "assets/images/tutorial/electric_board_connect.png",
           "code_hint": "Ex: AB",
+          "clues": [
+            {
+              "id": 6921,
+              "description": "Le schéma de branchement doit se situer quelque part dans la pièce."
+            },
+            {
+              "id": 6922,
+              "description": "Les picots du centre doivent être reliés."
+            }
+          ],
           "transitions": [
             {
               "expected_code": "CD",
@@ -141,6 +163,12 @@
           "description": "Un écran. Il n'y a pas de courant",
           "start": true,
           "image": "assets/images/tutorial/tv_off.png",
+          "clues": [
+            {
+              "id": 421,
+              "description": "Sans courant, cet écran ne sert à rien."
+            }
+          ],
           "transitions": [
             {
               "expected_track": 25,
@@ -160,10 +188,16 @@
       "states": [
         {
           "id": 1,
-          "description": "C'est la porte de sortie. Elle est commandée par un digicode.",
+          "description": "C'est la porte de sortie. Elle est commandée par un digicode.\n\nNote : dans le champ se trouve indiqué le type de réponse souhaité.",
           "start": true,
           "image": "assets/images/tutorial/exit_door.png",
           "code_hint": "Ex: 1234",
+          "clues": [
+            {
+              "id": 211,
+              "description": "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
+            }
+          ],
           "transitions": [
             {
               "expected_code": "9327",

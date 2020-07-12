@@ -683,6 +683,200 @@ class $InventoryMechanismStatesTable extends InventoryMechanismStates
   }
 }
 
+class InventoryClue extends DataClass implements Insertable<InventoryClue> {
+  final int clueId;
+  final DateTime creationDate;
+  InventoryClue({@required this.clueId, @required this.creationDate});
+  factory InventoryClue.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final dateTimeType = db.typeSystem.forDartType<DateTime>();
+    return InventoryClue(
+      clueId:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}clue_id']),
+      creationDate: dateTimeType
+          .mapFromDatabaseResponse(data['${effectivePrefix}creation_date']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || clueId != null) {
+      map['clue_id'] = Variable<int>(clueId);
+    }
+    if (!nullToAbsent || creationDate != null) {
+      map['creation_date'] = Variable<DateTime>(creationDate);
+    }
+    return map;
+  }
+
+  InventoryCluesCompanion toCompanion(bool nullToAbsent) {
+    return InventoryCluesCompanion(
+      clueId:
+          clueId == null && nullToAbsent ? const Value.absent() : Value(clueId),
+      creationDate: creationDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(creationDate),
+    );
+  }
+
+  factory InventoryClue.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return InventoryClue(
+      clueId: serializer.fromJson<int>(json['clueId']),
+      creationDate: serializer.fromJson<DateTime>(json['creationDate']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'clueId': serializer.toJson<int>(clueId),
+      'creationDate': serializer.toJson<DateTime>(creationDate),
+    };
+  }
+
+  InventoryClue copyWith({int clueId, DateTime creationDate}) => InventoryClue(
+        clueId: clueId ?? this.clueId,
+        creationDate: creationDate ?? this.creationDate,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('InventoryClue(')
+          ..write('clueId: $clueId, ')
+          ..write('creationDate: $creationDate')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(clueId.hashCode, creationDate.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is InventoryClue &&
+          other.clueId == this.clueId &&
+          other.creationDate == this.creationDate);
+}
+
+class InventoryCluesCompanion extends UpdateCompanion<InventoryClue> {
+  final Value<int> clueId;
+  final Value<DateTime> creationDate;
+  const InventoryCluesCompanion({
+    this.clueId = const Value.absent(),
+    this.creationDate = const Value.absent(),
+  });
+  InventoryCluesCompanion.insert({
+    @required int clueId,
+    @required DateTime creationDate,
+  })  : clueId = Value(clueId),
+        creationDate = Value(creationDate);
+  static Insertable<InventoryClue> custom({
+    Expression<int> clueId,
+    Expression<DateTime> creationDate,
+  }) {
+    return RawValuesInsertable({
+      if (clueId != null) 'clue_id': clueId,
+      if (creationDate != null) 'creation_date': creationDate,
+    });
+  }
+
+  InventoryCluesCompanion copyWith(
+      {Value<int> clueId, Value<DateTime> creationDate}) {
+    return InventoryCluesCompanion(
+      clueId: clueId ?? this.clueId,
+      creationDate: creationDate ?? this.creationDate,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (clueId.present) {
+      map['clue_id'] = Variable<int>(clueId.value);
+    }
+    if (creationDate.present) {
+      map['creation_date'] = Variable<DateTime>(creationDate.value);
+    }
+    return map;
+  }
+}
+
+class $InventoryCluesTable extends InventoryClues
+    with TableInfo<$InventoryCluesTable, InventoryClue> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $InventoryCluesTable(this._db, [this._alias]);
+  final VerificationMeta _clueIdMeta = const VerificationMeta('clueId');
+  GeneratedIntColumn _clueId;
+  @override
+  GeneratedIntColumn get clueId => _clueId ??= _constructClueId();
+  GeneratedIntColumn _constructClueId() {
+    return GeneratedIntColumn('clue_id', $tableName, false,
+        $customConstraints: 'PRIMARY KEY');
+  }
+
+  final VerificationMeta _creationDateMeta =
+      const VerificationMeta('creationDate');
+  GeneratedDateTimeColumn _creationDate;
+  @override
+  GeneratedDateTimeColumn get creationDate =>
+      _creationDate ??= _constructCreationDate();
+  GeneratedDateTimeColumn _constructCreationDate() {
+    return GeneratedDateTimeColumn(
+      'creation_date',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [clueId, creationDate];
+  @override
+  $InventoryCluesTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'inventory_clues';
+  @override
+  final String actualTableName = 'inventory_clues';
+  @override
+  VerificationContext validateIntegrity(Insertable<InventoryClue> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('clue_id')) {
+      context.handle(_clueIdMeta,
+          clueId.isAcceptableOrUnknown(data['clue_id'], _clueIdMeta));
+    } else if (isInserting) {
+      context.missing(_clueIdMeta);
+    }
+    if (data.containsKey('creation_date')) {
+      context.handle(
+          _creationDateMeta,
+          creationDate.isAcceptableOrUnknown(
+              data['creation_date'], _creationDateMeta));
+    } else if (isInserting) {
+      context.missing(_creationDateMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  @override
+  InventoryClue map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return InventoryClue.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $InventoryCluesTable createAlias(String alias) {
+    return $InventoryCluesTable(_db, alias);
+  }
+}
+
 abstract class _$InventoryDatabase extends GeneratedDatabase {
   _$InventoryDatabase(QueryExecutor e)
       : super(SqlTypeSystem.defaultInstance, e);
@@ -695,9 +889,16 @@ abstract class _$InventoryDatabase extends GeneratedDatabase {
   $InventoryMechanismStatesTable _inventoryMechanismStates;
   $InventoryMechanismStatesTable get inventoryMechanismStates =>
       _inventoryMechanismStates ??= $InventoryMechanismStatesTable(this);
+  $InventoryCluesTable _inventoryClues;
+  $InventoryCluesTable get inventoryClues =>
+      _inventoryClues ??= $InventoryCluesTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [inventoryTracks, inventoryItems, inventoryMechanismStates];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        inventoryTracks,
+        inventoryItems,
+        inventoryMechanismStates,
+        inventoryClues
+      ];
 }

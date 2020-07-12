@@ -21,8 +21,13 @@ class InventoryMechanismStates extends Table {
   DateTimeColumn get creationDate => dateTime()();
 }
 
+class InventoryClues extends Table {
+  IntColumn get clueId => integer().customConstraint("PRIMARY KEY")();
+  DateTimeColumn get creationDate => dateTime()();
+}
 
-@UseMoor(tables: [InventoryTracks, InventoryItems, InventoryMechanismStates])
+
+@UseMoor(tables: [InventoryTracks, InventoryItems, InventoryMechanismStates, InventoryClues])
 class InventoryDatabase extends _$InventoryDatabase {
   InventoryDatabase()
       : super(FlutterQueryExecutor.inDatabaseFolder(path: 'inventory_db.sqlite'));
