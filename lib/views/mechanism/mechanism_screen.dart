@@ -3,7 +3,9 @@ import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
+import 'package:airscaper/views/common/ars_inner_shadow.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
+import 'package:airscaper/views/common/ars_white_shadow.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
@@ -35,8 +37,11 @@ class MechanismStateRepresentation extends StatefulWidget {
   final ScenarioMechanism mechanism;
 
   MechanismCodeInputUseCase get _codeInputUseCase => sl();
+
   MechanismItemSelectUseCase get _itemSelectUseCase => sl();
+
   LoadCurrentMechanismStateUseCase get _loadMechanismStateUseCase => sl();
+
   MechanismFinishedUseCase get _mechanismFinishedUseCase => sl();
 
   const MechanismStateRepresentation({Key key, @required this.mechanism})
@@ -54,7 +59,7 @@ class _MechanismStateRepresentationState
   @override
   void initState() {
     super.initState();
-    refreshState(context);
+    _refreshState(context);
   }
 
   @override
@@ -66,31 +71,38 @@ class _MechanismStateRepresentationState
     return Column(
       children: <Widget>[
         // Image
-        if (_state.image == null) Container() else createImage(context),
+        if (_state.image == null) Container() else Expanded(child: _createImageBox(context)),
 
-        // item box
-
-        Expanded(child: createText(context)),
-
-        // Interaction
-        createInteraction(context)
+        // Item box
+        _createItemBox(context)
       ],
     );
   }
 
-  Widget createImage(BuildContext context) =>
-      BlocBuilder<InventoryBloc, InventoryState>(
-        builder: (context, state) {
-          final selectedId = state.selectedItem;
-          return InkWell(
-            onTap: () => onItemUsed(context, selectedId),
-            child: _createDragTarget(context, Image.asset(_state.image)),
-          );
-        },
+  Widget _createImageBox(BuildContext context) => BlocBuilder<InventoryBloc, InventoryState>(
+    builder: (context, state) {
+      final selectedId = state.selectedItem;
+      return InkWell(
+        onTap: () => _onItemUsed(context, selectedId),
+        child: _createDragTarget(
+            context,
+            ARSInnerShadow(
+              color: Colors.black,
+              offset: Offset(20, 20),
+              child: _createImageAsset(context),
+            )),
       );
+    },
+  );
+
+  Widget _createImageAsset(BuildContext context) {
+    return Image.asset(
+      _state.image,
+      fit: BoxFit.fill,
+    );
+  }
 
   Widget _createDragTarget(BuildContext context, Widget child) {
-
     List<int> acceptedIds = _state.transitions
         .where((it) => it.expectedItemId != null)
         .map((it) => it.expectedItemId)
@@ -102,31 +114,48 @@ class _MechanismStateRepresentationState
       },
       onWillAccept: (id) => acceptedIds.contains(id),
       onAccept: (id) {
-        onItemUsed(context, id);
+        _onItemUsed(context, id);
       },
     );
   }
 
-  Widget createText(BuildContext context) => Center(
+  Widget _createItemBox(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(36.0),
+      child: ARSWhiteShadow(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Text description
+            _createText(context),
+            // Interaction
+            _createInteraction(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _createText(BuildContext context) => Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(_state.description,
-              style: TextStyle(fontSize: 16, color: Colors.white)),
+              style: TextStyle(fontSize: 16, color: Colors.black)),
         ),
       );
 
-  Widget createInteraction(BuildContext context) {
+  Widget _createInteraction(BuildContext context) {
     if (_state.codeHint != null) {
-      return createCodeField(context);
+      return _createCodeField(context);
     } else {
-      return backButton;
+      return _backButton;
     }
   }
 
-  Widget get backButton => Padding(
+  Widget get _backButton => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ARSButton(
-          onClick: onContinueButtonClicked,
+          onClick: _onContinueButtonClicked,
           text: Text(
             "Retour",
             style: TextStyle(color: Colors.white),
@@ -135,20 +164,20 @@ class _MechanismStateRepresentationState
         ),
       );
 
-  onContinueButtonClicked(BuildContext context) {
+  _onContinueButtonClicked(BuildContext context) {
     Navigator.of(context).pop();
   }
 
-  Widget createCodeField(BuildContext context) {
+  Widget _createCodeField(BuildContext context) {
     return ARSCodeTextField(
-      callback: (context, textValue) => onCodeClicked(context, textValue),
+      callback: (context, textValue) => _onCodeClicked(context, textValue),
       acceptedValues: [],
       hint: "Entrez le code",
       validationErrorMessage: "Code invalide",
     );
   }
 
-  Widget createConfirmButton(Function(BuildContext) clickListener) => Padding(
+  Widget _createConfirmButton(Function(BuildContext) clickListener) => Padding(
         padding: const EdgeInsets.all(16.0),
         child: ARSButton(
           text: Text(
@@ -161,12 +190,12 @@ class _MechanismStateRepresentationState
         ),
       );
 
-  onCodeClicked(BuildContext context, String codeResult) async {
+  _onCodeClicked(BuildContext context, String codeResult) async {
     if (codeResult != null) {
       final MechanismState newState = await widget._codeInputUseCase
           .execute(context, widget.mechanism, codeResult);
       if (newState != null) {
-        refreshState(context, givenState: newState);
+        _refreshState(context, givenState: newState);
       } else {
         final intent = createDialogNavigationIntent("", "Rien ne se passe");
         navigateTo(context, intent);
@@ -174,19 +203,19 @@ class _MechanismStateRepresentationState
     }
   }
 
-  onItemUsed(BuildContext context, int selectedId) async {
+  _onItemUsed(BuildContext context, int selectedId) async {
     final MechanismState result = await widget._itemSelectUseCase
         .execute(context, widget.mechanism, selectedId);
     if (result != null) {
-      refreshState(context, givenState: result);
+      _refreshState(context, givenState: result);
     }
   }
 
-  onClueClicked(BuildContext context, ScenarioMechanism mechanism) {
+  _onClueClicked(BuildContext context, ScenarioMechanism mechanism) {
     // TODO
   }
 
-  refreshState(BuildContext context, {MechanismState givenState}) async {
+  _refreshState(BuildContext context, {MechanismState givenState}) async {
     final newState = givenState ??
         await widget._loadMechanismStateUseCase.execute(widget.mechanism);
 
