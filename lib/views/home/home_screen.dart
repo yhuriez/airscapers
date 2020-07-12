@@ -204,7 +204,7 @@ class HomeScreenContent extends StatelessWidget {
     Future.delayed(
         Duration.zero,
         () => Navigator.of(context)
-            .pushReplacementNamed(GameOverScreen.routeName));
+            .pushReplacement(GameOverScreen.createRoute()));
   }
 
   _startItemScreen(BuildContext context, ScenarioItem selectedItem) {

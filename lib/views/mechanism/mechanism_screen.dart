@@ -82,11 +82,29 @@ class _MechanismStateRepresentationState
         builder: (context, state) {
           final selectedId = state.selectedItem;
           return InkWell(
-            onTap: () => onImageClicked(context, selectedId),
-            child: Image.asset(_state.image),
+            onTap: () => onItemUsed(context, selectedId),
+            child: _createDragTarget(context, Image.asset(_state.image)),
           );
         },
       );
+
+  Widget _createDragTarget(BuildContext context, Widget child) {
+
+    List<int> acceptedIds = _state.transitions
+        .where((it) => it.expectedItemId != null)
+        .map((it) => it.expectedItemId)
+        .toList();
+
+    return DragTarget<int>(
+      builder: (context, incoming, rejected) {
+        return child;
+      },
+      onWillAccept: (id) => acceptedIds.contains(id),
+      onAccept: (id) {
+        onItemUsed(context, id);
+      },
+    );
+  }
 
   Widget createText(BuildContext context) => Center(
         child: Padding(
@@ -118,8 +136,6 @@ class _MechanismStateRepresentationState
 
   onContinueButtonClicked(BuildContext context) {
     Navigator.of(context).pop();
-//    Navigator.of(context)
-//        .pushNamedAndRemoveUntil(MainScanFragment.routeName, (route) => false);
   }
 
   Widget createCodeField(BuildContext context) {
@@ -157,7 +173,7 @@ class _MechanismStateRepresentationState
     }
   }
 
-  onImageClicked(BuildContext context, int selectedId) async {
+  onItemUsed(BuildContext context, int selectedId) async {
     final MechanismState result = await widget._itemSelectUseCase
         .execute(context, widget.mechanism, selectedId);
     if (result != null) {

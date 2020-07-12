@@ -6,6 +6,7 @@ import 'package:quiver/iterables.dart';
 
 const GRID_ITEM_PER_PAGE = 5;
 const double GRID_HEIGHT = 60;
+const double ITEM_SIZE = 50;
 
 class ARSGrid extends StatelessWidget {
   final List<ScenarioItem> items;
@@ -76,10 +77,7 @@ class ARSGridEmptyItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
         child: AspectRatio(
           aspectRatio: 1,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(6)),
-          ),
+          child: EmptySlot(),
         ),
       ),
     );
@@ -102,6 +100,13 @@ class ARSGridImageItem extends StatelessWidget {
 
     var content = createContent(context, bloc);
 
+    final draggableContent = Draggable(
+      childWhenDragging: EmptySlot(),
+      data: item.id,
+      feedback: SizedBox(height: ITEM_SIZE, width: ITEM_SIZE, child: imageSlot),
+      child: content,
+    );
+
     // If not selected, we add padding, so selected item will appear bigger than non-selected
     final hPadding = (this.selected) ? 8.0 : 12.0;
     final vPadding = (this.selected) ? 0.0 : 4.0;
@@ -109,7 +114,7 @@ class ARSGridImageItem extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: vPadding),
-        child: content,
+        child: draggableContent,
       ),
     );
   }
@@ -121,13 +126,26 @@ class ARSGridImageItem extends StatelessWidget {
             bloc.add(SelectItemInventoryEvent(item.id));
             onItemClicked(context, item);
           },
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: ExactAssetImage(item.image), fit: BoxFit.fill),
-              borderRadius: BorderRadius.circular(6),
-            ),
-          ),
+          child: imageSlot
         ),
       );
+  
+  Widget get imageSlot => Container(
+    decoration: BoxDecoration(
+      image: DecorationImage(
+          image: ExactAssetImage(item.image), fit: BoxFit.fill),
+      borderRadius: BorderRadius.circular(6),
+    ),
+  ); 
+}
+
+
+class EmptySlot extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.grey, borderRadius: BorderRadius.circular(6)),
+    );
+  }
 }
