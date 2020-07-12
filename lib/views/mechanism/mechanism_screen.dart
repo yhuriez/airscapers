@@ -68,7 +68,8 @@ class _MechanismStateRepresentationState
         // Image
         if (_state.image == null) Container() else createImage(context),
 
-        // Text description
+        // item box
+
         Expanded(child: createText(context)),
 
         // Interaction

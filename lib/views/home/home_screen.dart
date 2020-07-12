@@ -72,10 +72,7 @@ class HomeScreenLoader extends StatelessWidget {
           return Material(
             child: Container(
                 color: backgroundColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: HomeScreenContent(),
-                )),
+                child: HomeScreenContent()),
           );
         });
   }

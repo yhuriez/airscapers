@@ -21,30 +21,33 @@ class MainScanFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return ARSScaffold(
       title: _repository.title,
-      child: Center(
-        child: ARSButton(
-            text: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  "assets/images/common/qrcode.png",
-                  width: 80,
-                  height: 80,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Scanner un élément",
-                    style: TextStyle(fontSize: 18),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: ARSButton(
+              text: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    "assets/images/common/qrcode.png",
+                    width: 80,
+                    height: 80,
                   ),
-                ),
-              ],
-            ),
-            height: 150,
-            borderRadius: 30.0,
-            onClick: onStartBarcodeScanner,
-            onLongClick: onScanDebugClicked),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Scanner un élément",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              ),
+              height: 150,
+              borderRadius: 30.0,
+              onClick: onStartBarcodeScanner,
+              onLongClick: onScanDebugClicked),
+        ),
       ),
     );
   }

@@ -27,7 +27,10 @@ class InventoryDetailsFragment extends StatelessWidget {
     ScenarioElementDesc desc = ModalRoute.of(context).settings.arguments;
 
     return ARSScaffold(
-        title: desc.title, child: ScenarioElementView(desc: desc));
+        title: desc.title, child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ScenarioElementView(desc: desc),
+        ));
   }
 }
 
