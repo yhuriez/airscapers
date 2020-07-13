@@ -114,11 +114,7 @@ class HomeScreenContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         // Main view
-        Expanded(
-            child: Padding(
-          padding: const EdgeInsets.only(bottom: 24.0),
-          child: _createHomeNavigation(context),
-        )),
+        Expanded(child: _createHomeNavigation(context)),
 
         // Inventory
         (KeyboardVisibilityProvider.isKeyboardVisible(context))

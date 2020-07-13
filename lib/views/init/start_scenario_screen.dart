@@ -56,7 +56,7 @@ class StartScenarioScreen extends StatelessWidget {
               child: ARSButton(
                 text: Text(
                   "Démarrer le scénario",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black, fontSize: 16),
                 ),
                 onClick: (context) {
                   onStartClicked(context, scenario);

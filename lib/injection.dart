@@ -34,6 +34,8 @@ Future<void> init() async {
   sl.registerLazySingleton<MechanismItemSelectUseCase>(() => MechanismItemSelectUseCase(sl(), sl()));
   sl.registerLazySingleton<StateTransitionUseCase>(() => StateTransitionUseCase(sl(), sl()));
   sl.registerLazySingleton<MechanismFinishedUseCase>(() => MechanismFinishedUseCase(sl(), sl()));
+  sl.registerLazySingleton<LoadAvailableCluesUseCase>(() => LoadAvailableCluesUseCase(sl()));
+  sl.registerLazySingleton<UseClueUseCase>(() => UseClueUseCase(sl(), sl()));
   // endregion
 
 

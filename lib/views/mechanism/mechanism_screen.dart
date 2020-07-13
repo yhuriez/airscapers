@@ -5,6 +5,7 @@ import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
+import 'package:airscaper/views/mechanism/clue_dialog.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +21,10 @@ class MechanismFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScenarioMechanism mechanism = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    ScenarioMechanism mechanism = ModalRoute.of(context).settings.arguments;
 
-    return ARSScaffold(
-      title: mechanism.name,
-      child: MechanismStateRepresentation(
-        mechanism: mechanism,
-      ),
+    return MechanismStateRepresentation(
+      mechanism: mechanism,
     );
   }
 }
@@ -69,11 +64,15 @@ class _MechanismStateRepresentationState
       return Container();
     }
 
-    return ARSDetailsBox(
-      imageContainerBuilder: _createImageBox,
-      interactionsBuilder: _createInteraction,
-      imageUrl: _state.image,
-      description: _state.description,
+    return ARSScaffold(
+      title: widget.mechanism.name,
+      actions: [_createClueAction(context)],
+      child: ARSDetailsBox(
+        imageContainerBuilder: _createImageBox,
+        interactionsBuilder: _createInteraction,
+        imageUrl: _state.image,
+        description: _state.description,
+      ),
     );
   }
 
@@ -81,10 +80,9 @@ class _MechanismStateRepresentationState
       BlocBuilder<InventoryBloc, InventoryState>(
         builder: (context, state) {
           final selectedId = state.selectedItem;
-          return InkWell(
+          return GestureDetector(
             onTap: () => _onItemUsed(context, selectedId),
-            child: _createDragTarget(
-                context, child),
+            child: _createDragTarget(context, child),
           );
         },
       );
@@ -114,18 +112,14 @@ class _MechanismStateRepresentationState
     }
   }
 
-  Widget get _backButton =>
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: ARSButton(
-          onClick: _onContinueButtonClicked,
-          text: Text(
-            "Retour",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.green,
-        ),
-      );
+  Widget get _backButton => ARSButton(
+    onClick: _onContinueButtonClicked,
+    text: Text(
+      "Retour",
+      style: TextStyle(color: Colors.white),
+    ),
+    backgroundColor: Colors.green,
+  );
 
   _onContinueButtonClicked(BuildContext context) {
     Navigator.of(context).pop();
@@ -161,10 +155,6 @@ class _MechanismStateRepresentationState
     }
   }
 
-  _onClueClicked(BuildContext context, ScenarioMechanism mechanism) {
-    // TODO
-  }
-
   _refreshState(BuildContext context, {MechanismState givenState}) async {
     final newState = givenState ??
         await widget._loadMechanismStateUseCase.execute(widget.mechanism);
@@ -178,5 +168,16 @@ class _MechanismStateRepresentationState
         _state = newState;
       });
     }
+  }
+
+  Widget _createClueAction(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.help_outline),
+      onPressed: () => _onClueClicked(context),
+    );
+  }
+
+  _onClueClicked(BuildContext context) {
+    showDialog(context: context, child: ClueDialog(state: _state));
   }
 }

@@ -35,10 +35,10 @@ class GameOverScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ARSButton(
-              text: Text("Rejouer", style: TextStyle(color: Colors.white),),
+              text: Text("Rejouer", style: TextStyle(color: Colors.black),),
               onClick: onBackHomePressed,
               height: 60,
-              backgroundColor: startButtonColor,
+              backgroundColor: Colors.white,
             ),
           )
         ],

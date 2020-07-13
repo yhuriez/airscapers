@@ -13,7 +13,7 @@ class ARSButton extends StatelessWidget {
       {Key key,
       @required this.onClick,
       @required this.text,
-      this.height = 60,
+      this.height = 50,
       this.image = "",
       this.backgroundColor,
       this.borderRadius,

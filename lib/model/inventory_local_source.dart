@@ -60,6 +60,11 @@ class InventoryLocalSource {
     return db.doSelect(db.inventoryClues).get();
   }
 
+  Future<InventoryClue> loadClue(int id) {
+    return (db.doSelect(db.inventoryClues)..where((it) => it.clueId.equals(id)))
+        .getSingle();
+  }
+
   Future<int> insertTrack(int id) async {
     final InventoryTrack existing = await (db.doSelect(db.inventoryTracks)
           ..where((it) => it.id.equals(id)))
@@ -112,6 +117,7 @@ class InventoryLocalSource {
     await db.doDelete(db.inventoryItems).go();
     await db.doDelete(db.inventoryTracks).go();
     await db.doDelete(db.inventoryMechanismStates).go();
+    await db.doDelete(db.inventoryClues).go();
     return true;
   }
 }

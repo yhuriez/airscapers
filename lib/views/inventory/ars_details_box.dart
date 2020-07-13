@@ -40,7 +40,7 @@ class ARSDetailsBox extends StatelessWidget {
         child: SizedBox.expand(
           child: Image.asset(
             this.imageUrl,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
       );
@@ -53,7 +53,10 @@ class ARSDetailsBox extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // Text description
-            _createText(context),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: _createText(context),
+            ),
             // Interaction
             this.interactionsBuilder(context)
           ],
@@ -63,10 +66,7 @@ class ARSDetailsBox extends StatelessWidget {
   }
 
   Widget _createText(BuildContext context) => Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(this.description,
-              style: TextStyle(fontSize: 16, color: Colors.black)),
-        ),
+        child: Text(this.description,
+            style: TextStyle(fontSize: 16, color: Colors.black)),
       );
 }

@@ -1,3 +1,4 @@
+import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,33 +57,25 @@ class DialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Material(
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(6.0))),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                (arguments.title == null || arguments.title == "")
-                    ? Container(
-                        width: 0,
-                        height: 0,
-                      )
-                    : Text(arguments.title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18)),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child:
-                      Text(arguments.message, style: TextStyle(fontSize: 15)),
-                )
-              ],
-            ),
-          ),
+    return ARSDialogBase(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            (arguments.title == null || arguments.title == "")
+                ? Container(
+                    width: 0,
+                    height: 0,
+                  )
+                : Text(arguments.title,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(arguments.message, style: TextStyle(fontSize: 15)),
+            )
+          ],
         ),
       ),
     );

@@ -113,10 +113,8 @@ class StateTransitionUseCase {
 
   StateTransitionUseCase(this._inventory, this._currentMechanismStateUseCase);
 
-  Future<MechanismState> execute(
-      BuildContext context,
-      ScenarioMechanism mechanism,
-      MechanismTransition transition,
+  Future<MechanismState> execute(BuildContext context,
+      ScenarioMechanism mechanism, MechanismTransition transition,
       {int itemId}) async {
     final newStateId = transition.transitionTo;
 
@@ -134,11 +132,11 @@ class StateTransitionUseCase {
     }
 
     // Delete items that are no more useful
-    if(transition.removedItems != null) {
+    if (transition.removedItems != null) {
       removedItems += transition.removedItems;
     }
 
-    if(removedItems.isNotEmpty) {
+    if (removedItems.isNotEmpty) {
       inventoryBloc.add(RemoveItemsInventoryEvent(removedItems));
     }
 
@@ -160,5 +158,44 @@ class MechanismFinishedUseCase {
 
     return InventoryDetailsFragment.navigate(
         ScenarioElementDesc.fromTrack(track));
+  }
+}
+
+class LoadAvailableCluesUseCase {
+  final InventoryLocalSource _localSource;
+
+  LoadAvailableCluesUseCase(this._localSource);
+
+  Future<List<MechanismClue>> execute(MechanismState state) async {
+    final clues = state.clues;
+    final inventoryClues = await _localSource.loadAllClues();
+
+    return clues
+        .where((clue) =>
+            inventoryClues.any((element) => element.clueId == clue.id))
+        .toList();
+  }
+}
+
+class UseClueUseCase {
+  final InventoryLocalSource _localSource;
+  final LoadAvailableCluesUseCase _availableCluesUseCase;
+
+  UseClueUseCase(this._localSource, this._availableCluesUseCase);
+
+  Future<List<MechanismClue>> execute(MechanismState state) async {
+    var availableClues = await _availableCluesUseCase.execute(state);
+    var allClues = state.clues;
+
+    if (availableClues.length < allClues.length) {
+      availableClues.sort((a, b) => a.id - b.id);
+      allClues.sort((a, b) => a.id - b.id);
+
+      final nextClue = allClues[availableClues.length];
+      await _localSource.insertClue(nextClue.id);
+      availableClues += [nextClue];
+    }
+
+    return availableClues;
   }
 }

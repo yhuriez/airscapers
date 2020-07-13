@@ -4,6 +4,7 @@ import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/usecases/inventory_use_cases.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
+import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/common/ars_white_shadow.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
@@ -26,16 +27,14 @@ class InventoryDetailsFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScenarioElementDesc desc = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    ScenarioElementDesc desc = ModalRoute.of(context).settings.arguments;
 
     return ARSScaffold(
-        title: desc.title, child: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ScenarioElementView(desc: desc),
-    ));
+        title: desc.title,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ScenarioElementView(desc: desc),
+        ));
   }
 }
 
@@ -77,9 +76,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
           ? _searchButton
           : (widget.desc.end) ? _endButton : _continueButton;
 
-  
-  Widget get _continueButton =>
-      Padding(
+  Widget get _continueButton => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ARSButton(
           onClick: _onContinueButtonClicked,
@@ -95,8 +92,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     Navigator.of(context).pop();
   }
 
-  Widget get _endButton =>
-      Padding(
+  Widget get _endButton => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ARSButton(
           onClick: _onEndedClicked,
@@ -115,24 +111,23 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
         .pushNamedAndRemoveUntil(WelcomeScreen.routeName, (route) => false);
   }
 
-  Widget get _searchButton =>
-      FutureBuilder<List<ScenarioLoot>>(
-          future: widget._filterAvailableLootUseCase.execute(availableLoots),
-          builder: (context, snapshot) {
-            if (snapshot.data == null) return Container();
+  Widget get _searchButton => FutureBuilder<List<ScenarioLoot>>(
+      future: widget._filterAvailableLootUseCase.execute(availableLoots),
+      builder: (context, snapshot) {
+        if (snapshot.data == null) return Container();
 
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ARSButton(
-                onClick: (context) => _onSearchClicked(context, snapshot.data),
-                text: Text(
-                  "Fouiller",
-                  style: TextStyle(color: Colors.white),
-                ),
-                backgroundColor: Colors.green,
-              ),
-            );
-          });
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ARSButton(
+            onClick: (context) => _onSearchClicked(context, snapshot.data),
+            text: Text(
+              "Fouiller",
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
+      });
 
   _onSearchClicked(BuildContext context, List<ScenarioLoot> loots) {
     if (loots.length > 1) {
@@ -164,7 +159,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
 
   _refreshLoots() async {
     final newLoots =
-    await widget._filterAvailableLootUseCase.execute(availableLoots);
+        await widget._filterAvailableLootUseCase.execute(availableLoots);
     setState(() {
       availableLoots = newLoots;
     });
@@ -180,30 +175,19 @@ class SearchContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ARSWhiteShadow(
-          child: Material(
-            color: Colors.transparent,
-            child: Padding(
-              padding:
-              const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: loots
-                      .where((it) => it.interactionText != null)
-                      .map((loot) => _createLootButton(loot))
-                      .toList()),
-            ),
-          ),
-        ),
-      ),
-    );
+    return ARSDialogBase(
+        child: Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: loots
+              .where((it) => it.interactionText != null)
+              .map((loot) => _createLootButton(loot))
+              .toList()),
+    ));
   }
 
-  Widget _createLootButton(ScenarioLoot loot) =>
-      Padding(
+  Widget _createLootButton(ScenarioLoot loot) => Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: ARSButton(
             onClick: (context) => onLootClicked(loot),
