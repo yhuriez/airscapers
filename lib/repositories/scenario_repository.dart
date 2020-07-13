@@ -18,6 +18,8 @@ class ScenarioRepository {
 
   String get title => _scenario.details.title;
 
+  String get endText => _scenario.details.endText;
+
   int get durationInMinute => _scenario.details.duration;
 
   List<ScenarioItem> get items => _scenario?.items ?? [];

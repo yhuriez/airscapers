@@ -1,7 +1,8 @@
 {
   "details": {
-    "title": "Tutorial",
-    "duration": 10
+    "title": "Tutoriel",
+    "duration": 1,
+    "end_text": "Vous avez réussi à sortir de la pièce !"
   },
   "tracks": [
     {
@@ -38,8 +39,6 @@
     },
     {
       "id": 1,
-      "title": "Sortie",
-      "description": "Vous avez réussi à sortir de la pièce !",
       "end_track": true
     }
   ],

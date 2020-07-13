@@ -30,7 +30,7 @@ class ScenarioTrack {
     this._id = obj["id"];
     this._image = obj["image"];
     this._title = obj["title"];
-    this._endTrack = obj["end_track"];
+    this._endTrack = obj["end_track"] ?? false;
     this._loots = mapTypedList(obj["loots"], (it) => ScenarioLoot.map(it));
   }
 

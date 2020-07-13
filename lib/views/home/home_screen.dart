@@ -7,9 +7,10 @@ import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_grid.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/home/bloc/timer_bloc.dart';
-import 'package:airscaper/views/home/end_screen.dart';
+import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
+import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
@@ -55,7 +56,7 @@ class HomeScreenLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ARSResult<bool>>(
+    return FutureBuilder<ARSResult<StartResult>>(
         future: _startScenarioUseCase.execute(context),
         initialData: ARSResult.loading(),
         builder: (context, snapshot) {
@@ -67,6 +68,11 @@ class HomeScreenLoader extends StatelessWidget {
             return createErrorView(result.errorCode);
           } else if (result.loading) {
             return loadingView;
+          }
+
+          if(result.data == StartResult.ENDED) {
+            _doSuccessScreen(context);
+            return Container();
           }
 
           return Material(
@@ -99,12 +105,21 @@ class HomeScreenLoader extends StatelessWidget {
           ),
         ),
   );
+
+
+  _doSuccessScreen(BuildContext context) {
+
+    BlocProvider.of<TimerBloc>(context).add(EndTimerEvent());
+
+    Future.delayed(
+        Duration.zero,
+            () => Navigator.of(context)
+            .pushReplacement(SuccessScreen.createRoute()));
+  }
 }
 
 /// Visual content of the home page
 class HomeScreenContent extends StatelessWidget {
-
-  final EndScenarioUseCase _endScenarioUseCase = sl();
 
   final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey();
 
@@ -187,21 +202,20 @@ class HomeScreenContent extends StatelessWidget {
           (KeyboardVisibilityProvider.isKeyboardVisible(context))
               ? Container()
               : ARSClock(
-                  onEnd: doGameOverScreen,
+                  onEnd: _doGameOverScreen,
                 ),
         ],
       ),
     );
   }
 
-  doGameOverScreen(BuildContext context) async {
-    await _endScenarioUseCase.execute();
-
+  _doGameOverScreen(BuildContext context) {
     Future.delayed(
         Duration.zero,
         () => Navigator.of(context)
             .pushReplacement(GameOverScreen.createRoute()));
   }
+
 
   _startItemScreen(BuildContext context, ScenarioItem selectedItem) {
     if(selectedItem.isTrack) {

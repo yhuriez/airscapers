@@ -15,7 +15,10 @@ class ScanFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ARSScaffold(
-        title: "Scan Debug", child: Center(child: createCodeField(context)));
+        title: "Scan Debug", child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(child: createCodeField(context)),
+        ));
   }
 
   Widget createCodeField(BuildContext context) {

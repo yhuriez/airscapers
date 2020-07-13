@@ -1,13 +1,10 @@
 import 'package:airscaper/model/entities/element_description.dart';
 import 'package:airscaper/model/entities/scenario_loot.dart';
-import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/usecases/inventory_use_cases.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
-import 'package:airscaper/views/common/ars_white_shadow.dart';
-import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_link.dart';
@@ -43,7 +40,6 @@ class ScenarioElementView extends StatefulWidget {
 
   final FilterAvailableLootUseCase _filterAvailableLootUseCase = sl();
   final InterpretLinkUseCase _interpretLinkUseCase = sl();
-  final EndScenarioUseCase _endScenarioUseCase = sl();
 
   ScenarioElementView({Key key, this.desc}) : super(key: key);
 
@@ -74,7 +70,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   Widget _createInteraction(BuildContext context) =>
       (availableLoots != null && availableLoots.isNotEmpty)
           ? _searchButton
-          : (widget.desc.end) ? _endButton : _continueButton;
+          : _continueButton;
 
   Widget get _continueButton => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -92,24 +88,6 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     Navigator.of(context).pop();
   }
 
-  Widget get _endButton => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: ARSButton(
-          onClick: _onEndedClicked,
-          text: Text(
-            "Fin",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.green,
-        ),
-      );
-
-  _onEndedClicked(BuildContext context) async {
-    await widget._endScenarioUseCase.execute();
-
-    Navigator.of(context, rootNavigator: true)
-        .pushNamedAndRemoveUntil(WelcomeScreen.routeName, (route) => false);
-  }
 
   Widget get _searchButton => FutureBuilder<List<ScenarioLoot>>(
       future: widget._filterAvailableLootUseCase.execute(availableLoots),

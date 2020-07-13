@@ -124,13 +124,13 @@ class _ClueDialogState extends State<ClueDialog> {
       String text,
       Function(BuildContext) action,) =>
       FlatButton(
-          child: Text(text),
+          child: Text(text, style: TextStyle(fontSize: 20),),
           onPressed: () => action(context),
           textColor: Colors.black);
 
   _showConfirmDialog(BuildContext context) {
     String message = "Souhaitez-vous un autre indice ?";
-    if (currentClueIndex < 0) {
+    if (availableClues.length == 0) {
       message = "Souhaitez-vous obtenir un indice ?";
     }
 

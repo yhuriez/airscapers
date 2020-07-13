@@ -1,5 +1,4 @@
 import 'package:airscaper/common/ars_result.dart';
-import 'package:airscaper/model/entities/scenario.dart';
 import 'package:airscaper/model/entities/scenario_reference.dart';
 import 'package:airscaper/model/inventory_local_source.dart';
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
@@ -74,7 +73,7 @@ class StartScenarioUseCase {
 
   StartScenarioUseCase(this._repository, this._prefs);
 
-  Future<ARSResult<bool>> execute(BuildContext context) async {
+  Future<ARSResult<StartResult>> execute(BuildContext context) async {
     final currentId = await _prefs.getCurrentId();
 
     if (!_repository.isIndexInit) {
@@ -84,9 +83,9 @@ class StartScenarioUseCase {
 
     if (!_repository.isScenarioInit) {
       final scenarioRef = _repository.scenarios.firstWhere(
-          (element) => element.id == currentId,
+              (element) => element.id == currentId,
           orElse: () =>
-              throw Exception("Scenario with id $currentId not found"));
+          throw Exception("Scenario with id $currentId not found"));
 
       final scenarioInit = await _repository.initScenario(context, scenarioRef);
       if (!scenarioInit) return ARSResult.error("scenario_init_failed");
@@ -95,8 +94,20 @@ class StartScenarioUseCase {
     BlocProvider.of<TimerBloc>(context).add(InitTimerEvent());
     BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
 
-    return ARSResult.success(true);
+    // Check if scenario is ended
+    final endDate = await _prefs.getEndDate();
+
+    final result = (endDate != null)
+        ? StartResult.ENDED
+        : StartResult.ONGOING;
+
+    return ARSResult.success(result);
   }
+}
+
+enum StartResult {
+  ONGOING,
+  ENDED
 }
 
 /// Provide the list of all available scenario
@@ -125,22 +136,5 @@ class InitStartDateUseCase {
     }
 
     return startDate;
-  }
-}
-
-/// Reset all scenario local data
-class EndScenarioUseCase {
-  final ScenarioSharedPrefs _sharedPrefs;
-  final ScenarioRepository _repository;
-  final InventoryLocalSource _inventoryLocalSource;
-
-  EndScenarioUseCase(
-      this._sharedPrefs, this._repository, this._inventoryLocalSource);
-
-  Future<bool> execute() async {
-    await _sharedPrefs.clear();
-    await _inventoryLocalSource.clear();
-    _repository.resetScenario();
-    return true;
   }
 }

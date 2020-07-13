@@ -8,19 +8,27 @@ import 'fade_page_route.dart';
 const String dialogRouteName = "dialog";
 
 navigateTo(BuildContext context, NavigationIntent intent) {
-  if (intent.screenName == dialogRouteName) {
+  if(intent.route != null) {
+    Navigator.of(context, rootNavigator: intent.rootNavigator)
+        .push(intent.route);
+
+  } else if (intent.screenName == dialogRouteName) {
     navigateShowDialog(context, intent.arguments);
   } else {
-    Navigator.of(context)
+    Navigator.of(context, rootNavigator: intent.rootNavigator)
         .pushNamed(intent.screenName, arguments: intent.arguments);
   }
 }
 
 navigateReplaceTo(BuildContext context, NavigationIntent intent) {
-  if (intent.screenName == dialogRouteName) {
+  if(intent.route != null) {
+    Navigator.of(context, rootNavigator: intent.rootNavigator)
+        .pushReplacement(intent.route);
+
+  } else if (intent.screenName == dialogRouteName) {
     navigateShowDialog(context, intent.arguments);
   } else {
-    Navigator.of(context)
+    Navigator.of(context, rootNavigator: intent.rootNavigator)
         .pushReplacementNamed(intent.screenName, arguments: intent.arguments);
   }
 }

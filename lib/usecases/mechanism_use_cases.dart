@@ -1,8 +1,10 @@
 import 'package:airscaper/model/entities/element_description.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/inventory_local_source.dart';
+import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
+import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:flutter/material.dart';
@@ -147,14 +149,21 @@ class StateTransitionUseCase {
 class MechanismFinishedUseCase {
   final ScenarioRepository _repository;
   final InventoryLocalSource _inventory;
+  final ScenarioSharedPrefs _sharedPrefs;
 
-  MechanismFinishedUseCase(this._repository, this._inventory);
+  MechanismFinishedUseCase(this._repository, this._inventory, this._sharedPrefs);
 
   Future<NavigationIntent> execute(
       ScenarioMechanism mechanism, MechanismState endState) async {
     final track = _repository.getTrack(endState.endTrack);
 
     await _inventory.insertTrack(track.id);
+
+    // If end track, mark as ended and go to end screen
+    if(track.endTrack) {
+      await _sharedPrefs.setEndDate(DateTime.now());
+      return SuccessScreen.navigate();
+    }
 
     return InventoryDetailsFragment.navigate(
         ScenarioElementDesc.fromTrack(track));

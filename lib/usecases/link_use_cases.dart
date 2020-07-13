@@ -3,8 +3,11 @@ import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_loot.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/entities/scenario_track.dart';
+import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/usecases/inventory_use_cases.dart';
+import 'package:airscaper/views/home/game_over_screen.dart';
+import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
@@ -15,8 +18,9 @@ import 'package:flutter/material.dart';
 class InterpretLinkUseCase {
   final ScenarioRepository _repository;
   final AddLootUseCase _addLootUseCase;
+  final ScenarioSharedPrefs _sharedPrefs;
 
-  InterpretLinkUseCase(this._repository, this._addLootUseCase);
+  InterpretLinkUseCase(this._repository, this._addLootUseCase, this._sharedPrefs);
 
   Future<NavigationIntent> execute(BuildContext context, NavigationLink link) async {
     if (link.route == mechanismKey) {
@@ -52,6 +56,13 @@ class InterpretLinkUseCase {
     final scenarioTrack = _repository.getTrack(id);
 
     if (scenarioTrack != null) {
+
+      // If end track, mark as ended and go to end screen
+      if(scenarioTrack.endTrack) {
+        await _sharedPrefs.setEndDate(DateTime.now());
+        return SuccessScreen.navigate();
+      }
+
       final loot = ScenarioLoot(trackKey, id);
       final response = await _addLootUseCase.execute(context, [loot]);
 
@@ -59,9 +70,11 @@ class InterpretLinkUseCase {
         return createDialogNavigationIntent(
             "Erreur", "Une erreur est survenue");
       } else {
+        final loots = scenarioTrack.loots;
+
         // Add track's loots if there is some
-        if (scenarioTrack.loots != null) {
-          await _addLootUseCase.execute(context, scenarioTrack.loots);
+        if (loots != null) {
+          await _addLootUseCase.execute(context, loots);
         }
 
         return InventoryDetailsFragment.navigate(

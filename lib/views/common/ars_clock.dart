@@ -1,3 +1,4 @@
+import 'package:airscaper/common/helpers.dart';
 import 'package:airscaper/views/home/bloc/timer_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,12 +39,6 @@ class _ARSClockState extends State<ARSClock> {
       },
     );
   }
-
-  String formatDuration(Duration duration) {
-    return "${twoDigits(duration.inMinutes)} : ${twoDigits(duration.inSeconds.remainder(60))}";
-  }
-
-  String twoDigits(int n) => (n >= 10) ? "$n" : "0$n";
 
   Widget get loadingView => JumpingDotsProgressIndicator(
       numberOfDots: 4, fontSize: 40.0, dotSpacing: 2.0);

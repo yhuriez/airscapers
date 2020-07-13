@@ -34,16 +34,19 @@ class ARSDetailsBox extends StatelessWidget {
     );
   }
 
-  Widget _createImage(BuildContext context) => ARSInnerShadow(
-        color: Colors.black,
-        offset: Offset(20, 20),
-        child: SizedBox.expand(
-          child: Image.asset(
-            this.imageUrl,
-            fit: BoxFit.cover,
+  Widget _createImage(BuildContext context) => AspectRatio(
+    aspectRatio: 1,
+    child: ARSInnerShadow(
+          color: Colors.black,
+          offset: Offset(20, 20),
+          child: SizedBox.expand(
+            child: Image.asset(
+              this.imageUrl,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
-      );
+  );
 
   Widget _createItemBox(BuildContext context) {
     return Padding(

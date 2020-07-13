@@ -26,8 +26,8 @@ class ARSConfirmDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _createButton(context, "Annuler", onCancelClicked),
-                _createButton(context, "Ok", onOkClicked)
+                _createButton(context, "Non", onCancelClicked),
+                _createButton(context, "Oui", onOkClicked)
               ],
             ),
           )
@@ -42,7 +42,7 @@ class ARSConfirmDialog extends StatelessWidget {
     Function(BuildContext) action,
   ) =>
       FlatButton(
-          child: Text(text),
+          child: Text(text, style: TextStyle(fontSize: 20),),
           onPressed: () => action(context),
           textColor: Colors.black);
 }
