@@ -68,11 +68,11 @@ class _MechanismStateRepresentationState
       title: widget.mechanism.name,
       actions: [_createClueAction(context)],
       child: ARSDetailsBox(
-        imageContainerBuilder: _createImageBox,
-        interactionsBuilder: _createInteraction,
-        imageUrl: _state.image,
-        description: _state.description,
-      ),
+          imageContainerBuilder: _createImageBox,
+          interactionsBuilder: _createInteraction,
+          imageUrl: _state.image,
+          description: _state.description,
+          name: widget.mechanism.name),
     );
   }
 
@@ -113,13 +113,13 @@ class _MechanismStateRepresentationState
   }
 
   Widget get _backButton => ARSButton(
-    onClick: _onContinueButtonClicked,
-    text: Text(
-      "Retour",
-      style: TextStyle(color: Colors.white),
-    ),
-    backgroundColor: Colors.green,
-  );
+        onClick: _onContinueButtonClicked,
+        text: Text(
+          "Retour",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
 
   _onContinueButtonClicked(BuildContext context) {
     Navigator.of(context).pop();

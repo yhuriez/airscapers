@@ -64,6 +64,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
       interactionsBuilder: _createInteraction,
       imageUrl: widget.desc.imageUrl,
       description: widget.desc.description,
+      name: widget.desc.title
     );
   }
 
