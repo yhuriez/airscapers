@@ -1,3 +1,4 @@
+import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
@@ -67,34 +68,26 @@ class _MechanismStateRepresentationState
       title: widget.mechanism.name,
       actions: [_createClueAction(context)],
       child: ARSDetailsBox(
-          imageContainerBuilder: _createImageBox,
-          interactionsBuilder: (_) => createMechanismInteraction(widget.mechanism, _state, _refreshState),
-          imageUrl: _state.image,
-          description: _state.description,
-          name: widget.mechanism.name),
+        interactionsBuilder: (_) =>
+            createMechanismInteraction(widget.mechanism, _state, _refreshState),
+        imageUrl: _state.image,
+        description: _state.description,
+        name: widget.mechanism.name,
+        onAcceptedDropData: _onItemUsed,
+      ),
     );
   }
 
-  Widget _createImageBox(BuildContext context, Widget child) {
-    List<int> acceptedIds = _state.transitions
-        .where((it) => it.expectedItemId != null)
-        .map((it) => it.expectedItemId)
-        .toList();
+  List<int> get acceptedIds => _state.transitions
+      .where((it) => it.expectedItemId != null)
+      .map((it) => it.expectedItemId)
+      .toList();
 
-    return DragTarget<int>(
-      builder: (context, incoming, rejected) {
-        return child;
-      },
-      onWillAccept: (id) => acceptedIds.contains(id),
-      onAccept: (id) {
-        _onItemUsed(context, id);
-      },
-    );
-  }
+  _onItemUsed(BuildContext context, ScenarioItem selectedItem) async {
+    if (!acceptedIds.contains(selectedItem.id)) return null;
 
-  _onItemUsed(BuildContext context, int selectedId) async {
     final MechanismState result = await widget._itemSelectUseCase
-        .execute(context, widget.mechanism, selectedId);
+        .execute(context, widget.mechanism, selectedItem.id);
     if (result != null) {
       _refreshState(context, givenState: result);
     }

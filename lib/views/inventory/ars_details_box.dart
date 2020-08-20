@@ -1,11 +1,14 @@
+import 'package:airscaper/model/entities/scenario_item.dart';
+import 'package:airscaper/views/common/ars_drag_target.dart';
 import 'package:airscaper/views/common/ars_inner_shadow.dart';
 import 'package:airscaper/views/common/ars_white_shadow.dart';
 import 'package:airscaper/views/inventory/image_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ARSDetailsBox extends StatelessWidget {
-  final Widget Function(BuildContext, Widget) imageContainerBuilder;
   final Widget Function(BuildContext) interactionsBuilder;
+  
+  final Function(BuildContext, ScenarioItem) onAcceptedDropData;
 
   final String imageUrl;
   final String description;
@@ -13,11 +16,11 @@ class ARSDetailsBox extends StatelessWidget {
 
   const ARSDetailsBox(
       {Key key,
-      this.imageContainerBuilder,
       this.interactionsBuilder,
       this.imageUrl,
       this.description,
-      this.name})
+      this.name,
+      this.onAcceptedDropData})
       : super(key: key);
 
   @override
@@ -28,9 +31,7 @@ class ARSDetailsBox extends StatelessWidget {
         // Image
         (this.imageUrl == null)
             ? Container()
-            : Expanded(
-                child: imageContainerBuilder(context, _createImage(context))),
-
+            : Expanded(child: _createImage(context)),
         // Item box
         _createItemBox(context)
       ],
@@ -38,24 +39,36 @@ class ARSDetailsBox extends StatelessWidget {
   }
 
   Widget _createImage(BuildContext context) => AspectRatio(
-    aspectRatio: 1,
-    child: InkWell(
-      onTap: () => _onImageClicked(context),
-      child: ARSInnerShadow(
+        aspectRatio: 1,
+        child: InkWell(
+          onTap: () => _onImageClicked(context),
+          child: ARSInnerShadow(
             color: Colors.black,
             offset: Offset(20, 20),
             child: SizedBox.expand(
-              child: Hero(
+                child: createDragTarget(
+              context,
+              Hero(
                 tag: ImageDetailsScreen.imageTag,
                 child: Image.asset(
                   this.imageUrl,
                   fit: BoxFit.fill,
                 ),
               ),
-            ),
+            )),
           ),
-    ),
-  );
+        ),
+      );
+
+  Widget createDragTarget(BuildContext context, Widget child) {
+    // No drag target if not configured
+    if (onAcceptedDropData == null) return child;
+
+    return ARSDragTarget<ScenarioItem>(
+      child: child,
+      acceptedData: onAcceptedDropData,
+    );
+  }
 
   Widget _createItemBox(BuildContext context) {
     return Padding(
@@ -83,6 +96,7 @@ class ARSDetailsBox extends StatelessWidget {
       );
 
   _onImageClicked(BuildContext context) {
-    Navigator.of(context, rootNavigator: true).push(ImageDetailsScreen.createRoute(this.name ?? "", this.imageUrl));
+    Navigator.of(context, rootNavigator: true)
+        .push(ImageDetailsScreen.createRoute(this.name ?? "", this.imageUrl));
   }
 }

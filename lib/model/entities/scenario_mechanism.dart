@@ -120,7 +120,7 @@ class MechanismTransition {
     this._expectedCode = obj["expected_code"];
     this._expectedItem = obj["expected_item"];
     this._expectedTrack = obj["expected_track"];
-    this._expectedItemList = obj["expected_item_list"];
+    this._expectedItemList = obj["expected_item_list"]?.cast<int>();
     this._stateId = obj["state_id"];
     this._transitionTo = obj["transition_to"];
     this._removedItems = mapTypedList(obj["removed_items"], (it) => it as int);

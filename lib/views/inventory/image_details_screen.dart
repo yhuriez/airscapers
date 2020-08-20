@@ -1,6 +1,5 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
-import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';

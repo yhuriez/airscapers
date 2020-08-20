@@ -4,7 +4,7 @@ import 'package:airscaper/model/entities/element_description.dart';
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
-import 'package:airscaper/views/common/ars_grid.dart';
+import 'package:airscaper/views/common/ars_paginated_grid.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/home/bloc/timer_bloc.dart';
 import 'package:airscaper/views/home/game_over_screen.dart';
@@ -152,7 +152,7 @@ class HomeScreenContent extends StatelessWidget {
           child: Column(
             children: [
               _createBottomBar(context, selectedItem),
-              ARSGrid(
+              ARSPaginatedGrid(
                   items: items,
                   selectedItem: state.selectedItem,
                   onItemClicked: _startItemScreen),

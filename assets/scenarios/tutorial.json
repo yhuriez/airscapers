@@ -119,7 +119,7 @@
           ],
           "transitions": [
             {
-              "expected_item": 16,
+              "expected_item_list": [16, 35],
               "transition_to": 2
             }
           ]

@@ -1,4 +1,5 @@
 import 'package:airscaper/model/entities/scenario_item.dart';
+import 'package:airscaper/views/common/ars_drag_target.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,14 +9,18 @@ const GRID_ITEM_PER_PAGE = 5;
 const double GRID_HEIGHT = 60;
 const double ITEM_SIZE = 50;
 
-class ARSGrid extends StatelessWidget {
+class ARSPaginatedGrid extends StatelessWidget {
   final List<ScenarioItem> items;
   final int selectedItem;
   final Function(BuildContext, ScenarioItem) onItemClicked;
 
   final _controller = PageController();
 
-  ARSGrid({Key key, this.items, this.selectedItem, this.onItemClicked})
+  ARSPaginatedGrid(
+      {Key key,
+      this.items,
+      this.selectedItem,
+      this.onItemClicked})
       : super(key: key);
 
   @override
@@ -44,8 +49,10 @@ class ARSGrid extends StatelessWidget {
             selected: item.id == selectedItem,
             onItemClicked: onItemClicked))
         .toList();
-    final emptyItems =
-        List.generate(missingItems, (index) => ARSGridEmptyItem());
+
+    final emptyItems = List.generate(
+        missingItems,
+        (index) => ARSGridEmptyItem());
 
     final List<Widget> allItems = ([...imageItems, ...emptyItems]).toList();
 
@@ -70,6 +77,12 @@ class ARSGridPage extends StatelessWidget {
 }
 
 class ARSGridEmptyItem extends StatelessWidget {
+
+  final OnAcceptedData<ScenarioItem> onAcceptedData;
+
+  const ARSGridEmptyItem({Key key, this.onAcceptedData})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -77,9 +90,18 @@ class ARSGridEmptyItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
         child: AspectRatio(
           aspectRatio: 1,
-          child: EmptySlot(),
+          child: createContent(),
         ),
       ),
+    );
+  }
+
+  Widget createContent() {
+    if (onAcceptedData == null) return EmptySlot();
+
+    return ARSDragTarget<ScenarioItem>(
+      child: EmptySlot(),
+      acceptedData: onAcceptedData,
     );
   }
 }
@@ -88,9 +110,10 @@ class ARSGridImageItem extends StatelessWidget {
   final ScenarioItem item;
   final bool selected;
   final Function(BuildContext, ScenarioItem) onItemClicked;
+  final double itemSize;
 
   const ARSGridImageItem(
-      {Key key, @required this.item, this.selected = false, this.onItemClicked})
+      {Key key, @required this.item, this.selected = false, this.onItemClicked, this.itemSize = ITEM_SIZE})
       : super(key: key);
 
   @override
@@ -100,10 +123,10 @@ class ARSGridImageItem extends StatelessWidget {
 
     var content = createContent(context, bloc);
 
-    final draggableContent = Draggable(
+    final draggableContent = Draggable<ScenarioItem>(
       childWhenDragging: EmptySlot(),
-      data: item.id,
-      feedback: SizedBox(height: ITEM_SIZE, width: ITEM_SIZE, child: imageSlot),
+      data: item,
+      feedback: SizedBox(height: itemSize, width: itemSize, child: imageSlot),
       child: content,
     );
 
@@ -121,24 +144,24 @@ class ARSGridImageItem extends StatelessWidget {
 
   Widget createContent(BuildContext context, InventoryBloc bloc) => AspectRatio(
         aspectRatio: 1,
-        child: InkWell(
-          onTap: () {
-            bloc.add(SelectItemInventoryEvent(item.id));
-            onItemClicked(context, item);
-          },
-          child: imageSlot
+        child: (onItemClicked == null)
+            ? imageSlot
+            : InkWell(
+                onTap: () {
+                  bloc.add(SelectItemInventoryEvent(item.id));
+                  onItemClicked(context, item);
+                },
+                child: imageSlot),
+      );
+
+  Widget get imageSlot => Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: ExactAssetImage(item.image), fit: BoxFit.fill),
+          borderRadius: BorderRadius.circular(6),
         ),
       );
-  
-  Widget get imageSlot => Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-          image: ExactAssetImage(item.image), fit: BoxFit.fill),
-      borderRadius: BorderRadius.circular(6),
-    ),
-  ); 
 }
-
 
 class EmptySlot extends StatelessWidget {
   @override

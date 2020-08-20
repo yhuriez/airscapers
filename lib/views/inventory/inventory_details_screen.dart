@@ -60,7 +60,6 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   @override
   Widget build(BuildContext context) {
     return ARSDetailsBox(
-      imageContainerBuilder: (context, child) => child,
       interactionsBuilder: _createInteraction,
       imageUrl: widget.desc.imageUrl,
       description: widget.desc.description,
