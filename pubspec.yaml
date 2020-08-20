@@ -64,6 +64,8 @@ dependencies:
 
   flutter_keyboard_visibility: ^3.2.1
 
+  photo_view: ^0.10.1
+
 
 dev_dependencies:
   flutter_test:

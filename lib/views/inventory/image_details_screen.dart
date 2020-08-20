@@ -1,8 +1,8 @@
 
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 
 class ImageDetailsScreen extends StatelessWidget {
@@ -34,7 +34,9 @@ class ImageDetailsScreen extends StatelessWidget {
               tag: imageTag,
               child: AspectRatio(
                 aspectRatio: 1,
-                child: Image.asset(assetPath),
+                child: PhotoView(
+                  imageProvider: AssetImage(assetPath),
+                ),
               ),
             )
           ],
