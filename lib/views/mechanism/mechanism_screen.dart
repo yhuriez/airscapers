@@ -6,6 +6,7 @@ import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/mechanism/clue_dialog.dart';
+import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,6 @@ class MechanismFragment extends StatelessWidget {
 
 class MechanismStateRepresentation extends StatefulWidget {
   final ScenarioMechanism mechanism;
-
-  MechanismCodeInputUseCase get _codeInputUseCase => sl();
 
   MechanismItemSelectUseCase get _itemSelectUseCase => sl();
 
@@ -69,25 +68,14 @@ class _MechanismStateRepresentationState
       actions: [_createClueAction(context)],
       child: ARSDetailsBox(
           imageContainerBuilder: _createImageBox,
-          interactionsBuilder: _createInteraction,
+          interactionsBuilder: (_) => createMechanismInteraction(widget.mechanism, _state, _refreshState),
           imageUrl: _state.image,
           description: _state.description,
           name: widget.mechanism.name),
     );
   }
 
-  Widget _createImageBox(BuildContext context, Widget child) =>
-      BlocBuilder<InventoryBloc, InventoryState>(
-        builder: (context, state) {
-          final selectedId = state.selectedItem;
-          return GestureDetector(
-            onTap: () => _onItemUsed(context, selectedId),
-            child: _createDragTarget(context, child),
-          );
-        },
-      );
-
-  Widget _createDragTarget(BuildContext context, Widget child) {
+  Widget _createImageBox(BuildContext context, Widget child) {
     List<int> acceptedIds = _state.transitions
         .where((it) => it.expectedItemId != null)
         .map((it) => it.expectedItemId)
@@ -102,49 +90,6 @@ class _MechanismStateRepresentationState
         _onItemUsed(context, id);
       },
     );
-  }
-
-  Widget _createInteraction(BuildContext context) {
-    if (_state.codeHint != null) {
-      return _createCodeField(context);
-    } else {
-      return _backButton;
-    }
-  }
-
-  Widget get _backButton => ARSButton(
-        onClick: _onContinueButtonClicked,
-        text: Text(
-          "Retour",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.green,
-      );
-
-  _onContinueButtonClicked(BuildContext context) {
-    Navigator.of(context).pop();
-  }
-
-  Widget _createCodeField(BuildContext context) {
-    return ARSCodeTextField(
-      callback: (context, textValue) => _onCodeClicked(context, textValue),
-      acceptedValues: [],
-      hint: "Entrez le code",
-      validationErrorMessage: "Code invalide",
-    );
-  }
-
-  _onCodeClicked(BuildContext context, String codeResult) async {
-    if (codeResult != null) {
-      final MechanismState newState = await widget._codeInputUseCase
-          .execute(context, widget.mechanism, codeResult);
-      if (newState != null) {
-        _refreshState(context, givenState: newState);
-      } else {
-        final intent = createDialogNavigationIntent("", "Rien ne se passe");
-        navigateTo(context, intent);
-      }
-    }
   }
 
   _onItemUsed(BuildContext context, int selectedId) async {
