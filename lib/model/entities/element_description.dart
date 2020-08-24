@@ -1,7 +1,5 @@
-import 'package:airscaper/model/entities/scenario_code.dart';
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_loot.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/entities/scenario_track.dart';
 
 class ScenarioElementDesc {

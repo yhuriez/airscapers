@@ -10,8 +10,8 @@ import '../../injection.dart';
 class GameOverScreen extends StatelessWidget {
   static const routeName = "/gameover";
 
-  final EndScenarioUseCase _endScenarioUseCase = sl();
-  final ComputeCompletionUseCase _completionUseCase = sl();
+  EndScenarioUseCase get _endScenarioUseCase => sl();
+  ComputeCompletionUseCase get _completionUseCase => sl();
 
   static Route<dynamic> createRoute() {
     return createFadeRoute(GameOverScreen(), GameOverScreen.routeName);

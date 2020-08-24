@@ -38,8 +38,8 @@ class InventoryDetailsFragment extends StatelessWidget {
 class ScenarioElementView extends StatefulWidget {
   final ScenarioElementDesc desc;
 
-  final FilterAvailableLootUseCase _filterAvailableLootUseCase = sl();
-  final InterpretLinkUseCase _interpretLinkUseCase = sl();
+  FilterAvailableLootUseCase get _filterAvailableLootUseCase => sl();
+  InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
   ScenarioElementView({Key key, this.desc}) : super(key: key);
 

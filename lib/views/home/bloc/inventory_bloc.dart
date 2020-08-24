@@ -9,8 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../injection.dart';
 
 class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
-  final ScenarioRepository _repository = sl();
-  final InventoryLocalSource _localSource = sl();
+
+  ScenarioRepository get _repository => sl();
+  InventoryLocalSource get _localSource => sl();
 
   @override
   InventoryState get initialState => InventoryState(loading: true);

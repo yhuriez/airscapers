@@ -32,10 +32,4 @@ Widget createMechanismInteraction(
   }
 }
 
-Widget createTrackInteraction(ScenarioElementDesc desc) {
-  
-  
-}
-
-
 typedef OnNewState(BuildContext context, {MechanismState givenState});

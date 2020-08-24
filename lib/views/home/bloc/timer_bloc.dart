@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../injection.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
-  final ScenarioRepository _repository = sl();
-  final InitStartDateUseCase _initStartDateUseCase = sl();
+  ScenarioRepository get _repository => sl();
+  InitStartDateUseCase get _initStartDateUseCase => sl();
 
   Timer _globalTimer;
   int timeLeft;

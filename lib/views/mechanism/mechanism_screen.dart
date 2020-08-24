@@ -1,17 +1,13 @@
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/usecases/mechanism_use_cases.dart';
-import 'package:airscaper/views/common/ars_button.dart';
-import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/mechanism/clue_dialog.dart';
 import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../injection.dart';
 
@@ -35,9 +31,7 @@ class MechanismStateRepresentation extends StatefulWidget {
   final ScenarioMechanism mechanism;
 
   MechanismItemSelectUseCase get _itemSelectUseCase => sl();
-
   LoadCurrentMechanismStateUseCase get _loadMechanismStateUseCase => sl();
-
   MechanismFinishedUseCase get _mechanismFinishedUseCase => sl();
 
   const MechanismStateRepresentation({Key key, @required this.mechanism})

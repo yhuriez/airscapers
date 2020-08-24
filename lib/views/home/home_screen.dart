@@ -52,7 +52,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeScreenLoader extends StatelessWidget {
-  final StartScenarioUseCase _startScenarioUseCase = sl();
+
+  StartScenarioUseCase get _startScenarioUseCase => sl();
 
   @override
   Widget build(BuildContext context) {

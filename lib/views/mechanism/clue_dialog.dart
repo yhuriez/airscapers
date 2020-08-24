@@ -11,8 +11,8 @@ import '../../injection.dart';
 class ClueDialog extends StatefulWidget {
   final MechanismState state;
 
-  final LoadAvailableCluesUseCase _loadClueUseCase = sl();
-  final UseClueUseCase _useClueUseCase = sl();
+  LoadAvailableCluesUseCase get _loadClueUseCase => sl();
+  UseClueUseCase get _useClueUseCase => sl();
 
   ClueDialog({Key key, this.state}) : super(key: key);
 

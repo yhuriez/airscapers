@@ -23,7 +23,7 @@ class StartScenarioScreen extends StatelessWidget {
         arguments: StartScenarioParameter(scenario));
   }
 
-  final registerScenarioUseCase = sl<RegisterScenarioUseCase>();
+  RegisterScenarioUseCase get registerScenarioUseCase => sl();
 
   @override
   Widget build(BuildContext context) {

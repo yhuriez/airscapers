@@ -10,7 +10,7 @@ import '../../injection.dart';
 class ScanFragment extends StatelessWidget {
   static const routeName = "/scan";
 
-  final InterpretLinkUseCase interpretLinkUseCase = sl();
+  InterpretLinkUseCase get interpretLinkUseCase => sl();
 
   @override
   Widget build(BuildContext context) {

@@ -14,10 +14,10 @@ import '../../injection.dart';
 class SuccessScreen extends StatelessWidget {
   static const routeName = "/success";
 
-  final ScenarioRepository _repository = sl();
-  final EndScenarioUseCase _endScenarioUseCase = sl();
-  final CountCluesUseCase _countCluesUseCase = sl();
-  final TimeUsedUseCase _timeUsedUseCase = sl();
+  ScenarioRepository get _repository => sl();
+  EndScenarioUseCase get _endScenarioUseCase => sl();
+  CountCluesUseCase get _countCluesUseCase => sl();
+  TimeUsedUseCase get _timeUsedUseCase => sl();
 
   static Route<dynamic> createRoute() {
     return createFadeRoute(SuccessScreen(), SuccessScreen.routeName);

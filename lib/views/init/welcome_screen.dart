@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
     return createFadeRoute(WelcomeScreen(), WelcomeScreen.routeName);
   }
 
-  final InitScenarioIndexUseCase _initScenarioIndexUseCase = sl();
+  InitScenarioIndexUseCase get _initScenarioIndexUseCase => sl();
 
   @override
   Widget build(BuildContext context) {

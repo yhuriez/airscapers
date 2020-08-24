@@ -13,9 +13,9 @@ import '../../injection.dart';
 class MainScanFragment extends StatelessWidget {
   static const routeName = "main";
 
-  final ScenarioRepository _repository = sl();
-  final ParseLinkUseCase _parseLinkUseCase = sl();
-  final InterpretLinkUseCase _interpretLinkUseCase = sl();
+  ScenarioRepository get _repository => sl();
+  ParseLinkUseCase get _parseLinkUseCase => sl();
+  InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
   @override
   Widget build(BuildContext context) {
