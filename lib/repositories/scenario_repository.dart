@@ -32,6 +32,8 @@ class ScenarioRepository {
 
   bool get isScenarioInit => _scenario != null;
 
+  bool get isTutorial => title == "Tutoriel";
+
   ScenarioItem getItem(int itemId) =>
       items.firstWhere((element) => element.id == itemId, orElse: () => null);
 

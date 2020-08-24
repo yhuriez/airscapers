@@ -1,8 +1,10 @@
+import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
+import 'package:airscaper/views/home/tutorial_fragment.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
@@ -14,7 +16,9 @@ class MainScanFragment extends StatelessWidget {
   static const routeName = "main";
 
   ScenarioRepository get _repository => sl();
+
   ParseLinkUseCase get _parseLinkUseCase => sl();
+
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
   @override
@@ -24,36 +28,61 @@ class MainScanFragment extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
-          child: ARSButton(
-              text: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset(
-                    "assets/images/common/qrcode.png",
-                    width: 80,
-                    height: 80,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              ARSButton(
+                  text: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/images/common/qrcode.png",
+                        width: 80,
+                        height: 80,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Scanner un élément",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  height: 150,
+                  borderRadius: 30.0,
+                  onClick: onStartBarcodeScanner,
+                  onLongClick: onScanLongPress),
+
+              // Helper text for tutorial
+              (_repository.isTutorial)
+                  ? Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      "Scanner un élément",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                ],
-              ),
-              height: 150,
-              borderRadius: 30.0,
-              onClick: onStartBarcodeScanner,
-              onLongClick: onScanDebugClicked),
+                        "Maintenez le bouton Scan pour afficher la liste des éléments, si vous ne possédez pas les QR codes.",
+                        style: TextStyle(
+                            color: textColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic),
+                      ),
+                  )
+                  : Container()
+            ],
+          ),
         ),
       ),
     );
   }
 
-  onScanDebugClicked(BuildContext context) async {
-    if (kDebugMode) {
+  onScanLongPress(BuildContext context) async {
+    if (_repository.isTutorial) {
+      final scanResult =
+          await Navigator.of(context).pushNamed(TutorialFragment.routeName);
+      parseLink(context, scanResult);
+    } else if (kDebugMode) {
       final scanResult =
           await Navigator.of(context).pushNamed(ScanFragment.routeName);
       parseLink(context, scanResult);

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+
+const TEXT_FIELD_SIZE = 55.0;
+
 class ARSCodeTextField extends StatefulWidget {
+
   final List<String> acceptedValues;
   final Function(BuildContext, String) callback;
   final String hint;
@@ -39,6 +43,7 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
   }
 
   Widget get _codeInput => Container(
+    height: TEXT_FIELD_SIZE,
     decoration: borderDecoration,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
@@ -60,8 +65,8 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
   );
 
   Widget createConfirmButton(BuildContext context) => SizedBox(
-    width: 66,
-    height: 66,
+    width: TEXT_FIELD_SIZE,
+    height: TEXT_FIELD_SIZE,
     child: Container(
       decoration: borderDecoration,
       child: InkWell(
