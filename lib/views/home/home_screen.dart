@@ -64,7 +64,7 @@ class HomeScreenLoader extends StatelessWidget {
         initialData: ARSResult.loading(),
         builder: (context, snapshot) {
           if (snapshot.error != null) {
-            return createErrorView(snapshot.error);
+            return createErrorView(snapshot.error.toString());
           }
           final result = snapshot.data;
           if (result.errorCode != null) {

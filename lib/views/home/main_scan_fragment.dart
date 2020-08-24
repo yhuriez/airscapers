@@ -1,10 +1,13 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
+import 'package:airscaper/usecases/end_use_cases.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
+import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/tutorial_fragment.dart';
+import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
@@ -25,12 +28,12 @@ class MainScanFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return ARSScaffold(
       title: _repository.title,
+      actions: [_createQuitAction(context)],
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-
             children: [
               ARSButton(
                   text: Column(
@@ -59,8 +62,8 @@ class MainScanFragment extends StatelessWidget {
               // Helper text for tutorial
               (_repository.isTutorial)
                   ? Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
                         "Maintenez le bouton Scan pour afficher la liste des éléments, si vous ne possédez pas les QR codes.",
                         style: TextStyle(
                             color: textColor,
@@ -68,12 +71,19 @@ class MainScanFragment extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),
                       ),
-                  )
+                    )
                   : Container()
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _createQuitAction(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.clear),
+      onPressed: () => _onQuitClicked(context),
     );
   }
 
@@ -107,5 +117,29 @@ class MainScanFragment extends StatelessWidget {
           DialogArguments(
               "Code invalide", "Ce code n'existe pas dans l'application"));
     }
+  }
+
+  _onQuitClicked(BuildContext context) {
+    showDialog(
+        context: context,
+        child: ARSDialogConfirm(
+          title: "Etes-vous sûr de vouloir quitter ?",
+          message:
+              "Vous perdrez toute votre progression en quittant le scénario en cours.",
+          okAction: doQuitApp,
+          okText: "Oui",
+          cancelText: "Non",
+        ));
+  }
+
+  doQuitApp(BuildContext context) async {
+    EndScenarioUseCase _endScenarioUseCase = sl();
+
+    await _endScenarioUseCase.execute();
+
+    Future.delayed(
+        Duration.zero,
+        () => Navigator.of(context, rootNavigator: true)
+            .pushReplacement(WelcomeScreen.createRoute()));
   }
 }
