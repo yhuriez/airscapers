@@ -50,7 +50,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
       height: GRID_HEIGHT,
       child: Row(
         children: createSlots(),
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       ),
     );
   }

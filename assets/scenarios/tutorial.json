@@ -108,7 +108,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Une grille avec des picots séparés de 5 cm.",
+          "description": "Une grille avec des picots séparés de 5 cm.\n\nVous pouvez placer plusieurs objets ici pour résoudre l'énigme.",
           "image": "assets/images/tutorial/electric_board.png",
           "start": true,
           "clues": [
@@ -120,6 +120,7 @@
           "transitions": [
             {
               "expected_item_list": [16, 35],
+              "removed_items": [16],
               "transition_to": 2
             }
           ]

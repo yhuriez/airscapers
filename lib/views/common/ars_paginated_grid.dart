@@ -70,7 +70,7 @@ class ARSGridPage extends StatelessWidget {
     return Container(
         color: Colors.black,
         child: Row(
-          children: children,
+          children: children.map((item) => Expanded(child: item)).toList(),
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
         ));
   }
@@ -85,13 +85,11 @@ class ARSGridEmptyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: createContent(),
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: createContent(),
       ),
     );
   }
@@ -134,11 +132,9 @@ class ARSGridImageItem extends StatelessWidget {
     final hPadding = (this.selected) ? 8.0 : 12.0;
     final vPadding = (this.selected) ? 0.0 : 4.0;
 
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: vPadding),
-        child: draggableContent,
-      ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: vPadding),
+      child: draggableContent,
     );
   }
 

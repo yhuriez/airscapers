@@ -46,21 +46,21 @@ class ARSDetailsBox extends StatelessWidget {
             color: Colors.black,
             offset: Offset(20, 20),
             child: SizedBox.expand(
-                child: createDragTarget(
-              context,
-              Hero(
+                child: Hero(
                 tag: ImageDetailsScreen.imageTag,
-                child: Image.asset(
-                  this.imageUrl,
-                  fit: BoxFit.fill,
+                child: createDragTarget(
+                  Image.asset(
+                    this.imageUrl,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            )),
+            ),
           ),
         ),
       );
 
-  Widget createDragTarget(BuildContext context, Widget child) {
+  Widget createDragTarget(Widget child) {
     // No drag target if not configured
     if (onAcceptedDropData == null) return child;
 
