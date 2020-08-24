@@ -62,7 +62,11 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
       final selectedItem = selectedItems[index];
 
       final widget = (selectedItem != null)
-          ? ARSGridImageItem(item: selectedItem, itemSize: ITEM_SIZE)
+          ? ARSGridImageItem(
+              item: selectedItem,
+              itemSize: ITEM_SIZE,
+              draggable: false,
+              onItemClicked: onItemClicked)
           : ARSGridEmptyItem(
               onAcceptedData: (context, data) =>
                   onItemDropped(context, index, data));
@@ -73,32 +77,48 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
     return result;
   }
 
-  onItemDropped(BuildContext context, int index, ScenarioItem item) async {
+  onItemClicked(BuildContext context, ScenarioItem item) {
+    // When clicked, delete corresponding item from list
+    final newSelectedItems = Map<int, ScenarioItem>.from(selectedItems);
+    newSelectedItems.removeWhere((elem, si) => si.id == item.id);
+
+    doUpdateState(newSelectedItems);
+  }
+
+
+  onItemDropped(BuildContext context, int index, ScenarioItem item) {
     final newSelectedItems = Map<int, ScenarioItem>.from(selectedItems);
     newSelectedItems[index] = item;
 
-    final itemSet = newSelectedItems.values
-        .map((elem) => elem.id)
-        .toSet()
-        .toList();
+    doUpdateState(newSelectedItems);
+  }
+
+
+  doUpdateState(Map<int, ScenarioItem> newSelectedItems) async {
+    final itemSet =
+        newSelectedItems.values.map((elem) => elem.id).toSet().toList();
     itemSet.sort();
 
     print("Item Set is : $itemSet");
 
     // If items selected are right, we do execute state transition
     if (listEquals(itemSet, expectedItemList)) {
-      StateTransitionUseCase useCase = sl();
-      final newState = await useCase.execute(
-          context, widget.mechanism, widget.state.transitions.first);
-      if (newState != null) {
-        widget.onNewState(context, givenState: newState);
-      }
+      await doStateTransition();
 
       // Else we update current widget state
     } else {
       setState(() {
         selectedItems = newSelectedItems;
       });
+    }
+  }
+
+  doStateTransition() async {
+    StateTransitionUseCase useCase = sl();
+    final newState = await useCase.execute(
+        context, widget.mechanism, widget.state.transitions.first);
+    if (newState != null) {
+      widget.onNewState(context, givenState: newState);
     }
   }
 }

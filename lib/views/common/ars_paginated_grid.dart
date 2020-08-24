@@ -25,7 +25,7 @@ class ARSPaginatedGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pages = computePages();
+    final pages = computePages(context);
 
     return SizedBox(
       height: GRID_HEIGHT,
@@ -38,16 +38,22 @@ class ARSPaginatedGrid extends StatelessWidget {
     );
   }
 
-  List<List<Widget>> computePages() {
+  List<List<Widget>> computePages(BuildContext context) {
     var missingItems = (items.length == 0)
         ? GRID_ITEM_PER_PAGE
         : GRID_ITEM_PER_PAGE - (items.length % GRID_ITEM_PER_PAGE);
+
+    // ignore: close_sinks
+    final bloc = BlocProvider.of<InventoryBloc>(context);
 
     final imageItems = items
         .map((item) => ARSGridImageItem(
             item: item,
             selected: item.id == selectedItem,
-            onItemClicked: onItemClicked))
+            onItemClicked: (context, item) {
+              bloc.add(SelectItemInventoryEvent(item.id));
+              onItemClicked(context, item);
+            }))
         .toList();
 
     final emptyItems = List.generate(
@@ -109,24 +115,24 @@ class ARSGridImageItem extends StatelessWidget {
   final bool selected;
   final Function(BuildContext, ScenarioItem) onItemClicked;
   final double itemSize;
+  final bool draggable;
 
   const ARSGridImageItem(
-      {Key key, @required this.item, this.selected = false, this.onItemClicked, this.itemSize = ITEM_SIZE})
+      {Key key, @required this.item, this.selected = false, this.onItemClicked, this.itemSize = ITEM_SIZE, this.draggable = true})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // ignore: close_sinks
-    final bloc = BlocProvider.of<InventoryBloc>(context);
+    var content = createContent(context);
 
-    var content = createContent(context, bloc);
-
-    final draggableContent = Draggable<ScenarioItem>(
-      childWhenDragging: EmptySlot(),
-      data: item,
-      feedback: SizedBox(height: itemSize, width: itemSize, child: imageSlot),
-      child: content,
-    );
+    if(draggable) {
+      content = Draggable<ScenarioItem>(
+        childWhenDragging: EmptySlot(),
+        data: item,
+        feedback: SizedBox(height: itemSize, width: itemSize, child: imageSlot),
+        child: content,
+      );
+    }
 
     // If not selected, we add padding, so selected item will appear bigger than non-selected
     final hPadding = (this.selected) ? 8.0 : 12.0;
@@ -134,19 +140,16 @@ class ARSGridImageItem extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: vPadding),
-      child: draggableContent,
+      child: content,
     );
   }
 
-  Widget createContent(BuildContext context, InventoryBloc bloc) => AspectRatio(
+  Widget createContent(BuildContext context) => AspectRatio(
         aspectRatio: 1,
         child: (onItemClicked == null)
             ? imageSlot
             : InkWell(
-                onTap: () {
-                  bloc.add(SelectItemInventoryEvent(item.id));
-                  onItemClicked(context, item);
-                },
+                onTap: () => onItemClicked(context, item),
                 child: imageSlot),
       );
 

@@ -80,7 +80,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus ou bien en cliquant sur un objet, puis sur le coffre.",
+          "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus.",
           "start": true,
           "image": "assets/images/tutorial/furniture_closed.png",
           "clues": [
@@ -108,7 +108,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Une grille avec des picots séparés de 5 cm.\n\nVous pouvez placer plusieurs objets ici pour résoudre l'énigme.",
+          "description": "Une grille avec des picots séparés de 5 cm.\n\nVous pouvez placer plusieurs objets ici pour résoudre l'énigme. Pour supprimer l'objet, cliquez sur l'image.",
           "image": "assets/images/tutorial/electric_board.png",
           "start": true,
           "clues": [

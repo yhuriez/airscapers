@@ -28,7 +28,7 @@ Widget createMechanismInteraction(
 
   // Back button
   } else {
-    return MechanismBackButton();
+    return Container();
   }
 }
 
