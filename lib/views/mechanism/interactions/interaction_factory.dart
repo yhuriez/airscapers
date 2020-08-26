@@ -11,7 +11,7 @@ Widget createMechanismInteraction(
   final firstTransition = state.transitions.first;
 
   // Code input
-  if (firstTransition?.expectedCode != null) {
+  if (firstTransition?.expectedCodes != null) {
     return MechanismCodeInput(
       mechanism: mechanism,
       state: state,

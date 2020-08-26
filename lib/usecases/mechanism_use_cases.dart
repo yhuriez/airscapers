@@ -73,8 +73,11 @@ class MechanismCodeInputUseCase {
         await _loadCurrentMechanismStateUseCase.execute(mechanism);
 
     final nextTransition = currentState.transitions.firstWhere((transition) {
-      return transition.expectedCode != null &&
-          code.toLowerCase() == transition.expectedCode.toLowerCase();
+      final codeFormatted = code.toLowerCase().replaceAll(" ", "");
+
+      return transition.expectedCodes != null &&
+          transition.expectedCodes
+              .any((element) => element.toLowerCase() == codeFormatted);
     }, orElse: () => null);
 
     if (nextTransition != null) {
@@ -151,7 +154,8 @@ class MechanismFinishedUseCase {
   final InventoryLocalSource _inventory;
   final ScenarioSharedPrefs _sharedPrefs;
 
-  MechanismFinishedUseCase(this._repository, this._inventory, this._sharedPrefs);
+  MechanismFinishedUseCase(
+      this._repository, this._inventory, this._sharedPrefs);
 
   Future<NavigationIntent> execute(
       ScenarioMechanism mechanism, MechanismState endState) async {
@@ -160,7 +164,7 @@ class MechanismFinishedUseCase {
     await _inventory.insertTrack(track.id);
 
     // If end track, mark as ended and go to end screen
-    if(track.endTrack) {
+    if (track.endTrack) {
       await _sharedPrefs.setEndDate(DateTime.now());
       return SuccessScreen.navigate();
     }

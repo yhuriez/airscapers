@@ -89,7 +89,7 @@ class MechanismState {
 }
 
 class MechanismTransition {
-  String _expectedCode;
+  List<String> _expectedCodes;
   int _expectedItem;
   int _expectedTrack;
   List<int> _expectedItemList;
@@ -98,7 +98,7 @@ class MechanismTransition {
   int _transitionTo;
   List<int> _removedItems;
 
-  String get expectedCode => _expectedCode;
+  List<String> get expectedCodes => _expectedCodes;
 
   int get expectedItemId => _expectedItem;
 
@@ -113,11 +113,11 @@ class MechanismTransition {
   List<int> get removedItems => _removedItems;
 
 
-  MechanismTransition(this._expectedCode, this._expectedItem,
+  MechanismTransition(this._expectedCodes, this._expectedItem,
       this._expectedTrack, this._expectedItemList, this._stateId, this._transitionTo, this._removedItems);
 
   MechanismTransition.map(dynamic obj) {
-    this._expectedCode = obj["expected_code"];
+    this._expectedCodes = obj["expected_codes"];
     this._expectedItem = obj["expected_item"];
     this._expectedTrack = obj["expected_track"];
     this._expectedItemList = obj["expected_item_list"]?.cast<int>();
@@ -128,7 +128,7 @@ class MechanismTransition {
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
-    map["expected_code"] = _expectedCode;
+    map["expected_codes"] = _expectedCodes;
     map["expected_item"] = _expectedItem;
     map["expected_track"] = _expectedTrack;
     map["expected_item_list"] = _expectedItemList;

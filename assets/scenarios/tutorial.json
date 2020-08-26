@@ -142,7 +142,7 @@
           ],
           "transitions": [
             {
-              "expected_code": "CD",
+              "expected_codes": ["CD"],
               "transition_to": 3,
               "removed_items": [35]
             }
@@ -200,7 +200,7 @@
           ],
           "transitions": [
             {
-              "expected_code": "9327",
+              "expected_codes": ["9327"],
               "transition_to": 2,
               "removed_items": [42]
             }
