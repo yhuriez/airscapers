@@ -62,6 +62,7 @@ class MechanismState {
       this._endTrack, this._transitions, this._codeHint);
 
   MechanismState.map(dynamic obj) {
+
     this._id = obj["id"];
     this._start = obj["start"] ?? false;
     this._description = obj["description"];
@@ -69,9 +70,16 @@ class MechanismState {
     this._endTrack = obj["end_track"];
     this._transitions =
         mapTypedList(obj["transitions"], (it) => MechanismTransition.map(it));
-    this._clues =
-        mapTypedList(obj["clues"], (it) => MechanismClue.map(it));
     this._codeHint = obj["code_hint"];
+
+    // Clues
+    final List<String> cluesString = obj["clues"]?.cast<String>();
+    var index = 0;
+    this._clues = cluesString?.map((value) {
+      index++;
+      final id = this.id * 10 + index + 1;
+      return MechanismClue(id: id, description: value);
+    })?.toList();
   }
 
   Map<String, dynamic> toMap() {

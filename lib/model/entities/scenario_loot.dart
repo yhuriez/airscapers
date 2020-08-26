@@ -10,9 +10,9 @@ class ScenarioLoot {
   ScenarioLoot(this._type, this._id);
 
   ScenarioLoot.map(dynamic obj) {
-    this._type = obj["type"];
+    this._type = obj["type"] ?? "item";
     this._id = obj["id"];
-    this._interactionText = obj["interaction_text"];
+    this._interactionText = obj["interaction_text"] ?? "Fouiller";
   }
 
   Map<String, dynamic> toMap() {

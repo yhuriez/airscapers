@@ -119,8 +119,13 @@
           ],
           "transitions": [
             {
-              "expected_item_list": [16, 35],
-              "removed_items": [16],
+              "expected_item_list": [
+                16,
+                35
+              ],
+              "removed_items": [
+                16
+              ],
               "transition_to": 2
             }
           ]
@@ -142,9 +147,13 @@
           ],
           "transitions": [
             {
-              "expected_codes": ["CD"],
+              "expected_codes": [
+                "CD"
+              ],
               "transition_to": 3,
-              "removed_items": [35]
+              "removed_items": [
+                35
+              ]
             }
           ]
         },
@@ -164,10 +173,7 @@
           "start": true,
           "image": "assets/images/tutorial/tv_off.png",
           "clues": [
-            {
-              "id": 421,
-              "description": "Sans courant, cet écran ne sert à rien."
-            }
+            "Sans courant, cet écran ne sert à rien."
           ],
           "transitions": [
             {
@@ -193,16 +199,17 @@
           "image": "assets/images/tutorial/exit_door.png",
           "code_hint": "Ex: 1234",
           "clues": [
-            {
-              "id": 211,
-              "description": "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
-            }
+            "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
           ],
           "transitions": [
             {
-              "expected_codes": ["9327"],
+              "expected_codes": [
+                "9327"
+              ],
               "transition_to": 2,
-              "removed_items": [42]
+              "removed_items": [
+                42
+              ]
             }
           ]
         },
