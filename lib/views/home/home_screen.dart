@@ -11,7 +11,7 @@ import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/success_screen.dart';
-import 'package:airscaper/views/home/tutorial_fragment.dart';
+import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
@@ -26,7 +26,7 @@ import '../../injection.dart';
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
   ScanFragment.routeName: (BuildContext context) => ScanFragment(),
-  TutorialFragment.routeName: (BuildContext context) => TutorialFragment(),
+  ScenarioContentFragment.routeName: (BuildContext context) => ScenarioContentFragment(),
   InventoryDetailsFragment.routeName: (BuildContext context) =>
       InventoryDetailsFragment(),
   MechanismFragment.routeName: (BuildContext context) => MechanismFragment()

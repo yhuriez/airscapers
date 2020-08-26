@@ -13,6 +13,7 @@ class ScenarioTrack {
   String _title;
   bool _endTrack;
   List<ScenarioLoot> _loots;
+  bool hasQrCode;
 
   String get description => _description;
   String get foundDescription => _foundDescription;
@@ -22,7 +23,7 @@ class ScenarioTrack {
   bool get endTrack => _endTrack;
   List<ScenarioLoot> get loots => _loots;
 
-  ScenarioTrack(this._description, this._id, this._image, this._title, this._endTrack, this._loots);
+  ScenarioTrack(this._description, this._id, this._image, this._title, this._endTrack, this._loots, this.hasQrCode);
 
   ScenarioTrack.map(dynamic obj) {
     this._description = obj["description"];
@@ -32,6 +33,7 @@ class ScenarioTrack {
     this._title = obj["title"];
     this._endTrack = obj["end_track"] ?? false;
     this._loots = mapTypedList(obj["loots"], (it) => ScenarioLoot.map(it));
+    this.hasQrCode = obj["hasQrCode"] ?? false;
   }
 
   Map<String, dynamic> toMap() {

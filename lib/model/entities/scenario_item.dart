@@ -8,6 +8,7 @@ class ScenarioItem {
   String _title;
   String _foundDescription;
   bool _isTrack;
+  bool hasQrCode;
 
   String get description => _description;
   String get foundDescription => _foundDescription;
@@ -16,7 +17,7 @@ class ScenarioItem {
   String get title => _title;
   bool get isTrack => _isTrack;
 
-  ScenarioItem(this._description, this._foundDescription, this._id, this._image, this._title, this._isTrack);
+  ScenarioItem(this._description, this._foundDescription, this._id, this._image, this._title, this._isTrack, this.hasQrCode);
 
   ScenarioItem.map(dynamic obj) {
     this._description = obj["description"];
@@ -25,6 +26,7 @@ class ScenarioItem {
     this._image = obj["image"];
     this._title = obj["title"];
     this._isTrack = obj["is_track"] ?? false;
+    this.hasQrCode = obj["hasQrCode"] ?? false;
   }
 
   Map<String, dynamic> toMap() {

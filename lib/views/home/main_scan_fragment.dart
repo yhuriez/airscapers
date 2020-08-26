@@ -6,7 +6,7 @@ import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
-import 'package:airscaper/views/home/tutorial_fragment.dart';
+import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
@@ -88,13 +88,9 @@ class MainScanFragment extends StatelessWidget {
   }
 
   onScanLongPress(BuildContext context) async {
-    if (_repository.isTutorial) {
+    if (_repository.isTutorial || kDebugMode) {
       final scanResult =
-          await Navigator.of(context).pushNamed(TutorialFragment.routeName);
-      parseLink(context, scanResult);
-    } else if (kDebugMode) {
-      final scanResult =
-          await Navigator.of(context).pushNamed(ScanFragment.routeName);
+          await Navigator.of(context).pushNamed(ScenarioContentFragment.routeName);
       parseLink(context, scanResult);
     }
   }
