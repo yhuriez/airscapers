@@ -66,14 +66,14 @@
       "title": "Enigme",
       "description": "Cela resemble fort à une énigme...",
       "image": "assets/images/tresor/indice_secret.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 171,
       "title": "Détails du pont-levis",
       "description": "Un papier donnant toutes les caractéristiques du pont-levis.",
       "image": "assets/images/tresor/instructions_pont_levis.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 200,
@@ -114,28 +114,28 @@
       "title": "Heure de l'église",
       "description": "L'heure affiché sur l'horloge de l'église.",
       "image": "assets/images/tresor/vue_horloge.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 271,
       "title": "Bout de liste d'animaux",
       "description": "Un bout de document avec des animaux représentés",
       "image": "assets/images/tresor/liste_animaux_bout.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 272,
       "title": "Tissu quadrillé",
       "description": "Un tissu avec un quadrillage. La case en haut à droite est marquée.",
       "image": "assets/images/tresor/carte_nseo.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 273,
       "title": "Papier étrange",
       "description": "Un papier avec des symboles d'ondes étranges...",
       "image": "assets/images/tresor/indice_musique.png",
-      "isTrack": true,
+      "is_track": true,
       "hasQrCode": true
     },
     {
@@ -143,7 +143,7 @@
       "title": "Cours de solfège",
       "description": "Une page d'un cours de solfège.",
       "image": "assets/images/tresor/guide_musique.png",
-      "isTrack": true,
+      "is_track": true,
       "hasQrCode": true
     },
     {
@@ -170,7 +170,7 @@
       "description": "Une page avec pleins de symbole bizarre...",
       "foundDescription": "Au milieu de papiers dispersés, une page aux symboles étranges attire votre attention.",
       "image": "assets/images/tresor/lexique_demineur.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 371,
@@ -178,7 +178,7 @@
       "description": "Une partition de musique.",
       "foundDescription": "Vous trouvez une partition de musique",
       "image": "assets/images/tresor/partition.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 372,
@@ -186,28 +186,28 @@
       "description": "Un bout de papier avec des symboles.",
       "foundDescription": "Au fond de l'alcove vous trouver un bout de papier avec des symboles.",
       "image": "assets/images/tresor/indice_biblio.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 373,
       "title": "Citation",
       "description": "Une citation d'un auteur connu.",
       "image": "assets/images/tresor/indice_opus.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 374,
       "title": "Addition",
       "description": "Un papier avec une addition.",
       "image": "assets/images/tresor/papier_addition.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 375,
       "title": "Liste d'animaux",
       "description": "Un document troué, avec plusieurs animaux dessus.",
       "image": "assets/images/tresor/liste_animaux_base.png",
-      "isTrack": true
+      "is_track": true
     },
     {
       "id": 401,
@@ -563,7 +563,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 152
         }
       ]
@@ -573,7 +573,7 @@
       "name": "Cryptex",
       "states": [
         {
-          "stateId": 1,
+          "id": 1,
           "description": "Un curieux engin, rapporté d'un voyage il semblerait...",
           "image": "assets/images/tresor/cryptex_secret_ferme.png",
           "start": true,
@@ -596,7 +596,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 157
         }
       ]
@@ -606,7 +606,7 @@
       "id": 132,
       "states": [
         {
-          "stateId": 1,
+          "id": 1,
           "description": "Une partie de ce pilier a l'air de pouvoir s'ouvrir, mais un mécanisme semble le bloquer...",
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
@@ -621,7 +621,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 153
         }
       ]
@@ -631,7 +631,7 @@
       "id": 133,
       "states": [
         {
-          "stateId": 1,
+          "id": 1,
           "description": "Une partie de ce pilier a l'air de pouvoir s'ouvrir, mais un mécanisme semble le bloquer...",
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
@@ -646,7 +646,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 154
         }
       ]
@@ -654,9 +654,9 @@
     {
       "name": "Pilier",
       "id": 134,
-      "stateId": 1,
       "states": [
         {
+          "id": 1,
           "description": "Une partie de ce pilier a l'air de pouvoir s'ouvrir, mais un mécanisme semble le bloquer...",
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
@@ -671,7 +671,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 155
         }
       ]
@@ -681,7 +681,7 @@
       "id": 135,
       "states": [
         {
-          "stateId": 1,
+          "id": 1,
           "description": "Une bien belle pendule. Mais qui est arrêté.",
           "image": "assets/images/tresor/horloge_ferme.png",
           "start": true,
@@ -699,7 +699,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "description": "La pendule est à présente remonté et ouverte. Mais l'heure affiché n'est pas bonne.",
           "image": "assets/images/tresor/horloge_ouverte.png",
           "clues": [
@@ -720,17 +720,18 @@
           ]
         },
         {
-          "stateId": 3,
+          "id": 3,
           "endTrack": 151
         }
       ]
     },
     {
+      "name": "Coffre à blasons",
       "id": 136,
       "states": [
         {
-          "stateId": 1,
-          "title": "Coffre à blasons",
+          "id": 1,
+
           "description": "Un coffret ouvragé, avec sur le côté plusieurs blasons. Un système de combinaison à chiffre a été installé dessus...",
           "image": "assets/images/tresor/coffret_blasons.png",
           "start": true,
@@ -754,17 +755,18 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 156
         }
       ]
     },
     {
+      "name": "Bouclier",
       "id": 137,
       "states": [
         {
-          "stateId": 1,
-          "title": "Bouclier",
+          "id": 1,
+
           "description": "Un bouclier de décoration avec une lance qui le croise.",
           "image": "assets/images/tresor/bouclier_lance_mur.png",
           "start": true,
@@ -783,17 +785,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 158
         }
       ]
     },
     {
+      "name": "Echiquier",
       "id": 138,
       "states": [
         {
-          "stateId": 1,
-          "title": "Echiquier",
+          "id": 1,
           "description": "Un échiquier de 5 cases par 5. Un pion de reine est collé en D1.",
           "image": "assets/images/tresor/echiquier.png",
           "start": true,
@@ -819,8 +821,7 @@
           ]
         },
         {
-          "stateId": 2,
-          "title": "Echiquier",
+          "id": 2,
           "description": "Maintenant que tous les pions sont rassemblés, il faut les placer sur l'échiquier : aucun pion ne doit pouvoir en attaquer un autre (les reines attaquent dans les huit directions).",
           "image": "assets/images/tresor/echiquier.png",
           "clues": [
@@ -841,17 +842,17 @@
           ]
         },
         {
-          "stateId": 3,
+          "id": 3,
           "endTrack": 150
         }
       ]
     },
     {
+      "name": "Piano",
       "id": 230,
       "states": [
         {
-          "stateId": 1,
-          "title": "Piano",
+          "id": 1,
           "description": "Un beau piano à queue",
           "image": "assets/images/tresor/piano_queue.png",
           "start": true,
@@ -877,17 +878,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 255
         }
       ]
     },
     {
+      "name": "Tableau sale",
       "id": 231,
       "states": [
         {
-          "stateId": 1,
-          "title": "Tableau sale",
+          "id": 1,
           "description": "Un tableau, sali par la poussière",
           "image": "assets/images/tresor/tableau_sale.png",
           "start": true,
@@ -905,17 +906,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 251
         }
       ]
     },
     {
+      "name": "Fenêtre ouverte",
       "id": 232,
       "states": [
         {
-          "stateId": 1,
-          "title": "Fenêtre ouverte",
+          "id": 1,
           "description": "Une fenêtre ouverte sur un beau ciel ensoleillé.",
           "image": "assets/images/tresor/fenetre_soleil.png",
           "start": true,
@@ -938,17 +939,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 256
         }
       ]
     },
     {
+      "name": "Fenêtre avec vue",
       "id": 233,
       "states": [
         {
-          "stateId": 1,
-          "title": "Fenêtre avec vue",
+          "id": 1,
           "description": "Une petite fenêtre. Au loin, on voit des habitations.",
           "image": "assets/images/tresor/fenetre_vue_village.jpg",
           "start": true,
@@ -966,18 +967,17 @@
           ]
         },
         {
-          "id": 233,
-          "stateId": 2,
+          "id": 2,
           "endTrack": 252
         }
       ]
     },
     {
+      "name": "Coffret",
       "id": 234,
       "states": [
         {
-          "stateId": 1,
-          "title": "Coffret",
+          "id": 1,
           "description": "Un coffret ouvragé, fermé à clé.",
           "image": "assets/images/tresor/coffret.png",
           "start": true,
@@ -992,8 +992,7 @@
           ]
         },
         {
-          "stateId": 2,
-          "title": "Coffret",
+          "id": 2,
           "description": "La clef ne rentre pas... mais vous remarquez des boutons près de la serrure.",
           "image": "assets/images/tresor/serrure_boite.png",
           "clues": [
@@ -1013,17 +1012,17 @@
           ]
         },
         {
-          "stateId": 3,
+          "id": 3,
           "endTrack": 254
         }
       ]
     },
     {
+      "name": "Cheminée",
       "id": 235,
       "states": [
         {
-          "stateId": 1,
-          "title": "Cheminée",
+          "id": 1,
           "description": "Une cheminée très sombre.",
           "image": "assets/images/tresor/cheminee.png",
           "start": true,
@@ -1041,17 +1040,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 253
         }
       ]
     },
     {
+      "name": "Dalle étrange",
       "id": 236,
       "states": [
         {
-          "stateId": 1,
-          "title": "Dalle étrange",
+          "id": 1,
           "description": "Une dalle qui ressort un peu du sol. De l'air semble y passer.",
           "image": "assets/images/tresor/dalle_secrete.jpg",
           "start": true,
@@ -1066,8 +1065,7 @@
           ]
         },
         {
-          "stateId": 2,
-          "title": "Coffre caché",
+          "id": 2,
           "description": "La dalle s'est ouverte ! Vous voyez au fond un lourd coffre, scellé par une combinaison de chiffre",
           "image": "assets/images/tresor/coffre_dans_dalle.png",
           "clues": [
@@ -1089,17 +1087,17 @@
           ]
         },
         {
-          "stateId": 3,
+          "id": 3,
           "endTrack": 257
         }
       ]
     },
     {
+      "name": "Meuble à tiroirs",
       "id": 330,
       "states": [
         {
-          "stateId": 1,
-          "title": "Meuble à tiroirs",
+          "id": 1,
           "description": "Un meuble avec de nombreux tiroirs. Des cliquetis s'entendent en les ouvrant. Peut-être qu'en les ouvrant dans un certain ordre... ?",
           "image": "assets/images/tresor/buffet_code.png",
           "start": true,
@@ -1124,17 +1122,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 356
         }
       ]
     },
     {
+      "name": "Tableau",
       "id": 331,
       "states": [
         {
-          "stateId": 1,
-          "title": "Tableau",
+          "id": 1,
           "description": "Le tableau d'un rat de bibliothèque.",
           "image": "assets/images/tresor/tableau_systeme.png",
           "start": true,
@@ -1149,17 +1147,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 352
         }
       ]
     },
     {
+      "name": "Bibliothèque fermée",
       "id": 332,
       "states": [
         {
-          "stateId": 1,
-          "title": "Bibliothèque fermée",
+          "id": 1,
           "description": "Une bibliothèque fermée par une vitre.",
           "image": "assets/images/tresor/biblio-closed.png",
           "start": true,
@@ -1176,8 +1174,7 @@
           ]
         },
         {
-          "stateId": 2,
-          "title": "Bibliothèque ouverte",
+          "id": 2,
           "description": "La vitre cassée, les livres sont maintenant accessible. Certains semblent reliés à un mécanisme...",
           "image": "assets/images/tresor/biblio_opened.png",
           "clues": [
@@ -1199,17 +1196,17 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 357
         }
       ]
     },
     {
+      "name": "Table d'écriture",
       "id": 333,
       "states": [
         {
-          "stateId": 1,
-          "title": "Table d'écriture",
+          "id": 1,
           "description": "Une table d'écriture.",
           "image": "assets/images/tresor/table_ecriture.png",
           "start": true,
@@ -1234,7 +1231,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 358
         }
       ]
@@ -1244,7 +1241,7 @@
       "id": 334,
       "states": [
         {
-          "stateId": 1,
+          "id": 1,
           "description": "Un mur avec des bouteilles accrochées au mur, ainsi qu'un message.",
           "image": "assets/images/tresor/biblio_porte_cachee_fermee.png",
           "start": true,
@@ -1269,7 +1266,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 355
         }
       ]
@@ -1279,7 +1276,7 @@
       "id": 430,
       "states": [
         {
-          "stateId": 1,
+          "id": 1,
           "description": "Une statue grec. On peut y insérer plusieurs bijoux.",
           "image": "assets/images/tresor/statue_fin.png",
           "start": true,
@@ -1300,7 +1297,7 @@
           ]
         },
         {
-          "stateId": 2,
+          "id": 2,
           "endTrack": 450
         }
       ]

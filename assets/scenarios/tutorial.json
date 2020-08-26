@@ -84,10 +84,7 @@
           "start": true,
           "image": "assets/images/tutorial/furniture_closed.png",
           "clues": [
-            {
-              "id": 351,
-              "description": "Une clé est nécessaire pour ouvrir le coffre."
-            }
+            "Une clé est nécessaire pour ouvrir le coffre."
           ],
           "transitions": [
             {
@@ -112,10 +109,7 @@
           "image": "assets/images/tutorial/electric_board.png",
           "start": true,
           "clues": [
-            {
-              "id": 6911,
-              "description": "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
-            }
+            "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
           ],
           "transitions": [
             {
@@ -136,14 +130,8 @@
           "image": "assets/images/tutorial/electric_board_connect.png",
           "code_hint": "Ex: AB",
           "clues": [
-            {
-              "id": 6921,
-              "description": "Le schéma de branchement doit se situer quelque part dans la pièce."
-            },
-            {
-              "id": 6922,
-              "description": "Les picots du centre doivent être reliés."
-            }
+            "Le schéma de branchement doit se situer quelque part dans la pièce.",
+            "Les picots du centre doivent être reliés."
           ],
           "transitions": [
             {
