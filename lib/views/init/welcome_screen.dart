@@ -113,7 +113,7 @@ class WelcomeScreen extends StatelessWidget {
 
   onCodeValidated(
       BuildContext context, String code, List<ScenarioReference> scenarios) {
-    final scenario = scenarios.firstWhere((element) => element.code == code);
+    final scenario = scenarios.firstWhere((element) => element.code.toLowerCase() == code.toLowerCase());
     if (scenario != null) {
       goToScenarioStart(context, scenario);
     }

@@ -48,7 +48,8 @@
       "title": "Clé",
       "description": "Une simple clé",
       "found_description": "Accroché à un mur, vous trouvez une simple clé. Ce qu'elle ouvre ne doit pas être loin.",
-      "image": "assets/images/tutorial/key.png"
+      "image": "assets/images/tutorial/key.png",
+      "hasQrCode": true
     },
     {
       "id": 16,

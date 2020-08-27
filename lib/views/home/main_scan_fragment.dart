@@ -5,7 +5,6 @@ import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
-import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';

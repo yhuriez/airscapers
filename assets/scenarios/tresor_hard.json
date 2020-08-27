@@ -6,7 +6,7 @@
   },
   "items": [
     {
-      "id": 100,
+      "id": 110,
       "title": "Massue",
       "description": "Une masse bien lourde.",
       "image": "assets/images/tresor/massue.png",
@@ -17,7 +17,7 @@
       "title": "Clé de l'horloge",
       "description": "Une clé servant à remonter une horloge.",
       "foundDescription": "Une clé à horloge se cachait au fond de l'engin.",
-      "image": "assets/images/tresor/cle_horloge.png"
+      "image": "assets/images/tresor/transparent/cle_horloge.png"
     },
     {
       "id": 102,
@@ -66,14 +66,16 @@
       "title": "Enigme",
       "description": "Cela resemble fort à une énigme...",
       "image": "assets/images/tresor/indice_secret.png",
-      "is_track": true
+      "is_track": true,
+      "hasQrCode": true
     },
     {
       "id": 171,
       "title": "Détails du pont-levis",
       "description": "Un papier donnant toutes les caractéristiques du pont-levis.",
-      "image": "assets/images/tresor/instructions_pont_levis.png",
-      "is_track": true
+      "image": "assets/images/tresor/transparent/instructions_pont_levis.png",
+      "is_track": true,
+      "hasQrCode": true
     },
     {
       "id": 200,
@@ -94,7 +96,7 @@
       "title": "Longue vue",
       "description": "Une longue vue. Elle semble fragile...",
       "foundDescription": "Au fond du placard, vous trouvez une longue-vue.",
-      "image": ""
+      "image": "assets/images/tresor/longue_vue.png"
     },
     {
       "id": 203,
@@ -150,13 +152,13 @@
       "id": 300,
       "title": "Papier illisible",
       "description": "Un papier. En passant les doigts dessus, vous sentez des formes de lettres. Il faudrait repasser dessus.",
-      "image": "assets/images/tresor/papier_illisible.png"
+      "image": "assets/images/tresor/transparent/papier_illisible.png"
     },
     {
       "id": 301,
       "title": "Encre",
       "description": "Un pot d'encre.",
-      "image": "assets/images/tresor/encre.png"
+      "image": "assets/images/tresor/transparent/encre.png"
     },
     {
       "id": 302,
@@ -192,14 +194,14 @@
       "id": 373,
       "title": "Citation",
       "description": "Une citation d'un auteur connu.",
-      "image": "assets/images/tresor/indice_opus.png",
+      "image": "assets/images/tresor/transparent/indice_opus.png",
       "is_track": true
     },
     {
       "id": 374,
       "title": "Addition",
       "description": "Un papier avec une addition.",
-      "image": "assets/images/tresor/papier_addition.png",
+      "image": "assets/images/tresor/transparent/papier_addition.png",
       "is_track": true
     },
     {
@@ -207,35 +209,57 @@
       "title": "Liste d'animaux",
       "description": "Un document troué, avec plusieurs animaux dessus.",
       "image": "assets/images/tresor/liste_animaux_base.png",
-      "is_track": true
+      "is_track": true,
+      "hasQrCode": true
     },
     {
       "id": 401,
       "title": "Chevalière du 1er frère",
       "description": "La chevalière du 1er frère.",
-      "image": ""
+      "image": "assets/images/tresor/chevaliere.jpg"
     },
     {
       "id": 402,
       "title": "Pendentif du 2ème frère",
       "description": "Le pendentif du 2ème frère.",
-      "image": ""
+      "image": "assets/images/tresor/pendentif.png"
     },
     {
       "id": 403,
       "title": "Collier du 3ème frère",
       "description": "Le collier du 3ème frère.",
       "foundDescription": "Sur une table dans la pièce, vous trouvez le collier du 3ème frère.",
-      "image": ""
+      "image": "assets/images/tresor/collier.jpg"
     }
   ],
   "tracks": [
+    {
+      "id": 100,
+      "title": "Rangement",
+      "description": "Un meuble de rangement.",
+      "image": "assets/images/tresor/transparent/buffet.png",
+      "hasQrCode": true,
+      "loots": [
+        {
+          "interaction_text": "Fouiller sous le meuble",
+          "id": 100
+        },
+        {
+          "interaction_text": "Fouiller le placard de gauche",
+          "id": 171
+        },
+        {
+          "interaction_text": "Fouiller le placard de droite",
+          "id": 170
+        }
+      ]
+    },
     {
       "id": 150,
       "title": "Cache secrète",
       "description": "Un échiquier avec un tiroir secret",
       "foundDescription": "Un tiroir secret s'est ouvert en placant le dernier pion.",
-      "image": "assets/images/tresor/tiroir_secret_echiquier.png",
+      "image": "assets/images/tresor/transparent/tiroir_secret_echiquier.png",
       "loots": [
         {
           "id": 401
@@ -295,7 +319,7 @@
       "title": "Cryptex ouvert",
       "description": "Un étrange engin, ouvert",
       "foundDescription": "Vous avez ouvert l'engin !",
-      "image": "assets/images/tresor/cryptex_secret_ouvert.png",
+      "image": "assets/images/tresor/transparent/cryptex_secret_ouvert.png",
       "loots": [
         {
           "interaction_text": "Prendre l'objet",
@@ -324,7 +348,7 @@
       "id": 250,
       "title": "Buffet",
       "description": "Un buffet élégant.",
-      "image": "assets/images/tresor/buffet_salon.png",
+      "image": "assets/images/tresor/buffet_salon.jpg",
       "hasQrCode": true,
       "loots": [
         {
@@ -376,7 +400,7 @@
       "title": "Coffret ouvert",
       "description": "Un coffre ouvert",
       "foundDescription": "Le coffre est ouvert !",
-      "image": "assets/images/tresor/coffre_dalle_ouverte.png",
+      "image": "assets/images/tresor/transparent/coffre_dalle_ouverte.png",
       "loots": [
         {
           "id": 272
@@ -414,7 +438,7 @@
       "title": "Coffre ouvert",
       "description": "Un coffre ouvert.",
       "foundDescription": "Le coffre est ouvert !",
-      "image": "assets/images/tresor/coffre_ouvert.png",
+      "image": "assets/images/tresor/coffret_ouvert.png",
       "loots": [
         {
           "id": 402
@@ -474,7 +498,7 @@
       "id": 353,
       "title": "Armure",
       "description": "Une armure de chevalier.",
-      "image": "assets/images/tresor/armure_biblio.png",
+      "image": "assets/images/tresor/transparent/armure_biblio.png",
       "hasQrCode": true
     },
     {
@@ -564,7 +588,7 @@
         },
         {
           "id": 2,
-          "endTrack": 152
+          "end_track": 152
         }
       ]
     },
@@ -575,7 +599,7 @@
         {
           "id": 1,
           "description": "Un curieux engin, rapporté d'un voyage il semblerait...",
-          "image": "assets/images/tresor/cryptex_secret_ferme.png",
+          "image": "assets/images/tresor/transparent/cryptex_secret_ferme.png",
           "start": true,
           "clues": [
             "Regardez bien autour de l'engin, il y a sans doute quelque chose pour vous indiquer le code de ce cryptex.",
@@ -597,7 +621,7 @@
         },
         {
           "id": 2,
-          "endTrack": 157
+          "end_track": 157
         }
       ]
     },
@@ -622,7 +646,7 @@
         },
         {
           "id": 2,
-          "endTrack": 153
+          "end_track": 153
         }
       ]
     },
@@ -647,7 +671,7 @@
         },
         {
           "id": 2,
-          "endTrack": 154
+          "end_track": 154
         }
       ]
     },
@@ -672,7 +696,7 @@
         },
         {
           "id": 2,
-          "endTrack": 155
+          "end_track": 155
         }
       ]
     },
@@ -721,7 +745,7 @@
         },
         {
           "id": 3,
-          "endTrack": 151
+          "end_track": 151
         }
       ]
     },
@@ -756,7 +780,7 @@
         },
         {
           "id": 2,
-          "endTrack": 156
+          "end_track": 156
         }
       ]
     },
@@ -786,7 +810,7 @@
         },
         {
           "id": 2,
-          "endTrack": 158
+          "end_track": 158
         }
       ]
     },
@@ -843,7 +867,7 @@
         },
         {
           "id": 3,
-          "endTrack": 150
+          "end_track": 150
         }
       ]
     },
@@ -879,7 +903,7 @@
         },
         {
           "id": 2,
-          "endTrack": 255
+          "end_track": 255
         }
       ]
     },
@@ -907,7 +931,7 @@
         },
         {
           "id": 2,
-          "endTrack": 251
+          "end_track": 251
         }
       ]
     },
@@ -940,7 +964,7 @@
         },
         {
           "id": 2,
-          "endTrack": 256
+          "end_track": 256
         }
       ]
     },
@@ -968,7 +992,7 @@
         },
         {
           "id": 2,
-          "endTrack": 252
+          "end_track": 252
         }
       ]
     },
@@ -1013,7 +1037,7 @@
         },
         {
           "id": 3,
-          "endTrack": 254
+          "end_track": 254
         }
       ]
     },
@@ -1041,7 +1065,7 @@
         },
         {
           "id": 2,
-          "endTrack": 253
+          "end_track": 253
         }
       ]
     },
@@ -1067,7 +1091,7 @@
         {
           "id": 2,
           "description": "La dalle s'est ouverte ! Vous voyez au fond un lourd coffre, scellé par une combinaison de chiffre",
-          "image": "assets/images/tresor/coffre_dans_dalle.png",
+          "image": "assets/images/tresor/transparent/coffre_dans_dalle.png",
           "clues": [
             "Ce pentagramme, ne l'avez-vous pas vu ailleurs ?",
             "Le tissu avec quadrillage possède une rose des vents. Est-ce qu'il n'y a pas un autre élément qui vous indique des points cardinaux ?",
@@ -1088,7 +1112,7 @@
         },
         {
           "id": 3,
-          "endTrack": 257
+          "end_track": 257
         }
       ]
     },
@@ -1123,7 +1147,7 @@
         },
         {
           "id": 2,
-          "endTrack": 356
+          "end_track": 356
         }
       ]
     },
@@ -1148,7 +1172,7 @@
         },
         {
           "id": 2,
-          "endTrack": 352
+          "end_track": 352
         }
       ]
     },
@@ -1168,8 +1192,8 @@
           "transitions": [
             {
               "transition_to": 2,
-              "expected_item": 100,
-              "removed_items": 100
+              "expected_item": 110,
+              "removed_items": [110]
             }
           ]
         },
@@ -1197,7 +1221,7 @@
         },
         {
           "id": 2,
-          "endTrack": 357
+          "end_track": 357
         }
       ]
     },
@@ -1232,7 +1256,7 @@
         },
         {
           "id": 2,
-          "endTrack": 358
+          "end_track": 358
         }
       ]
     },
@@ -1267,7 +1291,7 @@
         },
         {
           "id": 2,
-          "endTrack": 355
+          "end_track": 355
         }
       ]
     },
@@ -1278,7 +1302,7 @@
         {
           "id": 1,
           "description": "Une statue grec. On peut y insérer plusieurs bijoux.",
-          "image": "assets/images/tresor/statue_fin.png",
+          "image": "assets/images/tresor/statue_fin.jpg",
           "start": true,
           "transitions": [
             {
@@ -1298,7 +1322,7 @@
         },
         {
           "id": 2,
-          "endTrack": 450
+          "end_track": 450
         }
       ]
     }

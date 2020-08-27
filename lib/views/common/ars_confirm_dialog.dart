@@ -26,8 +26,8 @@ class ARSConfirmDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _createButton(context, "Non", onCancelClicked),
-                _createButton(context, "Oui", onOkClicked)
+                _createButton(context, "Oui", onOkClicked),
+                _createButton(context, "Non", onCancelClicked)
               ],
             ),
           )

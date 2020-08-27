@@ -70,13 +70,6 @@ class InterpretLinkUseCase {
         return createDialogNavigationIntent(
             "Erreur", "Une erreur est survenue");
       } else {
-        final loots = scenarioTrack.loots;
-
-        // Add track's loots if there is some
-        if (loots != null) {
-          await _addLootUseCase.execute(context, loots);
-        }
-
         return InventoryDetailsFragment.navigate(
             ScenarioElementDesc.fromTrack(scenarioTrack));
       }

@@ -125,7 +125,7 @@ class MechanismTransition {
       this._expectedTrack, this._expectedItemList, this._stateId, this._transitionTo, this._removedItems);
 
   MechanismTransition.map(dynamic obj) {
-    this._expectedCodes = obj["expected_codes"];
+    this._expectedCodes = obj["expected_codes"]?.cast<String>();
     this._expectedItem = obj["expected_item"];
     this._expectedTrack = obj["expected_track"];
     this._expectedItemList = obj["expected_item_list"]?.cast<int>();

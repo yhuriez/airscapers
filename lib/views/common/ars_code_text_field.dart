@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-const TEXT_FIELD_SIZE = 55.0;
+const TEXT_FIELD_SIZE = 60.0;
 
 class ARSCodeTextField extends StatefulWidget {
 
@@ -52,8 +52,11 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
           decoration: InputDecoration(
               border: InputBorder.none, hintText: widget.hint ?? ""),
           validator: (value) {
-            if (widget.acceptedValues.isNotEmpty &&
-                !widget.acceptedValues.contains(value.toLowerCase())) {
+            final acceptedValues = widget.acceptedValues
+                .map((e) => e.toLowerCase()).toList();
+
+            if (acceptedValues.isNotEmpty &&
+                !acceptedValues.contains(value.toLowerCase())) {
               return widget.validationErrorMessage ?? "Erreur";
             }
             return null;

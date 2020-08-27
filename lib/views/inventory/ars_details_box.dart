@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ARSDetailsBox extends StatelessWidget {
   final Widget Function(BuildContext) interactionsBuilder;
-  
+
   final Function(BuildContext, ScenarioItem) onAcceptedDropData;
 
   final String imageUrl;
@@ -38,27 +38,33 @@ class ARSDetailsBox extends StatelessWidget {
     );
   }
 
-  Widget _createImage(BuildContext context) => AspectRatio(
-        aspectRatio: 1,
-        child: InkWell(
-          onTap: () => _onImageClicked(context),
-          child: ARSInnerShadow(
-            color: Colors.black,
-            offset: Offset(20, 20),
-            child: SizedBox.expand(
-                child: Hero(
-                tag: ImageDetailsScreen.imageTag,
-                child: createDragTarget(
-                  Image.asset(
-                    this.imageUrl,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
+  Widget _createImage(BuildContext context) {
+    final image = SizedBox.expand(
+      child: Hero(
+        tag: ImageDetailsScreen.imageTag,
+        child: createDragTarget(
+          Image.asset(
+            this.imageUrl,
+            fit: BoxFit.fill,
           ),
         ),
-      );
+      ),
+    );
+
+    return AspectRatio(
+      aspectRatio: 1,
+      child: InkWell(
+        onTap: () => _onImageClicked(context),
+        child: (imageUrl.contains("transparent"))
+            ? image
+            : ARSInnerShadow(
+                color: Colors.black,
+                offset: Offset(20, 20),
+                child: image,
+              ),
+      ),
+    );
+  }
 
   Widget createDragTarget(Widget child) {
     // No drag target if not configured

@@ -14,15 +14,15 @@
       "image": "",
       "code": "TF",
       "linkedFile": "tresor_hard.json",
-      "description": "Après de nombreuses recherches historiques, vous avez découvert que le chateau de la Colaissière abritait en son sein un trésor que nul ne soupçonnait.\\n\\nTrois frères, codirigeant le domaine au XXIIIème siècle, avaient trouvé au cours de leurs voyages un objet de grande valeur, qu’ils décidèrent de garder caché au coeur du chateau à l’aide de trois « clés », chacun en conservant une.\\n\\nCes clés ont à présent disparu, mais à l’aide de votre application et des marques qu’ils ont laissé dans le passé, vous pouvez à présent retrouver leur traces et tenter de mettre la main sur le trésor !"
+      "description": "Après de nombreuses recherches historiques, vous avez découvert que le chateau de la Colaissière abritait en son sein un trésor que nul ne soupçonnait.\n\nTrois frères, codirigeant le domaine au XXIIIème siècle, avaient trouvé au cours de leurs voyages un objet de grande valeur, qu’ils décidèrent de garder caché au coeur du chateau à l’aide de trois « clés », chacun en conservant une.\n\nCes clés ont à présent disparu, mais à l’aide de votre application et des marques qu’ils ont laissé dans le passé, vous pouvez à présent retrouver leur traces et tenter de mettre la main sur le trésor !"
     },
     {
       "id": "duke_treasure_hard_id",
       "name": "Le trésor des trois frères",
-      "image": "TF2",
-      "code": "bretagne_normal",
+      "image": "",
+      "code": "TFH",
       "linkedFile": "tresor_hard.json",
-      "description": "Après de nombreuses recherches historiques, vous avez découvert que le chateau de la Colaissière abritait en son sein un trésor que nul ne soupçonnait.\\n\\nTrois frères, codirigeant le domaine au XXIIIème siècle, avaient trouvé au cours de leurs voyages un objet de grande valeur, qu’ils décidèrent de garder caché au coeur du chateau à l’aide de trois « clés », chacun en conservant une.\\n\\nCes clés ont à présent disparu, mais à l’aide de votre application et des marques qu’ils ont laissé dans le passé, vous pouvez à présent retrouver leur traces et tenter de mettre la main sur le trésor !"
+      "description": "Après de nombreuses recherches historiques, vous avez découvert que le chateau de la Colaissière abritait en son sein un trésor que nul ne soupçonnait.\n\nTrois frères, codirigeant le domaine au XXIIIème siècle, avaient trouvé au cours de leurs voyages un objet de grande valeur, qu’ils décidèrent de garder caché au coeur du chateau à l’aide de trois « clés », chacun en conservant une.\n\nCes clés ont à présent disparu, mais à l’aide de votre application et des marques qu’ils ont laissé dans le passé, vous pouvez à présent retrouver leur traces et tenter de mettre la main sur le trésor !"
     }
   ]
 }

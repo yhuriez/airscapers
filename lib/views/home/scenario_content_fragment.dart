@@ -42,10 +42,13 @@ class ScenarioContentFragment extends StatelessWidget {
                       children: [
                         Image.asset(element.imageLink),
 
-                        Text(
-                          element.name,
-                          style:
-                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            element.name,
+                            style:
+                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
@@ -67,7 +70,9 @@ class ScenarioContentFragment extends StatelessWidget {
             ScenarioElement(element.title, "$itemKey/${element.id}", element.image))
         .toList();
 
-    result += repo.tracks.where((element) => element.hasQrCode)
+    result += repo.tracks
+        .where((element) => element.hasQrCode)
+//        .where((element) => !element.endTrack)
         .map((element) => ScenarioElement(element.title, "$trackKey/${element.id}", element.image))
         .toList();
 
