@@ -16,7 +16,7 @@
       "id": 101,
       "title": "Clé de l'horloge",
       "description": "Une clé servant à remonter une horloge.",
-      "foundDescription": "Une clé à horloge se cachait au fond de l'engin.",
+      "found_description": "Une clé à horloge se cachait au fond de l'engin.",
       "image": "assets/images/tresor/transparent/cle_horloge.png"
     },
     {
@@ -30,7 +30,7 @@
       "id": 103,
       "title": "Pion reine carreau",
       "description": "Un pion de reine, avec un symbole.",
-      "foundDescription": "Au fond du coffre, au milieu d'autres babioles, se trouve un pion de reine avec un symbole de carreau.",
+      "found_description": "Au fond du coffre, au milieu d'autres babioles, se trouve un pion de reine avec un symbole de carreau.",
       "image": "assets/images/tresor/pion_reine_carreau.png"
     },
     {
@@ -43,7 +43,7 @@
       "id": 105,
       "title": "Pion reine trèfle",
       "description": "Un pion de reine, avec un symbole.",
-      "foundDescription": "Vous trouvez un pion de reine d'échecs, avec un symbole de trèfle dessus.",
+      "found_description": "Vous trouvez un pion de reine d'échecs, avec un symbole de trèfle dessus.",
       "image": "assets/images/tresor/pion_reine_trefle.png",
       "hasQrCode": true
     },
@@ -51,14 +51,14 @@
       "id": 106,
       "title": "Pion reine coeur",
       "description": "Un pion de reine, avec un symbole.",
-      "foundDescription": "Au fond du tiroir, vous trouvez un pion de reine avec un symbole de coeur.",
+      "found_description": "Au fond du tiroir, vous trouvez un pion de reine avec un symbole de coeur.",
       "image": "assets/images/tresor/pion_reine_coeur.png"
     },
     {
       "id": 107,
       "title": "Clé ouvragée",
       "description": "Une clé finement ouvragée.",
-      "foundDescription": "La boîte semblait cacher une clé finement ouvragée.",
+      "found_description": "La boîte semblait cacher une clé finement ouvragée.",
       "image": "assets/images/tresor/cle_avec_code.png"
     },
     {
@@ -81,28 +81,27 @@
       "id": 200,
       "title": "Chiffon déchiré",
       "description": "Un chiffon déchiré.",
-      "foundDescription": "En tappant la dernière note, vous entendez une trappe s'ouvrir sous le piano. Un bout de tissu déchiré en tombe.",
       "image": "assets/images/tresor/tissu.png"
     },
     {
       "id": 201,
       "title": "Bougie éteinte",
       "description": "Une bougie éteinte.",
-      "foundDescription": "A l'intérieur du placard, vous trouvez une bougie éteinte.",
+      "found_description": "A l'intérieur du placard, vous trouvez une bougie éteinte.",
       "image": "assets/images/tresor/bougie_eteinte.png"
     },
     {
       "id": 202,
       "title": "Longue vue",
       "description": "Une longue vue. Elle semble fragile...",
-      "foundDescription": "Au fond du placard, vous trouvez une longue-vue.",
+      "found_description": "Au fond du placard, vous trouvez une longue-vue.",
       "image": "assets/images/tresor/longue_vue.png"
     },
     {
       "id": 203,
       "title": "Lentille concave",
       "description": "Une lentille concave.",
-      "foundDescription": "Alors que vous regardez le centre-ville, sa lentille se détache. Vous la rattrapez avant qu'elle ne se casse, heureusement.",
+      "found_description": "Alors que vous regardez le centre-ville, sa lentille se détache. Vous la rattrapez avant qu'elle ne se casse, heureusement.",
       "image": "assets/images/tresor/lentille_concave.png"
     },
     {
@@ -164,13 +163,13 @@
       "id": 302,
       "title": "Plume",
       "description": "Un plume d'écriture.",
-      "image": "assets/images/tresor/plume.png"
+      "image": "assets/images/tresor/transparent/plume.png"
     },
     {
       "id": 370,
       "title": "Décrypteur",
       "description": "Une page avec pleins de symbole bizarre...",
-      "foundDescription": "Au milieu de papiers dispersés, une page aux symboles étranges attire votre attention.",
+      "found_description": "Au milieu de papiers dispersés, une page aux symboles étranges attire votre attention.",
       "image": "assets/images/tresor/lexique_demineur.png",
       "is_track": true
     },
@@ -178,7 +177,7 @@
       "id": 371,
       "title": "Partition",
       "description": "Une partition de musique.",
-      "foundDescription": "Vous trouvez une partition de musique",
+      "found_description": "Vous trouvez une partition de musique",
       "image": "assets/images/tresor/partition.png",
       "is_track": true
     },
@@ -186,7 +185,7 @@
       "id": 372,
       "title": "Bout de papier",
       "description": "Un bout de papier avec des symboles.",
-      "foundDescription": "Au fond de l'alcove vous trouver un bout de papier avec des symboles.",
+      "found_description": "Au fond de l'alcove vous trouver un bout de papier avec des symboles.",
       "image": "assets/images/tresor/indice_biblio.png",
       "is_track": true
     },
@@ -216,19 +215,21 @@
       "id": 401,
       "title": "Chevalière du 1er frère",
       "description": "La chevalière du 1er frère.",
+      "found_description": "Vous y trouvez la chevalière du 1er frère.",
       "image": "assets/images/tresor/chevaliere.jpg"
     },
     {
       "id": 402,
       "title": "Pendentif du 2ème frère",
       "description": "Le pendentif du 2ème frère.",
+      "found_description": "A l'intérieur, vous trouvez le pendentif du 2ème frère.",
       "image": "assets/images/tresor/pendentif.png"
     },
     {
       "id": 403,
       "title": "Collier du 3ème frère",
       "description": "Le collier du 3ème frère.",
-      "foundDescription": "Sur une table dans la pièce, vous trouvez le collier du 3ème frère.",
+      "found_description": "Sur une table dans la pièce, vous trouvez le collier du 3ème frère.",
       "image": "assets/images/tresor/collier.jpg"
     }
   ],
@@ -251,6 +252,10 @@
         {
           "interaction_text": "Fouiller le placard de droite",
           "id": 170
+        },
+        {
+          "interaction_text": "Fouiller au-dessus",
+          "id": 375
         }
       ]
     },
@@ -258,7 +263,7 @@
       "id": 150,
       "title": "Cache secrète",
       "description": "Un échiquier avec un tiroir secret",
-      "foundDescription": "Un tiroir secret s'est ouvert en placant le dernier pion.",
+      "found_description": "Un tiroir secret s'est ouvert en placant le dernier pion.",
       "image": "assets/images/tresor/transparent/tiroir_secret_echiquier.png",
       "loots": [
         {
@@ -270,7 +275,7 @@
       "id": 151,
       "title": "Tiroir secret",
       "description": "Une pendule avec un tiroir secret",
-      "foundDescription": "Un tiroir secret s'est ouvert en changeant l'heure !",
+      "found_description": "Un tiroir secret s'est ouvert en changeant l'heure !",
       "image": "assets/images/tresor/tiroir_cache_ouvert.png",
       "loots": [
         {
@@ -306,7 +311,7 @@
       "id": 156,
       "title": "Coffre à blasons",
       "description": "Un coffre ouvert.",
-      "foundDescription": "Le coffret est ouvert !",
+      "found_description": "Le coffret est ouvert !",
       "image": "assets/images/tresor/coffret_blason_ouvert.png",
       "loots": [
         {
@@ -318,7 +323,7 @@
       "id": 157,
       "title": "Cryptex ouvert",
       "description": "Un étrange engin, ouvert",
-      "foundDescription": "Vous avez ouvert l'engin !",
+      "found_description": "Vous avez ouvert l'engin !",
       "image": "assets/images/tresor/transparent/cryptex_secret_ouvert.png",
       "loots": [
         {
@@ -335,7 +340,7 @@
       "id": 158,
       "title": "Bouclier",
       "description": "Un bouclier décoratif avec deux lances",
-      "foundDescription": "Lorsque vous glissez la deuxième lance derrière le bouclier, un pion de reine tombe par terre.",
+      "found_description": "Lorsque vous glissez la deuxième lance derrière le bouclier, un pion de reine tombe par terre.",
       "image": "assets/images/tresor/bouclier_lance_complet_mur.png",
       "loots": [
         {
@@ -369,14 +374,14 @@
       "id": 251,
       "title": "Tableau nettoyé",
       "description": "Un tableau propre, avec un mot marqué dessus.",
-      "foundDescription": "Une fois le tableau nettoyé, vous voyez un mot marqué dessus...",
+      "found_description": "Une fois le tableau nettoyé, vous voyez un mot marqué dessus...",
       "image": "assets/images/tresor/tableau_avec_SONS.png"
     },
     {
       "id": 252,
       "title": "Vue sur le village",
       "description": "Une belle vue sur le village.",
-      "foundDescription": "Grâce à la longue-vue vous parvenez à voir le village au loin.",
+      "found_description": "Grâce à la longue-vue vous parvenez à voir le village au loin.",
       "image": "assets/images/tresor/vue_village.jpg",
       "loots": [
         {
@@ -392,15 +397,15 @@
     {
       "id": 253,
       "title": "Bouton caché",
-      "description": "En éclairant le fond de la cheminée, vous discernez un trou au fond, avec un bouton à l'intérieur.\\n\\nEn appuyant dessus, vous entendez quelque chose bouger dans la pièce.",
+      "description": "En éclairant le fond de la cheminée, vous discernez un trou au fond, avec un bouton à l'intérieur.\n\nEn appuyant dessus, vous entendez quelque chose bouger dans la pièce.",
       "image": "assets/images/tresor/cheminee_trou.png"
     },
     {
       "id": 254,
       "title": "Coffret ouvert",
       "description": "Un coffre ouvert",
-      "foundDescription": "Le coffre est ouvert !",
-      "image": "assets/images/tresor/transparent/coffre_dalle_ouverte.png",
+      "found_description": "Le coffre est ouvert !",
+      "image": "assets/images/tresor/coffret_ouvert.png",
       "loots": [
         {
           "id": 272
@@ -411,7 +416,7 @@
       "id": 255,
       "title": "Piano",
       "description": "Un piano avec une trappe ouverte",
-      "foundDescription": "En tappant la dernière note, vous entendez une trappe s'ouvrir sous le piano. Un bout de tissu déchiré en tombe.",
+      "found_description": "En tappant la dernière note, vous entendez une trappe s'ouvrir sous le piano. Un bout de tissu déchiré en tombe.",
       "image": "assets/images/tresor/piano_queue.png",
       "loots": [
         {
@@ -424,7 +429,7 @@
       "id": 256,
       "title": "Fenêtre ouverte",
       "description": "Une fenêtre ouverte.",
-      "foundDescription": "En utilisant la lentille au soleil, vous parvenez à allumer la bougie !",
+      "found_description": "En utilisant la lentille au soleil, vous parvenez à allumer la bougie !",
       "image": "assets/images/tresor/fenetre_soleil.png",
       "loots": [
         {
@@ -437,8 +442,8 @@
       "id": 257,
       "title": "Coffre ouvert",
       "description": "Un coffre ouvert.",
-      "foundDescription": "Le coffre est ouvert !",
-      "image": "assets/images/tresor/coffret_ouvert.png",
+      "found_description": "Le coffre est ouvert !",
+      "image": "assets/images/tresor/transparent/coffre_dalle_ouverte.png",
       "loots": [
         {
           "id": 402
@@ -481,12 +486,12 @@
       "id": 352,
       "title": "Alcove cachée",
       "description": "Une alcôve cachée derrière un tableau.",
-      "foundDescription": "Derrière le tableau se trouvait cachée une alcôve.",
+      "found_description": "Derrière le tableau se trouvait cachée une alcôve.",
       "image": "assets/images/tresor/tableau_alcove.png",
       "loots": [
         {
           "interaction_text": "Fouiller le haut",
-          "id": 352
+          "id": 372
         },
         {
           "interaction_text": "Fouiller le bas",
@@ -512,7 +517,7 @@
       "id": 355,
       "title": "Mur ouvert",
       "description": "Un mur ouvert sur une pièce cachée",
-      "foundDescription": "En tournant les bouteilles, vous enclanchez l'ouverture du mur ! Une pièce secrète apparaît.",
+      "found_description": "En tournant les bouteilles, vous enclanchez l'ouverture du mur ! Une pièce secrète apparaît.",
       "image": "assets/images/tresor/biblio_porte_cachee_ouverte.png",
       "loots": [
         {
@@ -525,14 +530,14 @@
       "id": 356,
       "title": "Meuble à tiroirs",
       "description": "Un meuble avec beaucoup de tiroirs",
-      "foundDescription": "Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur de la pièce...",
+      "found_description": "Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur de la pièce...",
       "image": "assets/images/tresor/buffet_code.png"
     },
     {
       "id": 357,
       "title": "Bibbliothèque ouverte",
       "description": "Une bibliothèque ouverte",
-      "foundDescription": "En déplacant les différents livres, vous finissez par trouver un pot d'encre au fond de la bibliothèque.",
+      "found_description": "En déplacant les différents livres, vous finissez par trouver un pot d'encre au fond de la bibliothèque.",
       "image": "assets/images/tresor/biblio_opened.png",
       "loots": [
         {
@@ -545,7 +550,7 @@
       "id": 358,
       "title": "Table d'écriture",
       "description": "Une table d'écriture",
-      "foundDescription": "Vous passez la plume avec de l'encre sur les reliefs du papier, pour faire apparaître un texte.",
+      "found_description": "Vous passez la plume avec de l'encre sur les reliefs du papier, pour faire apparaître un texte.",
       "image": "assets/images/tresor/table_ecriture.png",
       "loots": [
         {
@@ -757,7 +762,7 @@
           "id": 1,
 
           "description": "Un coffret ouvragé, avec sur le côté plusieurs blasons. Un système de combinaison à chiffre a été installé dessus...",
-          "image": "assets/images/tresor/coffret_blasons.png",
+          "image": "assets/images/tresor/transparent/coffret_blasons.png",
           "start": true,
           "clues": [
             "Cherchez les blasons du code dans les escaliers, ils vous indiqueront les chiffres à entrer.",
@@ -1220,7 +1225,7 @@
           ]
         },
         {
-          "id": 2,
+          "id": 3,
           "end_track": 357
         }
       ]

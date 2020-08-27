@@ -131,11 +131,6 @@ class StateTransitionUseCase {
 
     List<int> removedItems = [];
 
-    // If item used for transition, mark item as used in database
-    if (itemId != null) {
-      removedItems += [itemId];
-    }
-
     // Delete items that are no more useful
     if (transition.removedItems != null) {
       removedItems += transition.removedItems;
@@ -170,7 +165,7 @@ class MechanismFinishedUseCase {
     }
 
     return InventoryDetailsFragment.navigate(
-        ScenarioElementDesc.fromTrack(track));
+        ScenarioElementDesc.fromTrack(track, found: false));
   }
 }
 

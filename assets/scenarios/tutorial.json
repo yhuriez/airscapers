@@ -90,7 +90,8 @@
           "transitions": [
             {
               "expected_item": 11,
-              "transition_to": 2
+              "transition_to": 2,
+              "removed_items": [11]
             }
           ]
         },
