@@ -4,8 +4,9 @@ import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiver/iterables.dart';
+import 'package:page_view_indicators/arrow_page_indicator.dart';
 
-const GRID_ITEM_PER_PAGE = 5;
+const GRID_ITEM_PER_PAGE = 4;
 const double GRID_HEIGHT = 60;
 const double ITEM_SIZE = 50;
 
@@ -15,12 +16,9 @@ class ARSPaginatedGrid extends StatelessWidget {
   final Function(BuildContext, ScenarioItem) onItemClicked;
 
   final _controller = PageController();
+  final _pageNotifier = ValueNotifier<int>(0);
 
-  ARSPaginatedGrid(
-      {Key key,
-      this.items,
-      this.selectedItem,
-      this.onItemClicked})
+  ARSPaginatedGrid({Key key, this.items, this.selectedItem, this.onItemClicked})
       : super(key: key);
 
   @override
@@ -29,12 +27,33 @@ class ARSPaginatedGrid extends StatelessWidget {
 
     return SizedBox(
       height: GRID_HEIGHT,
-      child: PageView.builder(
+      child: ArrowPageIndicator(
+        key: LabeledGlobalKey("arrow_grid_${pages.length}"),
+        pageController: _controller,
+        itemCount: pages.length,
+        leftIcon: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
+          size: 24.0,
+        ),
+        rightIcon: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+            size: 24.0
+        ),
+        currentPageNotifier: _pageNotifier,
+
+        child: PageView.builder(
           controller: _controller,
           itemCount: pages.length,
           itemBuilder: (context, index) {
             return ARSGridPage(children: pages[index]);
-          }),
+          },
+          onPageChanged: (index) {
+            _pageNotifier.value = index;
+          },
+        ),
+      ),
     );
   }
 
@@ -56,9 +75,8 @@ class ARSPaginatedGrid extends StatelessWidget {
             }))
         .toList();
 
-    final emptyItems = List.generate(
-        missingItems,
-        (index) => ARSGridEmptyItem());
+    final emptyItems =
+        List.generate(missingItems, (index) => ARSGridEmptyItem());
 
     final List<Widget> allItems = ([...imageItems, ...emptyItems]).toList();
 
@@ -83,11 +101,9 @@ class ARSGridPage extends StatelessWidget {
 }
 
 class ARSGridEmptyItem extends StatelessWidget {
-
   final OnAcceptedData<ScenarioItem> onAcceptedData;
 
-  const ARSGridEmptyItem({Key key, this.onAcceptedData})
-      : super(key: key);
+  const ARSGridEmptyItem({Key key, this.onAcceptedData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,14 +134,19 @@ class ARSGridImageItem extends StatelessWidget {
   final bool draggable;
 
   const ARSGridImageItem(
-      {Key key, @required this.item, this.selected = false, this.onItemClicked, this.itemSize = ITEM_SIZE, this.draggable = true})
+      {Key key,
+      @required this.item,
+      this.selected = false,
+      this.onItemClicked,
+      this.itemSize = ITEM_SIZE,
+      this.draggable = true})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var content = createContent(context);
 
-    if(draggable) {
+    if (draggable) {
       content = Draggable<ScenarioItem>(
         childWhenDragging: EmptySlot(),
         data: item,
@@ -149,8 +170,7 @@ class ARSGridImageItem extends StatelessWidget {
         child: (onItemClicked == null)
             ? imageSlot
             : InkWell(
-                onTap: () => onItemClicked(context, item),
-                child: imageSlot),
+                onTap: () => onItemClicked(context, item), child: imageSlot),
       );
 
   Widget get imageSlot => Container(
