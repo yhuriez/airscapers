@@ -135,6 +135,6 @@ class MainScanFragment extends StatelessWidget {
     Future.delayed(
         Duration.zero,
         () => Navigator.of(context, rootNavigator: true)
-            .pushReplacement(WelcomeScreen.createRoute()));
+            .pushAndRemoveUntil(WelcomeScreen.createRoute(), (route) => false));
   }
 }

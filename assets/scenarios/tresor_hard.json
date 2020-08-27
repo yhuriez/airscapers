@@ -242,7 +242,7 @@
       "loots": [
         {
           "interaction_text": "Fouiller sous le meuble",
-          "id": 100
+          "id": 110
         },
         {
           "interaction_text": "Fouiller le placard de gauche",
