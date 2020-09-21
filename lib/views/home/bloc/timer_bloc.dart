@@ -8,14 +8,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../injection.dart';
 
 class TimerBloc extends Bloc<TimerEvent, TimerState> {
+
+  TimerBloc() : super(TimerState(loading: true));
+
   ScenarioRepository get _repository => sl();
   InitStartDateUseCase get _initStartDateUseCase => sl();
 
   Timer _globalTimer;
   int timeLeft;
 
-  @override
-  TimerState get initialState => TimerState(loading: true);
 
   @override
   Stream<TimerState> mapEventToState(TimerEvent event) async* {

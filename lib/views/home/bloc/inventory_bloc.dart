@@ -10,11 +10,11 @@ import '../../../injection.dart';
 
 class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
 
+  InventoryBloc() : super(InventoryState(loading: true));
+
   ScenarioRepository get _repository => sl();
   InventoryLocalSource get _localSource => sl();
 
-  @override
-  InventoryState get initialState => InventoryState(loading: true);
 
   @override
   Stream<InventoryState> mapEventToState(InventoryEvent event) async* {

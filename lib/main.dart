@@ -22,10 +22,12 @@ Future<void> main() async {
     initialRoute = HomeScreen.routeName;
   }
 
-  CatcherOptions debugOptions =
-      CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
+  runApp(MainApp(initialRoute: initialRoute,));
 
-  Catcher(MainApp(initialRoute: initialRoute), debugConfig: debugOptions);
+//  CatcherOptions debugOptions =
+//      CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
+//
+//  Catcher(MainApp(initialRoute: initialRoute), debugConfig: debugOptions);
 }
 
 class MainApp extends StatelessWidget {
