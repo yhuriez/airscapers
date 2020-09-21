@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiver/iterables.dart';
 import 'package:page_view_indicators/arrow_page_indicator.dart';
 
-const GRID_ITEM_PER_PAGE = 4;
+const int GRID_ITEM_PER_PAGE = 4;
 const double GRID_HEIGHT = 60;
 const double ITEM_SIZE = 50;
 
@@ -15,42 +15,45 @@ class ARSPaginatedGrid extends StatelessWidget {
   final int selectedItem;
   final Function(BuildContext, ScenarioItem) onItemClicked;
 
-  final _controller = PageController();
-  final _pageNotifier = ValueNotifier<int>(0);
+  // pageNotifier is external because we want to keep selected page index across widget update
+  final ValueNotifier pageNotifier;
 
-  ARSPaginatedGrid({Key key, this.items, this.selectedItem, this.onItemClicked})
+  ARSPaginatedGrid(
+      {Key key,
+      this.items,
+      this.selectedItem,
+      this.onItemClicked,
+      this.pageNotifier})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final pages = computePages(context);
 
+    final controller = PageController(initialPage: pageNotifier.value);
+
     return SizedBox(
       height: GRID_HEIGHT,
       child: ArrowPageIndicator(
         key: LabeledGlobalKey("arrow_grid_${pages.length}"),
-        pageController: _controller,
+        pageController: controller,
         itemCount: pages.length,
         leftIcon: Icon(
           Icons.arrow_back_ios,
           color: Colors.white,
-          size: 24.0,
+          size: 32.0,
         ),
-        rightIcon: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-            size: 24.0
-        ),
-        currentPageNotifier: _pageNotifier,
-
+        rightIcon:
+            Icon(Icons.arrow_forward_ios, color: Colors.white, size: 32.0),
+        currentPageNotifier: pageNotifier,
         child: PageView.builder(
-          controller: _controller,
+          controller: controller,
           itemCount: pages.length,
           itemBuilder: (context, index) {
             return ARSGridPage(children: pages[index]);
           },
           onPageChanged: (index) {
-            _pageNotifier.value = index;
+            pageNotifier.value = index;
           },
         ),
       ),

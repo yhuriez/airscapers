@@ -1,7 +1,7 @@
 {
   "details": {
     "title": "Le trésor des trois frères",
-    "duration": 60,
+    "duration": 600000,
     "end_text": "Félicitations ! Vous avez réussi à trouver la position du trésor !\n\n A présent, rejoignez l'organisateur à la position indiquée et dites-lui le mot de passe\n\nMARIAGE MAGIQUE"
   },
   "items": [
@@ -145,7 +145,7 @@
       "id": 300,
       "title": "Papier illisible",
       "description": "Un papier. En passant les doigts dessus, vous sentez des formes de lettres. Il faudrait repasser dessus.",
-      "image": "assets/images/tresor/papier_illisible.png",
+      "image": "assets/images/tresor/transparent/papier_illisible.png",
       "hasQrCode": true
     },
     {
