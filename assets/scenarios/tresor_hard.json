@@ -847,7 +847,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Un beau piano à queue",
+          "description": "Un beau piano à queue. Si on jouait un morceau ?",
           "image": "assets/images/tresor/piano_queue.png",
           "start": true,
           "clues": [

@@ -11,7 +11,6 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import '../../injection.dart';
 
 class WelcomeScreen extends StatelessWidget {
-
   static const routeName = "/choose";
 
   static Route<dynamic> createRoute() {
@@ -55,23 +54,23 @@ class WelcomeScreen extends StatelessWidget {
             (KeyboardVisibilityProvider.isKeyboardVisible(context))
                 ? Container()
                 : Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SizedBox(
-                        width: 200,
-                        height: 200,
-                        child: Image.asset(
-                            "assets/images/common/airscapers_inverted.png")),
-                  ),
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: Image.asset(
+                      "assets/images/common/airscapers_inverted.png")),
+            ),
 
             // Title
             Center(
                 child: Text(
-              "Airscapers",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Colors.white),
-            )),
+                  "Airscapers",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white),
+                )),
 
             // Space
             Expanded(child: Container()),
@@ -80,20 +79,18 @@ class WelcomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ARSCodeTextField(
-                acceptedValues: scenarios.map((it) => it.code).toList(),
-                callback: (context, code) =>
-                    onCodeValidated(context, code, scenarios),
-                hint: "Entrez le code de votre scénario",
-                validationErrorMessage: "Ce code n'existe pas",
+                  callback: (context, code) =>
+                      checkScenarioCode(context, code, scenarios),
+                  hint: "Entrez le code de votre scénario"
               ),
             ),
 
             // Tutorial indicator
             Center(
                 child: Text(
-              "OU",
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            )),
+                  "OU",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                )),
 
             // Tutorial button
             Padding(
@@ -111,9 +108,24 @@ class WelcomeScreen extends StatelessWidget {
         ),
       );
 
-  onCodeValidated(
-      BuildContext context, String code, List<ScenarioReference> scenarios) {
-    final scenario = scenarios.firstWhere((element) => element.code.toLowerCase() == code.toLowerCase());
+  checkScenarioCode(BuildContext context, String code,
+      List<ScenarioReference> scenarios) {
+    final acceptedValues = scenarios.map((it) => it.code).toList();
+    if (!acceptedValues.contains(code.toLowerCase())) {
+      navigateShowDialog(
+          context,
+          DialogArguments(
+              "Code invalide", "Ce code n'existe pas dans l'application"));
+
+    } else {
+      onCodeValidated(context, code, scenarios);
+    }
+  }
+
+  onCodeValidated(BuildContext context, String code,
+      List<ScenarioReference> scenarios) {
+    final scenario = scenarios.firstWhere(
+            (element) => element.code.toLowerCase() == code.toLowerCase());
     if (scenario != null) {
       goToScenarioStart(context, scenario);
     }
@@ -124,6 +136,7 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   goToScenarioStart(BuildContext context, ScenarioReference scenario) {
-    Navigator.of(context, rootNavigator: true).push(StartScenarioScreen.createRoute(scenario));
+    Navigator.of(context, rootNavigator: true)
+        .push(StartScenarioScreen.createRoute(scenario));
   }
 }
