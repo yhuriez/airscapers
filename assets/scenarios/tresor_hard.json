@@ -1161,8 +1161,8 @@
           "transitions": [
             {
               "transition_to": 2,
-              "expected_item": 110,
-              "removed_items": [110]
+              "expected_item": 100,
+              "removed_items": [100]
             }
           ]
         },
