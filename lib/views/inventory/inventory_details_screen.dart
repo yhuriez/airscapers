@@ -108,7 +108,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
       });
 
   _onSearchClicked(BuildContext context, List<ScenarioLoot> loots) {
-    if (loots.length > 1) {
+    if (widget.desc.loots.length > 1) {
       showDialog(
           context: context,
           barrierDismissible: true,

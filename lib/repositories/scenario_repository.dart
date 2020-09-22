@@ -38,9 +38,9 @@ class ScenarioRepository {
       items.firstWhere((element) => element.id == itemId, orElse: () => null);
 
   List<ScenarioItem> getItems(List<InventoryItem> inventoryItems) =>
-      items.where((scenarioItem) {
-        return inventoryItems.any((item) {
-          return scenarioItem.id == item.id;
+      inventoryItems.map((inventoryItem) {
+        return items.firstWhere((scenarioItem) {
+          return scenarioItem.id == inventoryItem.id;
         });
       } ).toList();
 

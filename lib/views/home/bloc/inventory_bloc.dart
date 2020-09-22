@@ -21,6 +21,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
       // Init item
       if (event is InitInventoryEvent) {
         final items = await _localSource.loadUnusedItems();
+        items.sort((first, second) => first.creationDate.compareTo(second.creationDate));
         final scenarioItems = _repository.getItems(items);
         yield InventoryState(items: scenarioItems);
 
