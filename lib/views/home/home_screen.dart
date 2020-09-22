@@ -155,6 +155,7 @@ class HomeScreenContent extends StatelessWidget {
               ARSPaginatedGrid(
                 items: items,
                 selectedItem: state.selectedItem,
+                newItem: state.newItem,
                 onItemClicked: (context, item, selected) {
                   _updateSelectedItem(context, item, selected);
                 },

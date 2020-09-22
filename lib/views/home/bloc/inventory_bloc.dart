@@ -40,7 +40,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
         final scenarioItem = _repository.getItem(id);
 
         final newItems = (state.items ?? []) + [scenarioItem];
-        yield state.clone(items: newItems);
+        yield state.clone(items: newItems, newItem: scenarioItem.id);
 
         // Select item
       } else if (event is SelectItemInventoryEvent) {
