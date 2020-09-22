@@ -138,7 +138,6 @@ class HomeScreenContent extends StatelessWidget {
   }
 
   Widget createInventory(BuildContext context) {
-
     final pageNotifier = ValueNotifier(0);
 
     return BlocBuilder<InventoryBloc, InventoryState>(
@@ -156,7 +155,9 @@ class HomeScreenContent extends StatelessWidget {
               ARSPaginatedGrid(
                 items: items,
                 selectedItem: state.selectedItem,
-                onItemClicked: _startItemScreen,
+                onItemClicked: (context, item, selected) {
+                  _updateSelectedItem(context, item, selected);
+                },
                 pageNotifier: pageNotifier,
               ),
             ],
@@ -219,11 +220,41 @@ class HomeScreenContent extends StatelessWidget {
             .pushReplacement(GameOverScreen.createRoute()));
   }
 
-  _startItemScreen(BuildContext context, ScenarioItem selectedItem) {
-    if (selectedItem.isTrack) {
-      _homeNavigatorKey.currentState.pushNamed(
-          InventoryDetailsFragment.routeName,
-          arguments: ScenarioElementDesc.fromItem(selectedItem));
+  _updateSelectedItem(
+      BuildContext context, ScenarioItem selectedItem, bool isSelected) async {
+    // ignore: close_sinks
+    final bloc = BlocProvider.of<InventoryBloc>(context);
+
+
+    var isTrackScreen = false;
+    _homeNavigatorKey.currentState.popUntil((route) {
+      final routeName = route.settings.name;
+
+      if (routeName == InventoryDetailsFragment.routeName) {
+        if (route.settings.arguments is ScenarioElementDesc) {
+          final desc = route.settings.arguments as ScenarioElementDesc;
+          isTrackScreen = desc.isCurrentTrack;
+        }
+      }
+      return true; // Will prevent pop
+    });
+
+
+    if(isTrackScreen) {
+      bloc.add(DeselectItemInventoryEvent());
+      _homeNavigatorKey.currentState.pop();
+
+    } else {
+      // Select the new item
+      bloc.add(SelectItemInventoryEvent(selectedItem.id));
+
+      if(selectedItem.isTrack) {
+        await _homeNavigatorKey.currentState.pushNamed(
+            InventoryDetailsFragment.routeName,
+            arguments:
+            ScenarioElementDesc.fromItem(selectedItem, isCurrentTrack: true));
+        bloc.add(DeselectItemInventoryEvent());
+      }
     }
   }
 }

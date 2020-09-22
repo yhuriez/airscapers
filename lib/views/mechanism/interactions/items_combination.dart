@@ -77,7 +77,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
     return result;
   }
 
-  onItemClicked(BuildContext context, ScenarioItem item) {
+  onItemClicked(BuildContext context, ScenarioItem item, bool selected) {
     // When clicked, delete corresponding item from list
     final newSelectedItems = Map<int, ScenarioItem>.from(selectedItems);
     newSelectedItems.removeWhere((elem, si) => si.id == item.id);

@@ -8,10 +8,11 @@ class ScenarioElementDesc {
   final String imageUrl;
   final bool found;
   final bool end;
+  final bool isCurrentTrack;
   final List<ScenarioLoot> loots;
 
   ScenarioElementDesc._(this.title, this.description, this.imageUrl, this.found,
-      {this.loots, this.end = false});
+      {this.loots, this.end = false, this.isCurrentTrack = false});
 
   ScenarioElementDesc.fromTrack(ScenarioTrack track, {bool found = true})
       : title = track.title,
@@ -21,9 +22,10 @@ class ScenarioElementDesc {
         imageUrl = track.image,
         loots = track.loots,
         found = found,
-        end = track.endTrack ?? false;
+        end = track.endTrack ?? false,
+        isCurrentTrack = false;
 
-  ScenarioElementDesc.fromItem(ScenarioItem item, {bool found = true})
+  ScenarioElementDesc.fromItem(ScenarioItem item, {bool found = true, bool isCurrentTrack = false})
       : title = item.title,
         description = (found || item.foundDescription == null)
             ? item.description
@@ -31,5 +33,6 @@ class ScenarioElementDesc {
         imageUrl = item.image,
         loots = null,
         found = found,
-        end = false;
+        end = false,
+        isCurrentTrack = isCurrentTrack;
 }

@@ -1,10 +1,8 @@
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/views/common/ars_drag_target.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiver/iterables.dart';
 import 'package:page_view_indicators/arrow_page_indicator.dart';
+import 'package:quiver/iterables.dart';
 
 const int GRID_ITEM_PER_PAGE = 4;
 const double GRID_HEIGHT = 60;
@@ -13,7 +11,7 @@ const double ITEM_SIZE = 50;
 class ARSPaginatedGrid extends StatelessWidget {
   final List<ScenarioItem> items;
   final int selectedItem;
-  final Function(BuildContext, ScenarioItem) onItemClicked;
+  final Function(BuildContext, ScenarioItem, bool) onItemClicked;
 
   // pageNotifier is external because we want to keep selected page index across widget update
   final ValueNotifier pageNotifier;
@@ -65,17 +63,11 @@ class ARSPaginatedGrid extends StatelessWidget {
         ? GRID_ITEM_PER_PAGE
         : GRID_ITEM_PER_PAGE - (items.length % GRID_ITEM_PER_PAGE);
 
-    // ignore: close_sinks
-    final bloc = BlocProvider.of<InventoryBloc>(context);
-
     final imageItems = items
         .map((item) => ARSGridImageItem(
             item: item,
             selected: item.id == selectedItem,
-            onItemClicked: (context, item) {
-              bloc.add(SelectItemInventoryEvent(item.id));
-              onItemClicked(context, item);
-            }))
+            onItemClicked: onItemClicked))
         .toList();
 
     final emptyItems =
@@ -132,7 +124,7 @@ class ARSGridEmptyItem extends StatelessWidget {
 class ARSGridImageItem extends StatelessWidget {
   final ScenarioItem item;
   final bool selected;
-  final Function(BuildContext, ScenarioItem) onItemClicked;
+  final Function(BuildContext, ScenarioItem, bool) onItemClicked;
   final double itemSize;
   final bool draggable;
 
@@ -173,7 +165,7 @@ class ARSGridImageItem extends StatelessWidget {
         child: (onItemClicked == null)
             ? imageSlot
             : InkWell(
-                onTap: () => onItemClicked(context, item), child: imageSlot),
+                onTap: () => onItemClicked(context, item, selected), child: imageSlot),
       );
 
   Widget get imageSlot => Container(
