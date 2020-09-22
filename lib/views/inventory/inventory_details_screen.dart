@@ -132,14 +132,14 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     await Navigator.of(context)
         .pushNamed(intent.screenName, arguments: intent.arguments);
 
-    _refreshLoots();
+    _refreshLoots(exitOnEmpty: true);
   }
 
   _refreshLoots({bool exitOnEmpty = false}) async {
     final newLoots =
         await widget._filterAvailableLootUseCase.execute(availableLoots);
 
-    if(exitOnEmpty) {
+    if(exitOnEmpty && newLoots.isEmpty) {
       Navigator.of(context).pop();
 
     } else {
