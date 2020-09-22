@@ -59,7 +59,7 @@ class FilterAvailableLootUseCase {
     final trackIds =
         (await _inventory.loadAllTracks()).map((it) => it.id).toList();
     final itemIds =
-        (await _inventory.loadUnusedItems()).map((it) => it.id).toList();
+        (await _inventory.loadAllItems()).map((it) => it.id).toList();
 
     return baseLoot.where((loot) {
       if (loot.type == trackKey)
