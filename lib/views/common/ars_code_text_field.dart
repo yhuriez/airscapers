@@ -49,6 +49,7 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
           style: TextStyle(fontSize: 16.0, backgroundColor: Colors.white),
+          textInputAction: TextInputAction.done,
           decoration: InputDecoration(
               border: InputBorder.none, hintText: widget.hint ?? ""),
           validator: (value) {
@@ -60,6 +61,9 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
               return widget.validationErrorMessage ?? "Erreur";
             }
             return null;
+          },
+          onFieldSubmitted: (value){
+            widget.callback(context, value);
           },
           onSaved: (value) {
             inputValue = value;

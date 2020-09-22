@@ -135,12 +135,18 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     _refreshLoots();
   }
 
-  _refreshLoots() async {
+  _refreshLoots({bool exitOnEmpty = false}) async {
     final newLoots =
         await widget._filterAvailableLootUseCase.execute(availableLoots);
-    setState(() {
-      availableLoots = newLoots;
-    });
+
+    if(exitOnEmpty) {
+      Navigator.of(context).pop();
+
+    } else {
+      setState(() {
+        availableLoots = newLoots;
+      });
+    }
   }
 }
 
