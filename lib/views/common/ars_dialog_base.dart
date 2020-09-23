@@ -15,7 +15,7 @@ class ARSDialogBase extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(36.0),
-        child: ARSWhiteShadow(
+        child: ARSShadowBox(
           child: Material(
             color: Colors.transparent,
             child: child,

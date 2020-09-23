@@ -31,24 +31,22 @@ class ARSDetailsBox extends StatelessWidget {
         // Image
         (this.imageUrl == null)
             ? Container()
-            : Expanded(child: _createImage(context)),
+            : Expanded(child: _createImageDragTarget(context)),
         // Item box
         _createItemBox(context)
       ],
     );
   }
 
-  Widget _createImage(BuildContext context) {
+  Widget _createImage(BuildContext context, {bool incomingState = false}) {
     final image = SizedBox.expand(
       child: Hero(
         tag: ImageDetailsScreen.imageTag,
-        child: createDragTarget(
-          Image.asset(
+        child: Image.asset(
             this.imageUrl,
             fit: BoxFit.fill,
           ),
         ),
-      ),
     );
 
     return AspectRatio(
@@ -58,7 +56,8 @@ class ARSDetailsBox extends StatelessWidget {
         child: (imageUrl.contains("transparent"))
             ? image
             : ARSInnerShadow(
-                color: Colors.black,
+                key: LabeledGlobalKey("innershadow_$incomingState"),
+                color: (incomingState) ? Colors.white : Colors.black,
                 offset: Offset(20, 20),
                 child: image,
               ),
@@ -66,20 +65,23 @@ class ARSDetailsBox extends StatelessWidget {
     );
   }
 
-  Widget createDragTarget(Widget child) {
+  Widget _createImageDragTarget(BuildContext context) {
     // No drag target if not configured
-    if (onAcceptedDropData == null) return child;
+    if (onAcceptedDropData == null) return _createImage(context);
 
     return ARSDragTarget<ScenarioItem>(
-      child: child,
-      acceptedData: onAcceptedDropData,
+      targetBuilder: (context, incoming, rejected) {
+        print("Incoming = $incoming");
+        return _createImage(context, incomingState: incoming != null && incoming.isNotEmpty);
+      },
+      acceptedData: onAcceptedDropData
     );
   }
 
   Widget _createItemBox(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(36.0),
-      child: ARSWhiteShadow(
+      child: ARSShadowBox(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

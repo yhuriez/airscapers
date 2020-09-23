@@ -131,7 +131,7 @@ class ARSGridEmptyItem extends StatelessWidget {
     if (onAcceptedData == null) return EmptySlot();
 
     return ARSDragTarget<ScenarioItem>(
-      child: EmptySlot(),
+      targetBuilder: (context, incoming, rejected) => EmptySlot(),
       acceptedData: onAcceptedData,
     );
   }

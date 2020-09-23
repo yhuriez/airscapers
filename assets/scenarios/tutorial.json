@@ -13,9 +13,14 @@
       "image": "assets/images/tutorial/furniture_opened.png",
       "loots": [
         {
-          "interaction_text": "Fouiller le coffre",
+          "interaction_text": "Fouiller le coin du coffre",
           "type": "item",
           "id": 16
+        },
+        {
+          "interaction_text": "Fouiller le fond du coffre",
+          "type": "item",
+          "id": 39
         },
         {
           "interaction_text": "Etudier le coffre",
@@ -67,6 +72,13 @@
       "is_track": true
     },
     {
+      "id": 39,
+      "title": "Tournevis",
+      "description": "Un tournevis d'électricien",
+      "found_description": "Au fond du coffre, vous trouvez un tournevis d'électricien.",
+      "image": "assets/images/tutorial/tournevis.jpg"
+    },
+    {
       "id": 42,
       "title": "Télévision allumée",
       "description": "L'écran s'est allumé, un code est apparu dessus.",
@@ -107,7 +119,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Une grille avec des picots séparés de 5 cm.\n\nVous pouvez placer plusieurs objets ici pour résoudre l'énigme. Pour supprimer l'objet, cliquez sur l'image.",
+          "description": "Une grille avec des picots séparés de 5 cm.\n\nLorsque des cases grises sont présentes vous devez utiliser plusieurs objets . Pour supprimer l'objet, cliquez sur l'image.",
           "image": "assets/images/tutorial/electric_board.png",
           "start": true,
           "clues": [
@@ -117,10 +129,11 @@
             {
               "expected_item_list": [
                 16,
-                35
+                39
               ],
               "removed_items": [
-                16
+                16,
+                39
               ],
               "transition_to": 2
             }
