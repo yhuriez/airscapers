@@ -351,7 +351,7 @@
       "title": "Vue sur le village",
       "description": "Une belle vue sur le village.",
       "found_description": "Grâce à la longue-vue vous parvenez à voir le village au loin.",
-      "image": "assets/images/tresor/vue_village.jpg",
+      "image": "assets/images/tresor/vue_village.png",
       "loots": [
         {
           "interaction_text": "Regarder l'église",
@@ -496,7 +496,7 @@
       "title": "Meuble à tiroirs",
       "description": "Un meuble avec beaucoup de tiroirs",
       "found_description": "Bravo ! Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur à côté...",
-      "image": "assets/images/tresor/buffet_code.png"
+      "image": "assets/images/tresor/buffet_code_bruit.png"
     },
     {
       "id": 357,
@@ -1005,7 +1005,7 @@
           ]
         },
         {
-          "id": 2,
+          "id": 3,
           "end_track": 254
         }
       ]
