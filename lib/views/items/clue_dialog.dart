@@ -1,45 +1,42 @@
 import 'dart:math';
 
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/model/entities/scenario_clue.dart';
+import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:flutter/material.dart';
+import 'package:airscaper/common/extensions.dart';
 
-import '../../injection.dart';
 
 class ClueDialog extends StatefulWidget {
-  final MechanismState state;
+  final ScenarioItem item;
 
-  LoadAvailableCluesUseCase get _loadClueUseCase => sl();
-  UseClueUseCase get _useClueUseCase => sl();
-
-  ClueDialog({Key key, this.state}) : super(key: key);
+  ClueDialog({Key key, this.item}) : super(key: key);
 
   @override
   _ClueDialogState createState() => _ClueDialogState();
 }
 
 class _ClueDialogState extends State<ClueDialog> {
-
   int nbExistingClues;
 
   // State
-  List<MechanismClue> availableClues;
+  List<ScenarioClue> availableClues;
   int currentClueIndex = -1;
   bool showConfirm = true;
 
-  MechanismClue get currentClue => availableClues[currentClueIndex];
+  ScenarioClue get currentClue => availableClues[currentClueIndex];
 
   @override
   void initState() {
     super.initState();
-    nbExistingClues = widget.state.clues.length;
+    nbExistingClues = widget.item.clues.length;
     _initAvailableClues();
   }
 
   _initAvailableClues() async {
-    final clues = await widget._loadClueUseCase.execute(widget.state);
+    final clues = getUsedClues();
+
     setState(() {
       availableClues = clues;
       showConfirm = availableClues.isEmpty;
@@ -61,36 +58,36 @@ class _ClueDialogState extends State<ClueDialog> {
       return ARSDialogBase(child: Text("Aucun indice n'est disponible ici."));
     }
 
-    return ARSDialogBase(child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          // Title
-          _createClueTitle(context),
+    return ARSDialogBase(
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            // Title
+            _createClueTitle(context),
 
-          // Description
-          _createClueText(context),
+            // Description
+            _createClueText(context),
 
-          // Previous - Next
-          _createButtonBar(context)
-        ])),);
+            // Previous - Next
+            _createButtonBar(context)
+          ])),
+    );
   }
 
   Widget _createClueTitle(BuildContext context) {
-    final title = (nbExistingClues > 1)
-        ? "Indice ${currentClueIndex + 1}"
-        : "Indice";
+    final title =
+        (nbExistingClues > 1) ? "Indice ${currentClueIndex + 1}" : "Indice";
 
     return Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Text(title,
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
-    );
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)));
   }
 
   Widget _createClueText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(currentClue.description, style: TextStyle(fontSize: 16.0)),
+      child: Text(currentClue.text, style: TextStyle(fontSize: 16.0)),
     );
   }
 
@@ -102,29 +99,34 @@ class _ClueDialogState extends State<ClueDialog> {
           (currentClueIndex == 0)
               ? Container()
               : _createButton(context, "Précédent", (context) {
-            setState(() {
-              currentClueIndex--;
-            });
-          }),
+                  setState(() {
+                    currentClueIndex--;
+                  });
+                }),
           (currentClueIndex >= nbExistingClues - 1)
               ? Container()
               : _createButton(context, "Suivant", (context) {
-            setState(() {
-              if (currentClueIndex >= availableClues.length - 1) {
-                showConfirm = true;
-              } else {
-                currentClueIndex++;
-              }
-            });
-          })
+                  setState(() {
+                    if (currentClueIndex >= availableClues.length - 1) {
+                      showConfirm = true;
+                    } else {
+                      currentClueIndex++;
+                    }
+                  });
+                })
         ]);
   }
 
-  Widget _createButton(BuildContext context,
-      String text,
-      Function(BuildContext) action,) =>
+  Widget _createButton(
+    BuildContext context,
+    String text,
+    Function(BuildContext) action,
+  ) =>
       FlatButton(
-          child: Text(text, style: TextStyle(fontSize: 20),),
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 20),
+          ),
           onPressed: () => action(context),
           textColor: Colors.black);
 
@@ -137,7 +139,10 @@ class _ClueDialogState extends State<ClueDialog> {
     return ARSConfirmDialog(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(message, style: TextStyle(fontSize: 16),),
+          child: Text(
+            message,
+            style: TextStyle(fontSize: 16),
+          ),
         ),
         onCancelClicked: (context) => _dismissDialog(),
         onOkClicked: (context) {
@@ -145,10 +150,28 @@ class _ClueDialogState extends State<ClueDialog> {
         });
   }
 
+  List<ScenarioClue> getUsedClues() {
+    final inventoryState = context.inventoryBloc.state;
+    return widget.item
+        .getScenarioClues()
+        .where((clue) => inventoryState.usedClues.contains(clue.id))
+        .toList();
+  }
+
   useClue() async {
-    final newClues = await widget._useClueUseCase.execute(widget.state);
+    final allClues = widget.item.getScenarioClues();
+    var usedClues = getUsedClues();
+
+    if (usedClues.length < allClues.length) {
+      usedClues.sort((a, b) => a.id - b.id);
+      allClues.sort((a, b) => a.id - b.id);
+
+      final nextClue = allClues[usedClues.length];
+      usedClues += [nextClue];
+    }
+
     setState(() {
-      availableClues = newClues;
+      availableClues = usedClues;
       currentClueIndex = availableClues.length - 1;
       showConfirm = false;
     });

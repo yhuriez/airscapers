@@ -1,8 +1,5 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/injection.dart';
-import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/model/entities/scenario_track.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -41,13 +38,12 @@ class ScenarioContentFragment extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset(element.imageLink),
-
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
                             element.name,
-                            style:
-                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -61,23 +57,11 @@ class ScenarioContentFragment extends StatelessWidget {
   }
 
   List<ScenarioElement> initScenarioElements() {
-    List<ScenarioElement> result = [];
-
     final repo = _repository;
-    result += repo.items
+    List<ScenarioElement> result = repo.items
         .where((element) => element.hasQrCode)
-        .map((element) =>
-            ScenarioElement(element.title, "$itemKey/${element.id}", element.image))
-        .toList();
-
-    result += repo.tracks
-        .where((element) => element.hasQrCode)
-//        .where((element) => !element.endTrack)
-        .map((element) => ScenarioElement(element.title, "$trackKey/${element.id}", element.image))
-        .toList();
-
-    result += repo.mechanisms.map((mechanism) => ScenarioElement(
-        mechanism.name, "$mechanismKey/${mechanism.id}", mechanism.states.first.image))
+        .map((element) => ScenarioElement(
+            element.title, "item/${element.id}", element.image))
         .toList();
 
     return result;

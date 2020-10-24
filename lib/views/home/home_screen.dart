@@ -5,15 +5,14 @@ import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
-import 'package:airscaper/views/home/bloc/timer_bloc.dart';
+import 'package:airscaper/views/home/bloc/inventory/inventory_bloc.dart';
+import 'package:airscaper/views/home/bloc/timer/timer_bloc.dart';
 import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
-import 'package:airscaper/views/inventory/inventory_details_screen.dart';
-import 'package:airscaper/views/mechanism/mechanism_screen.dart';
+import 'package:airscaper/views/items/item_details_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +21,16 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 import '../../injection.dart';
+import 'bloc/inventory/inventory_events.dart';
+import 'bloc/inventory/inventory_state.dart';
 
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
   ScanFragment.routeName: (BuildContext context) => ScanFragment(),
   ScenarioContentFragment.routeName: (BuildContext context) =>
       ScenarioContentFragment(),
-  InventoryDetailsFragment.routeName: (BuildContext context) =>
-      InventoryDetailsFragment(),
-  MechanismFragment.routeName: (BuildContext context) => MechanismFragment()
+  ItemDetailsFragment.routeName: (BuildContext context) =>
+      ItemDetailsFragment()
 };
 
 class HomeScreen extends StatelessWidget {
@@ -226,12 +226,11 @@ class HomeScreenContent extends StatelessWidget {
     // ignore: close_sinks
     final bloc = BlocProvider.of<InventoryBloc>(context);
 
-
     var isTrackScreen = false;
     _homeNavigatorKey.currentState.popUntil((route) {
       final routeName = route.settings.name;
 
-      if (routeName == InventoryDetailsFragment.routeName) {
+      if (routeName == ItemDetailsFragment.routeName) {
         if (route.settings.arguments is ScenarioElementDesc) {
           final desc = route.settings.arguments as ScenarioElementDesc;
           isTrackScreen = desc.isCurrentTrack;
@@ -240,20 +239,17 @@ class HomeScreenContent extends StatelessWidget {
       return true; // Will prevent pop
     });
 
-
-    if(isTrackScreen) {
+    if (isTrackScreen) {
       bloc.add(DeselectItemInventoryEvent());
       _homeNavigatorKey.currentState.pop();
-
     } else {
       // Select the new item
       bloc.add(SelectItemInventoryEvent(selectedItem.id));
 
-      if(selectedItem.isTrack) {
+      if (selectedItem.isTrack) {
         await _homeNavigatorKey.currentState.pushNamed(
-            InventoryDetailsFragment.routeName,
-            arguments:
-            ScenarioElementDesc.fromItem(selectedItem, isCurrentTrack: true));
+            ItemDetailsFragment.routeName,
+            arguments: ScenarioElementDesc(selectedItem, isCurrentTrack: true));
         bloc.add(DeselectItemInventoryEvent());
       }
     }

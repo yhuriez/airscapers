@@ -1,30 +1,30 @@
 {
   "details": {
+    "id": "tutorial_id",
     "title": "Tutoriel",
     "duration": 10,
-    "end_text": "Vous avez réussi à sortir de la pièce !"
+    "image": "",
+    "endText": "Vous avez réussi à sortir de la pièce !",
+    "description": "Ceci est un tutoriel destiné à vous apprendre comment fonctionne l'application et le jeu.\n\nPour pouvoir jouer, vous devez vous procurer les QR codes du tutoriel, que vous pouvez trouver en cliquant sur le bouton \"Accéder aux QR codes\" en dessous.\n\nVous pouvez imprimer le PDF ou jouer avec le PDF sur un autre écran.\n\nVotre objectif : trouver la sortie du bureau !"
   },
-  "tracks": [
+  "items": [
     {
       "id": 46,
       "title": "Coffre ouvert",
       "description": "Contre le mur se trouve un coffre ouvert.",
-      "found_description": "Bravo ! Le coffre est ouvert !",
+      "foundDescription": "Bravo ! Le coffre est ouvert !",
       "image": "assets/images/tutorial/furniture_opened.png",
       "loots": [
         {
           "interaction_text": "Fouiller le coin du coffre",
-          "type": "item",
           "id": 16
         },
         {
           "interaction_text": "Fouiller le fond du coffre",
-          "type": "item",
           "id": 39
         },
         {
           "interaction_text": "Etudier le coffre",
-          "type": "item",
           "id": 35
         }
       ]
@@ -33,7 +33,7 @@
       "id": 25,
       "title": "Courant rétabli",
       "description": "Le courant est rétabli, peut-être cela aura-t-il un effet dans la pièce ?",
-      "found_description": "Le courant est rétabli à présent ! Peut-être cela aura-t-il un effet dans la pièce ?",
+      "foundDescription": "Le courant est rétabli à présent ! Peut-être cela aura-t-il un effet dans la pièce ?",
       "image": "assets/images/tutorial/electricity_back.jpg"
     },
     {
@@ -44,15 +44,13 @@
     },
     {
       "id": 1,
-      "end_track": true
-    }
-  ],
-  "items": [
+      "endTrack": true
+    },
     {
       "id": 11,
       "title": "Clé",
       "description": "Une simple clé",
-      "found_description": "Accroché à un mur, vous trouvez une simple clé. Ce qu'elle ouvre ne doit pas être loin.",
+      "foundDescription": "Accroché à un mur, vous trouvez une simple clé. Ce qu'elle ouvre ne doit pas être loin.",
       "image": "assets/images/tutorial/key.png",
       "hasQrCode": true
     },
@@ -60,22 +58,22 @@
       "id": 16,
       "title": "Fil électrique",
       "description": "Un fil électrique de 10cm avec des embouts en forme d'anneaux.",
-      "found_description": "Au fond du coffre, vous trouvez un fil électrique. Il fait une dizaine de centimètre et possède des embouts en forme d'anneaux.",
+      "foundDescription": "Au fond du coffre, vous trouvez un fil électrique. Il fait une dizaine de centimètre et possède des embouts en forme d'anneaux.",
       "image": "assets/images/tutorial/electric_cable.png"
     },
     {
       "id": 35,
       "title": "Une étrange indication",
       "description": "Une étrange indication sur le côté du coffre.",
-      "found_description": "Sur le côté du coffre se trouve une étrange indication...",
+      "foundDescription": "Sur le côté du coffre se trouve une étrange indication...",
       "image": "assets/images/tutorial/furniture_clue.png",
-      "is_track": true
+      "isTrack": true
     },
     {
       "id": 39,
       "title": "Tournevis",
       "description": "Un tournevis d'électricien",
-      "found_description": "Au fond du coffre, vous trouvez un tournevis d'électricien.",
+      "foundDescription": "Au fond du coffre, vous trouvez un tournevis d'électricien.",
       "image": "assets/images/tutorial/tournevis.jpg"
     },
     {
@@ -83,144 +81,99 @@
       "title": "Télévision allumée",
       "description": "L'écran s'est allumé, un code est apparu dessus.",
       "image": "assets/images/tutorial/tv_on.png",
-      "is_track": true
-    }
-  ],
-  "mechanisms": [
-    {
-      "name": "Coffre",
-      "id": 35,
-      "states": [
-        {
-          "id": 1,
-          "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus.",
-          "start": true,
-          "image": "assets/images/tutorial/furniture_closed.png",
-          "clues": [
-            "Une clé est nécessaire pour ouvrir le coffre."
-          ],
-          "transitions": [
-            {
-              "expected_item": 11,
-              "transition_to": 2,
-              "removed_items": [11]
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "end_track": 46
-        }
-      ]
+      "isTrack": true
     },
     {
-      "name": "Panneau électrique",
+      "id": 32,
+      "title": "Coffre",
+      "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus.",
+      "image": "assets/images/tutorial/furniture_closed.png",
+      "hasQrCode": true,
+      "clues": [
+        "Une clé est nécessaire pour ouvrir le coffre."
+      ],
+      "transition": {
+        "expected_item": 11,
+        "transitionTo": 46,
+        "removedItems": [
+          11
+        ]
+      }
+    },
+    {
       "id": 69,
-      "states": [
-        {
-          "id": 1,
-          "description": "Une grille avec des picots séparés de 5 cm.\n\nLorsque des cases grises sont présentes vous devez utiliser plusieurs objets . Pour supprimer l'objet, cliquez sur l'image.",
-          "image": "assets/images/tutorial/electric_board.png",
-          "start": true,
-          "clues": [
-            "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
-          ],
-          "transitions": [
-            {
-              "expected_item_list": [
-                16,
-                39
-              ],
-              "removed_items": [
-                16,
-                39
-              ],
-              "transition_to": 2
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "description": "Comment le fil doit être placé ?\n\nVous pouvez résoudre cette énigme en entrant les lettres à relier dans le bon ordre.",
-          "image": "assets/images/tutorial/electric_board_connect.png",
-          "code_hint": "Ex: AB",
-          "clues": [
-            "Le schéma de branchement doit se situer quelque part dans la pièce.",
-            "Les picots du centre doivent être reliés."
-          ],
-          "transitions": [
-            {
-              "expected_codes": [
-                "CD"
-              ],
-              "transition_to": 3,
-              "removed_items": [
-                35
-              ]
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "end_track": 25
-        }
-      ]
+      "title": "Panneau électrique",
+      "description": "Une grille avec des picots séparés de 5 cm.\n\nLorsque des cases grises sont présentes vous devez utiliser plusieurs objets . Pour supprimer l'objet, cliquez sur l'image.",
+      "image": "assets/images/tutorial/electric_board.png",
+      "hasQrCode": true,
+      "clues": [
+        "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
+      ],
+      "transition": {
+        "expectedItemList": [
+          16,
+          39
+        ],
+        "removedItems": [
+          16,
+          39
+        ],
+        "transitionTo": 70
+      }
     },
     {
-      "name": "Ecran",
+      "id": 70,
+      "title": "Panneau électrique",
+      "description": "Comment le fil doit être placé ?\n\nVous pouvez résoudre cette énigme en entrant les lettres à relier dans le bon ordre.",
+      "image": "assets/images/tutorial/electric_board_connect.png",
+      "codeHint": "Ex: AB",
+      "clues": [
+        "Le schéma de branchement doit se situer quelque part dans la pièce.",
+        "Les picots du centre doivent être reliés."
+      ],
+      "transition": {
+        "expectedCodes": [
+          "CD"
+        ],
+        "transitionTo": 25,
+        "removedItems": [
+          35
+        ]
+      }
+    },
+    {
       "id": 42,
-      "states": [
-        {
-          "id": 1,
-          "description": "Un écran. Il n'y a pas de courant",
-          "start": true,
-          "image": "assets/images/tutorial/tv_off.png",
-          "clues": [
-            "Sans courant, cet écran ne sert à rien."
-          ],
-          "transitions": [
-            {
-              "expected_track": 25,
-              "transition_to": 2
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "end_track": 48
-        }
-      ]
+      "title": "Ecran éteint",
+      "description": "Un écran. Il n'y a pas de courant",
+      "hasQrCode": true,
+      "image": "assets/images/tutorial/tv_off.png",
+      "clues": [
+        "Sans courant, cet écran ne sert à rien."
+      ],
+      "transition": {
+        "expectedTrack": 25,
+        "transitionTo": 48
+      }
     },
     {
-      "name": "Porte",
       "id": 21,
-      "states": [
-        {
-          "id": 1,
-          "description": "C'est la porte de sortie. Elle est commandée par un digicode.\n\nNote : dans le champ se trouve indiqué le type de réponse souhaité.",
-          "start": true,
-          "image": "assets/images/tutorial/exit_door.png",
-          "code_hint": "Ex: 1234",
-          "clues": [
-            "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
-          ],
-          "transitions": [
-            {
-              "expected_codes": [
-                "9372"
-              ],
-              "transition_to": 2,
-              "removed_items": [
-                42
-              ]
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "end_track": 1
-        }
-      ]
+      "title": "Porte",
+      "description": "C'est la porte de sortie. Elle est commandée par un digicode.\n\nNote : dans le champ se trouve indiqué le type de réponse souhaité.",
+      "hasQrCode": true,
+      "image": "assets/images/tutorial/exit_door.png",
+      "codeHint": "Ex: 1234",
+      "clues": [
+        "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
+      ],
+      "transition": {
+        "expectedCodes": [
+          "9372"
+        ],
+        "transitionTo": 1,
+        "removedItems": [
+          42
+        ]
+      }
     }
   ]
 }

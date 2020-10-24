@@ -1,41 +1,34 @@
 import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
-import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
+import 'package:airscaper/views/home/bloc/inventory/inventory_events.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../injection.dart';
+import 'package:airscaper/common/extensions.dart';
 
 const GRID_HEIGHT = 60.0;
 const ITEM_SIZE = 50.0;
 
-class MechanismItemsCombination extends StatefulWidget {
-  final ScenarioMechanism mechanism;
-  final MechanismState state;
-  final OnNewState onNewState;
+class ItemCombination extends StatefulWidget {
+  final ScenarioItem item;
+  final Function(BuildContext) onResolved;
 
-  const MechanismItemsCombination(
-      {Key key,
-      @required this.mechanism,
-      @required this.state,
-      @required this.onNewState})
+  const ItemCombination(this.item, this.onResolved, {Key key})
       : super(key: key);
 
   @override
-  _MechanismItemsCombinationState createState() =>
-      _MechanismItemsCombinationState();
+  _ItemCombinationState createState() =>
+      _ItemCombinationState();
 }
 
-class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
+class _ItemCombinationState extends State<ItemCombination> {
   List<int> expectedItemList;
   Map<int, ScenarioItem> selectedItems = {};
 
   @override
   void initState() {
     super.initState();
-    expectedItemList = widget.state.transitions.first.expectedItemList ?? [];
+    expectedItemList = widget.item.transition.expectedItemList ?? [];
 
     if (expectedItemList.isEmpty) {
       throw Exception(
@@ -85,14 +78,12 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
     doUpdateState(newSelectedItems);
   }
 
-
   onItemDropped(BuildContext context, int index, ScenarioItem item) {
     final newSelectedItems = Map<int, ScenarioItem>.from(selectedItems);
     newSelectedItems[index] = item;
 
     doUpdateState(newSelectedItems);
   }
-
 
   doUpdateState(Map<int, ScenarioItem> newSelectedItems) async {
     final itemSet =
@@ -101,24 +92,15 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
 
     print("Item Set is : $itemSet");
 
-    // If items selected are right, we do execute state transition
+    // If items selected are right, we do resolve item
     if (listEquals(itemSet, expectedItemList)) {
-      await doStateTransition();
+      widget.onResolved(context);
 
       // Else we update current widget state
     } else {
       setState(() {
         selectedItems = newSelectedItems;
       });
-    }
-  }
-
-  doStateTransition() async {
-    StateTransitionUseCase useCase = sl();
-    final newState = await useCase.execute(
-        context, widget.mechanism, widget.state.transitions.first);
-    if (newState != null) {
-      widget.onNewState(context, givenState: newState);
     }
   }
 }

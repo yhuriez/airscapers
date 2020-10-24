@@ -1,0 +1,41 @@
+{
+  "id": 21,
+  "title": "Porte",
+  "description": "C'est la porte de sortie. Elle est commandée par un digicode.\n\nNote : dans le champ se trouve indiqué le type de réponse souhaité.",
+  "found_description": "Bravo ! Le coffre est ouvert !",
+  "start": true,
+  "image": "assets/images/tutorial/exit_door.png",
+  "code_hint": "Ex: 1234",
+  "clues": [
+    "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
+  ],
+  "end_track": false,
+  "is_track": true,
+  "has_qr_code": true,
+  "loots": [
+    {
+      "interaction_text": "Fouiller le coin du coffre",
+      "id": 16
+    },
+    {
+      "interaction_text": "Fouiller le fond du coffre",
+      "id": 39
+    },
+    {
+      "interaction_text": "Etudier le coffre",
+      "id": 35
+    }
+  ],
+  "transition": {
+    "expected_item": 11,
+    "expected_item_list": [11],
+    "expected_tracks": [34],
+    "expected_codes": [
+      "9372"
+    ],
+    "transition_to": 1,
+    "removed_items": [
+      42
+    ]
+  }
+}

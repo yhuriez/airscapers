@@ -130,7 +130,7 @@ class MainScanFragment extends StatelessWidget {
   doQuitApp(BuildContext context) async {
     EndScenarioUseCase _endScenarioUseCase = sl();
 
-    await _endScenarioUseCase.execute();
+    await _endScenarioUseCase.execute(context);
 
     Future.delayed(
         Duration.zero,

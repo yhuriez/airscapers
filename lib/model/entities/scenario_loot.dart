@@ -1,25 +1,19 @@
 class ScenarioLoot {
-  String _type;
-  int _id;
-  String _interactionText;
+  String interactionText;
+  int id;
 
-  String get type => _type;
-  int get id => _id;
-  String get interactionText => _interactionText;
-
-  ScenarioLoot(this._type, this._id);
+  ScenarioLoot({this.interactionText, this.id});
 
   ScenarioLoot.map(dynamic obj) {
-    this._type = obj["type"] ?? "item";
-    this._id = obj["id"];
-    this._interactionText = obj["interaction_text"] ?? "Fouiller";
+    interactionText = obj["interactionText"];
+    id = obj["id"];
   }
 
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
-    map["type"] = _type;
-    map["id"] = _id;
-    map["interaction_text"] = _interactionText;
+    var map = <String, dynamic>{};
+    map["interactionText"] = interactionText;
+    map["id"] = id;
     return map;
   }
+
 }

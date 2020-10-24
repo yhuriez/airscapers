@@ -47,7 +47,7 @@ class GameOverScreen extends StatelessWidget {
 
                   // Percentage
                   FutureBuilder<int>(
-                    future: _completionUseCase.execute(),
+                    future: _completionUseCase.execute(context),
                     builder: (context, snapshot) {
                       if(snapshot.data == null) return Container();
 
@@ -93,7 +93,7 @@ class GameOverScreen extends StatelessWidget {
       );
 
   onBackHomePressed(BuildContext context) async {
-    await _endScenarioUseCase.execute();
+    await _endScenarioUseCase.execute(context);
 
     Future.delayed(
         Duration.zero,

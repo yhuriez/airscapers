@@ -1,10 +1,10 @@
 import 'package:airscaper/common/ars_result.dart';
 import 'package:airscaper/model/entities/scenario_reference.dart';
-import 'package:airscaper/model/inventory_local_source.dart';
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
-import 'package:airscaper/views/home/bloc/timer_bloc.dart';
+import 'package:airscaper/views/home/bloc/inventory/inventory_bloc.dart';
+import 'package:airscaper/views/home/bloc/inventory/inventory_events.dart';
+import 'package:airscaper/views/home/bloc/timer/timer_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

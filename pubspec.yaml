@@ -75,9 +75,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  moor_generator: ^3.1.0
   build_runner: ^1.10.0
   flutter_i18n: ^0.19.2
+  json_serializable: ^3.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -2,8 +2,9 @@ import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/views/common/ars_drag_target.dart';
 import 'package:airscaper/views/common/ars_inner_shadow.dart';
 import 'package:airscaper/views/common/ars_white_shadow.dart';
-import 'package:airscaper/views/inventory/image_details_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'image_details_screen.dart';
 
 class ARSDetailsBox extends StatelessWidget {
   final Widget Function(BuildContext) interactionsBuilder;

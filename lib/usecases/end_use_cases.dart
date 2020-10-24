@@ -1,20 +1,19 @@
 
-import 'package:airscaper/model/inventory_local_source.dart';
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
+import 'package:airscaper/views/home/bloc/inventory/inventory_bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Reset all scenario local data
 class EndScenarioUseCase {
   final ScenarioSharedPrefs _sharedPrefs;
   final ScenarioRepository _repository;
-  final InventoryLocalSource _inventoryLocalSource;
 
-  EndScenarioUseCase(this._sharedPrefs, this._repository,
-      this._inventoryLocalSource);
+  EndScenarioUseCase(this._sharedPrefs, this._repository);
 
-  Future<bool> execute() async {
+  Future<bool> execute(BuildContext context) async {
     await _sharedPrefs.clear();
-    await _inventoryLocalSource.clear();
     _repository.resetScenario();
     return true;
   }
@@ -23,33 +22,18 @@ class EndScenarioUseCase {
 class ComputeCompletionUseCase {
 
   final ScenarioRepository _repository;
-  final InventoryLocalSource _inventoryLocalSource;
 
-  ComputeCompletionUseCase(this._repository, this._inventoryLocalSource);
+  ComputeCompletionUseCase(this._repository);
 
-  Future<int> execute() async {
-    final items = await _inventoryLocalSource.loadAllItems();
-    final tracks = await _inventoryLocalSource.loadAllTracks();
+  Future<int> execute(BuildContext context) async {
+    final state = BlocProvider.of<InventoryBloc>(context).state;
 
-    final foundElementsSize = items.length + tracks.length;
-    final allElementsSize = _repository.items.length + _repository.tracks.length;
+    final foundElementsSize = state.resolvedItems.length;
+    final allElementsSize = _repository.items.length;
 
     return ((foundElementsSize / allElementsSize) * 100).toInt();
   }
 }
-
-class CountCluesUseCase {
-
-  final InventoryLocalSource _inventoryLocalSource;
-
-  CountCluesUseCase(this._inventoryLocalSource);
-
-  Future<int> execute() async {
-    final clues = await _inventoryLocalSource.loadAllClues();
-    return clues.length;
-  }
-}
-
 
 class TimeUsedUseCase {
 

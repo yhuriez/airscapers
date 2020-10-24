@@ -8,6 +8,7 @@ import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:airscaper/common/extensions.dart';
 
 import '../../injection.dart';
 
@@ -15,8 +16,9 @@ class SuccessScreen extends StatelessWidget {
   static const routeName = "/success";
 
   ScenarioRepository get _repository => sl();
+
   EndScenarioUseCase get _endScenarioUseCase => sl();
-  CountCluesUseCase get _countCluesUseCase => sl();
+
   TimeUsedUseCase get _timeUsedUseCase => sl();
 
   static Route<dynamic> createRoute() {
@@ -43,7 +45,6 @@ class SuccessScreen extends StatelessWidget {
                   _repository.endText,
                   style: TextStyle(
                       fontSize: 20,
-
                       fontWeight: FontWeight.bold,
                       color: textColor),
                 ),
@@ -52,7 +53,7 @@ class SuccessScreen extends StatelessWidget {
               // Clues used
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: _createClueUsedRow(),
+                child: _createClueUsedRow(context),
               ),
 
               Padding(
@@ -67,26 +68,20 @@ class SuccessScreen extends StatelessWidget {
     );
   }
 
-  Widget _createClueUsedRow() {
-    return FutureBuilder<int>(
-        future: _countCluesUseCase.execute(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return Container();
+  Widget _createClueUsedRow(BuildContext context) {
+    final clueCount = context.inventoryBloc.state.usedClues.length;
 
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Indices utilisés : ",
-                  style: TextStyle(fontSize: 20, color: textColor)),
-              Text(snapshot.data.toString(),
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: textColor)),
-            ],
-          );
-        });
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Indices utilisés : ",
+            style: TextStyle(fontSize: 20, color: textColor)),
+        Text(clueCount.toString(),
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: textColor)),
+      ],
+    );
   }
 
   Widget _createTimeUsedRow() {
@@ -145,7 +140,7 @@ class SuccessScreen extends StatelessWidget {
   }
 
   onBackHomePressed(BuildContext context) async {
-    await _endScenarioUseCase.execute();
+    await _endScenarioUseCase.execute(context);
 
     Future.delayed(
         Duration.zero,

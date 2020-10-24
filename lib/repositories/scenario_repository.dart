@@ -1,12 +1,9 @@
 import 'dart:convert';
 
-import 'package:airscaper/model/database.dart';
 import 'package:airscaper/model/entities/scenario.dart';
 import 'package:airscaper/model/entities/scenario_index.dart';
 import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/entities/scenario_reference.dart';
-import 'package:airscaper/model/entities/scenario_track.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -24,10 +21,6 @@ class ScenarioRepository {
 
   List<ScenarioItem> get items => _scenario?.items ?? [];
 
-  List<ScenarioTrack> get tracks => _scenario?.tracks ?? [];
-
-  List<ScenarioMechanism> get mechanisms => _scenario?.mechanisms ?? [];
-
   bool get isIndexInit => _index != null;
 
   bool get isScenarioInit => _scenario != null;
@@ -37,18 +30,6 @@ class ScenarioRepository {
   ScenarioItem getItem(int itemId) =>
       items.firstWhere((element) => element.id == itemId, orElse: () => null);
 
-  List<ScenarioItem> getItems(List<InventoryItem> inventoryItems) =>
-      inventoryItems.map((inventoryItem) {
-        return items.firstWhere((scenarioItem) {
-          return scenarioItem.id == inventoryItem.id;
-        });
-      } ).toList();
-
-  ScenarioTrack getTrack(int trackId) =>
-      tracks.firstWhere((element) => element.id == trackId, orElse: () => null);
-
-  ScenarioMechanism getMechanism(int mechanismId) => mechanisms
-      .firstWhere((element) => element.id == mechanismId, orElse: () => null);
 
   Future<bool> initIndex(BuildContext context) async {
     try {

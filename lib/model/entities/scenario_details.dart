@@ -13,14 +13,14 @@ class ScenarioDetails {
   ScenarioDetails.map(dynamic obj) {
     this._title = obj["title"];
     this._duration = obj["duration"];
-    this._endText = obj["end_text"];
+    this._endText = obj["endText"];
   }
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
     map["title"] = _title;
     map["duration"] = _duration;
-    map["end_text"] = _endText;
+    map["endText"] = _endText;
     return map;
   }
 }
