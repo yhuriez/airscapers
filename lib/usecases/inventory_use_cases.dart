@@ -14,10 +14,10 @@ class AddLootUseCase {
     final state = inventoryBloc.state;
 
     loots.forEach((loot) {
-      if (state.isItemAlreadyUsed(loot.id)) {
-        inventoryBloc.add(AddItemInventoryEvent(loot.id));
-      } else {
+      if (state.isItemAlreadyInInventory(loot.id)) {
         existingElement = true;
+      } else {
+        inventoryBloc.add(AddItemInventoryEvent(loot.id));
       }
     });
 

@@ -10,12 +10,11 @@ class Scenario {
 
   List<ScenarioItem> get items => _items;
 
-
   Scenario(this._details, this._items);
 
   Scenario.map(dynamic obj) {
     this._details = ScenarioDetails.map(obj["details"]);
-    this._items = mapTypedList(obj["items"], (it) => ScenarioItem.map(it));
+    this._items = mapTypedList(obj["items"], (it) => ScenarioItem.fromJson(it));
   }
 
   Map<String, dynamic> toMap() {

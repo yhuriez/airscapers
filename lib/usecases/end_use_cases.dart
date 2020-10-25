@@ -2,6 +2,7 @@
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:airscaper/views/home/bloc/inventory/inventory_bloc.dart';
+import 'package:airscaper/views/home/bloc/inventory/inventory_events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

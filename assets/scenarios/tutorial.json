@@ -52,14 +52,16 @@
       "description": "Une simple clé",
       "foundDescription": "Accroché à un mur, vous trouvez une simple clé. Ce qu'elle ouvre ne doit pas être loin.",
       "image": "assets/images/tutorial/key.png",
-      "hasQrCode": true
+      "hasQrCode": true,
+      "isInInventory": true
     },
     {
       "id": 16,
       "title": "Fil électrique",
       "description": "Un fil électrique de 10cm avec des embouts en forme d'anneaux.",
       "foundDescription": "Au fond du coffre, vous trouvez un fil électrique. Il fait une dizaine de centimètre et possède des embouts en forme d'anneaux.",
-      "image": "assets/images/tutorial/electric_cable.png"
+      "image": "assets/images/tutorial/electric_cable.png",
+      "isInInventory": true
     },
     {
       "id": 35,
@@ -67,14 +69,16 @@
       "description": "Une étrange indication sur le côté du coffre.",
       "foundDescription": "Sur le côté du coffre se trouve une étrange indication...",
       "image": "assets/images/tutorial/furniture_clue.png",
-      "isTrack": true
+      "isTrack": true,
+      "isInInventory": true
     },
     {
       "id": 39,
       "title": "Tournevis",
       "description": "Un tournevis d'électricien",
       "foundDescription": "Au fond du coffre, vous trouvez un tournevis d'électricien.",
-      "image": "assets/images/tutorial/tournevis.jpg"
+      "image": "assets/images/tutorial/tournevis.jpg",
+      "isInInventory": true
     },
     {
       "id": 42,

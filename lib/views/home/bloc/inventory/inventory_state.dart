@@ -1,6 +1,10 @@
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_loot.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'inventory_state.g.dart';
+
+@JsonSerializable()
 class InventoryState {
   final List<ScenarioItem> items;
   final Set<int> usedItems;
@@ -12,7 +16,7 @@ class InventoryState {
   final bool hasEnded;
 
   InventoryState(
-      {this.items,
+      {this.items = const [],
       this.resolvedItems = const {},
       this.usedItems = const {},
       this.usedClues = const {},
@@ -41,14 +45,21 @@ class InventoryState {
           newItem: newItem);
 
   ScenarioItem get selectedScenarioItem => items
-      .firstWhere((element) => element.id == selectedItem, orElse: () => null);
+      ?.firstWhere((element) => element.id == selectedItem, orElse: () => null);
 
   List<ScenarioItem> get unusedItems =>
-      items.where((element) => !resolvedItems.contains(element.id));
+      items?.where((element) => !resolvedItems.contains(element.id))?.toList() ?? [];
 
   bool isItemAlreadyUsed(int id) =>
-      !usedItems.contains(id) && !resolvedItems.contains(id);
+      usedItems.contains(id) || resolvedItems.contains(id);
+
+  bool isItemAlreadyInInventory(int id) =>
+      items.any((item) => item.id == id ) || isItemAlreadyUsed(id);
 
   List<ScenarioLoot> filterAvailableLoots(List<ScenarioLoot> loots) =>
-      loots.where((loot) => isItemAlreadyUsed(loot.id));
+      loots?.where((loot) => !isItemAlreadyUsed(loot.id))?.toList() ?? [];
+
+  factory InventoryState.fromJson(Map<String, dynamic> json) => _$InventoryStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InventoryStateToJson(this);
 }

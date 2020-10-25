@@ -27,10 +27,8 @@ import 'bloc/inventory/inventory_state.dart';
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
   ScanFragment.routeName: (BuildContext context) => ScanFragment(),
-  ScenarioContentFragment.routeName: (BuildContext context) =>
-      ScenarioContentFragment(),
-  ItemDetailsFragment.routeName: (BuildContext context) =>
-      ItemDetailsFragment()
+  ScenarioContentFragment.routeName: (BuildContext context) => ScenarioContentFragment(),
+  ItemDetailsFragment.routeName: (BuildContext context) => ItemDetailsFragment()
 };
 
 class HomeScreen extends StatelessWidget {

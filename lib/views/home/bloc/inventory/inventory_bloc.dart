@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../../../injection.dart';
 import 'inventory_events.dart';
 import 'inventory_state.dart';
 
-class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
+class InventoryBloc extends HydratedBloc<InventoryEvent, InventoryState> {
+
   InventoryBloc() : super(InventoryState(loading: true));
 
   ScenarioRepository get _repository => sl();
@@ -72,5 +74,18 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     } catch (exception, stack) {
       debugPrintStack(stackTrace: stack, label: exception.toString());
     }
+  }
+
+  @override
+  InventoryState fromJson(Map<String, dynamic> json) {
+    return InventoryState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic> toJson(InventoryState state) {
+    if(!state.loading) {
+      return state.toJson();
+    }
+    return null;
   }
 }

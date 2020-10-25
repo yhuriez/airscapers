@@ -11,6 +11,7 @@ import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:airscaper/common/extensions.dart';
 
 class InterpretLinkUseCase {
   final ScenarioRepository _repository;
@@ -41,12 +42,15 @@ class InterpretLinkUseCase {
     if (scenarioItem != null) {
       final loot = ScenarioLoot(id: scenarioItem.id);
       final response = await _addLootUseCase.execute(context, [loot]);
+
       if (response == AddLootResponse.ERROR) {
         return createDialogNavigationIntent(
             "Erreur", "Une erreur est survenue");
+
       } else if (response == AddLootResponse.ALREADY_FOUND) {
         return createDialogNavigationIntent(
             "Objet déjà trouvé", "Vous possédez déjà cet objet");
+
       } else {
         return ItemDetailsFragment.navigate(
             ScenarioElementDesc(scenarioItem, found: false));
@@ -59,7 +63,7 @@ class InterpretLinkUseCase {
 
   ScenarioItem getCurrentStateItem(BuildContext context, int baseLinkId) {
     final baseScenarioItem = _repository.getItem(baseLinkId);
-    if (baseScenarioItem.transition != null) {
+    if (baseScenarioItem?.transition != null) {
       // ignore: close_sinks
       final inventoryState = BlocProvider.of<InventoryBloc>(context).state;
       if (inventoryState.resolvedItems.contains(baseLinkId)) {

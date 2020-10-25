@@ -11,8 +11,10 @@ import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:airscaper/common/extensions.dart';
 
 import '../../injection.dart';
+import 'bloc/inventory/inventory_events.dart';
 
 class MainScanFragment extends StatelessWidget {
   static const routeName = "main";
@@ -88,8 +90,8 @@ class MainScanFragment extends StatelessWidget {
 
   onScanLongPress(BuildContext context) async {
     if (_repository.isTutorial || kDebugMode) {
-      final scanResult =
-          await Navigator.of(context).pushNamed(ScenarioContentFragment.routeName);
+      final scanResult = await Navigator.of(context)
+          .pushNamed(ScenarioContentFragment.routeName);
       parseLink(context, scanResult);
     }
   }
@@ -121,16 +123,16 @@ class MainScanFragment extends StatelessWidget {
           title: "Etes-vous sûr de vouloir quitter ?",
           message:
               "Vous perdrez toute votre progression en quittant le scénario en cours.",
-          okAction: doQuitApp,
+          okAction: (_) => doQuitApp(context),
           okText: "Oui",
           cancelText: "Non",
         ));
   }
 
   doQuitApp(BuildContext context) async {
-    EndScenarioUseCase _endScenarioUseCase = sl();
+    context.inventoryBloc.add(ClearInventoryEvent());
 
-    await _endScenarioUseCase.execute(context);
+    await sl<EndScenarioUseCase>().execute(context);
 
     Future.delayed(
         Duration.zero,

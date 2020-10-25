@@ -1,19 +1,16 @@
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'scenario_loot.g.dart';
+
+@JsonSerializable()
 class ScenarioLoot {
   String interactionText;
   int id;
 
   ScenarioLoot({this.interactionText, this.id});
 
-  ScenarioLoot.map(dynamic obj) {
-    interactionText = obj["interactionText"];
-    id = obj["id"];
-  }
+  factory ScenarioLoot.fromJson(Map<String, dynamic> json) => _$ScenarioLootFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{};
-    map["interactionText"] = interactionText;
-    map["id"] = id;
-    return map;
-  }
-
+  Map<String, dynamic> toJson() => _$ScenarioLootToJson(this);
 }

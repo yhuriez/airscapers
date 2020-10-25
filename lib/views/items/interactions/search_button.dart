@@ -4,15 +4,15 @@ import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/home/bloc/inventory/inventory_state.dart';
+import 'package:airscaper/views/items/interactions/continue_button.dart';
 import 'package:flutter/material.dart';
-import 'package:airscaper/common/extensions.dart';
 
 import '../../../injection.dart';
 
 class ItemSearchButton extends StatefulWidget {
   final InventoryState inventoryState;
   final ScenarioItem item;
-  final Function(BuildContext) onResolved;
+  final Function(BuildContext, int) onResolved;
 
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
@@ -40,7 +40,7 @@ class _ItemSearchButtonState extends State<ItemSearchButton> {
       return _getSearchButton(context);
 
     } else if (widget.item.transition != null) {
-      return _continueButton;
+      return ItemContinueButton(widget.item, widget.onResolved);
 
     } else {
       return Container();
@@ -101,18 +101,6 @@ class _ItemSearchButtonState extends State<ItemSearchButton> {
       });
     }
   }
-
-  Widget get _continueButton => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: ARSButton(
-          onClick: widget.onResolved,
-          text: Text(
-            "Continuer",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.green,
-        ),
-      );
 }
 
 class SearchContent extends StatelessWidget {

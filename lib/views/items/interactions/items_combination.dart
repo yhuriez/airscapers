@@ -4,14 +4,12 @@ import 'package:airscaper/views/home/bloc/inventory/inventory_events.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:airscaper/common/extensions.dart';
-
 const GRID_HEIGHT = 60.0;
 const ITEM_SIZE = 50.0;
 
 class ItemCombination extends StatefulWidget {
   final ScenarioItem item;
-  final Function(BuildContext) onResolved;
+  final Function(BuildContext, int) onResolved;
 
   const ItemCombination(this.item, this.onResolved, {Key key})
       : super(key: key);
@@ -94,7 +92,7 @@ class _ItemCombinationState extends State<ItemCombination> {
 
     // If items selected are right, we do resolve item
     if (listEquals(itemSet, expectedItemList)) {
-      widget.onResolved(context);
+      widget.onResolved(context, widget.item.id);
 
       // Else we update current widget state
     } else {

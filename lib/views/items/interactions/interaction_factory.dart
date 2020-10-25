@@ -7,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'code_input.dart';
 import 'items_combination.dart';
 
-Widget createInteractionWidget(InventoryState state, ScenarioItem item, Function(BuildContext) onResolved) {
+Widget createInteractionWidget(
+    final InventoryState state,
+    final ScenarioItem item,
+    final Function(BuildContext, int) onResolved) {
 
   final transition = item.transition;
 
@@ -24,8 +27,8 @@ Widget createInteractionWidget(InventoryState state, ScenarioItem item, Function
     return ItemSearchButton(state, item, onResolved);
 
     // Continue button
-  } else if (transition?.transitionTo != null) {
-    return ItemContinueButton(onResolved);
+  } else if (item.loots.isNotEmpty && transition?.transitionTo != null) {
+    return ItemContinueButton(item, onResolved);
 
     // No interaction
   } else {

@@ -6,11 +6,18 @@ import 'package:catcher/handlers/console_handler.dart';
 import 'package:catcher/mode/dialog_report_mode.dart';
 import 'package:catcher/model/catcher_options.dart';
 import 'package:flutter/material.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'injection.dart';
 
 Future<void> main() async {
   await init();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationSupportDirectory()
+  );
 
   final initAppUseCase = sl<InitAppUseCase>();
   final initResponse = await initAppUseCase.execute();
@@ -24,10 +31,10 @@ Future<void> main() async {
 
   runApp(MainApp(initialRoute: initialRoute,));
 
-//  CatcherOptions debugOptions =
-//      CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
-//
-//  Catcher(MainApp(initialRoute: initialRoute), debugConfig: debugOptions);
+  CatcherOptions debugOptions =
+      CatcherOptions(DialogReportMode(), [ConsoleHandler()]);
+
+  Catcher(MainApp(initialRoute: initialRoute), debugConfig: debugOptions);
 }
 
 class MainApp extends StatelessWidget {
