@@ -10,7 +10,7 @@ import 'items_combination.dart';
 Widget createInteractionWidget(
     final InventoryState state,
     final ScenarioItem item,
-    final Function(BuildContext, int) onResolved) {
+    final Function(BuildContext, ScenarioItem) onResolved) {
 
   final transition = item.transition;
 
@@ -24,7 +24,7 @@ Widget createInteractionWidget(
 
     // Search loot button
   } else if (state.filterAvailableLoots(item.loots).isNotEmpty) {
-    return ItemSearchButton(state, item, onResolved);
+    return ItemSearchButton(item, onResolved);
 
     // Continue button
   } else if (item.loots.isNotEmpty && transition?.transitionTo != null) {

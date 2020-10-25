@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../../../injection.dart';
@@ -20,16 +19,8 @@ class InventoryBloc extends HydratedBloc<InventoryEvent, InventoryState> {
     try {
       // INIT ITEM
       if (event is InitInventoryEvent) {
-        final items = state.unusedItems;
-//        items.sort((first, second) => first.creationDate.compareTo(second.creationDate));
-//        final scenarioItems = _repository.getItems(items);
-        yield InventoryState(items: items);
+        yield InventoryState();
 
-        // REMOVE ITEM
-      } else if (event is RemoveItemsInventoryEvent) {
-        Set<int> resolvedItems = state.resolvedItems ?? {};
-        resolvedItems.addAll(event.itemIds);
-        yield state.clone(resolvedItems: resolvedItems);
 
         // ADD ITEM
       } else if (event is AddItemInventoryEvent) {
@@ -56,16 +47,30 @@ class InventoryBloc extends HydratedBloc<InventoryEvent, InventoryState> {
         yield state.clone(selectedItem: -1);
 
 
-        // RESOLVED ITEM
+        // RESOLVE ITEM
       } else if (event is ResolveItemInventoryEvent) {
-        Set<int> newResolvedItems = (state.resolvedItems ?? {});
-        newResolvedItems.add(event.itemId);
-        yield state.clone(resolvedItems: newResolvedItems);
+        final removedItems = event.item.transition?.removedItems ?? [];
 
+        // Mark resolved items
+        final newResolvedItems = (state.resolvedItems.toSet() ?? {});
+        newResolvedItems.add(event.item.id);
+        newResolvedItems.addAll(removedItems);
 
-        // CLEAR INVENTORY
-      } else if (event is ClearInventoryEvent) {
-        yield InventoryState(items: [], resolvedItems: {});
+        // Remove used items from items
+        final newItems = state.items ?? [];
+        newItems.removeWhere((item) => removedItems.contains(item.id));
+
+        // If next step is last step (no more transition) we add it to resolved items
+        final nextItemId = event.item.transition?.transitionTo;
+        if(nextItemId != null) {
+          final nextItem = _repository.getItem(nextItemId);
+          if(nextItem != null && nextItem.transition == null) {
+            newResolvedItems.add(nextItemId);
+          }
+        }
+
+        yield state.clone(resolvedItems: newResolvedItems, items: newItems);
+
 
         // ELSE
       } else {

@@ -34,8 +34,8 @@ final homeRouteBuilders = {
 class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
 
-  static Route<dynamic> createRoute() {
-    return createFadeRoute(HomeScreen(), HomeScreen.routeName);
+  static Route<dynamic> createRoute(bool isNewScenario) {
+    return createFadeRoute(HomeScreen(), HomeScreen.routeName, arguments: isNewScenario);
   }
 
   @override
@@ -56,8 +56,10 @@ class HomeScreenLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isNewScenario = ModalRoute.of(context).settings.arguments ?? false;
+
     return FutureBuilder<ARSResult<StartResult>>(
-        future: _startScenarioUseCase.execute(context),
+        future: _startScenarioUseCase.execute(context, isNewScenario: isNewScenario),
         initialData: ARSResult.loading(),
         builder: (context, snapshot) {
           if (snapshot.error != null) {

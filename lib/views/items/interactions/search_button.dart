@@ -1,23 +1,21 @@
+import 'package:airscaper/common/extensions.dart';
 import 'package:airscaper/model/entities/scenario_item.dart';
 import 'package:airscaper/model/entities/scenario_loot.dart';
 import 'package:airscaper/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
-import 'package:airscaper/views/home/bloc/inventory/inventory_state.dart';
 import 'package:airscaper/views/items/interactions/continue_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../injection.dart';
 
 class ItemSearchButton extends StatefulWidget {
-  final InventoryState inventoryState;
   final ScenarioItem item;
-  final Function(BuildContext, int) onResolved;
+  final Function(BuildContext, ScenarioItem) onResolved;
 
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
-  const ItemSearchButton(this.inventoryState, this.item, this.onResolved,
-      {Key key})
+  const ItemSearchButton(this.item, this.onResolved, {Key key})
       : super(key: key);
 
   @override
@@ -38,10 +36,8 @@ class _ItemSearchButtonState extends State<ItemSearchButton> {
   Widget build(BuildContext context) {
     if (_availableLoots.isNotEmpty) {
       return _getSearchButton(context);
-
     } else if (widget.item.transition != null) {
       return ItemContinueButton(widget.item, widget.onResolved);
-
     } else {
       return Container();
     }
@@ -86,20 +82,17 @@ class _ItemSearchButtonState extends State<ItemSearchButton> {
     await Navigator.of(context)
         .pushNamed(intent.screenName, arguments: intent.arguments);
 
-    _refreshLoots(exitOnEmpty: true);
+    _refreshLoots();
   }
 
-  _refreshLoots({bool exitOnEmpty = false}) async {
-    final newLoots =
-        widget.inventoryState.filterAvailableLoots(_availableLoots);
+  _refreshLoots() {
+    final state = context.inventoryBloc.state;
 
-    if (exitOnEmpty && newLoots.isEmpty) {
-      Navigator.of(context).pop();
-    } else {
-      setState(() {
-        _availableLoots = newLoots;
-      });
-    }
+    final newLoots = state.filterAvailableLoots(_availableLoots);
+
+    setState(() {
+      _availableLoots = newLoots;
+    });
   }
 }
 
@@ -117,10 +110,7 @@ class SearchContent extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
       child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: loots
-              .where((it) => it.interactionText != null)
-              .map((loot) => _createLootButton(loot))
-              .toList()),
+          children: loots.map((loot) => _createLootButton(loot)).toList()),
     ));
   }
 

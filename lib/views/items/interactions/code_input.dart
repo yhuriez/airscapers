@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ItemCodeInput extends StatelessWidget {
 
   final ScenarioItem item;
-  final Function(BuildContext, int) onResolved;
+  final Function(BuildContext, ScenarioItem) onResolved;
 
   const ItemCodeInput( this.item, this.onResolved, {Key key}) : super(key: key);
 
@@ -24,7 +24,7 @@ class ItemCodeInput extends StatelessWidget {
     if (codeResult != null) {
 
       if(item.transition.expectedCodes.contains(codeResult)) {
-        onResolved(context, item.id);
+        onResolved(context, item);
 
       } else {
         final intent = createDialogNavigationIntent("", "Rien ne se passe");

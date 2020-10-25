@@ -73,7 +73,8 @@ class StartScenarioUseCase {
 
   StartScenarioUseCase(this._repository, this._prefs);
 
-  Future<ARSResult<StartResult>> execute(BuildContext context) async {
+  Future<ARSResult<StartResult>> execute(BuildContext context,
+      {bool isNewScenario = false}) async {
     final currentId = await _prefs.getCurrentId();
 
     if (!_repository.isIndexInit) {
@@ -83,32 +84,29 @@ class StartScenarioUseCase {
 
     if (!_repository.isScenarioInit) {
       final scenarioRef = _repository.scenarios.firstWhere(
-              (element) => element.id == currentId,
+          (element) => element.id == currentId,
           orElse: () =>
-          throw Exception("Scenario with id $currentId not found"));
+              throw Exception("Scenario with id $currentId not found"));
 
       final scenarioInit = await _repository.initScenario(context, scenarioRef);
       if (!scenarioInit) return ARSResult.error("scenario_init_failed");
     }
 
     BlocProvider.of<TimerBloc>(context).add(InitTimerEvent());
-    BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
+    if (isNewScenario) {
+      BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
+    }
 
     // Check if scenario is ended
     final endDate = await _prefs.getEndDate();
 
-    final result = (endDate != null)
-        ? StartResult.ENDED
-        : StartResult.ONGOING;
+    final result = (endDate != null) ? StartResult.ENDED : StartResult.ONGOING;
 
     return ARSResult.success(result);
   }
 }
 
-enum StartResult {
-  ONGOING,
-  ENDED
-}
+enum StartResult { ONGOING, ENDED }
 
 /// Provide the list of all available scenario
 class LoadAllScenariosUseCase {

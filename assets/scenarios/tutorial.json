@@ -16,15 +16,15 @@
       "image": "assets/images/tutorial/furniture_opened.png",
       "loots": [
         {
-          "interaction_text": "Fouiller le coin du coffre",
+          "interactionText": "Fouiller le coin du coffre",
           "id": 16
         },
         {
-          "interaction_text": "Fouiller le fond du coffre",
+          "interactionText": "Fouiller le fond du coffre",
           "id": 39
         },
         {
-          "interaction_text": "Etudier le coffre",
+          "interactionText": "Etudier le coffre",
           "id": 35
         }
       ]
@@ -81,13 +81,6 @@
       "isInInventory": true
     },
     {
-      "id": 42,
-      "title": "Télévision allumée",
-      "description": "L'écran s'est allumé, un code est apparu dessus.",
-      "image": "assets/images/tutorial/tv_on.png",
-      "isTrack": true
-    },
-    {
       "id": 32,
       "title": "Coffre",
       "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus.",
@@ -97,7 +90,7 @@
         "Une clé est nécessaire pour ouvrir le coffre."
       ],
       "transition": {
-        "expected_item": 11,
+        "expectedItem": 11,
         "transitionTo": 46,
         "removedItems": [
           11
@@ -155,7 +148,7 @@
         "Sans courant, cet écran ne sert à rien."
       ],
       "transition": {
-        "expectedTrack": 25,
+        "expectedTracks": [25],
         "transitionTo": 48
       }
     },

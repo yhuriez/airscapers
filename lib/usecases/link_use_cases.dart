@@ -11,7 +11,6 @@ import 'package:airscaper/views/navigation/navigation_intent.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:airscaper/common/extensions.dart';
 
 class InterpretLinkUseCase {
   final ScenarioRepository _repository;
@@ -26,11 +25,9 @@ class InterpretLinkUseCase {
 
     if (scenarioItem.isInInventory) {
       return _interpretInventoryItem(context, scenarioItem);
-
     } else if (scenarioItem.endTrack) {
       await _sharedPrefs.setEndDate(DateTime.now());
       return SuccessScreen.navigate();
-
     } else {
       return ItemDetailsFragment.navigate(
           ScenarioElementDesc(scenarioItem, found: false));
@@ -46,11 +43,9 @@ class InterpretLinkUseCase {
       if (response == AddLootResponse.ERROR) {
         return createDialogNavigationIntent(
             "Erreur", "Une erreur est survenue");
-
       } else if (response == AddLootResponse.ALREADY_FOUND) {
         return createDialogNavigationIntent(
             "Objet déjà trouvé", "Vous possédez déjà cet objet");
-
       } else {
         return ItemDetailsFragment.navigate(
             ScenarioElementDesc(scenarioItem, found: false));
@@ -66,9 +61,17 @@ class InterpretLinkUseCase {
     if (baseScenarioItem?.transition != null) {
       // ignore: close_sinks
       final inventoryState = BlocProvider.of<InventoryBloc>(context).state;
+
       if (inventoryState.resolvedItems.contains(baseLinkId)) {
         return getCurrentStateItem(
             context, baseScenarioItem.transition.transitionTo);
+
+      } else if (baseScenarioItem.transition?.expectedTracks != null &&
+          baseScenarioItem.transition.expectedTracks
+              .every((item) => inventoryState.resolvedItems.contains(item))) {
+        return getCurrentStateItem(
+            context, baseScenarioItem.transition.transitionTo);
+
       } else {
         return baseScenarioItem;
       }

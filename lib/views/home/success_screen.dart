@@ -69,7 +69,7 @@ class SuccessScreen extends StatelessWidget {
   }
 
   Widget _createClueUsedRow(BuildContext context) {
-    final clueCount = context.inventoryBloc.state.usedClues.length;
+//    final clueCount = context.inventoryBloc.state.usedClues.length;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -77,7 +77,7 @@ class SuccessScreen extends StatelessWidget {
       children: [
         Text("Indices utilisés : ",
             style: TextStyle(fontSize: 20, color: textColor)),
-        Text(clueCount.toString(),
+        Text(0.toString(),
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: textColor)),
       ],

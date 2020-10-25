@@ -104,7 +104,7 @@ class StartScenarioScreen extends StatelessWidget {
   onStartClicked(BuildContext context, ScenarioReference scenario) async {
     await registerScenarioUseCase.execute(context, scenario);
     Navigator.of(context, rootNavigator: true)
-        .pushAndRemoveUntil(HomeScreen.createRoute(), (route) => false);
+        .pushAndRemoveUntil(HomeScreen.createRoute(true), (route) => false);
   }
 
   _launchUrl(BuildContext context) async {

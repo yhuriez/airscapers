@@ -11,10 +11,8 @@ import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:airscaper/common/extensions.dart';
 
 import '../../injection.dart';
-import 'bloc/inventory/inventory_events.dart';
 
 class MainScanFragment extends StatelessWidget {
   static const routeName = "main";
@@ -130,8 +128,6 @@ class MainScanFragment extends StatelessWidget {
   }
 
   doQuitApp(BuildContext context) async {
-    context.inventoryBloc.add(ClearInventoryEvent());
-
     await sl<EndScenarioUseCase>().execute(context);
 
     Future.delayed(

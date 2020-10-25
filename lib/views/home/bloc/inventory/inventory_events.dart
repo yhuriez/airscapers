@@ -1,5 +1,7 @@
 
 
+import 'package:airscaper/model/entities/scenario_item.dart';
+
 abstract class InventoryEvent {}
 
 class InitInventoryEvent extends InventoryEvent {}
@@ -10,12 +12,6 @@ class AddItemInventoryEvent extends InventoryEvent {
   AddItemInventoryEvent(this.itemId);
 }
 
-class RemoveItemsInventoryEvent extends InventoryEvent {
-  final List<int> itemIds;
-
-  RemoveItemsInventoryEvent(this.itemIds);
-}
-
 class SelectItemInventoryEvent extends InventoryEvent {
   final int itemId;
 
@@ -23,13 +19,10 @@ class SelectItemInventoryEvent extends InventoryEvent {
 }
 
 class ResolveItemInventoryEvent extends InventoryEvent {
-  final int itemId;
+  final ScenarioItem item;
 
-  ResolveItemInventoryEvent(this.itemId);
+  ResolveItemInventoryEvent(this.item);
 }
 
 
-
 class DeselectItemInventoryEvent extends InventoryEvent {}
-
-class ClearInventoryEvent extends InventoryEvent {}

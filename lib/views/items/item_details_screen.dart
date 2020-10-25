@@ -32,22 +32,35 @@ class ItemDetailsFragment extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ARSDetailsBox(
-              interactionsBuilder: (context) =>
-                  _createInteraction(context, item),
-              imageUrl: item.image,
-              description:
-                  (desc.found) ? item.description : item.foundDescription ?? item.description,
-              name: item.title),
+            interactionsBuilder: (context) => _createInteraction(context, item),
+            imageUrl: item.image,
+            description: (desc.found)
+                ? item.description
+                : item.foundDescription ?? item.description,
+            name: item.title,
+            onAcceptedDropData: (context, selectedItem) =>
+                _onItemUsed(context, item, selectedItem),
+          ),
         ));
+  }
+
+  _onItemUsed(BuildContext context, ScenarioItem currentItem,
+      ScenarioItem selectedItem) async {
+    if (currentItem.transition.expectedItem == selectedItem.id) {
+      await onInteractionResolved(context, currentItem);
+    }
   }
 
   Widget _createInteraction(BuildContext context, ScenarioItem item) =>
       createInteractionWidget(
           context.inventoryBloc.state, item, onInteractionResolved);
 
-  onInteractionResolved(BuildContext context, int itemId) async {
-    context.inventoryBloc.add(ResolveItemInventoryEvent(itemId));
-    final intent = await _interpretLinkUseCase.execute(context, itemId);
-    navigateTo(context, intent);
+  onInteractionResolved(BuildContext context, ScenarioItem item) async {
+    context.inventoryBloc.add(ResolveItemInventoryEvent(item));
+    if (item.transition?.transitionTo != null) {
+      final intent = await _interpretLinkUseCase.execute(
+          context, item.transition.transitionTo);
+      navigateReplaceTo(context, intent);
+    }
   }
 }

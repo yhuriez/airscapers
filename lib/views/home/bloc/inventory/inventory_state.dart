@@ -50,14 +50,12 @@ class InventoryState {
   List<ScenarioItem> get unusedItems =>
       items?.where((element) => !resolvedItems.contains(element.id))?.toList() ?? [];
 
-  bool isItemAlreadyUsed(int id) =>
-      usedItems.contains(id) || resolvedItems.contains(id);
 
   bool isItemAlreadyInInventory(int id) =>
-      items.any((item) => item.id == id ) || isItemAlreadyUsed(id);
+      items.any((item) => item.id == id ) || usedItems.contains(id) || resolvedItems.contains(id);
 
   List<ScenarioLoot> filterAvailableLoots(List<ScenarioLoot> loots) =>
-      loots?.where((loot) => !isItemAlreadyUsed(loot.id))?.toList() ?? [];
+      loots?.where((loot) => !isItemAlreadyInInventory(loot.id))?.toList() ?? [];
 
   factory InventoryState.fromJson(Map<String, dynamic> json) => _$InventoryStateFromJson(json);
 
