@@ -7,6 +7,7 @@ import 'package:airscaper/views/home/bloc/inventory/inventory_events.dart';
 import 'package:airscaper/views/home/bloc/timer/timer_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 
 /// Init application
 class InitAppUseCase {
@@ -92,7 +93,7 @@ class StartScenarioUseCase {
       if (!scenarioInit) return ARSResult.error("scenario_init_failed");
     }
 
-    BlocProvider.of<TimerBloc>(context).add(InitTimerEvent());
+    CubitProvider.of<TimerCubit>(context).init();
     if (isNewScenario) {
       BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
     }

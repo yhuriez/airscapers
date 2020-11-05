@@ -1,7 +1,7 @@
 import 'package:airscaper/common/helpers.dart';
 import 'package:airscaper/views/home/bloc/timer/timer_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class ARSClock extends StatefulWidget {
@@ -16,7 +16,7 @@ class ARSClock extends StatefulWidget {
 class _ARSClockState extends State<ARSClock> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TimerBloc, TimerState>(
+    return CubitBuilder<TimerCubit, TimerState>(
       builder: (context, state) {
         if (state.loading) {
           return loadingView;

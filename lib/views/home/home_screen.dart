@@ -17,6 +17,7 @@ import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cubit/flutter_cubit.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
@@ -27,7 +28,8 @@ import 'bloc/inventory/inventory_state.dart';
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
   ScanFragment.routeName: (BuildContext context) => ScanFragment(),
-  ScenarioContentFragment.routeName: (BuildContext context) => ScenarioContentFragment(),
+  ScenarioContentFragment.routeName: (BuildContext context) =>
+      ScenarioContentFragment(),
   ItemDetailsFragment.routeName: (BuildContext context) => ItemDetailsFragment()
 };
 
@@ -35,18 +37,21 @@ class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
 
   static Route<dynamic> createRoute(bool isNewScenario) {
-    return createFadeRoute(HomeScreen(), HomeScreen.routeName, arguments: isNewScenario);
+    return createFadeRoute(HomeScreen(), HomeScreen.routeName,
+        arguments: isNewScenario);
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => TimerBloc()),
         BlocProvider(create: (context) => InventoryBloc()),
       ],
-      child: SafeArea(
-          child: KeyboardVisibilityProvider(child: HomeScreenLoader())),
+      child: MultiCubitProvider(
+        providers: [CubitProvider(create: (context) => TimerCubit())],
+        child: SafeArea(
+            child: KeyboardVisibilityProvider(child: HomeScreenLoader())),
+      ),
     );
   }
 }
@@ -59,7 +64,8 @@ class HomeScreenLoader extends StatelessWidget {
     bool isNewScenario = ModalRoute.of(context).settings.arguments ?? false;
 
     return FutureBuilder<ARSResult<StartResult>>(
-        future: _startScenarioUseCase.execute(context, isNewScenario: isNewScenario),
+        future: _startScenarioUseCase.execute(context,
+            isNewScenario: isNewScenario),
         initialData: ARSResult.loading(),
         builder: (context, snapshot) {
           if (snapshot.error != null) {
@@ -108,7 +114,7 @@ class HomeScreenLoader extends StatelessWidget {
       );
 
   _doSuccessScreen(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(EndTimerEvent());
+    CubitProvider.of<TimerCubit>(context).endTimer();
 
     Future.delayed(
         Duration.zero,

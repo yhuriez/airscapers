@@ -149,6 +149,7 @@
       ],
       "transition": {
         "expectedTracks": [25],
+        "removedItems": [25],
         "transitionTo": 48
       }
     },
@@ -168,7 +169,7 @@
         ],
         "transitionTo": 1,
         "removedItems": [
-          42
+          48
         ]
       }
     }

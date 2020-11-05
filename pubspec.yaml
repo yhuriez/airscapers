@@ -29,8 +29,10 @@ dependencies:
 
   progress_indicators: ^0.1.4
 
-  flutter_bloc: ^6.0.5
+  cubit: ^0.1.2
+  flutter_cubit: ^0.1.1
 
+  flutter_bloc: ^6.0.5
   hydrated_bloc: ^6.0.2
   json_annotation: ^3.1.0
 
@@ -69,6 +71,10 @@ dependencies:
   photo_view: ^0.10.1
 
   url_launcher: ^5.5.0
+
+
+  # Graph dependencies
+  graphview: ^0.6.1
 
 
 dev_dependencies:

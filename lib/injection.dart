@@ -1,3 +1,4 @@
+import 'package:airscaper/graph/graph_use_case.dart';
 import 'package:airscaper/model/managers/timer_manager.dart';
 import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
@@ -27,8 +28,9 @@ Future<void> init() async {
   sl.registerLazySingleton<AddLootUseCase>(() => AddLootUseCase());
   sl.registerLazySingleton<InterpretLinkUseCase>(() => InterpretLinkUseCase(sl(), sl(), sl()));
   sl.registerLazySingleton<ParseLinkUseCase>(() => ParseLinkUseCase());
-  // endregion
 
+  sl.registerLazySingleton<CreateItemTreeUseCase>(() => CreateItemTreeUseCase());
+  // endregion
 
   // region Repositories
   sl.registerLazySingleton<ScenarioRepository>(() => ScenarioRepository());
