@@ -55,9 +55,10 @@ class GraphContainer extends StatelessWidget {
       var graph = getGraph(graphModel);
       return GraphView(
         graph: graph,
-        algorithm: SugiyamaAlgorithm(sugiyamaConfiguration), paint: Paint()
-        ..color = Colors.white30
-        ..strokeWidth = 2.0,
+        algorithm: SugiyamaAlgorithm(sugiyamaConfiguration),
+        paint: Paint()
+          ..color = Colors.white30
+          ..strokeWidth = 2.0,
       );
     });
   }
@@ -65,8 +66,8 @@ class GraphContainer extends StatelessWidget {
   Graph getGraph(GraphModel model) {
     final graph = Graph();
 
-    final nodeMap = model.nodes.map(
-        (key, value) => MapEntry(key, Node(createNodeContent(value, model.nodes))));
+    final nodeMap = model.nodes.map((key, value) =>
+        MapEntry(key, Node(createNodeContent(value, model.nodes))));
     graph.addNodes(nodeMap.values.toList());
 
     model.edges.forEach(
@@ -75,12 +76,10 @@ class GraphContainer extends StatelessWidget {
   }
 
   Widget createNodeContent(GraphNode node, Map<int, GraphNode> nodes) {
-    if(node is GraphItemNode) {
+    if (node is GraphItemNode) {
       return createItemNodeContent(node.item);
-
-    } else if(node is GraphTransitionNode) {
+    } else if (node is GraphTransitionNode) {
       return createTransitionNodeContent(node.transition, nodes);
-
     } else {
       throw Exception("Graph node of type ${node.runtimeType} not managed");
     }
@@ -97,19 +96,17 @@ class GraphContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Image
-            SizedBox(
-                height: 100,
-                width: 100,
-                child: (item.image == null)
-                    ? Container()
-                    : Image.asset(item.image)),
+            (item.image == null)
+                ? Container()
+                : SizedBox(
+                    height: 100, width: 100, child: Image.asset(item.image)),
             // Title
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: SizedBox(
                 width: 100,
                 child: Text(
-                  item.title == null ? "No title" : item.title,
+                  item.title == null ? "Fin" : item.title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                 ),
               ),
@@ -120,46 +117,47 @@ class GraphContainer extends StatelessWidget {
     );
   }
 
-  Widget createTransitionNodeContent(ScenarioTransition transition, Map<int, GraphNode> nodes) {
+  Widget createTransitionNodeContent(
+      ScenarioTransition transition, Map<int, GraphNode> nodes) {
     return Container(
       decoration: BoxDecoration(
           color: Colors.amber, borderRadius: BorderRadius.circular(8.0)),
       child: SizedBox(
         width: 100,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:  Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              _getTransitionText(transition, nodes),
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-            ),
-          )
-        ),
+            padding: const EdgeInsets.all(8.0),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                _getTransitionText(transition, nodes),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+              ),
+            )),
       ),
     );
   }
 
-  String _getTransitionText(ScenarioTransition transition, Map<int, GraphNode> nodes) {
-    if(transition.expectedCodes != null && transition.expectedCodes.isNotEmpty) {
+  String _getTransitionText(
+      ScenarioTransition transition, Map<int, GraphNode> nodes) {
+    if (transition.expectedCodes != null &&
+        transition.expectedCodes.isNotEmpty) {
       return "Codes attendus : ${transition.expectedCodes.join(", ")}";
-
-    } else if(transition.expectedTracks != null && transition.expectedTracks.isNotEmpty) {
+    } else if (transition.expectedTracks != null &&
+        transition.expectedTracks.isNotEmpty) {
       final trackItems = transition.expectedTracks.map((item) {
-        return (nodes[item] as GraphItemNode).item.title; 
+        return (nodes[item] as GraphItemNode).item.title;
       }).toList();
       return "Transition si indice trouvé : ${trackItems.join(", ")}";
-
-    } else if(transition.expectedItemList != null && transition.expectedItemList.isNotEmpty) {
+    } else if (transition.expectedItemList != null &&
+        transition.expectedItemList.isNotEmpty) {
       final items = transition.expectedItemList.map((item) {
         return (nodes[item] as GraphItemNode).item.title;
       }).toList();
       return "Objets pour débloquer : ${items.join(", ")}";
-
-    } else if(transition.expectedItem != null) {
-      final itemTitle = (nodes[transition.expectedItem] as GraphItemNode).item.title;
+    } else if (transition.expectedItem != null) {
+      final itemTitle =
+          (nodes[transition.expectedItem] as GraphItemNode).item.title;
       return "Objets pour débloquer : $itemTitle";
-
     } else {
       return "Transition inconnue";
     }

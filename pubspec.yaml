@@ -72,6 +72,7 @@ dependencies:
 
   url_launcher: ^5.5.0
 
+  image: ^2.1.18
 
   # Graph dependencies
   graphview: ^0.6.1
