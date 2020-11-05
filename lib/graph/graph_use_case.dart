@@ -1,5 +1,6 @@
 import 'package:airscaper/graph/graph_node.dart';
 import 'package:airscaper/injection.dart';
+import 'package:airscaper/model/entities/scenario_transition.dart';
 import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -16,15 +17,18 @@ class CreateItemTreeUseCase {
     final edges = <GraphEdge>[];
 
     items.forEach((item) {
-      nodes.putIfAbsent(item.id, () => GraphNode(item));
+      nodes.putIfAbsent(item.id, () => GraphItemNode(item));
 
-      item.transition?.removedItems?.forEach((removedItem) {
-        edges.add(GraphEdge(removedItem, item.id));
-      });
+      if(item.transition != null) {
+        final transitionId = item.id + 1024;
+        nodes[transitionId] = GraphTransitionNode(transitionId, item.transition);
+        edges.add(GraphEdge(item.id, transitionId));
 
-      final transitionTo = item.transition?.transitionTo;
-      if (transitionTo != null) {
-        edges.add(GraphEdge(item.id, transitionTo));
+        item.transition.removedItems?.forEach((removedItem) {
+          edges.add(GraphEdge(removedItem, transitionId));
+        });
+
+        edges.add(GraphEdge(transitionId, item.transition.transitionTo));
       }
 
       item.loots?.forEach((loot) {

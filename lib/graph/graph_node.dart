@@ -1,5 +1,6 @@
 
 import 'package:airscaper/model/entities/scenario_item.dart';
+import 'package:airscaper/model/entities/scenario_transition.dart';
 
 
 class GraphModel {
@@ -9,12 +10,27 @@ class GraphModel {
   GraphModel(this.nodes, this.edges);
 }
 
-class GraphNode {
+abstract class GraphNode {
+  int get id;
+}
+
+class GraphItemNode extends GraphNode {
   final ScenarioItem item;
 
-  GraphNode(this.item);
-
+  GraphItemNode(this.item);
+  
+  @override
   int get id => item.id;
+}
+
+class GraphTransitionNode extends GraphNode {
+  final int transitionId;
+  final ScenarioTransition transition;
+
+  GraphTransitionNode(this.transitionId, this.transition);
+
+  @override
+  int get id => throw UnimplementedError();
 }
 
 class GraphEdge {
