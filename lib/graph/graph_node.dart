@@ -6,8 +6,9 @@ import 'package:airscaper/model/entities/scenario_transition.dart';
 class GraphModel {
   final Map<int, GraphNode> nodes;
   final List<GraphEdge> edges;
+  final GraphMode graphMode;
 
-  GraphModel(this.nodes, this.edges);
+  GraphModel(this.nodes, this.edges, {this.graphMode = GraphMode.LAYERED});
 }
 
 abstract class GraphNode {
@@ -30,7 +31,17 @@ class GraphTransitionNode extends GraphNode {
   GraphTransitionNode(this.transitionId, this.transition);
 
   @override
-  int get id => throw UnimplementedError();
+  int get id => transitionId;
+}
+
+class GraphBoundaryNode extends GraphNode {
+  final int boundaryId;
+  final String title;
+
+  GraphBoundaryNode(this.boundaryId, this.title);
+
+  @override
+  int get id => boundaryId;
 }
 
 class GraphEdge {
@@ -39,3 +50,12 @@ class GraphEdge {
 
   GraphEdge(this.start, this.end);
 }
+
+
+enum GraphMode {
+  TREE,
+  DIRECTED,
+  LAYERED
+}
+
+const int FIRST_NODE = 0;

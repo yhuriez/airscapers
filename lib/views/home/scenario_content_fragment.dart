@@ -59,7 +59,7 @@ class ScenarioContentFragment extends StatelessWidget {
   List<ScenarioElement> initScenarioElements() {
     final repo = _repository;
     List<ScenarioElement> result = repo.items
-        .where((element) => element.hasQrCode)
+        .where((element) => element.isFirstItem)
         .map((element) => ScenarioElement(
             element.title, "item/${element.id}", element.image))
         .toList();

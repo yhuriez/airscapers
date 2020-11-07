@@ -5,6 +5,7 @@ import 'package:airscaper/repositories/scenario_repository.dart';
 import 'package:flutter/material.dart';
 
 class CreateItemTreeUseCase {
+
   ScenarioRepository get repository => sl();
 
   Future<GraphModel> execute(BuildContext context) async {
@@ -16,8 +17,14 @@ class CreateItemTreeUseCase {
     final Map<int, GraphNode> nodes = {};
     final edges = <GraphEdge>[];
 
+    nodes[FIRST_NODE] = GraphBoundaryNode(FIRST_NODE, "Début");
+
     items.forEach((item) {
-      nodes.putIfAbsent(item.id, () => GraphItemNode(item));
+      if(item.endTrack) {
+        nodes[item.id] = GraphBoundaryNode(item.id, "Fin");
+      } else {
+        nodes[item.id] = GraphItemNode(item);
+      }
 
       if(item.transition != null) {
         final transitionId = item.id + 1024;
@@ -34,6 +41,10 @@ class CreateItemTreeUseCase {
       item.loots?.forEach((loot) {
         edges.add(GraphEdge(item.id, loot.id));
       });
+      
+      if(item.isFirstItem) {
+        edges.add(GraphEdge(FIRST_NODE, item.id));
+      }
     });
 
     return GraphModel(nodes, edges);

@@ -30,7 +30,7 @@ class ScenarioItem {
   bool isInInventory;
 
   @JsonKey(defaultValue: false)
-  bool hasQrCode;
+  bool isFirstItem;
 
   ScenarioItem(
       {this.id,
@@ -43,7 +43,7 @@ class ScenarioItem {
       this.endTrack,
       this.isTrack,
       this.isInInventory,
-      this.hasQrCode,
+      this.isFirstItem,
       this.loots,
       this.transition});
 

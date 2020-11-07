@@ -33,16 +33,23 @@ class GraphScreen extends StatelessWidget {
   }
 }
 
-class GraphContainer extends StatelessWidget {
-  final BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration()
-    ..siblingSeparation = (100)
-    ..levelSeparation = (150)
-    ..subtreeSeparation = (150)
+class GraphContainer extends StatefulWidget {
+
+  final BuchheimWalkerConfiguration treeBuilder = BuchheimWalkerConfiguration()
+    ..siblingSeparation = (50)
+    ..levelSeparation = (50)
+    ..subtreeSeparation = (50)
     ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
 
-  final SugiyamaConfiguration sugiyamaConfiguration = SugiyamaConfiguration()
+  final SugiyamaConfiguration layeredConfiguration = SugiyamaConfiguration()
     ..nodeSeparation = (50)
     ..levelSeparation = (50);
+
+  @override
+  _GraphContainerState createState() => _GraphContainerState();
+}
+
+class _GraphContainerState extends State<GraphContainer> {
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +62,27 @@ class GraphContainer extends StatelessWidget {
       var graph = getGraph(graphModel);
       return GraphView(
         graph: graph,
-        algorithm: SugiyamaAlgorithm(sugiyamaConfiguration),
+        algorithm: getAlgorithm(graphModel.graphMode),
         paint: Paint()
           ..color = Colors.white30
           ..strokeWidth = 2.0,
       );
     });
+  }
+
+  Layout getAlgorithm(GraphMode graphMode) {
+    if(graphMode == GraphMode.TREE) {
+      return SugiyamaAlgorithm(widget.layeredConfiguration);
+
+    } else if (graphMode == GraphMode.DIRECTED) {
+      return FruchtermanReingoldAlgorithm();
+
+    } else if (graphMode == GraphMode.LAYERED) {
+      return BuchheimWalkerAlgorithm(widget.treeBuilder, null);
+
+    } else {
+      throw Exception("Algorithm not managed: $graphMode");
+    }
   }
 
   Graph getGraph(GraphModel model) {
@@ -78,8 +100,13 @@ class GraphContainer extends StatelessWidget {
   Widget createNodeContent(GraphNode node, Map<int, GraphNode> nodes) {
     if (node is GraphItemNode) {
       return createItemNodeContent(node.item);
+
     } else if (node is GraphTransitionNode) {
       return createTransitionNodeContent(node.transition, nodes);
+
+    } else if (node is GraphBoundaryNode) {
+      return createBoundaryNodeContent(node.title);
+
     } else {
       throw Exception("Graph node of type ${node.runtimeType} not managed");
     }
@@ -106,7 +133,7 @@ class GraphContainer extends StatelessWidget {
               child: SizedBox(
                 width: 100,
                 child: Text(
-                  item.title == null ? "Fin" : item.title,
+                  item.title == null ? "" : item.title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                 ),
               ),
@@ -137,27 +164,50 @@ class GraphContainer extends StatelessWidget {
     );
   }
 
+  Widget createBoundaryNodeContent(String title) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.deepPurple, borderRadius: BorderRadius.circular(8.0)),
+      child: SizedBox(
+        width: 100,
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                title,
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
+              ),
+            )),
+      ),
+    );
+  }
+
   String _getTransitionText(
       ScenarioTransition transition, Map<int, GraphNode> nodes) {
     if (transition.expectedCodes != null &&
         transition.expectedCodes.isNotEmpty) {
       return "Codes attendus : ${transition.expectedCodes.join(", ")}";
+
     } else if (transition.expectedTracks != null &&
         transition.expectedTracks.isNotEmpty) {
       final trackItems = transition.expectedTracks.map((item) {
         return (nodes[item] as GraphItemNode).item.title;
       }).toList();
       return "Transition si indice trouvé : ${trackItems.join(", ")}";
+
     } else if (transition.expectedItemList != null &&
         transition.expectedItemList.isNotEmpty) {
       final items = transition.expectedItemList.map((item) {
         return (nodes[item] as GraphItemNode).item.title;
       }).toList();
       return "Objets pour débloquer : ${items.join(", ")}";
+
     } else if (transition.expectedItem != null) {
       final itemTitle =
           (nodes[transition.expectedItem] as GraphItemNode).item.title;
       return "Objets pour débloquer : $itemTitle";
+
     } else {
       return "Transition inconnue";
     }

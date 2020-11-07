@@ -18,7 +18,7 @@ ScenarioItem _$ScenarioItemFromJson(Map<String, dynamic> json) {
     endTrack: json['endTrack'] as bool ?? false,
     isTrack: json['isTrack'] as bool ?? false,
     isInInventory: json['isInInventory'] as bool ?? false,
-    hasQrCode: json['hasQrCode'] as bool ?? false,
+    isFirstItem: json['isFirstItem'] as bool ?? false,
     loots: (json['loots'] as List)
             ?.map((e) => e == null
                 ? null
@@ -46,5 +46,5 @@ Map<String, dynamic> _$ScenarioItemToJson(ScenarioItem instance) =>
       'endTrack': instance.endTrack,
       'isTrack': instance.isTrack,
       'isInInventory': instance.isInInventory,
-      'hasQrCode': instance.hasQrCode,
+      'isFirstItem': instance.isFirstItem,
     };

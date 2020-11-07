@@ -52,7 +52,7 @@
       "description": "Une simple clé",
       "foundDescription": "Accroché à un mur, vous trouvez une simple clé. Ce qu'elle ouvre ne doit pas être loin.",
       "image": "assets/images/tutorial/key.png",
-      "hasQrCode": true,
+      "isFirstItem": true,
       "isInInventory": true
     },
     {
@@ -85,7 +85,7 @@
       "title": "Coffre",
       "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus.",
       "image": "assets/images/tutorial/furniture_closed.png",
-      "hasQrCode": true,
+      "isFirstItem": true,
       "clues": [
         "Une clé est nécessaire pour ouvrir le coffre."
       ],
@@ -102,7 +102,7 @@
       "title": "Panneau électrique",
       "description": "Une grille avec des picots séparés de 5 cm.\n\nLorsque des cases grises sont présentes vous devez utiliser plusieurs objets . Pour supprimer l'objet, cliquez sur l'image.",
       "image": "assets/images/tutorial/electric_board.png",
-      "hasQrCode": true,
+      "isFirstItem": true,
       "clues": [
         "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
       ],
@@ -142,7 +142,7 @@
       "id": 42,
       "title": "Ecran éteint",
       "description": "Un écran. Il n'y a pas de courant",
-      "hasQrCode": true,
+      "isFirstItem": true,
       "image": "assets/images/tutorial/tv_off.png",
       "clues": [
         "Sans courant, cet écran ne sert à rien."
@@ -157,7 +157,7 @@
       "id": 21,
       "title": "Porte",
       "description": "C'est la porte de sortie. Elle est commandée par un digicode.\n\nNote : dans le champ se trouve indiqué le type de réponse souhaité.",
-      "hasQrCode": true,
+      "isFirstItem": true,
       "image": "assets/images/tutorial/exit_door.png",
       "codeHint": "Ex: 1234",
       "clues": [
