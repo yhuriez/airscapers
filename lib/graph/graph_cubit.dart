@@ -16,5 +16,9 @@ class GraphCubit extends Cubit<GraphModel> {
     final graph = await createTreeUseCase.execute(context);
     emit(graph);
   }
+
+  updateMode(GraphMode mode) {
+    emit(GraphModel(state.nodes, state.edges, graphMode: mode));
+  }
 }
 
