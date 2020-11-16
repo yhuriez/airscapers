@@ -1,0 +1,13 @@
+{
+  "builder": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign in",
+      "create_account": "Create account",
+      "email_invalid_error": "This email is invalid, please type a correct email address",
+      "email_empty_error": "Please type your email address here",
+      "password_empty_error": "Please type your password here"
+    }
+  }
+}
