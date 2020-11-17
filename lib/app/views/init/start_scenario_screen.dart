@@ -38,7 +38,7 @@ class StartScenarioScreen extends StatelessWidget {
     ScenarioReference scenario = arguments.scenario;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: arsBackgroundColor,
       appBar:
       AppBar(title: Text(scenario.name), centerTitle: true, elevation: 0),
       body: Container(

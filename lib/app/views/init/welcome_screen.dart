@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return KeyboardVisibilityProvider(
       child: Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: arsBackgroundColor,
         body: FutureBuilder<InitIndexResponse>(
             future: _initScenarioIndexUseCase.execute(context),
             builder: (context, snapshot) {

@@ -25,7 +25,7 @@ class ImageDetailsScreen extends StatelessWidget {
     return ARSScaffold(
       title: title,
       child: Container(
-        color: backgroundColor,
+        color: arsBackgroundColor,
         constraints: BoxConstraints.expand(
           height: MediaQuery
               .of(context)

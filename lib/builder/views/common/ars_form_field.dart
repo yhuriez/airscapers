@@ -1,3 +1,4 @@
+import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/common/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,9 @@ class ARSFormField extends StatefulWidget {
   final FormFieldValidator<String> validator;
   final Map<String, dynamic> values;
   final String valueKey;
+  final TextInputAction textInputAction;
+  final TextInputType textInputType;
+  final bool obscureText;
 
   const ARSFormField(
       {Key key,
@@ -14,7 +18,10 @@ class ARSFormField extends StatefulWidget {
       @required this.valueKey,
       this.label,
       this.hint,
-      this.validator})
+      this.validator,
+      this.textInputAction = TextInputAction.next,
+      this.textInputType = TextInputType.text,
+      this.obscureText = false})
       : super(key: key);
 
   @override
@@ -23,35 +30,59 @@ class ARSFormField extends StatefulWidget {
 
 class _ARSFormFieldState extends State<ARSFormField> {
 
+  bool passwordDisplayed = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Label
         (widget.label == null)
             ? Container()
             : Text(
                 widget.label,
-                style: fieldLabelTextStyle,
+                style: arsFieldLabelTextStyle,
               ),
 
         // Field
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: TextFormField(
-              style: fieldContentTextStyle,
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                  border: InputBorder.none, hintText: widget.hint ?? ""),
-              validator: widget.validator,
-              onFieldSubmitted: (value) {
-                widget.values[widget.valueKey] = value;
-              },
-              onSaved: (value) {
-                widget.values[widget.valueKey] = value;
-              }),
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          child: Stack(
+            children: [
+              _textField,
+
+
+            ],
+          )
         ),
       ],
     );
   }
+
+  Widget get _textField => TextFormField(
+      style: arsFieldContentTextStyle,
+      keyboardType: widget.textInputType,
+      textInputAction: widget.textInputAction,
+      obscureText: widget.obscureText,
+      decoration: InputDecoration(
+          border: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          enabledBorder: arsFieldBorder,
+          focusedBorder: arsFieldBorder,
+          errorBorder: arsFieldErrorBorder,
+          focusedErrorBorder: arsFieldErrorBorder,
+          errorStyle: TextStyle(fontSize: 16.0, color: arsErrorColor),
+          hintText: widget.hint ?? "",
+          contentPadding: EdgeInsets.only(left: 16),
+          fillColor: arsFieldColor,
+          filled: true
+      ),
+      validator: widget.validator,
+      onFieldSubmitted: (value) {
+        widget.values[widget.valueKey] = value;
+      },
+      onSaved: (value) {
+        widget.values[widget.valueKey] = value;
+      });
 }

@@ -31,7 +31,7 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: arsBackgroundColor,
       body: Column(children: [
         Expanded(
           child: Column(
@@ -46,7 +46,7 @@ class SuccessScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: textColor),
+                      color: arsTextColor),
                 ),
               ),
 
@@ -76,10 +76,10 @@ class SuccessScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("Indices utilisés : ",
-            style: TextStyle(fontSize: 20, color: textColor)),
+            style: TextStyle(fontSize: 20, color: arsTextColor)),
         Text(0.toString(),
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: textColor)),
+                fontSize: 20, fontWeight: FontWeight.bold, color: arsTextColor)),
       ],
     );
   }
@@ -98,12 +98,12 @@ class SuccessScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Fini en : ",
-                  style: TextStyle(fontSize: 20, color: textColor)),
+                  style: TextStyle(fontSize: 20, color: arsTextColor)),
               Text(formattedTime,
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: textColor)),
+                      color: arsTextColor)),
             ],
           );
         });

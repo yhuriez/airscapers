@@ -1,5 +1,5 @@
 
 
 
-const defaultRadius = 12.0;
+const defaultRadius = 6.0;
 

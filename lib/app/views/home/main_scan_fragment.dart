@@ -65,7 +65,7 @@ class MainScanFragment extends StatelessWidget {
                       child: Text(
                         "Maintenez le bouton Scan pour afficher la liste des éléments, si vous ne possédez pas les QR codes.",
                         style: TextStyle(
-                            color: textColor,
+                            color: arsTextColor,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),

@@ -11,7 +11,7 @@ class ARSScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: arsBackgroundColor,
       appBar: AppBar(
         title: Text(title),
         elevation: 0,

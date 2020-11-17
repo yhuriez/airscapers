@@ -23,10 +23,10 @@ class ARSShadowBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
           boxShadow: [
             const BoxShadow(
-              color: Colors.white,
+              color: Colors.white30,
             ),
             BoxShadow(
-              color: Colors.white,
+              color: Colors.white30,
               spreadRadius: spreadRadius,
               blurRadius: blurRadius,
             ),

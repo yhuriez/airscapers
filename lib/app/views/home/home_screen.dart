@@ -85,14 +85,14 @@ class HomeScreenLoader extends StatelessWidget {
 
           return Material(
             child:
-                Container(color: backgroundColor, child: HomeScreenContent()),
+                Container(color: arsBackgroundColor, child: HomeScreenContent()),
           );
         });
   }
 
   Widget createErrorView(String errorCode) => Material(
         child: Container(
-            color: backgroundColor,
+            color: arsBackgroundColor,
             child: Center(
                 child: Text(
               errorCode,
@@ -102,10 +102,10 @@ class HomeScreenLoader extends StatelessWidget {
 
   Widget get loadingView => Material(
         child: Container(
-          color: backgroundColor,
+          color: arsBackgroundColor,
           child: Center(
             child: JumpingDotsProgressIndicator(
-                color: textColor,
+                color: arsTextColor,
                 numberOfDots: 4,
                 fontSize: 40.0,
                 dotSpacing: 2.0),
@@ -203,7 +203,7 @@ class HomeScreenContent extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
-                      color: textColor),
+                      color: arsTextColor),
                 ),
 
           // Spacing components

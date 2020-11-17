@@ -27,29 +27,26 @@ class ARSButton extends StatelessWidget {
         : DecorationImage(
             image: AssetImage("assets/images/$image"), fit: BoxFit.fill);
 
-    return Card(
-      elevation: 3.0,
-      child: Container(
-        height: height,
-        decoration: BoxDecoration(
-            image: backgroundImage,
-            borderRadius:
-                BorderRadius.all(Radius.circular(borderRadius ?? 6.0)),
-            color: backgroundColor),
-        child: InkWell(
-          onTap: () {
-            onClick(context);
-          },
-          onLongPress: () {
-            if (onLongClick != null) {
-              onLongClick(context);
-            }
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[Expanded(child: Center(child: text))],
-          ),
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+          image: backgroundImage,
+          borderRadius:
+              BorderRadius.all(Radius.circular(borderRadius ?? 8.0)),
+          color: backgroundColor),
+      child: InkWell(
+        onTap: () {
+          onClick(context);
+        },
+        onLongPress: () {
+          if (onLongClick != null) {
+            onLongClick(context);
+          }
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[Expanded(child: Center(child: text))],
         ),
       ),
     );

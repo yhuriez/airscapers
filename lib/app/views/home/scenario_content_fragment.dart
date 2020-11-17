@@ -13,7 +13,7 @@ class ScenarioContentFragment extends StatelessWidget {
     final tutorialElements = initScenarioElements();
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: arsBackgroundColor,
       appBar: AppBar(
         title: Text("Eléments du scénario"),
         centerTitle: true,

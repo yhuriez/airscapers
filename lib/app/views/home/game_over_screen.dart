@@ -20,7 +20,7 @@ class GameOverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: arsBackgroundColor,
       body: Column(
         children: [
           Expanded(
@@ -32,7 +32,7 @@ class GameOverScreen extends StatelessWidget {
                   Text(
                     "Le temps est écoulé",
                     style: TextStyle(
-                        fontSize: 30, fontWeight: FontWeight.bold, color: textColor),
+                        fontSize: 30, fontWeight: FontWeight.bold, color: arsTextColor),
                   ),
 
                   // Description
@@ -41,7 +41,7 @@ class GameOverScreen extends StatelessWidget {
                     child: Text(
                       "Pourcentage d'achèvement :",
                       style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold, color: textColor),
+                          fontSize: 20, fontWeight: FontWeight.bold, color: arsTextColor),
                     ),
                   ),
 
@@ -74,7 +74,7 @@ class GameOverScreen extends StatelessWidget {
     child: Text(
       "$percentage %",
       style: TextStyle(
-          fontSize: 40, fontWeight: FontWeight.bold, color: textColor),
+          fontSize: 40, fontWeight: FontWeight.bold, color: arsTextColor),
     ),
   );
 

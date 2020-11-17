@@ -46,7 +46,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
         navigatorKey: Catcher.navigatorKey,
         title: 'Airscapers',
-        localizationsDelegates: localizationDelegates,
+        // localizationsDelegates: localizationDelegates,
         theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
         debugShowCheckedModeBanner: false,
         home: _getHome());
