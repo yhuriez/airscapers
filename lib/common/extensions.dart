@@ -31,12 +31,18 @@ extension ContextExtension on BuildContext {
 const Map<String, dynamic> strings = {
   "builder": {
     "login": {
+      "name": "Name",
       "email": "Email",
       "password": "Password",
+      "confirm_password": "Password",
       "sign_in": "Sign in",
       "create_account": "Create account",
+      "no_account": "No account ? Register here",
+      "already_have_account": "Have an account already ?",
       "email_invalid_error": "This email is invalid, please type a correct email address",
       "email_empty_error": "Please type your email address here",
+      "name_empty_error": "Please type your name here",
+      "password_not_matching_error": "Passwords doesn't match, please re-type them.",
       "password_empty_error": "Please type your password here"
     }
   }

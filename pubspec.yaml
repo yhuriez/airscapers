@@ -44,6 +44,7 @@ dependencies:
   # Network
   http: ^0.12.0+4
   dio: ^3.0.10
+  pretty_dio_logger: ^1.1.1
 
   # UI components
   progress_indicators: ^0.1.4
@@ -62,6 +63,9 @@ dependencies:
 
   # Graph dependencies
   graphview: ^0.6.1
+
+  # Logging
+  logger: ^0.9.4
 
   # Dart code helpers
   catcher: ^0.3.11 # Exception management

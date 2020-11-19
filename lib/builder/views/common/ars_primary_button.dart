@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 
 class ARSPrimaryButton extends StatelessWidget {
   final String label;
+  final Widget child;
   final double height;
   final Function(BuildContext) onClick;
 
   const ARSPrimaryButton(
       {Key key,
       @required this.onClick,
-      @required this.label,
+      this.label,
+      this.child,
       this.height = 50})
       : super(key: key);
 
@@ -32,7 +34,7 @@ class ARSPrimaryButton extends StatelessWidget {
           children: <Widget>[
             Expanded(
                 child:
-                    Center(child: Text(label, style: arsFieldLabelTextStyle)))
+                    Center(child: child ?? Text(label, style: arsFieldLabelTextStyle)))
           ],
         ),
       ),

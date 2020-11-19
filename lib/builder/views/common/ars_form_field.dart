@@ -11,6 +11,7 @@ class ARSFormField extends StatefulWidget {
   final TextInputAction textInputAction;
   final TextInputType textInputType;
   final bool obscureText;
+  final TextEditingController controller;
 
   const ARSFormField(
       {Key key,
@@ -21,7 +22,8 @@ class ARSFormField extends StatefulWidget {
       this.validator,
       this.textInputAction = TextInputAction.next,
       this.textInputType = TextInputType.text,
-      this.obscureText = false})
+      this.obscureText = false,
+      this.controller})
       : super(key: key);
 
   @override
@@ -61,6 +63,7 @@ class _ARSFormFieldState extends State<ARSFormField> {
   }
 
   Widget get _textField => TextFormField(
+      controller: widget.controller,
       style: arsFieldContentTextStyle,
       keyboardType: widget.textInputType,
       textInputAction: widget.textInputAction,

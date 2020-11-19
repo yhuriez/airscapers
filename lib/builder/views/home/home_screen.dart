@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  static const screenName = "home";
+  static const screenName = "/";
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Container();
   }
 
 }
