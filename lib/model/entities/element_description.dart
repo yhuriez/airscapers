@@ -11,9 +11,6 @@ class ScenarioElementDesc {
   final bool isCurrentTrack;
   final List<ScenarioLoot> loots;
 
-  ScenarioElementDesc._(this.title, this.description, this.imageUrl, this.found,
-      {this.loots, this.end = false, this.isCurrentTrack = false});
-
   ScenarioElementDesc.fromTrack(ScenarioTrack track, {bool found = true})
       : title = track.title,
         description = (found || track.foundDescription == null)

@@ -10,9 +10,9 @@ class ARSButton extends StatelessWidget {
   final double borderRadius;
 
   const ARSButton(
-      {Key key,
-      @required this.onClick,
-      @required this.text,
+      {Key? key,
+      required this.onClick,
+      required this.text,
       this.height = 50,
       this.image = "",
       this.backgroundColor,

@@ -13,10 +13,10 @@ class MechanismCodeInput extends StatelessWidget {
   final OnNewState onNewState;
 
   const MechanismCodeInput(
-      {Key key,
-      @required this.mechanism,
-      @required this.state,
-      @required this.onNewState})
+      {Key? key,
+      required this.mechanism,
+      required this.state,
+      required this.onNewState})
       : super(key: key);
 
   @override

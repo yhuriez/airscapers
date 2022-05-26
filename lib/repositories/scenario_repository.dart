@@ -11,16 +11,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class ScenarioRepository {
-  ScenarioIndex _index;
-  Scenario _scenario;
+
+  ScenarioIndex? _index;
+  Scenario? _scenario;
 
   List<ScenarioReference> get scenarios => _index?.scenarios ?? [];
 
-  String get title => _scenario.details.title;
+  String? get title => _scenario?.details.title;
 
-  String get endText => _scenario.details.endText;
+  String? get endText => _scenario?.details.endText;
 
-  int get durationInMinute => _scenario.details.duration;
+  int? get durationInMinute => _scenario?.details.duration;
 
   List<ScenarioItem> get items => _scenario?.items ?? [];
 

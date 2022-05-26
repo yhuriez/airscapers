@@ -17,10 +17,10 @@ class MechanismItemsCombination extends StatefulWidget {
   final OnNewState onNewState;
 
   const MechanismItemsCombination(
-      {Key key,
-      @required this.mechanism,
-      @required this.state,
-      @required this.onNewState})
+      {Key? key,
+      required this.mechanism,
+      required this.state,
+      required this.onNewState})
       : super(key: key);
 
   @override

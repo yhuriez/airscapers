@@ -10,12 +10,12 @@ class ARSDetailsBox extends StatelessWidget {
 
   final Function(BuildContext, ScenarioItem) onAcceptedDropData;
 
-  final String imageUrl;
+  final String? imageUrl;
   final String description;
   final String name;
 
   const ARSDetailsBox(
-      {Key key,
+      {Key? key,
       this.interactionsBuilder,
       this.imageUrl,
       this.description,

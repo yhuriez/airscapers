@@ -11,7 +11,7 @@ class ARSCodeTextField extends StatefulWidget {
   final String validationErrorMessage;
 
   const ARSCodeTextField(
-      {Key key,
+      {Key? key,
       this.acceptedValues = const [],
       this.callback,
       this.hint,

@@ -2,9 +2,10 @@
 
 
 class ARSResult<D> {
+
   final bool loading;
-  final String errorCode;
-  final D data;
+  final String? errorCode;
+  final D? data;
 
   ARSResult._({this.loading = false, this.errorCode, this.data});
 

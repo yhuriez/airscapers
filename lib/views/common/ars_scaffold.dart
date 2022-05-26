@@ -6,7 +6,7 @@ class ARSScaffold extends StatelessWidget {
   final String title;
   final List<Widget> actions;
 
-  const ARSScaffold({Key key, this.child, this.title, this.actions}) : super(key: key);
+  const ARSScaffold({Key? key, this.child, this.title, this.actions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

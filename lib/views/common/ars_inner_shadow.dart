@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 class ARSInnerShadow extends SingleChildRenderObjectWidget {
 
   const ARSInnerShadow({
-    Key key,
+    Key? key,
     this.blur = 10,
     this.color = Colors.black38,
     this.offset = const Offset(10, 10),

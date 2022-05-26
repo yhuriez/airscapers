@@ -10,7 +10,7 @@ part of 'database.dart';
 class InventoryTrack extends DataClass implements Insertable<InventoryTrack> {
   final int id;
   final DateTime creationDate;
-  InventoryTrack({@required this.id, @required this.creationDate});
+  InventoryTrack({required this.id, required this.creationDate});
   factory InventoryTrack.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -92,8 +92,8 @@ class InventoryTracksCompanion extends UpdateCompanion<InventoryTrack> {
     this.creationDate = const Value.absent(),
   });
   InventoryTracksCompanion.insert({
-    @required int id,
-    @required DateTime creationDate,
+    required int id,
+    required DateTime creationDate,
   })  : id = Value(id),
         creationDate = Value(creationDate);
   static Insertable<InventoryTrack> custom({
@@ -203,7 +203,7 @@ class InventoryItem extends DataClass implements Insertable<InventoryItem> {
   final DateTime creationDate;
   final bool used;
   InventoryItem(
-      {@required this.id, @required this.creationDate, @required this.used});
+      {required this.id, required this.creationDate, required this.used});
   factory InventoryItem.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -300,8 +300,8 @@ class InventoryItemsCompanion extends UpdateCompanion<InventoryItem> {
     this.used = const Value.absent(),
   });
   InventoryItemsCompanion.insert({
-    @required int id,
-    @required DateTime creationDate,
+    required int id,
+    required DateTime creationDate,
     this.used = const Value.absent(),
   })  : id = Value(id),
         creationDate = Value(creationDate);
@@ -432,9 +432,9 @@ class InventoryMechanismState extends DataClass
   final int currentStateId;
   final DateTime creationDate;
   InventoryMechanismState(
-      {@required this.mechanismId,
-      @required this.currentStateId,
-      @required this.creationDate});
+      {required this.mechanismId,
+      required this.currentStateId,
+      required this.creationDate});
   factory InventoryMechanismState.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -538,9 +538,9 @@ class InventoryMechanismStatesCompanion
     this.creationDate = const Value.absent(),
   });
   InventoryMechanismStatesCompanion.insert({
-    @required int mechanismId,
-    @required int currentStateId,
-    @required DateTime creationDate,
+    required int mechanismId,
+    required int currentStateId,
+    required DateTime creationDate,
   })  : mechanismId = Value(mechanismId),
         currentStateId = Value(currentStateId),
         creationDate = Value(creationDate);
@@ -686,7 +686,7 @@ class $InventoryMechanismStatesTable extends InventoryMechanismStates
 class InventoryClue extends DataClass implements Insertable<InventoryClue> {
   final int clueId;
   final DateTime creationDate;
-  InventoryClue({@required this.clueId, @required this.creationDate});
+  InventoryClue({required this.clueId, required this.creationDate});
   factory InventoryClue.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -770,8 +770,8 @@ class InventoryCluesCompanion extends UpdateCompanion<InventoryClue> {
     this.creationDate = const Value.absent(),
   });
   InventoryCluesCompanion.insert({
-    @required int clueId,
-    @required DateTime creationDate,
+    required int clueId,
+    required DateTime creationDate,
   })  : clueId = Value(clueId),
         creationDate = Value(creationDate);
   static Insertable<InventoryClue> custom({

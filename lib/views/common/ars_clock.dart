@@ -7,7 +7,7 @@ import 'package:progress_indicators/progress_indicators.dart';
 class ARSClock extends StatefulWidget {
   final Function(BuildContext) onEnd;
 
-  const ARSClock({Key key, this.onEnd}) : super(key: key);
+  const ARSClock({Key? key, this.onEnd}) : super(key: key);
 
   @override
   _ARSClockState createState() => _ARSClockState();

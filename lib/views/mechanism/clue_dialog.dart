@@ -14,7 +14,7 @@ class ClueDialog extends StatefulWidget {
   LoadAvailableCluesUseCase get _loadClueUseCase => sl();
   UseClueUseCase get _useClueUseCase => sl();
 
-  ClueDialog({Key key, this.state}) : super(key: key);
+  ClueDialog({Key? key, this.state}) : super(key: key);
 
   @override
   _ClueDialogState createState() => _ClueDialogState();

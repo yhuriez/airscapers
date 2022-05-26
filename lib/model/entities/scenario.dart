@@ -5,10 +5,11 @@ import 'package:airscaper/model/entities/scenario_mechanism.dart';
 import 'package:airscaper/model/entities/scenario_track.dart';
 
 class Scenario {
-  ScenarioDetails _details;
-  List<ScenarioTrack> _tracks;
-  List<ScenarioItem> _items;
-  List<ScenarioMechanism> _mechanisms;
+
+  final ScenarioDetails _details;
+  final List<ScenarioTrack> _tracks;
+  final List<ScenarioItem> _items;
+  final List<ScenarioMechanism> _mechanisms;
 
   ScenarioDetails get details => _details;
 
@@ -20,7 +21,7 @@ class Scenario {
 
   Scenario(this._details, this._tracks, this._items, this._mechanisms);
 
-  Scenario.map(dynamic obj) {
+  factory Scenario.map(dynamic obj) {
     this._details = ScenarioDetails.map(obj["details"]);
     this._tracks = mapTypedList(obj["tracks"], (it) => ScenarioTrack.map(it));
     this._items = mapTypedList(obj["items"], (it) => ScenarioItem.map(it));

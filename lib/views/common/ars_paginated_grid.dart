@@ -19,7 +19,7 @@ class ARSPaginatedGrid extends StatelessWidget {
   final ValueNotifier pageNotifier;
 
   ARSPaginatedGrid(
-      {Key key,
+      {Key? key,
       this.items,
       this.selectedItem,
       this.onItemClicked,
@@ -98,7 +98,7 @@ class ARSPaginatedGrid extends StatelessWidget {
 class ARSGridPage extends StatelessWidget {
   final List<Widget> children;
 
-  const ARSGridPage({Key key, this.children}) : super(key: key);
+  const ARSGridPage({Key? key, this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class ARSGridPage extends StatelessWidget {
 class ARSGridEmptyItem extends StatelessWidget {
   final OnAcceptedData<ScenarioItem> onAcceptedData;
 
-  const ARSGridEmptyItem({Key key, this.onAcceptedData}) : super(key: key);
+  const ARSGridEmptyItem({Key? key, this.onAcceptedData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +146,8 @@ class ARSGridImageItem extends StatelessWidget {
   final bool animated;
 
   const ARSGridImageItem(
-      {Key key,
-      @required this.item,
+      {Key? key,
+      required this.item,
       this.selected = false,
       this.onItemClicked,
       this.itemSize = ITEM_SIZE,

@@ -17,7 +17,7 @@ class InventoryDetailsFragment extends StatelessWidget {
 
   final ScenarioElementDesc desc;
 
-  const InventoryDetailsFragment({Key key, this.desc}) : super(key: key);
+  const InventoryDetailsFragment({Key? key, this.desc}) : super(key: key);
 
   static NavigationIntent navigate(ScenarioElementDesc desc) =>
       NavigationIntent(routeName, desc);
@@ -41,7 +41,7 @@ class ScenarioElementView extends StatefulWidget {
   FilterAvailableLootUseCase get _filterAvailableLootUseCase => sl();
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
-  ScenarioElementView({Key key, this.desc}) : super(key: key);
+  ScenarioElementView({Key? key, this.desc}) : super(key: key);
 
   @override
   _ScenarioElementViewState createState() => _ScenarioElementViewState();
@@ -154,7 +154,7 @@ class SearchContent extends StatelessWidget {
   final List<ScenarioLoot> loots;
   final Function(ScenarioLoot) onLootClicked;
 
-  const SearchContent({Key key, this.loots, this.onLootClicked})
+  const SearchContent({Key? key, this.loots, this.onLootClicked})
       : super(key: key);
 
   @override

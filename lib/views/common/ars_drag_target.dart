@@ -5,9 +5,9 @@ class ARSDragTarget<T> extends StatelessWidget {
   final DragTargetBuilder<T> targetBuilder;
   final OnAcceptedData<T> acceptedData;
 
-  const ARSDragTarget({Key key,
-    @required this.targetBuilder,
-    @required this.acceptedData})
+  const ARSDragTarget({Key? key,
+    required this.targetBuilder,
+    required this.acceptedData})
       : super(key: key);
 
   @override

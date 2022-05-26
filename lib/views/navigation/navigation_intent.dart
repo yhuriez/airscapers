@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class NavigationIntent {
   final String screenName;
-  final Object arguments;
+  final dynamic arguments;
   final bool rootNavigator;
-  final Route<dynamic> route;
+  final Route<Object> route;
 
   NavigationIntent(this.screenName, this.arguments,
-      {this.rootNavigator = false, this.route});
+      {this.rootNavigator = false, required this.route});
 }

@@ -12,7 +12,7 @@ class ImageDetailsScreen extends StatelessWidget {
   final String assetPath;
   final String title;
 
-  const ImageDetailsScreen({Key key, this.title, this.assetPath})
+  const ImageDetailsScreen({Key? key, this.title, this.assetPath})
       : super(key: key);
 
   static Route<dynamic> createRoute(String title, String assetPath) {

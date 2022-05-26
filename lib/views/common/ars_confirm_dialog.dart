@@ -7,7 +7,7 @@ class ARSConfirmDialog extends StatelessWidget {
   final Function(BuildContext) onCancelClicked;
 
   const ARSConfirmDialog(
-      {Key key, this.child, this.onOkClicked, this.onCancelClicked})
+      {Key? key, this.child, this.onOkClicked, this.onCancelClicked})
       : super(key: key);
 
   @override

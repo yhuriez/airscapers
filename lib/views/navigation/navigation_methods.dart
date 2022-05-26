@@ -46,7 +46,7 @@ navigateShowDialog(BuildContext context, DialogArguments arguments) {
 }
 
 FadeBlackPageRoute createFadeRoute(Widget child, String name,
-        {Object arguments}) =>
+        {dynamic arguments}) =>
     FadeBlackPageRoute(
         builder: (context) => child,
         settings: RouteSettings(name: name, arguments: arguments));
@@ -61,7 +61,7 @@ class DialogArguments {
 class DialogContent extends StatelessWidget {
   final DialogArguments arguments;
 
-  const DialogContent({Key key, @required this.arguments}) : super(key: key);
+  const DialogContent({Key? key, required this.arguments}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class DialogContent extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            (arguments.title == null || arguments.title == "")
+            (arguments.title.isEmpty)
                 ? Container(
                     width: 0,
                     height: 0,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ARSScaleAnimation extends StatefulWidget {
   final Widget child;
 
-  const ARSScaleAnimation({Key key, this.child}) : super(key: key);
+  const ARSScaleAnimation({Key? key, this.child}) : super(key: key);
 
   @override
   _ARSScaleAnimationState createState() => _ARSScaleAnimationState();

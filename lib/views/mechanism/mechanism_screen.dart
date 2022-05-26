@@ -34,7 +34,7 @@ class MechanismStateRepresentation extends StatefulWidget {
   LoadCurrentMechanismStateUseCase get _loadMechanismStateUseCase => sl();
   MechanismFinishedUseCase get _mechanismFinishedUseCase => sl();
 
-  const MechanismStateRepresentation({Key key, @required this.mechanism})
+  const MechanismStateRepresentation({Key? key, required this.mechanism})
       : super(key: key);
 
   @override

@@ -6,7 +6,7 @@ class ARSShadowBox extends StatelessWidget {
 
   final Widget child;
 
-  const ARSShadowBox({Key key, this.child}) : super(key: key);
+  const ARSShadowBox({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
