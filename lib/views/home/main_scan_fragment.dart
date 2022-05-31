@@ -1,7 +1,8 @@
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/usecases/end_use_cases.dart';
-import 'package:airscaper/usecases/link_use_cases.dart';
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
+import 'package:airscaper/domain/usecases/end_use_cases.dart';
+import 'package:airscaper/domain/usecases/link_use_cases.dart';
+import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
@@ -88,7 +89,7 @@ class MainScanFragment extends StatelessWidget {
 
   onScanLongPress(BuildContext context) async {
     if (_repository.isTutorial || kDebugMode) {
-      final scanResult =
+      final String? scanResult =
           await Navigator.of(context).pushNamed(ScenarioContentFragment.routeName);
       parseLink(context, scanResult);
     }
@@ -101,7 +102,7 @@ class MainScanFragment extends StatelessWidget {
     parseLink(context, scanResult);
   }
 
-  parseLink(BuildContext context, String scanResult) async {
+  parseLink(BuildContext context, String? scanResult) async {
     final link = _parseLinkUseCase.execute(scanResult);
     if (link != null) {
       final intent = await _interpretLinkUseCase.execute(context, link);
@@ -117,7 +118,7 @@ class MainScanFragment extends StatelessWidget {
   _onQuitClicked(BuildContext context) {
     showDialog(
         context: context,
-        child: ARSDialogConfirm(
+        builder: (context) => ARSDialogConfirm(
           title: "Etes-vous sûr de vouloir quitter ?",
           message:
               "Vous perdrez toute votre progression en quittant le scénario en cours.",

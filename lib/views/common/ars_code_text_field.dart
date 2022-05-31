@@ -7,15 +7,15 @@ class ARSCodeTextField extends StatefulWidget {
 
   final List<String> acceptedValues;
   final Function(BuildContext, String) callback;
-  final String hint;
-  final String validationErrorMessage;
+  final String? hint;
+  final String? validationErrorMessage;
 
   const ARSCodeTextField(
-      {Key? key,
-      this.acceptedValues = const [],
-      this.callback,
-      this.hint,
-      this.validationErrorMessage})
+      { Key? key,
+        this.acceptedValues = const [],
+        required this.callback,
+        this.hint,
+        this.validationErrorMessage})
       : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class ARSCodeTextField extends StatefulWidget {
 
 class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
   final _formKey = GlobalKey<FormState>();
-  String inputValue;
+  String? inputValue;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
                 .map((e) => e.toLowerCase()).toList();
 
             if (acceptedValues.isNotEmpty &&
-                !acceptedValues.contains(value.toLowerCase())) {
+                !acceptedValues.contains(value?.toLowerCase())) {
               return widget.validationErrorMessage ?? "Erreur";
             }
             return null;
@@ -93,9 +93,9 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
       border: Border.all(color: Colors.black12));
 
   onConfirmClicked(BuildContext context) {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      widget.callback(context, inputValue);
+    if (_formKey.currentState?.validate() == true) {
+      _formKey.currentState?.save();
+      widget.callback(context, inputValue ?? "");
     }
   }
 }

@@ -8,7 +8,7 @@ class ARSDialogBase extends StatelessWidget {
 
   final Widget child;
 
-  const ARSDialogBase({Key? key, this.child}) : super(key: key);
+  const ARSDialogBase({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,12 @@ class ARSDialogConfirm extends StatelessWidget {
   final String cancelText;
   final Function(BuildContext) okAction;
 
-  const ARSDialogConfirm({Key? key, this.title, this.message, this.okText, this.cancelText, this.okAction}) : super(key: key);
+  const ARSDialogConfirm({Key? key,
+    required this.title,
+    required this.message,
+    required this.okText,
+    required this.cancelText,
+    required this.okAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

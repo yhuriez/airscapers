@@ -1,6 +1,6 @@
-import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/models/scenario_item.dart';
+import 'package:airscaper/models/scenario_mechanism.dart';
+import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
 import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
 import 'package:flutter/foundation.dart';
@@ -29,13 +29,13 @@ class MechanismItemsCombination extends StatefulWidget {
 }
 
 class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
-  List<int> expectedItemList;
+  late List<int> expectedItemList;
   Map<int, ScenarioItem> selectedItems = {};
 
   @override
   void initState() {
     super.initState();
-    expectedItemList = widget.state.transitions.first.expectedItemList ?? [];
+    expectedItemList = widget.state.transitions.first.expectedItemList;
 
     if (expectedItemList.isEmpty) {
       throw Exception(
@@ -114,11 +114,9 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
   }
 
   doStateTransition() async {
-    StateTransitionUseCase useCase = sl();
-    final newState = await useCase.execute(
-        context, widget.mechanism, widget.state.transitions.first);
-    if (newState != null) {
-      widget.onNewState(context, givenState: newState);
-    }
+
+    final newState = sl<StateTransitionUseCase>().execute(context, widget.mechanism, widget.state.transitions.first);
+
+    widget.onNewState(context, givenState: newState);
   }
 }

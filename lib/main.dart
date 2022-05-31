@@ -1,4 +1,4 @@
-import 'package:airscaper/usecases/init_use_cases.dart';
+import 'package:airscaper/domain/usecases/init_use_cases.dart';
 import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'injection.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await init();
 
-  final initAppUseCase = sl<InitAppUseCase>();
-  final initResponse = await initAppUseCase.execute();
+  final initResponse = sl<InitAppUseCase>().execute();
 
   var initialRoute;
   if (initResponse is NoScenarioResponse) {

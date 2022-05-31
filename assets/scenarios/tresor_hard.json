@@ -2,7 +2,7 @@
   "details": {
     "title": "Le trésor des trois frères",
     "duration": 80,
-    "end_text": "Félicitations ! Vous avez réussi à trouver la position du trésor !\n\n A présent, rejoignez l'organisateur à la position indiquée et dites-lui le mot de passe : \n\nAUGURE"
+    "endText": "Félicitations ! Vous avez réussi à trouver la position du trésor !\n\n A présent, rejoignez l'organisateur à la position indiquée et dites-lui le mot de passe : \n\nAUGURE"
   },
   "items": [
     {
@@ -16,7 +16,7 @@
       "id": 101,
       "title": "Clé de l'horloge",
       "description": "Une clé servant à remonter une horloge.",
-      "found_description": "Une clé à remonter une horloge se cachait au fond de l'engin.",
+      "foundDescription": "Une clé à remonter une horloge se cachait au fond de l'engin.",
       "image": "assets/images/tresor/cle_horloge.png"
     },
     {
@@ -30,7 +30,7 @@
       "id": 103,
       "title": "Pion reine carreau",
       "description": "Un pion de reine, avec un symbole.",
-      "found_description": "Au fond du coffre, au milieu d'autres babioles, se trouve un pion de reine avec un symbole de carreau.",
+      "foundDescription": "Au fond du coffre, au milieu d'autres babioles, se trouve un pion de reine avec un symbole de carreau.",
       "image": "assets/images/tresor/pion_reine_carreau.png"
     },
     {
@@ -43,7 +43,7 @@
       "id": 105,
       "title": "Pion reine trèfle",
       "description": "Un pion de reine, avec un symbole.",
-      "found_description": "Vous trouvez un pion de reine d'échecs, avec un symbole de trèfle dessus.",
+      "foundDescription": "Vous trouvez un pion de reine d'échecs, avec un symbole de trèfle dessus.",
       "image": "assets/images/tresor/pion_reine_trefle.png",
       "hasQrCode": true
     },
@@ -51,188 +51,22 @@
       "id": 106,
       "title": "Pion reine coeur",
       "description": "Un pion de reine, avec un symbole.",
-      "found_description": "Au fond du tiroir, vous trouvez un pion de reine avec un symbole de coeur.",
+      "foundDescription": "Au fond du tiroir, vous trouvez un pion de reine avec un symbole de coeur.",
       "image": "assets/images/tresor/pion_reine_coeur.png"
     },
     {
       "id": 107,
       "title": "Clé ouvragée",
       "description": "Une clé finement ouvragée.",
-      "found_description": "La boîte semblait cacher une clé finement ouvragée.",
+      "foundDescription": "La boîte semblait cacher une clé finement ouvragée.",
       "image": "assets/images/tresor/cle_avec_code.png",
-      "is_track": true
+      "isTrack": true
     },
-    {
-      "id": 170,
-      "title": "Enigme",
-      "description": "Cela resemble fort à une énigme...",
-      "image": "assets/images/tresor/indice_secret.png",
-      "is_track": true,
-      "hasQrCode": true
-    },
-    {
-      "id": 171,
-      "title": "Détails du pont-levis",
-      "description": "Un papier donnant toutes les caractéristiques du pont-levis.",
-      "image": "assets/images/tresor/instructions_pont_levis.png",
-      "is_track": true,
-      "hasQrCode": true
-    },
-    {
-      "id": 200,
-      "title": "Chiffon déchiré",
-      "description": "Un chiffon déchiré.",
-      "image": "assets/images/tresor/tissu.png"
-    },
-    {
-      "id": 201,
-      "title": "Bougie éteinte",
-      "description": "Une bougie éteinte.",
-      "found_description": "A l'intérieur du placard, vous trouvez une bougie éteinte.",
-      "image": "assets/images/tresor/bougie_eteinte.png"
-    },
-    {
-      "id": 202,
-      "title": "Longue vue",
-      "description": "Une longue vue. Elle semble fragile...",
-      "found_description": "Au fond du placard, vous trouvez une longue-vue.",
-      "image": "assets/images/tresor/longue_vue.png"
-    },
-    {
-      "id": 203,
-      "title": "Lentille concave",
-      "description": "Une lentille concave.",
-      "found_description": "Alors que vous regardez le centre-ville, sa lentille se détache. Vous la rattrapez avant qu'elle ne se casse, heureusement.",
-      "image": "assets/images/tresor/lentille_concave.png"
-    },
-    {
-      "id": 204,
-      "title": "Bougie allumé",
-      "description": "Une bougie allumée.",
-      "image": "assets/images/tresor/bougie_allume.png"
-    },
-    {
-      "id": 270,
-      "title": "Heure de l'église",
-      "description": "L'heure affiché sur l'horloge de l'église.",
-      "image": "assets/images/tresor/vue_horloge.png",
-      "is_track": true
-    },
-    {
-      "id": 271,
-      "title": "Partition",
-      "description": "Une partition de musique.",
-      "found_description": "Vous trouvez une partition de musique",
-      "image": "assets/images/tresor/partition.png",
-      "is_track": true
-    },
-    {
-      "id": 272,
-      "title": "Tissu quadrillé",
-      "description": "Un tissu avec un quadrillage.",
-      "image": "assets/images/tresor/carte_nseo.png",
-      "is_track": true
-    },
-    {
-      "id": 274,
-      "title": "Cours de solfège",
-      "description": "Une page d'un cours de solfège.",
-      "image": "assets/images/tresor/guide_musique.png",
-      "is_track": true,
-      "hasQrCode": true
-    },
-    {
-      "id": 300,
-      "title": "Papier illisible",
-      "description": "Un papier. En passant les doigts dessus, vous sentez des formes de lettres. Il faudrait repasser dessus.",
-      "image": "assets/images/tresor/transparent/papier_illisible.png",
-      "hasQrCode": true
-    },
-    {
-      "id": 301,
-      "title": "Encre",
-      "description": "Un pot d'encre.",
-      "image": "assets/images/tresor/encre.png"
-    },
-    {
-      "id": 302,
-      "title": "Plume",
-      "description": "Un plume d'écriture.",
-      "image": "assets/images/tresor/plume.png"
-    },
-    {
-      "id": 370,
-      "title": "Décrypteur",
-      "description": "Une page avec pleins de symbole bizarre...",
-      "found_description": "Au milieu de papiers dispersés, une page aux symboles étranges attire votre attention.",
-      "image": "assets/images/tresor/lexique_demineur.png",
-      "is_track": true
-    },
-    {
-      "id": 371,
-      "title": "Bout de liste d'animaux",
-      "description": "Un bout de document avec des animaux représentés",
-      "image": "assets/images/tresor/liste_animaux_bout.png",
-      "is_track": true
-    },
-    {
-      "id": 372,
-      "title": "Bout de papier",
-      "description": "Un bout de papier avec des symboles.",
-      "found_description": "Au fond de l'alcove vous trouver un bout de papier avec des symboles.",
-      "image": "assets/images/tresor/indice_biblio.png",
-      "is_track": true
-    },
-    {
-      "id": 373,
-      "title": "Citation",
-      "description": "Une citation d'un auteur connu.",
-      "image": "assets/images/tresor/indice_opus.png",
-      "is_track": true
-    },
-    {
-      "id": 374,
-      "title": "Addition",
-      "description": "Un papier avec une addition.",
-      "image": "assets/images/tresor/papier_addition.png",
-      "is_track": true
-    },
-    {
-      "id": 375,
-      "title": "Liste d'animaux",
-      "description": "Un document troué, avec plusieurs animaux dessus.",
-      "image": "assets/images/tresor/liste_animaux_base.png",
-      "is_track": true,
-      "hasQrCode": true
-    },
-    {
-      "id": 401,
-      "title": "Chevalière du 1er frère",
-      "description": "La chevalière du 1er frère.",
-      "found_description": "Vous y trouvez la chevalière du 1er frère.",
-      "image": "assets/images/tresor/chevaliere.jpg"
-    },
-    {
-      "id": 402,
-      "title": "Pendentif du 2ème frère",
-      "description": "Le pendentif du 2ème frère.",
-      "found_description": "A l'intérieur, vous trouvez le pendentif du 2ème frère.",
-      "image": "assets/images/tresor/pendentif.png"
-    },
-    {
-      "id": 403,
-      "title": "Collier du 3ème frère",
-      "description": "Le collier du 3ème frère.",
-      "found_description": "Sur une table dans la pièce, vous trouvez le collier du 3ème frère.",
-      "image": "assets/images/tresor/collier.jpg"
-    }
-  ],
-  "tracks": [
     {
       "id": 150,
       "title": "Cache secrète",
       "description": "Un échiquier avec un tiroir secret",
-      "found_description": "Un tiroir secret s'est ouvert en placant le dernier pion.",
+      "foundDescription": "Un tiroir secret s'est ouvert en placant le dernier pion.",
       "image": "assets/images/tresor/tiroir_secret_echiquier.png",
       "loots": [
         {
@@ -244,7 +78,7 @@
       "id": 151,
       "title": "Tiroir secret",
       "description": "Une pendule avec un tiroir secret",
-      "found_description": "Un tiroir secret s'est ouvert en changeant l'heure !",
+      "foundDescription": "Un tiroir secret s'est ouvert en changeant l'heure !",
       "image": "assets/images/tresor/tiroir_cache_ouvert.png",
       "loots": [
         {
@@ -280,7 +114,7 @@
       "id": 156,
       "title": "Coffre à blasons",
       "description": "Un coffre ouvert.",
-      "found_description": "Le coffret est ouvert !",
+      "foundDescription": "Le coffret est ouvert !",
       "image": "assets/images/tresor/coffret_blason_ouvert.png",
       "loots": [
         {
@@ -292,15 +126,15 @@
       "id": 157,
       "title": "Cryptex ouvert",
       "description": "Un étrange engin, ouvert",
-      "found_description": "Vous avez ouvert l'engin !",
+      "foundDescription": "Vous avez ouvert l'engin !",
       "image": "assets/images/tresor/cryptex_secret_ouvert.png",
       "loots": [
         {
-          "interaction_text": "Prendre 1er objet",
+          "interactionText": "Prendre 1er objet",
           "id": 101
         },
         {
-          "interaction_text": "Prendre 2ème objet",
+          "interactionText": "Prendre 2ème objet",
           "id": 107
         }
       ]
@@ -309,14 +143,63 @@
       "id": 158,
       "title": "Bouclier",
       "description": "Un bouclier décoratif avec deux lances",
-      "found_description": "Lorsque vous glissez la deuxième lance derrière le bouclier, un pion de reine tombe par terre.",
+      "foundDescription": "Lorsque vous glissez la deuxième lance derrière le bouclier, un pion de reine tombe par terre.",
       "image": "assets/images/tresor/bouclier_lance_complet_mur.png",
       "loots": [
         {
-          "interaction_text": "Ramasser",
+          "interactionText": "Ramasser",
           "id": 104
         }
       ]
+    },
+    {
+      "id": 170,
+      "title": "Enigme",
+      "description": "Cela resemble fort à une énigme...",
+      "image": "assets/images/tresor/indice_secret.png",
+      "isTrack": true,
+      "hasQrCode": true
+    },
+    {
+      "id": 171,
+      "title": "Détails du pont-levis",
+      "description": "Un papier donnant toutes les caractéristiques du pont-levis.",
+      "image": "assets/images/tresor/instructions_pont_levis.png",
+      "isTrack": true,
+      "hasQrCode": true
+    },
+    {
+      "id": 200,
+      "title": "Chiffon déchiré",
+      "description": "Un chiffon déchiré.",
+      "image": "assets/images/tresor/tissu.png"
+    },
+    {
+      "id": 201,
+      "title": "Bougie éteinte",
+      "description": "Une bougie éteinte.",
+      "foundDescription": "A l'intérieur du placard, vous trouvez une bougie éteinte.",
+      "image": "assets/images/tresor/bougie_eteinte.png"
+    },
+    {
+      "id": 202,
+      "title": "Longue vue",
+      "description": "Une longue vue. Elle semble fragile...",
+      "foundDescription": "Au fond du placard, vous trouvez une longue-vue.",
+      "image": "assets/images/tresor/longue_vue.png"
+    },
+    {
+      "id": 203,
+      "title": "Lentille concave",
+      "description": "Une lentille concave.",
+      "foundDescription": "Alors que vous regardez le centre-ville, sa lentille se détache. Vous la rattrapez avant qu'elle ne se casse, heureusement.",
+      "image": "assets/images/tresor/lentille_concave.png"
+    },
+    {
+      "id": 204,
+      "title": "Bougie allumé",
+      "description": "Une bougie allumée.",
+      "image": "assets/images/tresor/bougie_allume.png"
     },
     {
       "id": 250,
@@ -326,15 +209,15 @@
       "hasQrCode": true,
       "loots": [
         {
-          "interaction_text": "Ouvrir le tiroir",
+          "interactionText": "Ouvrir le tiroir",
           "id": 271
         },
         {
-          "interaction_text": "Fouiller à droite",
+          "interactionText": "Fouiller à droite",
           "id": 202
         },
         {
-          "interaction_text": "Fouiller à gauche",
+          "interactionText": "Fouiller à gauche",
           "id": 201
         }
       ]
@@ -343,22 +226,22 @@
       "id": 251,
       "title": "Tableau nettoyé",
       "description": "Un tableau propre, avec un mot marqué dessus.",
-      "found_description": "Une fois le tableau nettoyé, vous voyez un mot marqué dessus...",
+      "foundDescription": "Une fois le tableau nettoyé, vous voyez un mot marqué dessus...",
       "image": "assets/images/tresor/tableau_avec_SONS.png"
     },
     {
       "id": 252,
       "title": "Vue sur le village",
       "description": "Une belle vue sur le village.",
-      "found_description": "Grâce à la longue-vue vous parvenez à voir le village au loin.",
+      "foundDescription": "Grâce à la longue-vue vous parvenez à voir le village au loin.",
       "image": "assets/images/tresor/vue_village.png",
       "loots": [
         {
-          "interaction_text": "Regarder l'église",
+          "interactionText": "Regarder l'église",
           "id": 270
         },
         {
-          "interaction_text": "Regarder le centre-ville",
+          "interactionText": "Regarder le centre-ville",
           "id": 203
         }
       ]
@@ -373,7 +256,7 @@
       "id": 254,
       "title": "Coffret ouvert",
       "description": "Un coffre ouvert",
-      "found_description": "Le coffre est ouvert !",
+      "foundDescription": "Le coffre est ouvert !",
       "image": "assets/images/tresor/coffret_ouvert.png",
       "loots": [
         {
@@ -385,11 +268,11 @@
       "id": 255,
       "title": "Piano",
       "description": "Un piano avec une trappe ouverte",
-      "found_description": "En tappant la dernière note, vous entendez une trappe s'ouvrir sous le piano.\n\nUn bout de tissu déchiré en tombe.",
+      "foundDescription": "En tappant la dernière note, vous entendez une trappe s'ouvrir sous le piano.\n\nUn bout de tissu déchiré en tombe.",
       "image": "assets/images/tresor/piano_queue.png",
       "loots": [
         {
-          "interaction_text": "Ramasser le tissu",
+          "interactionText": "Ramasser le tissu",
           "id": 200
         }
       ]
@@ -398,11 +281,11 @@
       "id": 256,
       "title": "Fenêtre ouverte",
       "description": "Une fenêtre ouverte.",
-      "found_description": "En utilisant la lentille au soleil, vous parvenez à allumer la bougie !",
+      "foundDescription": "En utilisant la lentille au soleil, vous parvenez à allumer la bougie !",
       "image": "assets/images/tresor/fenetre_soleil.png",
       "loots": [
         {
-          "interaction_text": "Récupérer la bougie",
+          "interactionText": "Récupérer la bougie",
           "id": 204
         }
       ]
@@ -411,13 +294,62 @@
       "id": 257,
       "title": "Coffre ouvert",
       "description": "Un coffre ouvert.",
-      "found_description": "Le coffre est ouvert !",
+      "foundDescription": "Le coffre est ouvert !",
       "image": "assets/images/tresor/coffre_dalle_ouverte.png",
       "loots": [
         {
           "id": 402
         }
       ]
+    },
+    {
+      "id": 270,
+      "title": "Heure de l'église",
+      "description": "L'heure affiché sur l'horloge de l'église.",
+      "image": "assets/images/tresor/vue_horloge.png",
+      "isTrack": true
+    },
+    {
+      "id": 271,
+      "title": "Partition",
+      "description": "Une partition de musique.",
+      "foundDescription": "Vous trouvez une partition de musique",
+      "image": "assets/images/tresor/partition.png",
+      "isTrack": true
+    },
+    {
+      "id": 272,
+      "title": "Tissu quadrillé",
+      "description": "Un tissu avec un quadrillage.",
+      "image": "assets/images/tresor/carte_nseo.png",
+      "isTrack": true
+    },
+    {
+      "id": 274,
+      "title": "Cours de solfège",
+      "description": "Une page d'un cours de solfège.",
+      "image": "assets/images/tresor/guide_musique.png",
+      "isTrack": true,
+      "hasQrCode": true
+    },
+    {
+      "id": 300,
+      "title": "Papier illisible",
+      "description": "Un papier. En passant les doigts dessus, vous sentez des formes de lettres. Il faudrait repasser dessus.",
+      "image": "assets/images/tresor/transparent/papier_illisible.png",
+      "hasQrCode": true
+    },
+    {
+      "id": 301,
+      "title": "Encre",
+      "description": "Un pot d'encre.",
+      "image": "assets/images/tresor/encre.png"
+    },
+    {
+      "id": 302,
+      "title": "Plume",
+      "description": "Un plume d'écriture.",
+      "image": "assets/images/tresor/plume.png"
     },
     {
       "id": 350,
@@ -427,15 +359,15 @@
       "hasQrCode": true,
       "loots": [
         {
-          "interaction_text": "Fouiller 1ère étagère",
+          "interactionText": "Fouiller 1ère étagère",
           "id": 370
         },
         {
-          "interaction_text": "Fouiller 2ème étagère",
+          "interactionText": "Fouiller 2ème étagère",
           "id": 371
         },
         {
-          "interaction_text": "Fouiller 3ème étagère",
+          "interactionText": "Fouiller 3ème étagère",
           "id": 373
         }
       ]
@@ -451,15 +383,15 @@
       "id": 352,
       "title": "Alcove cachée",
       "description": "Une alcôve cachée derrière un tableau.",
-      "found_description": "Derrière le tableau se trouvait cachée une alcôve.",
+      "foundDescription": "Derrière le tableau se trouvait cachée une alcôve.",
       "image": "assets/images/tresor/tableau_alcove.png",
       "loots": [
         {
-          "interaction_text": "Fouiller le haut",
+          "interactionText": "Fouiller le haut",
           "id": 372
         },
         {
-          "interaction_text": "Fouiller le bas",
+          "interactionText": "Fouiller le bas",
           "id": 302
         }
       ]
@@ -482,11 +414,11 @@
       "id": 355,
       "title": "Mur ouvert",
       "description": "Un mur ouvert sur une pièce cachée",
-      "found_description": "En tournant les bouteilles, vous enclanchez l'ouverture du mur ! Une pièce secrète apparaît.",
+      "foundDescription": "En tournant les bouteilles, vous enclanchez l'ouverture du mur ! Une pièce secrète apparaît.",
       "image": "assets/images/tresor/biblio_porte_cachee_ouverte.png",
       "loots": [
         {
-          "interaction_text": "Fouiller la pièce",
+          "interactionText": "Fouiller la pièce",
           "id": 403
         }
       ]
@@ -495,18 +427,18 @@
       "id": 356,
       "title": "Meuble à tiroirs",
       "description": "Un meuble avec beaucoup de tiroirs",
-      "found_description": "Bravo ! Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur à côté...",
+      "foundDescription": "Bravo ! Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur à côté...",
       "image": "assets/images/tresor/buffet_code_bruit.png"
     },
     {
       "id": 357,
       "title": "Bibbliothèque ouverte",
       "description": "Une bibliothèque ouverte",
-      "found_description": "En déplacant les différents livres, vous finissez par trouver un pot d'encre au fond de la bibliothèque.",
+      "foundDescription": "En déplacant les différents livres, vous finissez par trouver un pot d'encre au fond de la bibliothèque.",
       "image": "assets/images/tresor/biblio_opened.png",
       "loots": [
         {
-          "interaction_text": "Ramasser",
+          "interactionText": "Ramasser",
           "id": 301
         }
       ]
@@ -515,18 +447,84 @@
       "id": 358,
       "title": "Table d'écriture",
       "description": "Une table d'écriture",
-      "found_description": "Vous passez la plume avec de l'encre sur les reliefs du papier, pour faire apparaître un texte.",
+      "foundDescription": "Vous passez la plume avec de l'encre sur les reliefs du papier, pour faire apparaître un texte.",
       "image": "assets/images/tresor/table_ecriture.png",
       "loots": [
         {
-          "interaction_text": "Ramasser",
+          "interactionText": "Ramasser",
           "id": 374
         }
       ]
     },
     {
+      "id": 370,
+      "title": "Décrypteur",
+      "description": "Une page avec pleins de symbole bizarre...",
+      "foundDescription": "Au milieu de papiers dispersés, une page aux symboles étranges attire votre attention.",
+      "image": "assets/images/tresor/lexique_demineur.png",
+      "isTrack": true
+    },
+    {
+      "id": 371,
+      "title": "Bout de liste d'animaux",
+      "description": "Un bout de document avec des animaux représentés",
+      "image": "assets/images/tresor/liste_animaux_bout.png",
+      "isTrack": true
+    },
+    {
+      "id": 372,
+      "title": "Bout de papier",
+      "description": "Un bout de papier avec des symboles.",
+      "foundDescription": "Au fond de l'alcove vous trouver un bout de papier avec des symboles.",
+      "image": "assets/images/tresor/indice_biblio.png",
+      "isTrack": true
+    },
+    {
+      "id": 373,
+      "title": "Citation",
+      "description": "Une citation d'un auteur connu.",
+      "image": "assets/images/tresor/indice_opus.png",
+      "isTrack": true
+    },
+    {
+      "id": 374,
+      "title": "Addition",
+      "description": "Un papier avec une addition.",
+      "image": "assets/images/tresor/papier_addition.png",
+      "isTrack": true
+    },
+    {
+      "id": 375,
+      "title": "Liste d'animaux",
+      "description": "Un document troué, avec plusieurs animaux dessus.",
+      "image": "assets/images/tresor/liste_animaux_base.png",
+      "isTrack": true,
+      "hasQrCode": true
+    },
+    {
+      "id": 401,
+      "title": "Chevalière du 1er frère",
+      "description": "La chevalière du 1er frère.",
+      "foundDescription": "Vous y trouvez la chevalière du 1er frère.",
+      "image": "assets/images/tresor/chevaliere.jpg"
+    },
+    {
+      "id": 402,
+      "title": "Pendentif du 2ème frère",
+      "description": "Le pendentif du 2ème frère.",
+      "foundDescription": "A l'intérieur, vous trouvez le pendentif du 2ème frère.",
+      "image": "assets/images/tresor/pendentif.png"
+    },
+    {
+      "id": 403,
+      "title": "Collier du 3ème frère",
+      "description": "Le collier du 3ème frère.",
+      "foundDescription": "Sur une table dans la pièce, vous trouvez le collier du 3ème frère.",
+      "image": "assets/images/tresor/collier.jpg"
+    },
+    {
       "id": 450,
-      "end_track": true
+      "endTrack": true
     }
   ],
   "mechanisms": [
@@ -543,14 +541,14 @@
             "La configuration du pont peut servir ici.",
             "Verifier bien la LOngeur et le POids du pont-levis sur la feuille de configuration."
           ],
-          "code_hint": "Ex: 1234",
+          "codeHint": "Ex: 1234",
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_codes": [
+              "transitionTo": 2,
+              "expectedCodes": [
                 "1232"
               ],
-              "removed_items": [
+              "removedItems": [
                 171
               ]
             }
@@ -558,7 +556,7 @@
         },
         {
           "id": 2,
-          "end_track": 152
+          "endTrack": 152
         }
       ]
     },
@@ -576,14 +574,14 @@
             "L'énigme a une réponse en 6 lettres.",
             "Pour résoudre l'énigme, pensez à un \"mystère\", quelque chose de caché, ou d'intime."
           ],
-          "code_hint": "Ex: coffre",
+          "codeHint": "Ex: coffre",
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_codes": [
+              "transitionTo": 2,
+              "expectedCodes": [
                 "secret"
               ],
-              "removed_items": [
+              "removedItems": [
                 170
               ]
             }
@@ -591,7 +589,7 @@
         },
         {
           "id": 2,
-          "end_track": 157
+          "endTrack": 157
         }
       ]
     },
@@ -609,14 +607,14 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_track": 152
+              "transitionTo": 2,
+              "expectedItem": 152
             }
           ]
         },
         {
           "id": 2,
-          "end_track": 153
+          "endTrack": 153
         }
       ]
     },
@@ -634,14 +632,14 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_track": 152
+              "transitionTo": 2,
+              "expectedItem": 152
             }
           ]
         },
         {
           "id": 2,
-          "end_track": 154
+          "endTrack": 154
         }
       ]
     },
@@ -659,14 +657,14 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_track": 152
+              "transitionTo": 2,
+              "expectedItem": 152
             }
           ]
         },
         {
           "id": 2,
-          "end_track": 155
+          "endTrack": 155
         }
       ]
     },
@@ -684,9 +682,9 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 101,
-              "removed_items": [
+              "transitionTo": 2,
+              "expectedItem": 101,
+              "removedItems": [
                 101
               ]
             }
@@ -699,15 +697,15 @@
           "clues": [
             "L'heure affiché n'est pas correct, il faut trouver dans le chateau un endroit où se trouve la bonne heure."
           ],
-          "code_hint": "Ex: 08:30",
+          "codeHint": "Ex: 08:30",
           "transitions": [
             {
-              "transition_to": 3,
-              "expected_codes": [
+              "transitionTo": 3,
+              "expectedCodes": [
                 "11:30",
                 "23:30"
               ],
-              "removed_items": [
+              "removedItems": [
                 270
               ]
             }
@@ -715,7 +713,7 @@
         },
         {
           "id": 3,
-          "end_track": 151
+          "endTrack": 151
         }
       ]
     },
@@ -735,14 +733,14 @@
             "Les chiffres des quadrillages indiquent combien de cases noires il y a à côté d'elle.",
             "Comptez bien le nombre de cases noires des quadrillages."
           ],
-          "code_hint": "Ex: 1234",
+          "codeHint": "Ex: 1234",
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_codes": [
+              "transitionTo": 2,
+              "expectedCodes": [
                 "4535"
               ],
-              "removed_items": [
+              "removedItems": [
                 370
               ]
             }
@@ -750,7 +748,7 @@
         },
         {
           "id": 2,
-          "end_track": 156
+          "endTrack": 156
         }
       ]
     },
@@ -770,9 +768,9 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 102,
-              "removed_items": [
+              "transitionTo": 2,
+              "expectedItem": 102,
+              "removedItems": [
                 102
               ]
             }
@@ -780,7 +778,7 @@
         },
         {
           "id": 2,
-          "end_track": 158
+          "endTrack": 158
         }
       ]
     },
@@ -798,14 +796,14 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item_list": [
+              "transitionTo": 2,
+              "expectedItemList": [
                 103,
                 104,
                 105,
                 106
               ],
-              "removed_items": [
+              "removedItems": [
                 103,
                 104,
                 105,
@@ -822,11 +820,11 @@
             "Une des reines se trouve en A5.",
             "Une autre reine se trouve en E3."
           ],
-          "code_hint": "Ex:  A1B2C3D4",
+          "codeHint": "Ex:  A1B2C3D4",
           "transitions": [
             {
-              "transition_to": 3,
-              "expected_codes": [
+              "transitionTo": 3,
+              "expectedCodes": [
                 "A5B2C4E3",
                 "A5B2C4D1E3",
                 "1D2B3E4C5A",
@@ -837,7 +835,7 @@
         },
         {
           "id": 3,
-          "end_track": 150
+          "endTrack": 150
         }
       ]
     },
@@ -855,15 +853,15 @@
             "Il vous faut trois indices : une partition, un cours de solfège et un document avec des \"ondes\".",
             "Observez bien les \"ondes\" et la partition, vous ne remarquez rien ?"
           ],
-          "code_hint": "Ex: DO RE MI FA",
+          "codeHint": "Ex: DO RE MI FA",
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_codes": [
+              "transitionTo": 2,
+              "expectedCodes": [
                 "MIMISIDO",
                 " MI MI SI DO"
               ],
-              "removed_items": [
+              "removedItems": [
                 271,
                 274
               ]
@@ -872,7 +870,7 @@
         },
         {
           "id": 2,
-          "end_track": 255
+          "endTrack": 255
         }
       ]
     },
@@ -890,9 +888,9 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 200,
-              "removed_items": [
+              "transitionTo": 2,
+              "expectedItem": 200,
+              "removedItems": [
                 200
               ]
             }
@@ -900,7 +898,7 @@
         },
         {
           "id": 2,
-          "end_track": 251
+          "endTrack": 251
         }
       ]
     },
@@ -919,12 +917,12 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item_list": [
+              "transitionTo": 2,
+              "expectedItemList": [
                 201,
                 203
               ],
-              "removed_items": [
+              "removedItems": [
                 201,
                 203
               ]
@@ -933,7 +931,7 @@
         },
         {
           "id": 2,
-          "end_track": 256
+          "endTrack": 256
         }
       ]
     },
@@ -951,9 +949,9 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 202,
-              "removed_items": [
+              "transitionTo": 2,
+              "expectedItem": 202,
+              "removedItems": [
                 202
               ]
             }
@@ -961,7 +959,7 @@
         },
         {
           "id": 2,
-          "end_track": 252
+          "endTrack": 252
         }
       ]
     },
@@ -979,8 +977,8 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 107
+              "transitionTo": 2,
+              "expectedItem": 107
             }
           ]
         },
@@ -991,14 +989,14 @@
           "clues": [
             "Les boutons doivent être appuyé dans un certain ordre. La clé donne peut-être un indice ? N'hésitez pas à zoomer sur l'image."
           ],
-          "code_hint": "Ex: 1234",
+          "codeHint": "Ex: 1234",
           "transitions": [
             {
-              "transition_to": 3,
-              "expected_codes": [
+              "transitionTo": 3,
+              "expectedCodes": [
                 "1243"
               ],
-              "removed_items": [
+              "removedItems": [
                 107
               ]
             }
@@ -1006,7 +1004,7 @@
         },
         {
           "id": 3,
-          "end_track": 254
+          "endTrack": 254
         }
       ]
     },
@@ -1024,9 +1022,9 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 204,
-              "removed_items": [
+              "transitionTo": 2,
+              "expectedItem": 204,
+              "removedItems": [
                 204
               ]
             }
@@ -1034,7 +1032,7 @@
         },
         {
           "id": 2,
-          "end_track": 253
+          "endTrack": 253
         }
       ]
     },
@@ -1052,8 +1050,8 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_track": 253
+              "transitionTo": 2,
+              "expectedItem": 253
             }
           ]
         },
@@ -1066,14 +1064,14 @@
             "Le tissu avec quadrillage possède une rose des vents. Est-ce qu'il n'y a pas un autre élément qui vous indique des points cardinaux ?",
             "Nord = N, Sud = S, Ouest = O, Est = E."
           ],
-          "code_hint": "Ex: 1234",
+          "codeHint": "Ex: 1234",
           "transitions": [
             {
-              "transition_to": 3,
-              "expected_codes": [
+              "transitionTo": 3,
+              "expectedCodes": [
                 "6878"
               ],
-              "removed_items": [
+              "removedItems": [
                 272
               ]
             }
@@ -1081,7 +1079,7 @@
         },
         {
           "id": 3,
-          "end_track": 257
+          "endTrack": 257
         }
       ]
     },
@@ -1099,15 +1097,15 @@
             "Pour trouvez le code, il vous faut trouver deux morceaux d'un document avec des animaux. Fouillez bien le chateau pour trouver le 2ème morceau.",
             "Pour savoir quels animaux choisir, regardez-bien à leur hauteur et baissez la tête."
           ],
-          "code_hint": "Ex: 1234",
+          "codeHint": "Ex: 1234",
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_codes": [
+              "transitionTo": 2,
+              "expectedCodes": [
                 "8995",
                 "9589"
               ],
-              "removed_items": [
+              "removedItems": [
                 375,
                 371
               ]
@@ -1116,7 +1114,7 @@
         },
         {
           "id": 2,
-          "end_track": 356
+          "endTrack": 356
         }
       ]
     },
@@ -1134,14 +1132,14 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_track": 356
+              "transitionTo": 2,
+              "expectedItem": 356
             }
           ]
         },
         {
           "id": 2,
-          "end_track": 352
+          "endTrack": 352
         }
       ]
     },
@@ -1160,9 +1158,9 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item": 100,
-              "removed_items": [100]
+              "transitionTo": 2,
+              "expectedItem": 100,
+              "removedItems": [100]
             }
           ]
         },
@@ -1175,14 +1173,14 @@
             "Deux documents vous donnent les infos nécessaires : un avec les quatre couleurs, un avec les quatres lettres.",
             "Regardez bien les documents en votre possession : n'y a t-il pas un avec des LETTRES inhabituelles ?"
           ],
-          "code_hint": "Ex: 1234",
+          "codeHint": "Ex: 1234",
           "transitions": [
             {
-              "transition_to": 3,
-              "expected_codes": [
+              "transitionTo": 3,
+              "expectedCodes": [
                 "7361"
               ],
-              "removed_items": [
+              "removedItems": [
                 372
               ]
             }
@@ -1190,7 +1188,7 @@
         },
         {
           "id": 3,
-          "end_track": 357
+          "endTrack": 357
         }
       ]
     },
@@ -1209,13 +1207,13 @@
           ],
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item_list": [
+              "transitionTo": 2,
+              "expectedItemList": [
                 300,
                 301,
                 302
               ],
-              "removed_items": [
+              "removedItems": [
                 300,
                 301,
                 302
@@ -1225,7 +1223,7 @@
         },
         {
           "id": 2,
-          "end_track": 358
+          "endTrack": 358
         }
       ]
     },
@@ -1244,14 +1242,14 @@
             "En remplacant des lettres par des chiffres, une certaine addition prend un tout autre sens...",
             "Cherchez bien partout : sur vos documents, sur des énigmes déjà résolu, sur les murs..."
           ],
-          "code_hint": "Ex: 12345",
+          "codeHint": "Ex: 12345",
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_codes": [
+              "transitionTo": 2,
+              "expectedCodes": [
                 "68302"
               ],
-              "removed_items": [
+              "removedItems": [
                 373,
                 374
               ]
@@ -1260,7 +1258,7 @@
         },
         {
           "id": 2,
-          "end_track": 355
+          "endTrack": 355
         }
       ]
     },
@@ -1275,13 +1273,13 @@
           "start": true,
           "transitions": [
             {
-              "transition_to": 2,
-              "expected_item_list": [
+              "transitionTo": 2,
+              "expectedItemList": [
                 401,
                 402,
                 403
               ],
-              "removed_items": [
+              "removedItems": [
                 401,
                 402,
                 403
@@ -1291,7 +1289,7 @@
         },
         {
           "id": 2,
-          "end_track": 450
+          "endTrack": 450
         }
       ]
     }

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/inventory_local_source.dart';
-import 'package:airscaper/repositories/scenario_repository.dart';
+import 'package:airscaper/models/scenario_item.dart';
+import 'package:airscaper/domain/storage/inventory_local_source.dart';
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +37,7 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
 
         // Add item
       } else if (event is AddItemInventoryEvent) {
-        final id = await _localSource.insertItem(event.itemId);
+        final id = _localSource.insertItem(event.itemId);
         final scenarioItem = _repository.getItem(id);
 
         final newItems = (state.items ?? []) + [scenarioItem];

@@ -1,8 +1,6 @@
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/model/entities/scenario.dart';
-import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_reference.dart';
-import 'package:airscaper/usecases/init_use_cases.dart';
+import 'package:airscaper/domain/usecases/init_use_cases.dart';
+import 'package:airscaper/models/scenario_reference.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/home/home_screen.dart';
@@ -19,23 +17,23 @@ class StartScenarioParameter {
 }
 
 class StartScenarioScreen extends StatelessWidget {
+
   static const routeName = "/start";
 
+  final ScenarioReference scenario;
+
+  const StartScenarioScreen({Key? key, required this.scenario});
+
   static Route<dynamic> createRoute(ScenarioReference scenario) {
-    return createFadeRoute(StartScenarioScreen(), StartScenarioScreen.routeName,
-        arguments: StartScenarioParameter(scenario));
+    return createFadeRoute(
+        StartScenarioScreen(scenario: scenario,),
+        StartScenarioScreen.routeName);
   }
 
   RegisterScenarioUseCase get registerScenarioUseCase => sl();
 
   @override
   Widget build(BuildContext context) {
-    StartScenarioParameter arguments =
-        ModalRoute
-            .of(context)
-            .settings
-            .arguments;
-    ScenarioReference scenario = arguments.scenario;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -108,17 +106,19 @@ class StartScenarioScreen extends StatelessWidget {
   }
 
   _launchUrl(BuildContext context) async {
-    const url = "https://drive.google.com/file/d/1UU6Erdvv3bm_IoO_ft-tDvU6AMBAROFh/view?usp=sharing";
-    if (await canLaunch(url))
-      launch(url);
+    final url = Uri.parse("https://drive.google.com/file/d/1UU6Erdvv3bm_IoO_ft-tDvU6AMBAROFh/view?usp=sharing");
+    if (await canLaunchUrl(url))
+      launchUrl(url);
     else {
-      showDialog(context: context,
-          child: ARSDialogBase(child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Une erreur est survenue, merci de vérifier votre connexion internet",
-              textAlign: TextAlign.center,),
-          ),));
+      showDialog<String>(context: context,
+          builder: (context) {
+            return ARSDialogBase(child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Une erreur est survenue, merci de vérifier votre connexion internet",
+                textAlign: TextAlign.center,),
+            ),);
+          });
     }
   }
 }

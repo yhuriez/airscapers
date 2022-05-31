@@ -4,10 +4,10 @@ class ARSButton extends StatelessWidget {
   final Widget text;
   final double height;
   final Function(BuildContext) onClick;
-  final Function(BuildContext) onLongClick;
+  final Function(BuildContext)? onLongClick;
   final String image;
-  final Color backgroundColor;
-  final double borderRadius;
+  final Color? backgroundColor;
+  final double? borderRadius;
 
   const ARSButton(
       {Key? key,
@@ -42,7 +42,7 @@ class ARSButton extends StatelessWidget {
           },
           onLongPress: () {
             if (onLongClick != null) {
-              onLongClick(context);
+              onLongClick?.call(context);
             }
           },
           child: Row(

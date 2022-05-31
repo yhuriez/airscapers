@@ -1,10 +1,12 @@
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/model/entities/scenario_reference.dart';
-import 'package:airscaper/usecases/init_use_cases.dart';
+import 'package:airscaper/domain/usecases/init_use_cases.dart';
+import 'package:airscaper/models/navigation_intent.dart';
+import 'package:airscaper/models/scenario_reference.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/init/start_scenario_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -124,7 +126,7 @@ class WelcomeScreen extends StatelessWidget {
 
   onCodeValidated(BuildContext context, String code,
       List<ScenarioReference> scenarios) {
-    final scenario = scenarios.firstWhere(
+    final scenario = scenarios.firstWhereOrNull(
             (element) => element.code.toLowerCase() == code.toLowerCase());
     if (scenario != null) {
       goToScenarioStart(context, scenario);

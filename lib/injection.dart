@@ -1,15 +1,15 @@
-import 'package:airscaper/model/inventory_local_source.dart';
-import 'package:airscaper/model/managers/timer_manager.dart';
-import 'package:airscaper/model/sharedprefs/scenario_shared_prefs.dart';
-import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/usecases/end_use_cases.dart';
-import 'package:airscaper/usecases/init_use_cases.dart';
-import 'package:airscaper/usecases/inventory_use_cases.dart';
-import 'package:airscaper/usecases/link_use_cases.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/domain/configuration/hive_configuration.dart';
+import 'package:airscaper/domain/managers/timer_manager.dart';
+import 'package:airscaper/domain/storage/inventory_local_source.dart';
+import 'package:airscaper/domain/storage/scenario_storage.dart';
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
+import 'package:airscaper/domain/usecases/end_use_cases.dart';
+import 'package:airscaper/domain/usecases/init_use_cases.dart';
+import 'package:airscaper/domain/usecases/inventory_use_cases.dart';
+import 'package:airscaper/domain/usecases/link_use_cases.dart';
+import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:get_it/get_it.dart';
 
-import 'model/database.dart';
 
 final sl = GetIt.instance;
 
@@ -54,8 +54,14 @@ Future<void> init() async {
   // endregion
 
   // region Storage
-  sl.registerLazySingleton<ScenarioSharedPrefs>(() => ScenarioSharedPrefs());
-  sl.registerLazySingleton<InventoryLocalSource>(() => InventoryLocalSource(sl()));
-  sl.registerLazySingleton<InventoryDatabase>(() => InventoryDatabase());
+  await initHive();
+
+  final scenarioDb = await ScenarioStateStorage.createBox();
+  final itemDb = await InventoryLocalSource.createItemBox(1);
+  final mechanismDb = await InventoryLocalSource.createMechanismBox(2);
+  final clueDb = await InventoryLocalSource.createClueBox(3);
+
+  sl.registerLazySingleton<ScenarioStateStorage>(() => ScenarioStateStorage(scenarioDb));
+  sl.registerLazySingleton<InventoryLocalSource>(() => InventoryLocalSource(itemDb, mechanismDb, clueDb));
   // endregion
 }

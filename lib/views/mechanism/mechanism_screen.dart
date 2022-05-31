@@ -1,11 +1,11 @@
-import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/models/scenario_item.dart';
+import 'package:airscaper/models/scenario_mechanism.dart';
+import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/mechanism/clue_dialog.dart';
 import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
-import 'package:airscaper/views/navigation/navigation_intent.dart';
+import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
@@ -14,13 +14,18 @@ import '../../injection.dart';
 class MechanismFragment extends StatelessWidget {
   static const routeName = "/mechanism";
 
-  static NavigationIntent navigate(ScenarioMechanism mechanism) =>
-      NavigationIntent(routeName, mechanism);
+  final ScenarioMechanism mechanism;
+
+  const MechanismFragment({super.key, required this.mechanism});
+
+  static Route route(ScenarioMechanism mechanism) {
+    return FadeBlackPageRoute(
+        builder: (_) => MechanismFragment(mechanism: mechanism),
+        settings: const RouteSettings(name: routeName));
+  }
 
   @override
   Widget build(BuildContext context) {
-    ScenarioMechanism mechanism = ModalRoute.of(context).settings.arguments;
-
     return MechanismStateRepresentation(
       mechanism: mechanism,
     );
@@ -44,7 +49,8 @@ class MechanismStateRepresentation extends StatefulWidget {
 
 class _MechanismStateRepresentationState
     extends State<MechanismStateRepresentation> {
-  MechanismState _state;
+
+  late MechanismState _state;
 
   @override
   void initState() {
@@ -54,9 +60,6 @@ class _MechanismStateRepresentationState
 
   @override
   Widget build(BuildContext context) {
-    if (_state == null) {
-      return Container();
-    }
 
     return ARSScaffold(
       title: widget.mechanism.name,
@@ -73,23 +76,23 @@ class _MechanismStateRepresentationState
   }
 
   List<int> get acceptedIds => _state.transitions
-      .where((it) => it.expectedItemId != null)
-      .map((it) => it.expectedItemId)
+      .map((it) => it.expectedItem)
+      .whereType<int>()
       .toList();
 
-  _onItemUsed(BuildContext context, ScenarioItem selectedItem) async {
+  _onItemUsed(BuildContext context, ScenarioItem selectedItem) {
     if (!acceptedIds.contains(selectedItem.id)) return null;
 
-    final MechanismState result = await widget._itemSelectUseCase
+    final MechanismState result = widget._itemSelectUseCase
         .execute(context, widget.mechanism, selectedItem.id);
     if (result != null) {
       _refreshState(context, givenState: result);
     }
   }
 
-  _refreshState(BuildContext context, {MechanismState givenState}) async {
+  _refreshState(BuildContext context, {MechanismState? givenState}) {
     final newState = givenState ??
-        await widget._loadMechanismStateUseCase.execute(widget.mechanism);
+        widget._loadMechanismStateUseCase.execute(widget.mechanism);
 
     if (newState.end) {
       final intent = await widget._mechanismFinishedUseCase

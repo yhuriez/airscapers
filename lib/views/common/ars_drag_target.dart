@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ARSDragTarget<T> extends StatelessWidget {
+class ARSDragTarget<T extends Object> extends StatelessWidget {
 
   final DragTargetBuilder<T> targetBuilder;
-  final OnAcceptedData<T> acceptedData;
+  final OnAcceptedData<T>? acceptedData;
 
   const ARSDragTarget({Key? key,
     required this.targetBuilder,
-    required this.acceptedData})
+    this.acceptedData})
       : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class ARSDragTarget<T> extends StatelessWidget {
     return DragTarget<T>(
         builder: targetBuilder,
         onWillAccept: (data) => true,
-        onAccept: (data) => acceptedData(context, data)
+        onAccept: (data) => acceptedData?.call(context, data)
     );
   }
 }

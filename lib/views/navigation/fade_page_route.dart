@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 
 class FadeBlackPageRoute<T> extends MaterialPageRoute<T> {
-  FadeBlackPageRoute({WidgetBuilder builder, RouteSettings settings})
+  FadeBlackPageRoute({required WidgetBuilder builder, required RouteSettings settings})
       : super(builder: builder, settings: settings);
 
   @override

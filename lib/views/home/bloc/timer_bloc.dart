@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/usecases/init_use_cases.dart';
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
+import 'package:airscaper/domain/usecases/init_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,32 +46,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
     }
   }
 
-  Stream<TimerState> initTimer() async* {
-    try {
-      final initialDate = await _initStartDateUseCase.execute();
-      final scenarioDuration = Duration(minutes: _repository.durationInMinute);
 
-      final durationLeft =
-          scenarioDuration - DateTime.now().difference(initialDate);
-      timeLeft = durationLeft.inSeconds;
-
-      print("TimerBloc: timeLeft => $timeLeft");
-
-      if(_globalTimer != null) {
-        _globalTimer.cancel();
-      }
-
-      _globalTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-        add(TickTimerEvent());
-      });
-
-      yield TimerState(durationLeft: timeLeft);
-
-    } catch (exception, stack) {
-      debugPrintStack(stackTrace: stack, label: exception.toString());
-      yield null;
-    }
-  }
 }
 
 /// EVENT

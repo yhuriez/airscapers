@@ -12,8 +12,11 @@ class ImageDetailsScreen extends StatelessWidget {
   final String assetPath;
   final String title;
 
-  const ImageDetailsScreen({Key? key, this.title, this.assetPath})
-      : super(key: key);
+  const ImageDetailsScreen({
+    Key? key,
+    required this.title,
+    required this.assetPath
+  }) : super(key: key);
 
   static Route<dynamic> createRoute(String title, String assetPath) {
     return createFadeRoute(

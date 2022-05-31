@@ -14,7 +14,7 @@ class ScenarioMechanism with _$ScenarioMechanism {
   const factory ScenarioMechanism({
     required int id,
     required String name,
-    List<MechanismState> states
+    @Default([]) List<MechanismState> states
   }) = _ScenarioMechanism;
 
   factory ScenarioMechanism.fromJson(Map<String, dynamic> json) =>
@@ -29,13 +29,13 @@ class MechanismState with _$MechanismState {
 
   const factory MechanismState({
     required int id,
-    String? description,
-    String? image,
+    required String description,
+    required String image,
     @Default(false) bool start,
     int? endTrack,
     @Default([]) List<MechanismTransition> transitions,
     @Default([]) List<MechanismClue> clues,
-    required String codeHint,
+    String? codeHint,
   }) = _MechanismState;
 
   factory MechanismState.fromJson(Map<String, dynamic> json) =>
@@ -51,11 +51,10 @@ class MechanismTransition with _$MechanismTransition {
 
   const factory MechanismTransition({
     required int stateId,
-    int? transitionTo,
-    @Default([]) List<String> expectedCodes,
+    required int transitionTo,
     int? expectedItem,
-    int? expectedTrack,
     @Default([]) List<int> expectedItemList,
+    @Default([]) List<String> expectedCodes,
     @Default([]) List<int> removedItems,
   }) = _MechanismTransition;
 

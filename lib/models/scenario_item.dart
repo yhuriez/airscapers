@@ -15,11 +15,12 @@ class ScenarioItem with _$ScenarioItem {
   const factory ScenarioItem({
     required int id,
     required String description,
-    String? image,
+    required String image,
     required String title,
     String? foundDescription,
     @Default([]) List<ScenarioLoot> loots,
-    @Default(false) bool isPickup,
+    @Default(false) bool isPickedUp,
+    @Default(false) bool isZoomable,
     @Default(false) bool endTrack,
     @Default(false) bool hasQrCode,
   }) = _ScenarioItem;

@@ -1,12 +1,10 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/common/helpers.dart';
-import 'package:airscaper/repositories/scenario_repository.dart';
-import 'package:airscaper/usecases/end_use_cases.dart';
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
+import 'package:airscaper/domain/usecases/end_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
-import 'package:airscaper/views/navigation/navigation_intent.dart';
-import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
 import '../../injection.dart';
@@ -19,12 +17,6 @@ class SuccessScreen extends StatelessWidget {
   CountCluesUseCase get _countCluesUseCase => sl();
   TimeUsedUseCase get _timeUsedUseCase => sl();
 
-  static Route<dynamic> createRoute() {
-    return createFadeRoute(SuccessScreen(), SuccessScreen.routeName);
-  }
-
-  static NavigationIntent navigate() => NavigationIntent(routeName, null,
-      rootNavigator: true, route: createRoute());
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +32,7 @@ class SuccessScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 32.0),
                 child: Text(
-                  _repository.endText,
+                  _repository.endText ?? "",
                   style: TextStyle(
                       fontSize: 20,
 
@@ -68,50 +60,43 @@ class SuccessScreen extends StatelessWidget {
   }
 
   Widget _createClueUsedRow() {
-    return FutureBuilder<int>(
-        future: _countCluesUseCase.execute(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return Container();
 
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Indices utilisés : ",
-                  style: TextStyle(fontSize: 20, color: textColor)),
-              Text(snapshot.data.toString(),
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: textColor)),
-            ],
-          );
-        });
+    final count = _countCluesUseCase.execute();
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Indices utilisés : ",
+            style: TextStyle(fontSize: 20, color: textColor)),
+        Text(count.toString(),
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: textColor)),
+      ],
+    );
   }
 
   Widget _createTimeUsedRow() {
-    return FutureBuilder<int>(
-        future: _timeUsedUseCase.execute(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return Container();
 
-          final formattedTime =
-              formatDuration(Duration(seconds: snapshot.data));
+    final timeUsed = _timeUsedUseCase.execute();
 
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Fini en : ",
-                  style: TextStyle(fontSize: 20, color: textColor)),
-              Text(formattedTime,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: textColor)),
-            ],
-          );
-        });
+    final formattedTime = formatDuration(Duration(seconds: timeUsed));
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Fini en : ",
+            style: TextStyle(fontSize: 20, color: textColor)),
+        Text(formattedTime,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: textColor)),
+      ],
+    );
   }
 
   Widget get finishButton => Padding(
@@ -130,7 +115,7 @@ class SuccessScreen extends StatelessWidget {
   _showQuitDialog(BuildContext context) {
     showDialog(
         context: context,
-        child: ARSConfirmDialog(
+        builder: (context) => ARSConfirmDialog(
           onCancelClicked: (context) =>
               Navigator.of(context, rootNavigator: true).pop(),
           onOkClicked: onBackHomePressed,

@@ -8,7 +8,7 @@ class FadeBlackAnimation extends StatelessWidget {
   final Animation<double> animation;
   final Widget child;
 
-  const FadeBlackAnimation({Key? key, this.animation, this.child}) : super(key: key);
+  const FadeBlackAnimation({Key? key, required this.animation, required this.child}) : super(key: key);
 
 
   @override

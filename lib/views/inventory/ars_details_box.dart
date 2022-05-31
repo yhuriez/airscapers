@@ -1,4 +1,4 @@
-import 'package:airscaper/model/entities/scenario_item.dart';
+import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_drag_target.dart';
 import 'package:airscaper/views/common/ars_inner_shadow.dart';
 import 'package:airscaper/views/common/ars_white_shadow.dart';
@@ -8,18 +8,18 @@ import 'package:flutter/material.dart';
 class ARSDetailsBox extends StatelessWidget {
   final Widget Function(BuildContext) interactionsBuilder;
 
-  final Function(BuildContext, ScenarioItem) onAcceptedDropData;
+  final Function(BuildContext, ScenarioItem)? onAcceptedDropData;
 
-  final String? imageUrl;
+  final String imageUrl;
   final String description;
   final String name;
 
   const ARSDetailsBox(
       {Key? key,
-      this.interactionsBuilder,
-      this.imageUrl,
-      this.description,
-      this.name,
+      required this.interactionsBuilder,
+      required this.imageUrl,
+      required this.description,
+      required this.name,
       this.onAcceptedDropData})
       : super(key: key);
 
@@ -29,9 +29,8 @@ class ARSDetailsBox extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         // Image
-        (this.imageUrl == null)
-            ? Container()
-            : Expanded(child: _createImageDragTarget(context)),
+        Expanded(child: _createImageDragTarget(context)),
+
         // Item box
         _createItemBox(context)
       ],
@@ -72,7 +71,7 @@ class ARSDetailsBox extends StatelessWidget {
     return ARSDragTarget<ScenarioItem>(
       targetBuilder: (context, incoming, rejected) {
         print("Incoming = $incoming");
-        return _createImage(context, incomingState: incoming != null && incoming.isNotEmpty);
+        return _createImage(context, incomingState: incoming.isNotEmpty);
       },
       acceptedData: onAcceptedDropData
     );
@@ -105,6 +104,6 @@ class ARSDetailsBox extends StatelessWidget {
 
   _onImageClicked(BuildContext context) {
     Navigator.of(context, rootNavigator: true)
-        .push(ImageDetailsScreen.createRoute(this.name ?? "", this.imageUrl));
+        .push(ImageDetailsScreen.createRoute(this.name, this.imageUrl));
   }
 }

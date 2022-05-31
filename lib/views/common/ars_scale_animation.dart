@@ -1,10 +1,10 @@
-import 'package:airscaper/common/colors.dart';
+
 import 'package:flutter/material.dart';
 
 class ARSScaleAnimation extends StatefulWidget {
   final Widget child;
 
-  const ARSScaleAnimation({Key? key, this.child}) : super(key: key);
+  const ARSScaleAnimation({Key? key, required this.child}) : super(key: key);
 
   @override
   _ARSScaleAnimationState createState() => _ARSScaleAnimationState();
@@ -12,8 +12,8 @@ class ARSScaleAnimation extends StatefulWidget {
 
 class _ARSScaleAnimationState extends State<ARSScaleAnimation>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {

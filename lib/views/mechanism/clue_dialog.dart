@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/models/scenario_mechanism.dart';
+import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class ClueDialog extends StatefulWidget {
   LoadAvailableCluesUseCase get _loadClueUseCase => sl();
   UseClueUseCase get _useClueUseCase => sl();
 
-  ClueDialog({Key? key, this.state}) : super(key: key);
+  ClueDialog({Key? key, required this.state}) : super(key: key);
 
   @override
   _ClueDialogState createState() => _ClueDialogState();
@@ -22,12 +22,10 @@ class ClueDialog extends StatefulWidget {
 
 class _ClueDialogState extends State<ClueDialog> {
 
-  int nbExistingClues;
-
-  // State
-  List<MechanismClue> availableClues;
-  int currentClueIndex = -1;
-  bool showConfirm = true;
+  late int nbExistingClues;
+  late List<MechanismClue> availableClues;
+  late int currentClueIndex;
+  late bool showConfirm;
 
   MechanismClue get currentClue => availableClues[currentClueIndex];
 
@@ -35,24 +33,13 @@ class _ClueDialogState extends State<ClueDialog> {
   void initState() {
     super.initState();
     nbExistingClues = widget.state.clues.length;
-    _initAvailableClues();
-  }
-
-  _initAvailableClues() async {
-    final clues = await widget._loadClueUseCase.execute(widget.state);
-    setState(() {
-      availableClues = clues;
-      showConfirm = availableClues.isEmpty;
-      currentClueIndex = max(0, availableClues.length - 1);
-    });
+    availableClues = widget._loadClueUseCase.execute(widget.state);
+    showConfirm = availableClues.isEmpty;
+    currentClueIndex = max(0, availableClues.length - 1);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (currentClueIndex == -1 || availableClues == null) {
-      return Container();
-    }
-
     if (showConfirm) {
       return _showConfirmDialog(context);
     }
@@ -123,10 +110,9 @@ class _ClueDialogState extends State<ClueDialog> {
   Widget _createButton(BuildContext context,
       String text,
       Function(BuildContext) action,) =>
-      FlatButton(
-          child: Text(text, style: TextStyle(fontSize: 20),),
-          onPressed: () => action(context),
-          textColor: Colors.black);
+      TextButton(
+          child: Text(text, style: TextStyle(fontSize: 20, color: Colors.black),),
+          onPressed: () => action(context));
 
   _showConfirmDialog(BuildContext context) {
     String message = "Souhaitez-vous un autre indice ?";
@@ -145,8 +131,8 @@ class _ClueDialogState extends State<ClueDialog> {
         });
   }
 
-  useClue() async {
-    final newClues = await widget._useClueUseCase.execute(widget.state);
+  useClue() {
+    final newClues = widget._useClueUseCase.execute(widget.state);
     setState(() {
       availableClues = newClues;
       currentClueIndex = availableClues.length - 1;
@@ -155,7 +141,7 @@ class _ClueDialogState extends State<ClueDialog> {
   }
 
   _dismissDialog() {
-    if (availableClues == null || availableClues.isEmpty) {
+    if (availableClues.isEmpty) {
       Navigator.of(context, rootNavigator: true).pop();
     } else {
       setState(() {

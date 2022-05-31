@@ -1,4 +1,4 @@
-import 'package:airscaper/model/entities/scenario_item.dart';
+import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_drag_target.dart';
 import 'package:airscaper/views/common/ars_scale_animation.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +12,19 @@ const double ITEM_SIZE = 50;
 class ARSPaginatedGrid extends StatelessWidget {
   final List<ScenarioItem> items;
   final int selectedItem;
-  final int newItem;
+  final int? newItem;
   final Function(BuildContext, ScenarioItem, bool) onItemClicked;
 
   // pageNotifier is external because we want to keep selected page index across widget update
-  final ValueNotifier pageNotifier;
+  final ValueNotifier<int> pageNotifier;
 
   ARSPaginatedGrid(
       {Key? key,
-      this.items,
-      this.selectedItem,
-      this.onItemClicked,
-      this.pageNotifier,
-      this.newItem})
+      required this.items,
+        required this.selectedItem,
+        required this.onItemClicked,
+        required this.pageNotifier,
+        this.newItem})
       : super(key: key);
 
   @override
@@ -98,7 +98,7 @@ class ARSPaginatedGrid extends StatelessWidget {
 class ARSGridPage extends StatelessWidget {
   final List<Widget> children;
 
-  const ARSGridPage({Key? key, this.children}) : super(key: key);
+  const ARSGridPage({Key? key, required this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class ARSGridPage extends StatelessWidget {
 }
 
 class ARSGridEmptyItem extends StatelessWidget {
-  final OnAcceptedData<ScenarioItem> onAcceptedData;
+  final OnAcceptedData<ScenarioItem>? onAcceptedData;
 
   const ARSGridEmptyItem({Key? key, this.onAcceptedData}) : super(key: key);
 
@@ -140,7 +140,7 @@ class ARSGridEmptyItem extends StatelessWidget {
 class ARSGridImageItem extends StatelessWidget {
   final ScenarioItem item;
   final bool selected;
-  final Function(BuildContext, ScenarioItem, bool) onItemClicked;
+  final Function(BuildContext, ScenarioItem, bool) ?onItemClicked;
   final double itemSize;
   final bool draggable;
   final bool animated;
@@ -191,14 +191,14 @@ class ARSGridImageItem extends StatelessWidget {
         child: (onItemClicked == null)
             ? imageSlot
             : InkWell(
-                onTap: () => onItemClicked(context, item, selected),
+                onTap: () => onItemClicked?.call(context, item, selected),
                 child: imageSlot),
       );
 
   Widget get imageSlot => Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: ExactAssetImage(item.image), fit: BoxFit.fill),
+              image: ExactAssetImage(item.image!), fit: BoxFit.fill),
           borderRadius: BorderRadius.circular(6),
         ),
       );

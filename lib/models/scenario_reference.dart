@@ -17,7 +17,7 @@ class ScenarioReference with _$ScenarioReference {
     String? image,
     required String code,
     String? linkedFile,
-    String? description,
+    required String description,
   }) = _ScenarioReference;
 
   factory ScenarioReference.fromJson(Map<String, dynamic> json) =>

@@ -1,12 +1,11 @@
-import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ARSShadowBox extends StatelessWidget {
 
   final Widget child;
 
-  const ARSShadowBox({Key? key, this.child}) : super(key: key);
+  const ARSShadowBox({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

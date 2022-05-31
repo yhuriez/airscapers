@@ -1,14 +1,14 @@
-import 'package:airscaper/model/entities/element_description.dart';
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
+
+import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/views/mechanism/interactions/code_input.dart';
-import 'package:airscaper/views/mechanism/interactions/continue_button.dart';
 import 'package:airscaper/views/mechanism/interactions/items_combination.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 Widget createMechanismInteraction(
     ScenarioMechanism mechanism, MechanismState state, OnNewState onNewState) {
 
-  final firstTransition = state.transitions.first;
+  final firstTransition = state.transitions.firstOrNull;
 
   // Code input
   if (firstTransition?.expectedCodes != null) {

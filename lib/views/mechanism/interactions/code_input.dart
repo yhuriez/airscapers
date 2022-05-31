@@ -1,5 +1,6 @@
-import 'package:airscaper/model/entities/scenario_mechanism.dart';
-import 'package:airscaper/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/models/navigation_intent.dart';
+import 'package:airscaper/models/scenario_mechanism.dart';
+import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
@@ -29,16 +30,17 @@ class MechanismCodeInput extends StatelessWidget {
     );
   }
 
-  _onCodeClicked(BuildContext context, String codeResult) async {
+  _onCodeClicked(BuildContext context, String? codeResult) {
     if (codeResult != null) {
       MechanismCodeInputUseCase _codeInputUseCase = sl();
 
-      final MechanismState newState = await _codeInputUseCase.execute(
-          context, mechanism, codeResult);
+      final newState = _codeInputUseCase.execute(context, mechanism, codeResult);
+
       if (newState != null) {
         onNewState(context, givenState: newState);
+
       } else {
-        final intent = createDialogNavigationIntent("", "Rien ne se passe");
+        final intent = NavigationIntent.dialog(arguments: DialogArguments("", "Rien ne se passe"));
         navigateTo(context, intent);
       }
     }

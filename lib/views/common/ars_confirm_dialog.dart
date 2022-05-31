@@ -7,7 +7,10 @@ class ARSConfirmDialog extends StatelessWidget {
   final Function(BuildContext) onCancelClicked;
 
   const ARSConfirmDialog(
-      {Key? key, this.child, this.onOkClicked, this.onCancelClicked})
+      {Key? key,
+        required this.child,
+        required this.onOkClicked,
+        required this.onCancelClicked})
       : super(key: key);
 
   @override
@@ -41,8 +44,7 @@ class ARSConfirmDialog extends StatelessWidget {
     String text,
     Function(BuildContext) action,
   ) =>
-      FlatButton(
-          child: Text(text, style: TextStyle(fontSize: 20),),
-          onPressed: () => action(context),
-          textColor: Colors.black);
+      TextButton(
+          child: Text(text, style: TextStyle(fontSize: 20, color: Colors.black),),
+          onPressed: () => action(context));
 }

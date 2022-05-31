@@ -1,8 +1,6 @@
-import 'package:airscaper/common/ars_result.dart';
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/model/entities/element_description.dart';
-import 'package:airscaper/model/entities/scenario_item.dart';
-import 'package:airscaper/usecases/init_use_cases.dart';
+import 'package:airscaper/models/scenario_item.dart';
+import 'package:airscaper/domain/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
 import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
@@ -13,7 +11,6 @@ import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
-import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +23,7 @@ import '../../injection.dart';
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
   ScanFragment.routeName: (BuildContext context) => ScanFragment(),
-  ScenarioContentFragment.routeName: (BuildContext context) =>
-      ScenarioContentFragment(),
-  InventoryDetailsFragment.routeName: (BuildContext context) =>
-      InventoryDetailsFragment(),
-  MechanismFragment.routeName: (BuildContext context) => MechanismFragment()
+  ScenarioContentFragment.routeName: (BuildContext context) => ScenarioContentFragment()
 };
 
 class HomeScreen extends StatelessWidget {
@@ -58,30 +51,24 @@ class HomeScreenLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ARSResult<StartResult>>(
-        future: _startScenarioUseCase.execute(context),
-        initialData: ARSResult.loading(),
-        builder: (context, snapshot) {
-          if (snapshot.error != null) {
-            return createErrorView(snapshot.error.toString());
-          }
-          final result = snapshot.data;
-          if (result.errorCode != null) {
-            return createErrorView(result.errorCode);
-          } else if (result.loading) {
-            return loadingView;
-          }
 
-          if (result.data == StartResult.ENDED) {
-            _doSuccessScreen(context);
-            return Container();
-          }
+    final result = _startScenarioUseCase.execute(context);
 
-          return Material(
-            child:
-                Container(color: backgroundColor, child: HomeScreenContent()),
-          );
-        });
+    if (result.errorCode != null) {
+      return createErrorView(result.errorCode!);
+    } else if (result.loading) {
+      return loadingView;
+    }
+
+    if (result.data == StartResult.ENDED) {
+      _doSuccessScreen(context);
+      return Container();
+    }
+
+    return Material(
+      child:
+          Container(color: backgroundColor, child: HomeScreenContent()),
+    );
   }
 
   Widget createErrorView(String errorCode) => Material(
@@ -112,8 +99,7 @@ class HomeScreenLoader extends StatelessWidget {
 
     Future.delayed(
         Duration.zero,
-        () =>
-            Navigator.of(context).pushReplacement(SuccessScreen.createRoute()));
+        () => Navigator.of(context).pushReplacementNamed(SuccessScreen.routeName));
   }
 }
 
@@ -142,10 +128,8 @@ class HomeScreenContent extends StatelessWidget {
 
     return BlocBuilder<InventoryBloc, InventoryState>(
       builder: (context, state) {
-        final List<ScenarioItem> items = state.items ?? [];
-        final selectedItem = items.firstWhere(
-            (it) => it.id == state.selectedItem,
-            orElse: () => null);
+        final List<ScenarioItem> items = state.items;
+        final selectedItem = items.firstWhere((it) => it.id == state.selectedItem);
 
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -171,14 +155,14 @@ class HomeScreenContent extends StatelessWidget {
   Widget _createHomeNavigation(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        _homeNavigatorKey.currentState.maybePop();
+        _homeNavigatorKey.currentState?.maybePop();
         return false;
       },
       child: Navigator(
           key: _homeNavigatorKey,
           initialRoute: MainScanFragment.routeName,
           onGenerateRoute: (RouteSettings settings) => FadeBlackPageRoute(
-              settings: settings, builder: homeRouteBuilders[settings.name])),
+              settings: settings, builder: homeRouteBuilders[settings.name]!)),
     );
   }
 
@@ -189,16 +173,14 @@ class HomeScreenContent extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           // Selected item name
-          (selectedItem == null)
-              ? Container()
-              : Text(
-                  selectedItem.title,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      color: textColor),
-                ),
+           Text(
+            selectedItem.title,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: textColor),
+          ),
 
           // Spacing components
           Spacer(),
@@ -228,7 +210,7 @@ class HomeScreenContent extends StatelessWidget {
 
 
     var isTrackScreen = false;
-    _homeNavigatorKey.currentState.popUntil((route) {
+    _homeNavigatorKey.currentState?.popUntil((route) {
       final routeName = route.settings.name;
 
       if (routeName == InventoryDetailsFragment.routeName) {
@@ -250,7 +232,7 @@ class HomeScreenContent extends StatelessWidget {
       bloc.add(SelectItemInventoryEvent(selectedItem.id));
 
       if(selectedItem.isTrack) {
-        await _homeNavigatorKey.currentState.pushNamed(
+        await _homeNavigatorKey.currentState.push(
             InventoryDetailsFragment.routeName,
             arguments:
             ScenarioElementDesc.fromItem(selectedItem, isCurrentTrack: true));

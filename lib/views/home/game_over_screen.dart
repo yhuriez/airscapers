@@ -1,5 +1,5 @@
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/usecases/end_use_cases.dart';
+import 'package:airscaper/domain/usecases/end_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
@@ -46,15 +46,7 @@ class GameOverScreen extends StatelessWidget {
                   ),
 
                   // Percentage
-                  FutureBuilder<int>(
-                    future: _completionUseCase.execute(),
-                    builder: (context, snapshot) {
-                      if(snapshot.data == null) return Container();
-
-                      return _createPercentage(snapshot.data);
-                    }
-                  ),
-
+                  _createPercentage(_completionUseCase.execute())
                 ]),
           ),
 
