@@ -14,7 +14,7 @@ description: Escame game with QR codes
 version: 0.1.1+2
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -29,39 +29,22 @@ dependencies:
 
   progress_indicators: ^1.0.0
 
-  flutter_bloc: ^8.0.1
-
   intl: ^0.17.0
 
   http: ^0.13.4
 
   collection: ^1.15.0
-  quiver: ^2.1.5
 
   # Freezed
   freezed_annotation: ^1.0.0 # Give additional methods to data classes (copy, equals, sealed classes...)
-
-  # Moor
 
   provider: ^6.0.1
 
   hive: ^2.0.0
   hive_flutter: ^1.0.0
 
-  # Value equality
-  equatable: ^2.0.3
-
-  # Functional programming thingies
-  dartz: ^0.10.1
-
-  # Local cache
-  shared_preferences: ^2.0.15
-
   # To interpret SVG
   flutter_svg: ^1.0.3
-
-  # To parse enum to string
-  enum_to_string: ^2.0.1
 
   flutter_keyboard_visibility: ^5.2.0
 

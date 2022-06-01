@@ -16,7 +16,7 @@ class MechanismFragment extends StatelessWidget {
 
   final ScenarioMechanism mechanism;
 
-  const MechanismFragment({super.key, required this.mechanism});
+  const MechanismFragment({Key? key, required this.mechanism});
 
   static Route route(ScenarioMechanism mechanism) {
     return FadeBlackPageRoute(
@@ -83,21 +83,20 @@ class _MechanismStateRepresentationState
   _onItemUsed(BuildContext context, ScenarioItem selectedItem) {
     if (!acceptedIds.contains(selectedItem.id)) return null;
 
-    final MechanismState result = widget._itemSelectUseCase
-        .execute(context, widget.mechanism, selectedItem.id);
+    final MechanismState? result = widget._itemSelectUseCase.execute(context, widget.mechanism, selectedItem.id);
     if (result != null) {
       _refreshState(context, givenState: result);
     }
   }
 
   _refreshState(BuildContext context, {MechanismState? givenState}) {
-    final newState = givenState ??
+    final MechanismState newState = givenState ??
         widget._loadMechanismStateUseCase.execute(widget.mechanism);
 
-    if (newState.end) {
-      final intent = await widget._mechanismFinishedUseCase
-          .execute(widget.mechanism, newState);
+    if (newState.endTrack != null) {
+      final intent = widget._mechanismFinishedUseCase.execute(widget.mechanism, newState.endTrack!);
       navigateReplaceTo(context, intent);
+
     } else {
       setState(() {
         _state = newState;
@@ -113,6 +112,6 @@ class _MechanismStateRepresentationState
   }
 
   _onClueClicked(BuildContext context) {
-    showDialog(context: context, child: ClueDialog(state: _state));
+    showDialog(context: context, builder: (_) => ClueDialog(state: _state));
   }
 }

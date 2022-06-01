@@ -1,15 +1,11 @@
 import 'package:airscaper/common/exception/invalid_scenario_exception.dart';
-import 'package:airscaper/models/scenario_mechanism.dart';
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:airscaper/domain/storage/inventory_local_source.dart';
 import 'package:airscaper/domain/storage/scenario_storage.dart';
-import 'package:airscaper/domain/repositories/scenario_repository.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
-import 'package:airscaper/views/home/success_screen.dart';
-import 'package:airscaper/views/inventory/inventory_details_screen.dart';
-import 'package:airscaper/views/navigation/navigation_intent.dart';
+import 'package:airscaper/models/navigation_intent.dart';
+import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoadCurrentMechanismStateUseCase {
   final InventoryLocalSource _inventory;
@@ -97,10 +93,12 @@ class MechanismItemSelectUseCase {
 }
 
 class StateTransitionUseCase {
+
   final InventoryLocalSource _inventory;
   final LoadCurrentMechanismStateUseCase _currentMechanismStateUseCase;
+  final InventoryLocalSource _localSource;
 
-  StateTransitionUseCase(this._inventory, this._currentMechanismStateUseCase);
+  StateTransitionUseCase(this._inventory, this._currentMechanismStateUseCase, this._localSource);
 
   MechanismState execute(
       BuildContext context, ScenarioMechanism mechanism, MechanismTransition transition,
@@ -110,14 +108,9 @@ class StateTransitionUseCase {
     // Update current state for given mechanism
     _inventory.insertOrUpdateMechanismState(mechanism.id, newStateId);
 
-    // ignore: close_sinks
-    final InventoryBloc inventoryBloc = BlocProvider.of(context);
-
     List<int> removedItems = List.of(transition.removedItems);
 
-    if (removedItems.isNotEmpty) {
-      inventoryBloc.add(RemoveItemsInventoryEvent(removedItems));
-    }
+    removedItems.forEach((itemId) => _localSource.updateItemUsed(itemId));
 
     return _currentMechanismStateUseCase.execute(mechanism);
   }
@@ -130,7 +123,7 @@ class MechanismFinishedUseCase {
 
   MechanismFinishedUseCase(this._repository, this._inventory, this._sharedPrefs);
 
-  Future<NavigationIntent> execute(ScenarioMechanism mechanism, int endTrackId) async {
+  NavigationIntent execute(ScenarioMechanism mechanism, int endTrackId) {
     final item = _repository.getItem(endTrackId);
 
     if (item == null) throw InvalidScenarioException(
@@ -140,11 +133,11 @@ class MechanismFinishedUseCase {
 
     // If end track, mark as ended and go to end screen
     if (item.endTrack) {
-      await _sharedPrefs.setEndDate(DateTime.now());
-      return SuccessScreen.navigate();
+      _sharedPrefs.setEndDate(DateTime.now());
+      return NavigationIntent.success();
     }
 
-    return InventoryDetailsFragment.navigate(item);
+    return NavigationIntent.itemDetails(item: item);
   }
 }
 

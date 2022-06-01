@@ -1,24 +1,19 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/models/scenario_item.dart';
-import 'package:airscaper/domain/usecases/init_use_cases.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
-import 'package:airscaper/views/home/bloc/timer_bloc.dart';
+import 'package:airscaper/views/home/bloc/inventory_state.dart';
 import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
-import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:progress_indicators/progress_indicators.dart';
+import 'package:provider/provider.dart';
 
-import '../../injection.dart';
 
 final homeRouteBuilders = {
   MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
@@ -35,71 +30,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => TimerBloc()),
-        BlocProvider(create: (context) => InventoryBloc()),
-      ],
-      child: SafeArea(
-          child: KeyboardVisibilityProvider(child: HomeScreenLoader())),
-    );
-  }
-}
-
-class HomeScreenLoader extends StatelessWidget {
-  StartScenarioUseCase get _startScenarioUseCase => sl();
-
-  @override
-  Widget build(BuildContext context) {
-
-    final result = _startScenarioUseCase.execute(context);
-
-    if (result.errorCode != null) {
-      return createErrorView(result.errorCode!);
-    } else if (result.loading) {
-      return loadingView;
-    }
-
-    if (result.data == StartResult.ENDED) {
-      _doSuccessScreen(context);
-      return Container();
-    }
-
-    return Material(
-      child:
-          Container(color: backgroundColor, child: HomeScreenContent()),
-    );
-  }
-
-  Widget createErrorView(String errorCode) => Material(
-        child: Container(
-            color: backgroundColor,
-            child: Center(
-                child: Text(
-              errorCode,
-              style: TextStyle(fontSize: 20),
-            ))),
-      );
-
-  Widget get loadingView => Material(
-        child: Container(
-          color: backgroundColor,
-          child: Center(
-            child: JumpingDotsProgressIndicator(
-                color: textColor,
-                numberOfDots: 4,
-                fontSize: 40.0,
-                dotSpacing: 2.0),
-          ),
-        ),
-      );
-
-  _doSuccessScreen(BuildContext context) {
-    BlocProvider.of<TimerBloc>(context).add(EndTimerEvent());
-
-    Future.delayed(
-        Duration.zero,
-        () => Navigator.of(context).pushReplacementNamed(SuccessScreen.routeName));
+    return SafeArea(
+        child: KeyboardVisibilityProvider(
+            child: Material(child: Container(color: backgroundColor, child: HomeScreenContent()))));
   }
 }
 
@@ -126,29 +59,27 @@ class HomeScreenContent extends StatelessWidget {
   Widget createInventory(BuildContext context) {
     final pageNotifier = ValueNotifier(0);
 
-    return BlocBuilder<InventoryBloc, InventoryState>(
-      builder: (context, state) {
-        final List<ScenarioItem> items = state.items;
-        final selectedItem = items.firstWhere((it) => it.id == state.selectedItem);
+    final state = context.watch<InventoryState>();
 
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              _createBottomBar(context, selectedItem),
-              ARSPaginatedGrid(
-                items: items,
-                selectedItem: state.selectedItem,
-                newItem: state.newItem,
-                onItemClicked: (context, item, selected) {
-                  _updateSelectedItem(context, item, selected);
-                },
-                pageNotifier: pageNotifier,
-              ),
-            ],
+    final List<ScenarioItem> items = state.items;
+    final selectedItem = state.selectedItem;
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          _createBottomBar(context, selectedItem),
+          ARSPaginatedGrid(
+            items: items,
+            selectedItem: state.selectedItem?.id,
+            newItem: state.newItem?.id,
+            onItemClicked: (context, item, selected) {
+              _updateSelectedItem(context, item, selected);
+            },
+            pageNotifier: pageNotifier,
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 
@@ -161,20 +92,20 @@ class HomeScreenContent extends StatelessWidget {
       child: Navigator(
           key: _homeNavigatorKey,
           initialRoute: MainScanFragment.routeName,
-          onGenerateRoute: (RouteSettings settings) => FadeBlackPageRoute(
-              settings: settings, builder: homeRouteBuilders[settings.name]!)),
+          onGenerateRoute: (RouteSettings settings) =>
+              FadeBlackPageRoute(settings: settings, builder: homeRouteBuilders[settings.name]!)),
     );
   }
 
-  Widget _createBottomBar(BuildContext context, ScenarioItem selectedItem) {
+  Widget _createBottomBar(BuildContext context, ScenarioItem? selectedItem) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           // Selected item name
-           Text(
-            selectedItem.title,
+          Text(
+            selectedItem?.title ?? "",
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -198,45 +129,38 @@ class HomeScreenContent extends StatelessWidget {
 
   _doGameOverScreen(BuildContext context) {
     Future.delayed(
-        Duration.zero,
-        () => Navigator.of(context)
-            .pushReplacement(GameOverScreen.createRoute()));
+        Duration.zero, () => Navigator.of(context).pushReplacement(GameOverScreen.createRoute()));
   }
 
-  _updateSelectedItem(
-      BuildContext context, ScenarioItem selectedItem, bool isSelected) async {
-    // ignore: close_sinks
-    final bloc = BlocProvider.of<InventoryBloc>(context);
+  _updateSelectedItem(BuildContext context, ScenarioItem selectedItem, bool isSelected) async {
 
+    final state = context.read<InventoryState>();
 
     var isTrackScreen = false;
     _homeNavigatorKey.currentState?.popUntil((route) {
       final routeName = route.settings.name;
 
-      if (routeName == InventoryDetailsFragment.routeName) {
-        if (route.settings.arguments is ScenarioElementDesc) {
-          final desc = route.settings.arguments as ScenarioElementDesc;
-          isTrackScreen = desc.isCurrentTrack;
-        }
-      }
+      // TODO
+      // if (routeName == InventoryDetailsFragment.routeName) {
+      //   if (route.settings.arguments is ScenarioElementDesc) {
+      //     final desc = route.settings.arguments as ScenarioElementDesc;
+      //     isTrackScreen = desc.isCurrentTrack;
+      //   }
+      // }
       return true; // Will prevent pop
     });
 
-
-    if(isTrackScreen) {
-      bloc.add(DeselectItemInventoryEvent());
-      _homeNavigatorKey.currentState.pop();
+    if (isTrackScreen) {
+      state.unselectItem(selectedItem.id);
+      _homeNavigatorKey.currentState?.pop();
 
     } else {
       // Select the new item
-      bloc.add(SelectItemInventoryEvent(selectedItem.id));
+      state.selectItem(selectedItem.id);
 
-      if(selectedItem.isTrack) {
-        await _homeNavigatorKey.currentState.push(
-            InventoryDetailsFragment.routeName,
-            arguments:
-            ScenarioElementDesc.fromItem(selectedItem, isCurrentTrack: true));
-        bloc.add(DeselectItemInventoryEvent());
+      if (selectedItem.isZoomable) {
+        await _homeNavigatorKey.currentState?.push(InventoryDetailsFragment.route(selectedItem));
+        state.unselectItem(selectedItem.id);
       }
     }
   }

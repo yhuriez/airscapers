@@ -98,6 +98,9 @@ class InventoryLocalSource {
     }
   }
 
+  Stream watchItems() => _itemDb.watch();
+
+
   Future<bool> clear() async {
     await _itemDb.clear();
     await _mechanismDb.clear();

@@ -9,7 +9,6 @@ import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
-import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -96,10 +95,12 @@ class MainScanFragment extends StatelessWidget {
   }
 
   onStartBarcodeScanner(BuildContext context) async {
-    var result = await BarcodeScanner.scan();
-    var scanResult = result.rawContent;
+    // TODO
 
-    parseLink(context, scanResult);
+    // var result = await BarcodeScanner.scan();
+    // var scanResult = result.rawContent;
+    //
+    // parseLink(context, scanResult);
   }
 
   parseLink(BuildContext context, String? scanResult) async {

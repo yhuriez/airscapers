@@ -51,7 +51,7 @@ class ScenarioRepository {
   ScenarioMechanism? getMechanism(int mechanismId)
       => mechanisms.firstWhereOrNull((element) => element.id == mechanismId);
 
-  Future<bool> initIndex(BuildContext context) async {
+  Future<bool> initIndex() async {
     try {
       final indexJsonStr =
           await rootBundle.loadString("assets/scenarios/index.json");
@@ -64,14 +64,14 @@ class ScenarioRepository {
     }
   }
 
-  Future<bool> initScenario(
-      BuildContext context, ScenarioReference reference) async {
+  Future<bool> initScenario(ScenarioReference reference) async {
     try {
       final indexJsonStr = await rootBundle
           .loadString("assets/scenarios/${reference.linkedFile}");
       final indexJson = jsonDecode(indexJsonStr);
       _scenario = Scenario.fromJson(indexJson);
       return true;
+
     } catch (e, stack) {
       debugPrintStack(stackTrace: stack, label: e.toString());
       return false;

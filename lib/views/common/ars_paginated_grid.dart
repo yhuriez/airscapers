@@ -1,9 +1,9 @@
+import 'package:airscaper/common/extensions/list_extensions.dart';
 import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_drag_target.dart';
 import 'package:airscaper/views/common/ars_scale_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:page_view_indicators/arrow_page_indicator.dart';
-import 'package:quiver/iterables.dart';
 
 const int GRID_ITEM_PER_PAGE = 4;
 const double GRID_HEIGHT = 60;
@@ -11,7 +11,7 @@ const double ITEM_SIZE = 50;
 
 class ARSPaginatedGrid extends StatelessWidget {
   final List<ScenarioItem> items;
-  final int selectedItem;
+  final int? selectedItem;
   final int? newItem;
   final Function(BuildContext, ScenarioItem, bool) onItemClicked;
 
@@ -91,7 +91,7 @@ class ARSPaginatedGrid extends StatelessWidget {
 
     final List<Widget> allItems = ([...imageItems, ...emptyItems]).toList();
 
-    return partition<Widget>(allItems, GRID_ITEM_PER_PAGE).toList();
+    return allItems.partition(GRID_ITEM_PER_PAGE).toList();
   }
 }
 
@@ -198,7 +198,7 @@ class ARSGridImageItem extends StatelessWidget {
   Widget get imageSlot => Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: ExactAssetImage(item.image!), fit: BoxFit.fill),
+              image: ExactAssetImage(item.image), fit: BoxFit.fill),
           borderRadius: BorderRadius.circular(6),
         ),
       );

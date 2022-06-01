@@ -1,45 +1,29 @@
-import 'package:airscaper/common/helpers.dart';
-import 'package:airscaper/views/home/bloc/timer_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:progress_indicators/progress_indicators.dart';
+import 'package:provider/provider.dart';
 
-class ARSClock extends StatefulWidget {
+import '../home/bloc/timer_state.dart';
+
+class ARSClock extends StatelessWidget {
+
   final Function(BuildContext) onEnd;
 
   const ARSClock({Key? key, required this.onEnd}) : super(key: key);
 
   @override
-  _ARSClockState createState() => _ARSClockState();
-}
-
-class _ARSClockState extends State<ARSClock> {
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TimerBloc, TimerState>(
-      builder: (context, state) {
-        if (state.loading) {
-          return loadingView;
-        }
 
-        if (state.end) {
-          widget.onEnd(context);
-          return Container();
-        }
+    final state = context.watch<TimerState>();
 
-        final durationLeft = Duration(seconds: state.durationLeft);
-        final textValue = formatDuration(durationLeft);
+    if (state.end) {
+      onEnd(context);
+      return Container();
+    }
 
-        return Text(textValue,
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                color: Colors.white));
-      },
-    );
+    return Text(state.durationLeft,
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            color: Colors.white));
   }
-
-  Widget get loadingView => JumpingDotsProgressIndicator(
-      numberOfDots: 4, fontSize: 40.0, dotSpacing: 2.0);
 }

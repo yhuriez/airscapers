@@ -1,140 +1,126 @@
 import 'package:airscaper/common/colors.dart';
-import 'package:airscaper/domain/usecases/init_use_cases.dart';
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/models/scenario_reference.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/init/start_scenario_screen.dart';
+import 'package:airscaper/views/init/state/scenario_index_state.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-
-import '../../injection.dart';
+import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static const routeName = "/choose";
 
-  static Route<dynamic> createRoute() {
+  static Route createRoute() {
     return createFadeRoute(WelcomeScreen(), WelcomeScreen.routeName);
   }
-
-  InitScenarioIndexUseCase get _initScenarioIndexUseCase => sl();
 
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityProvider(
       child: Scaffold(
         backgroundColor: backgroundColor,
-        body: FutureBuilder<InitIndexResponse>(
-            future: _initScenarioIndexUseCase.execute(context),
-            builder: (context, snapshot) {
-              final scenarioResponse = snapshot.data;
-
-              if (scenarioResponse is FailedInitIndexResponse) {
-                return Container(
-                  child: Center(
-                    child: Text("Error while loading index"),
-                  ),
-                );
-              } else if (scenarioResponse is ScenarioChoiceInitResponse) {
-                final scenarios = scenarioResponse.scenarios;
-                return createCoreScreen(context, scenarios);
-              } else {
-                return Container();
-              }
-            }),
+        body: SafeArea(child: WelcomeScreenBody()),
       ),
     );
   }
+}
 
-  createCoreScreen(BuildContext context, List<ScenarioReference> scenarios) =>
-      SafeArea(
-        child: Column(
-          children: [
-            // Header image
-            (KeyboardVisibilityProvider.isKeyboardVisible(context))
-                ? Container()
-                : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
-                  width: 200,
-                  height: 200,
-                  child: Image.asset(
-                      "assets/images/common/airscapers_inverted.png")),
-            ),
 
-            // Title
-            Center(
-                child: Text(
-                  "Airscapers",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.white),
-                )),
+class WelcomeScreenBody extends StatelessWidget {
 
-            // Space
-            Expanded(child: Container()),
+  const WelcomeScreenBody({Key? key}) : super(key: key);
 
-            // Code input
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ARSCodeTextField(
-                  callback: (context, code) =>
-                      checkScenarioCode(context, code, scenarios),
-                  hint: "Entrez le code de votre scénario"
-              ),
-            ),
-
-            // Tutorial indicator
-            Center(
-                child: Text(
-                  "OU",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                )),
-
-            // Tutorial button
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ARSButton(
-                text: Text(
-                  "Démarrer le tutoriel",
-                  style: TextStyle(fontSize: 16),
-                ),
-                onClick: (context) => onTutorialClicked(context, scenarios),
-                height: 60,
-              ),
-            )
-          ],
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Header image
+        (KeyboardVisibilityProvider.isKeyboardVisible(context))
+            ? Container()
+            : Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+              width: 200,
+              height: 200,
+              child: Image.asset(
+                  "assets/images/common/airscapers_inverted.png")),
         ),
-      );
 
-  checkScenarioCode(BuildContext context, String code,
-      List<ScenarioReference> scenarios) {
-    final acceptedValues = scenarios.map((it) => it.code).toList();
-    if (!acceptedValues.contains(code.toLowerCase())) {
+        // Title
+        Center(
+            child: Text(
+              "Airscapers",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.white),
+            )),
+
+        // Space
+        Expanded(child: Container()),
+
+        // Code input
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ARSCodeTextField(
+              callback: (context, code) => checkScenarioCode(context, code),
+              hint: "Entrez le code de votre scénario"
+          ),
+        ),
+
+        // Tutorial indicator
+        Center(
+            child: Text(
+              "OU",
+              style: TextStyle(fontSize: 16, color: Colors.white),
+            )),
+
+        // Tutorial button
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ARSButton(
+            text: Text(
+              "Démarrer le tutoriel",
+              style: TextStyle(fontSize: 16),
+            ),
+            onClick: (context) => onTutorialClicked(context),
+            height: 60,
+          ),
+        )
+      ],
+    );
+  }
+
+  checkScenarioCode(BuildContext context, String code) {
+
+    final state = context.read<ScenarioIndexState>();
+
+    if (state.checkScenarioCode(code)) {
+      onCodeValidated(context, code);
+
+    } else {
       navigateShowDialog(
           context,
           DialogArguments(
               "Code invalide", "Ce code n'existe pas dans l'application"));
-
-    } else {
-      onCodeValidated(context, code, scenarios);
     }
   }
 
-  onCodeValidated(BuildContext context, String code,
-      List<ScenarioReference> scenarios) {
-    final scenario = scenarios.firstWhereOrNull(
-            (element) => element.code.toLowerCase() == code.toLowerCase());
+  onCodeValidated(BuildContext context, String code) {
+
+    final state = context.read<ScenarioIndexState>();
+
+    final scenario = state.getScenarioByCode(code);
     if (scenario != null) {
       goToScenarioStart(context, scenario);
     }
   }
 
-  onTutorialClicked(BuildContext context, List<ScenarioReference> scenarios) {
-    onCodeValidated(context, "tuto", scenarios);
+  onTutorialClicked(BuildContext context) {
+    onCodeValidated(context, "tuto");
   }
 
   goToScenarioStart(BuildContext context, ScenarioReference scenario) {

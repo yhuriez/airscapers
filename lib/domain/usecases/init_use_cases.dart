@@ -1,112 +1,70 @@
-import 'package:airscaper/common/ars_result.dart';
-import 'package:airscaper/models/scenario_reference.dart';
-import 'package:airscaper/domain/storage/scenario_storage.dart';
+import 'package:airscaper/common/exception/invalid_scenario_exception.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
-import 'package:airscaper/views/home/bloc/timer_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:airscaper/domain/storage/scenario_storage.dart';
+import 'package:airscaper/models/scenario_reference.dart';
+import 'package:collection/collection.dart';
+
 
 /// Init application
 class InitAppUseCase {
+
   final ScenarioStateStorage _prefs;
+  final ScenarioRepository _repository;
+  final StartScenarioUseCase _startScenarioUseCase;
 
-  InitAppUseCase(this._prefs);
 
-  InitAppResponse execute() {
+  InitAppUseCase(this._prefs, this._repository, this._startScenarioUseCase);
+
+  Future<InitAppResponse> execute() async {
+
+    final initSucceeded = await _repository.initIndex();
+    if (!initSucceeded) throw InvalidScenarioException("Scenario index cannot be initialized");
+
     final scenarioId = _prefs.getCurrentId();
     if (scenarioId == null) {
-      return NoScenarioResponse();
+      return InitAppResponse.NO_SCENARIO;
+
     } else {
-      return HasScenarioResponse();
+      // Init scenario
+      await _startScenarioUseCase.execute(scenarioId);
+
+      return InitAppResponse.HAS_SCENARIO;
     }
   }
 }
 
-abstract class InitAppResponse {}
 
-class HasScenarioResponse extends InitAppResponse {}
-
-class NoScenarioResponse extends InitAppResponse {}
-
-/// Init index containing all scenarios
-class InitScenarioIndexUseCase {
-  final ScenarioRepository _repository;
-
-  InitScenarioIndexUseCase(this._repository);
-
-  Future<InitIndexResponse> execute(BuildContext context) async {
-    final initSucceeded = await _repository.initIndex(context);
-    if (!initSucceeded) return FailedInitIndexResponse();
-
-    return ScenarioChoiceInitResponse(_repository.scenarios);
-  }
+enum InitAppResponse {
+  NO_SCENARIO,
+  HAS_SCENARIO
 }
 
-abstract class InitIndexResponse {}
-
-class ScenarioChoiceInitResponse extends InitIndexResponse {
-  final List<ScenarioReference> scenarios;
-
-  ScenarioChoiceInitResponse(this.scenarios);
-}
-
-class FailedInitIndexResponse extends InitIndexResponse {}
-
-/// Register given scenario as ongoing scenario
-class RegisterScenarioUseCase {
-  final ScenarioStateStorage _prefs;
-
-  RegisterScenarioUseCase(this._prefs);
-
-  execute(BuildContext context, ScenarioReference scenario) async {
-    await _prefs.setCurrentId(scenario.id);
-  }
-}
 
 /// Init storage with given scenario
 class StartScenarioUseCase {
-  final ScenarioRepository _repository;
+
   final ScenarioStateStorage _prefs;
+  final ScenarioRepository _repository;
 
   StartScenarioUseCase(this._repository, this._prefs);
 
-  Future<ARSResult<StartResult>> execute(BuildContext context) async {
-    final currentId = _prefs.getCurrentId();
+  Future<void> execute(String scenarioId) async {
 
-    if (!_repository.isIndexInit) {
-      final indexInit = await _repository.initIndex(context);
-      if (!indexInit) return ARSResult.error("index_init_failed");
-    }
+    _prefs.setCurrentId(scenarioId);
 
     if (!_repository.isScenarioInit) {
-      final scenarioRef = _repository.scenarios.firstWhere(
-              (element) => element.id == currentId,
-          orElse: () =>
-          throw Exception("Scenario with id $currentId not found"));
+      final scenarioRef = _repository.scenarios.firstWhereOrNull(
+              (element) => element.id == scenarioId);
+      if(scenarioRef == null)
+        throw InvalidScenarioException("Should have a scenario with id $scenarioId in memory");
 
-      final scenarioInit = await _repository.initScenario(context, scenarioRef);
-      if (!scenarioInit) return ARSResult.error("scenario_init_failed");
+      final scenarioInit = await _repository.initScenario(scenarioRef);
+      if (!scenarioInit)
+        throw InvalidScenarioException("Scenario $scenarioId cannot be initialize");
     }
-
-    BlocProvider.of<TimerBloc>(context).add(InitTimerEvent());
-    BlocProvider.of<InventoryBloc>(context).add(InitInventoryEvent());
-
-    // Check if scenario is ended
-    final endDate = _prefs.getEndDate();
-
-    final result = (endDate != null)
-        ? StartResult.ENDED
-        : StartResult.ONGOING;
-
-    return ARSResult.success(result);
   }
 }
 
-enum StartResult {
-  ONGOING,
-  ENDED
-}
 
 /// Provide the list of all available scenario
 class LoadAllScenariosUseCase {

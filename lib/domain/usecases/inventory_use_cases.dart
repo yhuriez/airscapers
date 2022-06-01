@@ -1,19 +1,15 @@
-import 'package:airscaper/models/scenario_loot.dart';
 import 'package:airscaper/domain/storage/inventory_local_source.dart';
-import 'package:airscaper/views/home/bloc/inventory_bloc.dart';
+import 'package:airscaper/models/scenario_loot.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddLootUseCase {
+
   final InventoryLocalSource _localSource;
 
   AddLootUseCase(this._localSource);
 
   Future<AddLootResponse> execute(BuildContext context, Iterable<ScenarioLoot> loots) async {
     var existingElement = false;
-
-    // ignore: close_sinks
-    final inventoryBloc = BlocProvider.of<InventoryBloc>(context);
 
     try {
 
@@ -22,8 +18,9 @@ class AddLootUseCase {
           final result = _localSource.loadItem(loot.id);
           if (result != null) {
             existingElement = true;
+
           } else {
-            inventoryBloc.add(AddItemInventoryEvent(loot.id));
+            _localSource.insertItem(loot.id, true);
           }
         }
       });

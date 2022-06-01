@@ -16,9 +16,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
 
   // region Use Cases
-  sl.registerLazySingleton<InitAppUseCase>(() => InitAppUseCase(sl()));
-  sl.registerLazySingleton<InitScenarioIndexUseCase>(() => InitScenarioIndexUseCase(sl()));
-  sl.registerLazySingleton<RegisterScenarioUseCase>(() => RegisterScenarioUseCase(sl()));
+  sl.registerLazySingleton<InitAppUseCase>(() => InitAppUseCase(sl(), sl(), sl()));
   sl.registerLazySingleton<InitStartDateUseCase>(() => InitStartDateUseCase(sl()));
   sl.registerLazySingleton<StartScenarioUseCase>(() => StartScenarioUseCase(sl(), sl()));
   sl.registerLazySingleton<LoadAllScenariosUseCase>(() => LoadAllScenariosUseCase(sl()));
@@ -37,7 +35,7 @@ Future<void> init() async {
   sl.registerLazySingleton<LoadCurrentMechanismStateUseCase>(() => LoadCurrentMechanismStateUseCase(sl()));
   sl.registerLazySingleton<MechanismCodeInputUseCase>(() => MechanismCodeInputUseCase(sl(), sl()));
   sl.registerLazySingleton<MechanismItemSelectUseCase>(() => MechanismItemSelectUseCase(sl(), sl()));
-  sl.registerLazySingleton<StateTransitionUseCase>(() => StateTransitionUseCase(sl(), sl()));
+  sl.registerLazySingleton<StateTransitionUseCase>(() => StateTransitionUseCase(sl(), sl(), sl()));
   sl.registerLazySingleton<MechanismFinishedUseCase>(() => MechanismFinishedUseCase(sl(), sl(), sl()));
 
   sl.registerLazySingleton<LoadAvailableCluesUseCase>(() => LoadAvailableCluesUseCase(sl()));

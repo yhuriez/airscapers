@@ -18,8 +18,8 @@ class InterpretLinkUseCase {
     switch(loot.type) {
       case LootType.item: return _interpretItem(context, loot);
       case LootType.mechanism: return _interpretMechanism(loot);
-      default: return createDialogNavigationIntent(
-          "QR code invalide", "Ce QR code n'existe pas pour ce scénario");
+      default: return NavigationIntent.dialog(arguments: DialogArguments(
+          "QR code invalide", "Ce QR code n'existe pas pour ce scénario"));
     }
   }
 
@@ -52,7 +52,7 @@ class InterpretLinkUseCase {
         return NavigationIntent.dialog(arguments: DialogArguments("Erreur", "Une erreur est survenue"));
 
       } else if (response == AddLootResponse.ALREADY_FOUND) {
-        return NavigationIntent.dialog(arguments: DialogArguments("Objet déjà trouvé", "Vous possédez déjà cet objet");
+        return NavigationIntent.dialog(arguments: DialogArguments("Objet déjà trouvé", "Vous possédez déjà cet objet"));
 
       } else {
         return NavigationIntent.itemDetails(item: scenarioItem);

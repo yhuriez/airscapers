@@ -30,7 +30,7 @@ class StartScenarioScreen extends StatelessWidget {
         StartScenarioScreen.routeName);
   }
 
-  RegisterScenarioUseCase get registerScenarioUseCase => sl();
+  StartScenarioUseCase get _startScenarioUseCase => sl();
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class StartScenarioScreen extends StatelessWidget {
   }
 
   onStartClicked(BuildContext context, ScenarioReference scenario) async {
-    await registerScenarioUseCase.execute(context, scenario);
+    await _startScenarioUseCase.execute(scenario.id);
     Navigator.of(context, rootNavigator: true)
         .pushAndRemoveUntil(HomeScreen.createRoute(), (route) => false);
   }
