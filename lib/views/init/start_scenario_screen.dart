@@ -24,7 +24,7 @@ class StartScenarioScreen extends StatelessWidget {
 
   const StartScenarioScreen({Key? key, required this.scenario});
 
-  static Route<dynamic> createRoute(ScenarioReference scenario) {
+  static Route<Object> createRoute(ScenarioReference scenario) {
     return createFadeRoute(
         StartScenarioScreen(scenario: scenario,),
         StartScenarioScreen.routeName);
@@ -38,7 +38,12 @@ class StartScenarioScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar:
-      AppBar(title: Text(scenario.name), centerTitle: true, elevation: 0),
+      AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text(scenario.name),
+          centerTitle: true,
+          elevation: 0
+      ),
       body: Container(
         child: Column(
           children: <Widget>[

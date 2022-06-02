@@ -27,8 +27,8 @@ Map<String, dynamic> _$$_ScenarioMechanismToJson(
 _$_MechanismState _$$_MechanismStateFromJson(Map<String, dynamic> json) =>
     _$_MechanismState(
       id: json['id'] as int,
-      description: json['description'] as String,
-      image: json['image'] as String,
+      description: json['description'] as String?,
+      image: json['image'] as String?,
       start: json['start'] as bool? ?? false,
       endTrack: json['endTrack'] as int?,
       transitions: (json['transitions'] as List<dynamic>?)
@@ -36,10 +36,9 @@ _$_MechanismState _$$_MechanismStateFromJson(Map<String, dynamic> json) =>
                   MechanismTransition.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      clues: (json['clues'] as List<dynamic>?)
-              ?.map((e) => MechanismClue.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      clues:
+          (json['clues'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const [],
       codeHint: json['codeHint'] as String?,
     );
 
@@ -58,7 +57,6 @@ Map<String, dynamic> _$$_MechanismStateToJson(_$_MechanismState instance) =>
 _$_MechanismTransition _$$_MechanismTransitionFromJson(
         Map<String, dynamic> json) =>
     _$_MechanismTransition(
-      stateId: json['stateId'] as int,
       transitionTo: json['transitionTo'] as int,
       expectedItem: json['expectedItem'] as int?,
       expectedItemList: (json['expectedItemList'] as List<dynamic>?)
@@ -78,7 +76,6 @@ _$_MechanismTransition _$$_MechanismTransitionFromJson(
 Map<String, dynamic> _$$_MechanismTransitionToJson(
         _$_MechanismTransition instance) =>
     <String, dynamic>{
-      'stateId': instance.stateId,
       'transitionTo': instance.transitionTo,
       'expectedItem': instance.expectedItem,
       'expectedItemList': instance.expectedItemList,
@@ -88,7 +85,7 @@ Map<String, dynamic> _$$_MechanismTransitionToJson(
 
 _$_MechanismClue _$$_MechanismClueFromJson(Map<String, dynamic> json) =>
     _$_MechanismClue(
-      id: json['id'] as int,
+      id: json['id'] as String,
       description: json['description'] as String,
     );
 

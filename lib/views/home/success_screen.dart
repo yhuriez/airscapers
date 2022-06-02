@@ -5,6 +5,7 @@ import 'package:airscaper/domain/usecases/end_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
 import '../../injection.dart';
@@ -17,6 +18,9 @@ class SuccessScreen extends StatelessWidget {
   CountCluesUseCase get _countCluesUseCase => sl();
   TimeUsedUseCase get _timeUsedUseCase => sl();
 
+  static Route<void> createRoute() {
+    return createFadeRoute<void>(SuccessScreen(), SuccessScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class SuccessScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 32.0),
                 child: Text(
-                  _repository.endText ?? "",
+                  _repository.endText,
                   style: TextStyle(
                       fontSize: 20,
 

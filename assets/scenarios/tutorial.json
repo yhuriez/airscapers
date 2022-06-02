@@ -88,6 +88,9 @@
     },
     {
       "id": 1,
+      "title": "",
+      "description": "",
+      "image": "",
       "endTrack": true
     }
   ],

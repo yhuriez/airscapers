@@ -2,12 +2,17 @@ import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:airscaper/injection.dart';
 import 'package:airscaper/models/scenario_loot.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
 class ScenarioContentFragment extends StatelessWidget {
   static const routeName = "/tutorial";
 
   ScenarioRepository get _repository => sl();
+
+  static Route<String> createRoute() {
+    return createFadeRoute<String>(ScenarioContentFragment(), ScenarioContentFragment.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class ScenarioContentFragment extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text("Eléments du scénario"),
         centerTitle: true,
       ),
@@ -38,7 +44,7 @@ class ScenarioContentFragment extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset(element.imageLink),
+                        if(element.imageLink != null) Image.asset(element.imageLink!),
 
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
@@ -65,12 +71,12 @@ class ScenarioContentFragment extends StatelessWidget {
     result += repo.items
         .where((element) => element.hasQrCode && !element.endTrack)
         .map((element) =>
-            ScenarioElement(element.title, "${LootType.item}/${element.id}", element.image))
+            ScenarioElement(element.title, "${LootType.item.name}/${element.id}", element.image))
         .toList();
 
 
     result += repo.mechanisms.map((mechanism) => ScenarioElement(
-        mechanism.name, "${LootType.mechanism}/${mechanism.id}", mechanism.states.first.image))
+        mechanism.name, "${LootType.mechanism.name}/${mechanism.id}", mechanism.states.first.image))
         .toList();
 
     return result;
@@ -84,7 +90,7 @@ class ScenarioContentFragment extends StatelessWidget {
 class ScenarioElement {
   final String name;
   final String link;
-  final String imageLink;
+  final String? imageLink;
 
   const ScenarioElement(this.name, this.link, this.imageLink);
 }

@@ -13,7 +13,7 @@ class InventoryClue with _$InventoryClue {
   const InventoryClue._();
 
   const factory InventoryClue({
-    required int id,
+    required String id,
     required DateTime creationDate,
   }) = _InventoryClue;
 

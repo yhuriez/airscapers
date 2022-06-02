@@ -146,8 +146,8 @@ class LoadAvailableCluesUseCase {
 
   LoadAvailableCluesUseCase(this._localSource);
 
-  List<MechanismClue> execute(MechanismState state) {
-    final clues = state.clues;
+  List<MechanismClue> execute(int mechanismId, MechanismState state) {
+    final clues = state.getCluesObjects(mechanismId);
     final inventoryClues = _localSource.loadAllClues();
 
     return clues
@@ -162,13 +162,13 @@ class UseClueUseCase {
 
   UseClueUseCase(this._localSource, this._availableCluesUseCase);
 
-  List<MechanismClue> execute(MechanismState state) {
-    var availableClues = _availableCluesUseCase.execute(state);
-    var allClues = state.clues;
+  List<MechanismClue> execute(int mechanismId, MechanismState state) {
+    var availableClues = _availableCluesUseCase.execute(mechanismId, state);
+    var allClues = state.getCluesObjects(mechanismId);
 
     if (availableClues.length < allClues.length) {
-      availableClues.sort((a, b) => a.id - b.id);
-      allClues.sort((a, b) => a.id - b.id);
+      availableClues.sort((a, b) => a.id.compareTo(b.id));
+      allClues.sort((a, b) => a.id.compareTo(b.id));
 
       final nextClue = allClues[availableClues.length];
       _localSource.insertClue(nextClue.id);

@@ -23,6 +23,10 @@ class MainScanFragment extends StatelessWidget {
 
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
+  static Route<void> createRoute() {
+    return createFadeRoute<void>(MainScanFragment(), MainScanFragment.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ARSScaffold(

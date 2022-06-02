@@ -8,7 +8,7 @@ part of 'inventory_clue.dart';
 
 _$_InventoryClue _$$_InventoryClueFromJson(Map<String, dynamic> json) =>
     _$_InventoryClue(
-      id: json['id'] as int,
+      id: json['id'] as String,
       creationDate: DateTime.parse(json['creationDate'] as String),
     );
 

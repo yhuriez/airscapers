@@ -3,6 +3,7 @@ import 'package:airscaper/domain/usecases/link_use_cases.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_code_text_field.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
+import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
 import '../../injection.dart';
@@ -11,6 +12,10 @@ class ScanFragment extends StatelessWidget {
   static const routeName = "/scan";
 
   InterpretLinkUseCase get interpretLinkUseCase => sl();
+
+  static Route<void> createRoute() {
+    return createFadeRoute<void>(ScanFragment(), ScanFragment.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {

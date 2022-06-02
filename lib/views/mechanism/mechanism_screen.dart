@@ -67,8 +67,8 @@ class _MechanismStateRepresentationState
       child: ARSDetailsBox(
         interactionsBuilder: (_) =>
             createMechanismInteraction(widget.mechanism, _state, _refreshState),
-        imageUrl: _state.image,
-        description: _state.description,
+        imageUrl: _state.image ?? "",
+        description: _state.description ?? "",
         name: widget.mechanism.name,
         onAcceptedDropData: _onItemUsed,
       ),
@@ -112,6 +112,6 @@ class _MechanismStateRepresentationState
   }
 
   _onClueClicked(BuildContext context) {
-    showDialog(context: context, builder: (_) => ClueDialog(state: _state));
+    showDialog(context: context, builder: (_) => ClueDialog(mechanismId: widget.mechanism.id, state: _state));
   }
 }

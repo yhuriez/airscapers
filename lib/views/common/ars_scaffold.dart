@@ -14,6 +14,7 @@ class ARSScaffold extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text(title),
         elevation: 0,
         centerTitle: true,

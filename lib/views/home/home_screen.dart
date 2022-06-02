@@ -8,7 +8,6 @@ import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/inventory/inventory_details_screen.dart';
-import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -16,15 +15,15 @@ import 'package:provider/provider.dart';
 
 
 final homeRouteBuilders = {
-  MainScanFragment.routeName: (BuildContext context) => MainScanFragment(),
-  ScanFragment.routeName: (BuildContext context) => ScanFragment(),
-  ScenarioContentFragment.routeName: (BuildContext context) => ScenarioContentFragment()
+  MainScanFragment.routeName: () => MainScanFragment.createRoute(),
+  ScanFragment.routeName: () => ScanFragment.createRoute(),
+  ScenarioContentFragment.routeName: () => ScenarioContentFragment.createRoute()
 };
 
 class HomeScreen extends StatelessWidget {
   static const routeName = "/home";
 
-  static Route<dynamic> createRoute() {
+  static Route<Object> createRoute() {
     return createFadeRoute(HomeScreen(), HomeScreen.routeName);
   }
 
@@ -92,8 +91,7 @@ class HomeScreenContent extends StatelessWidget {
       child: Navigator(
           key: _homeNavigatorKey,
           initialRoute: MainScanFragment.routeName,
-          onGenerateRoute: (RouteSettings settings) =>
-              FadeBlackPageRoute(settings: settings, builder: homeRouteBuilders[settings.name]!)),
+          onGenerateRoute: (RouteSettings settings) => homeRouteBuilders[settings.name]?.call()),
     );
   }
 

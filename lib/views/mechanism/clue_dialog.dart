@@ -9,12 +9,14 @@ import 'package:flutter/material.dart';
 import '../../injection.dart';
 
 class ClueDialog extends StatefulWidget {
+
+  final int mechanismId;
   final MechanismState state;
 
   LoadAvailableCluesUseCase get _loadClueUseCase => sl();
   UseClueUseCase get _useClueUseCase => sl();
 
-  ClueDialog({Key? key, required this.state}) : super(key: key);
+  ClueDialog({Key? key, required this.state, required this.mechanismId}) : super(key: key);
 
   @override
   _ClueDialogState createState() => _ClueDialogState();
@@ -33,7 +35,7 @@ class _ClueDialogState extends State<ClueDialog> {
   void initState() {
     super.initState();
     nbExistingClues = widget.state.clues.length;
-    availableClues = widget._loadClueUseCase.execute(widget.state);
+    availableClues = widget._loadClueUseCase.execute(widget.mechanismId, widget.state);
     showConfirm = availableClues.isEmpty;
     currentClueIndex = max(0, availableClues.length - 1);
   }
@@ -132,7 +134,7 @@ class _ClueDialogState extends State<ClueDialog> {
   }
 
   useClue() {
-    final newClues = widget._useClueUseCase.execute(widget.state);
+    final newClues = widget._useClueUseCase.execute(widget.mechanismId, widget.state);
     setState(() {
       availableClues = newClues;
       currentClueIndex = availableClues.length - 1;

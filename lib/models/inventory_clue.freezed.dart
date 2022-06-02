@@ -21,7 +21,7 @@ InventoryClue _$InventoryClueFromJson(Map<String, dynamic> json) {
 class _$InventoryClueTearOff {
   const _$InventoryClueTearOff();
 
-  _InventoryClue call({required int id, required DateTime creationDate}) {
+  _InventoryClue call({required String id, required DateTime creationDate}) {
     return _InventoryClue(
       id: id,
       creationDate: creationDate,
@@ -38,7 +38,7 @@ const $InventoryClue = _$InventoryClueTearOff();
 
 /// @nodoc
 mixin _$InventoryClue {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   DateTime get creationDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $InventoryClueCopyWith<$Res> {
   factory $InventoryClueCopyWith(
           InventoryClue value, $Res Function(InventoryClue) then) =
       _$InventoryClueCopyWithImpl<$Res>;
-  $Res call({int id, DateTime creationDate});
+  $Res call({String id, DateTime creationDate});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$InventoryClueCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
@@ -89,7 +89,7 @@ abstract class _$InventoryClueCopyWith<$Res>
           _InventoryClue value, $Res Function(_InventoryClue) then) =
       __$InventoryClueCopyWithImpl<$Res>;
   @override
-  $Res call({int id, DateTime creationDate});
+  $Res call({String id, DateTime creationDate});
 }
 
 /// @nodoc
@@ -112,7 +112,7 @@ class __$InventoryClueCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ class _$_InventoryClue extends _InventoryClue with DiagnosticableTreeMixin {
       _$$_InventoryClueFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final DateTime creationDate;
 
@@ -178,14 +178,14 @@ class _$_InventoryClue extends _InventoryClue with DiagnosticableTreeMixin {
 
 abstract class _InventoryClue extends InventoryClue {
   const factory _InventoryClue(
-      {required int id, required DateTime creationDate}) = _$_InventoryClue;
+      {required String id, required DateTime creationDate}) = _$_InventoryClue;
   const _InventoryClue._() : super._();
 
   factory _InventoryClue.fromJson(Map<String, dynamic> json) =
       _$_InventoryClue.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   DateTime get creationDate;
   @override

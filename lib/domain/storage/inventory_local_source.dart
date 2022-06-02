@@ -76,7 +76,7 @@ class InventoryLocalSource {
     return _clueDb.get(id);
   }
 
-  bool insertClue(int id) {
+  bool insertClue(String id) {
     if(_clueDb.containsKey(id)) return false;
 
     _clueDb.put(id, InventoryClue(id: id, creationDate: DateTime.now()));

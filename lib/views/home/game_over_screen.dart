@@ -13,7 +13,7 @@ class GameOverScreen extends StatelessWidget {
   EndScenarioUseCase get _endScenarioUseCase => sl();
   ComputeCompletionUseCase get _completionUseCase => sl();
 
-  static Route<dynamic> createRoute() {
+  static Route<Object> createRoute() {
     return createFadeRoute(GameOverScreen(), GameOverScreen.routeName);
   }
 

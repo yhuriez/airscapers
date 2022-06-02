@@ -9,28 +9,36 @@ import 'fade_page_route.dart';
 
 
 navigateTo(BuildContext context, NavigationIntent intent) {
+  _doNavigate(context, intent, false);
+}
+
+navigateReplaceTo(BuildContext context, NavigationIntent intent) {
+  _doNavigate(context, intent, true);
+}
+
+_doNavigate(BuildContext context, NavigationIntent intent, bool replace) {
   intent.when(
     // Show success screen
-      success: () => Navigator.of(context, rootNavigator: true)
-          .pushReplacementNamed(SuccessScreen.routeName),
+      success: () => _pushTo(context, SuccessScreen.createRoute(), replace, root: true),
 
       // Show mechanism page
-      mechanism: (mechanism) => Navigator.of(context)
-          .pushReplacement(MechanismFragment.route(mechanism)),
+      mechanism: (mechanism) => _pushTo(context, MechanismFragment.route(mechanism), replace),
 
       // Show item details pages
-      itemDetails: (item) => Navigator.of(context, rootNavigator: true)
-          .pushReplacement(InventoryDetailsFragment.route(item)),
+      itemDetails: (item) => _pushTo(context, InventoryDetailsFragment.route(item), replace),
 
       // Show dialog
       dialog: (arguments) => navigateShowDialog(context, arguments)
   );
 }
 
-navigateReplaceTo(BuildContext context, NavigationIntent intent) {
-  navigateTo(context, intent);
+_pushTo<T>(BuildContext context, Route<T> route, bool replace, {bool root = false}) {
+  if(replace) {
+    Navigator.of(context, rootNavigator: root).pushReplacement(route);
+  } else {
+    Navigator.of(context, rootNavigator: root).push(route);
+  }
 }
-
 
 navigateShowDialog(BuildContext context, DialogArguments arguments) {
   showDialog(
@@ -40,8 +48,8 @@ navigateShowDialog(BuildContext context, DialogArguments arguments) {
       ));
 }
 
-FadeBlackPageRoute<Object> createFadeRoute(Widget child, String name,
+FadeBlackPageRoute<T> createFadeRoute<T>(Widget child, String name,
         {dynamic arguments}) =>
-    FadeBlackPageRoute(
+    FadeBlackPageRoute<T>(
         builder: (context) => child,
         settings: RouteSettings(name: name, arguments: arguments));

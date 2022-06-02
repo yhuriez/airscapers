@@ -17,7 +17,7 @@ Future<void> main() async {
   final initResponse = await sl<InitAppUseCase>().execute();
 
   var initialScreen;
-  switch(initResponse) {
+  switch (initResponse) {
     case InitAppResponse.NO_SCENARIO:
       initialScreen = WelcomeScreen();
       break;
@@ -26,7 +26,16 @@ Future<void> main() async {
       break;
   }
 
-  runApp(MainApp(child: initialScreen,));
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ScenarioIndexState()),
+      ChangeNotifierProvider(create: (_) => InventoryState()),
+      ChangeNotifierProvider(create: (_) => TimerState())
+    ],
+    child: MainApp(
+      child: initialScreen,
+    ),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -36,20 +45,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: getProviders(),
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Airscapers',
         theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
         debugShowCheckedModeBanner: false,
-        home: child
-      ),
-    );
+        home: child);
   }
-
-  List<ChangeNotifierProvider> getProviders() => [
-    ChangeNotifierProvider(create: (_) => ScenarioIndexState()),
-    ChangeNotifierProvider(create: (_) => InventoryState()),
-    ChangeNotifierProvider(create: (_) => TimerState())
-  ];
 }
