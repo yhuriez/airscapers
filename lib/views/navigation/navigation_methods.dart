@@ -8,16 +8,16 @@ import 'package:flutter/material.dart';
 import 'fade_page_route.dart';
 
 
-navigateTo(BuildContext context, NavigationIntent intent) {
-  _doNavigate(context, intent, false);
+Future navigateTo(BuildContext context, NavigationIntent intent) {
+  return _doNavigate(context, intent, false);
 }
 
-navigateReplaceTo(BuildContext context, NavigationIntent intent) {
-  _doNavigate(context, intent, true);
+Future navigateReplaceTo(BuildContext context, NavigationIntent intent) {
+  return _doNavigate(context, intent, true);
 }
 
-_doNavigate(BuildContext context, NavigationIntent intent, bool replace) {
-  intent.when(
+Future _doNavigate(BuildContext context, NavigationIntent intent, bool replace) {
+  return intent.when(
     // Show success screen
       success: () => _pushTo(context, SuccessScreen.createRoute(), replace, root: true),
 
@@ -32,16 +32,16 @@ _doNavigate(BuildContext context, NavigationIntent intent, bool replace) {
   );
 }
 
-_pushTo<T>(BuildContext context, Route<T> route, bool replace, {bool root = false}) {
+Future<T?> _pushTo<T>(BuildContext context, Route<T> route, bool replace, {bool root = false}) async {
   if(replace) {
-    Navigator.of(context, rootNavigator: root).pushReplacement(route);
+    return Navigator.of(context, rootNavigator: root).pushReplacement(route);
   } else {
-    Navigator.of(context, rootNavigator: root).push(route);
+    return Navigator.of(context, rootNavigator: root).push(route);
   }
 }
 
-navigateShowDialog(BuildContext context, DialogArguments arguments) {
-  showDialog(
+Future<void> navigateShowDialog(BuildContext context, DialogArguments arguments) {
+  return showDialog(
       context: context,
       builder: (context) => DialogContent(
         arguments: arguments,

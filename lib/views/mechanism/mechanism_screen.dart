@@ -8,6 +8,7 @@ import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart'
 import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../injection.dart';
 
@@ -95,7 +96,9 @@ class _MechanismStateRepresentationState
 
     if (newState.endTrack != null) {
       final intent = widget._mechanismFinishedUseCase.execute(widget.mechanism, newState.endTrack!);
-      navigateReplaceTo(context, intent);
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        navigateReplaceTo(context, intent);
+      });
 
     } else {
       setState(() {

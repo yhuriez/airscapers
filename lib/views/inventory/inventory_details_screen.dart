@@ -129,7 +129,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   _onLootClicked(ScenarioLoot loot) async {
     final intent = await widget._interpretLinkUseCase.execute(context, loot);
 
-    navigateTo(context, intent);
+    await navigateTo(context, intent);
 
     _refreshLoots(exitOnEmpty: true);
   }
@@ -137,14 +137,9 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   _refreshLoots({bool exitOnEmpty = false}) {
     final newLoots = widget._filterAvailableLootUseCase.execute(availableLoots);
 
-    if(exitOnEmpty && newLoots.isEmpty) {
-      Navigator.of(context).pop();
-
-    } else {
-      setState(() {
-        availableLoots = newLoots;
-      });
-    }
+    setState(() {
+      availableLoots = newLoots;
+    });
   }
 }
 

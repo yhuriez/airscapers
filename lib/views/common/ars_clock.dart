@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../home/bloc/timer_state.dart';
+import '../home/state/timer_state.dart';
 
 class ARSClock extends StatelessWidget {
 

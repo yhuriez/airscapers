@@ -1,6 +1,6 @@
 import 'package:airscaper/domain/usecases/init_use_cases.dart';
-import 'package:airscaper/views/home/bloc/inventory_state.dart';
-import 'package:airscaper/views/home/bloc/timer_state.dart';
+import 'package:airscaper/views/home/state/inventory_state.dart';
+import 'package:airscaper/views/home/state/timer_state.dart';
 import 'package:airscaper/views/home/home_screen.dart';
 import 'package:airscaper/views/init/state/scenario_index_state.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';

@@ -10,8 +10,10 @@ Widget createMechanismInteraction(
 
   final firstTransition = state.transitions.firstOrNull;
 
+  if(firstTransition == null) return Container();
+
   // Code input
-  if (firstTransition?.expectedCodes != null) {
+  if (firstTransition.expectedCodes.isNotEmpty) {
     return MechanismCodeInput(
       mechanism: mechanism,
       state: state,
@@ -19,7 +21,7 @@ Widget createMechanismInteraction(
     );
 
     // Items combination
-  } else if (firstTransition?.expectedItemList != null) {
+  } else if (firstTransition.expectedItemList.isNotEmpty) {
     return MechanismItemsCombination(
       mechanism: mechanism,
       state: state,

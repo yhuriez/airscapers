@@ -4,8 +4,10 @@ import 'package:airscaper/models/scenario_reference.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/home/home_screen.dart';
+import 'package:airscaper/views/home/state/timer_state.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../injection.dart';
@@ -106,6 +108,8 @@ class StartScenarioScreen extends StatelessWidget {
 
   onStartClicked(BuildContext context, ScenarioReference scenario) async {
     await _startScenarioUseCase.execute(scenario.id);
+    context.read<TimerState>().initTimer();
+
     Navigator.of(context, rootNavigator: true)
         .pushAndRemoveUntil(HomeScreen.createRoute(), (route) => false);
   }

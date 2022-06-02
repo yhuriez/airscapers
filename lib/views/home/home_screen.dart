@@ -2,7 +2,7 @@ import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
-import 'package:airscaper/views/home/bloc/inventory_state.dart';
+import 'package:airscaper/views/home/state/inventory_state.dart';
 import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';

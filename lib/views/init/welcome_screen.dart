@@ -37,30 +37,33 @@ class WelcomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Header image
-        (KeyboardVisibilityProvider.isKeyboardVisible(context))
-            ? Container()
-            : Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SizedBox(
-              width: 200,
-              height: 200,
-              child: Image.asset(
-                  "assets/images/common/airscapers_inverted.png")),
+
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Header image
+              (KeyboardVisibilityProvider.isKeyboardVisible(context))
+                  ? Container()
+                  : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: Image.asset(
+                        "assets/images/common/airscapers_inverted.png")),
+              ),
+
+              Text(
+                "Airscapers",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: Colors.white),
+              ),
+            ],
+          ),
         ),
-
-        // Title
-        Center(
-            child: Text(
-              "Airscapers",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Colors.white),
-            )),
-
-        // Space
-        Expanded(child: Container()),
 
         // Code input
         Padding(

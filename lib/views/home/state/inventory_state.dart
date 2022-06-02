@@ -44,6 +44,8 @@ class InventoryState extends ChangeNotifier {
     final inventoryItems = _localSource.loadUnusedItems();
     inventoryItems.sort((first, second) => first.creationDate.compareTo(second.creationDate));
     _items = _repository.getItems(inventoryItems);
+        // .where((element) => element.isPickedUp)
+        // .toList();
     notifyListeners();
   }
 
