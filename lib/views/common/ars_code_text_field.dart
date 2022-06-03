@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-const TEXT_FIELD_SIZE = 60.0;
+const TEXT_FIELD_SIZE = 50.0;
 
 class ARSCodeTextField extends StatefulWidget {
 

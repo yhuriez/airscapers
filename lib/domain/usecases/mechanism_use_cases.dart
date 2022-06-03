@@ -58,7 +58,7 @@ class MechanismCodeInputUseCase {
 
   MechanismCodeInputUseCase(this._stateTransitionUseCase, this._loadCurrentMechanismStateUseCase);
 
-  MechanismState? execute(BuildContext context, ScenarioMechanism mechanism, String code) {
+  MechanismState? execute(ScenarioMechanism mechanism, String code) {
     final currentState = _loadCurrentMechanismStateUseCase.execute(mechanism);
 
     final nextTransition = currentState.transitions.firstWhereOrNull((transition) {
@@ -67,7 +67,7 @@ class MechanismCodeInputUseCase {
     });
 
     if (nextTransition != null) {
-      return _stateTransitionUseCase.execute(context, mechanism, nextTransition);
+      return _stateTransitionUseCase.execute(mechanism, nextTransition);
     }
     return null;
   }
@@ -79,14 +79,14 @@ class MechanismItemSelectUseCase {
 
   MechanismItemSelectUseCase(this._stateTransitionUseCase, this._loadCurrentMechanismStateUseCase);
 
-  MechanismState? execute(BuildContext context, ScenarioMechanism mechanism, int itemId) {
+  MechanismState? execute(ScenarioMechanism mechanism, int itemId) {
     final currentState = _loadCurrentMechanismStateUseCase.execute(mechanism);
 
     final nextTransition = currentState.transitions
         .firstWhereOrNull((transition) => itemId == transition.expectedItem);
 
     if (nextTransition != null) {
-      return _stateTransitionUseCase.execute(context, mechanism, nextTransition, itemId: itemId);
+      return _stateTransitionUseCase.execute(mechanism, nextTransition, itemId: itemId);
     }
     return null;
   }
@@ -100,9 +100,7 @@ class StateTransitionUseCase {
 
   StateTransitionUseCase(this._inventory, this._currentMechanismStateUseCase, this._localSource);
 
-  MechanismState execute(
-      BuildContext context, ScenarioMechanism mechanism, MechanismTransition transition,
-      {int? itemId}) {
+  MechanismState execute(ScenarioMechanism mechanism, MechanismTransition transition, {int? itemId}) {
     final newStateId = transition.transitionTo;
 
     // Update current state for given mechanism

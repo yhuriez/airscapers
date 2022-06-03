@@ -1,10 +1,10 @@
-import 'package:airscaper/models/scenario_item.dart';
-import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
-import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
+import 'package:airscaper/views/mechanism/mechanism_screen_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../injection.dart';
 
@@ -12,20 +12,9 @@ const GRID_HEIGHT = 60.0;
 const ITEM_SIZE = 50.0;
 
 class MechanismItemsCombination extends StatefulWidget {
-  final ScenarioMechanism mechanism;
-  final MechanismState state;
-  final OnNewState onNewState;
-
-  const MechanismItemsCombination(
-      {Key? key,
-      required this.mechanism,
-      required this.state,
-      required this.onNewState})
-      : super(key: key);
 
   @override
-  _MechanismItemsCombinationState createState() =>
-      _MechanismItemsCombinationState();
+  _MechanismItemsCombinationState createState() => _MechanismItemsCombinationState();
 }
 
 class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
@@ -35,7 +24,10 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
   @override
   void initState() {
     super.initState();
-    expectedItemList = widget.state.transitions.first.expectedItemList;
+
+    final state = context.read<MechanismScreenState>();
+
+    expectedItemList = state.mechanismState.transitions.first.expectedItemList;
 
     if (expectedItemList.isEmpty) {
       throw Exception(
@@ -103,7 +95,8 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
 
     // If items selected are right, we do execute state transition
     if (listEquals(itemSet, expectedItemList)) {
-      await doStateTransition();
+      final state = context.read<MechanismScreenState>();
+      state.onStateResolved();
 
       // Else we update current widget state
     } else {
@@ -111,12 +104,5 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
         selectedItems = newSelectedItems;
       });
     }
-  }
-
-  doStateTransition() async {
-
-    final newState = sl<StateTransitionUseCase>().execute(context, widget.mechanism, widget.state.transitions.first);
-
-    widget.onNewState(context, givenState: newState);
   }
 }

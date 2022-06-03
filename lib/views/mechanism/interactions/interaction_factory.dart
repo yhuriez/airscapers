@@ -2,36 +2,28 @@
 import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/views/mechanism/interactions/code_input.dart';
 import 'package:airscaper/views/mechanism/interactions/items_combination.dart';
+import 'package:airscaper/views/mechanism/mechanism_screen_state.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-Widget createMechanismInteraction(
-    ScenarioMechanism mechanism, MechanismState state, OnNewState onNewState) {
+Widget createMechanismInteraction(BuildContext context) {
 
-  final firstTransition = state.transitions.firstOrNull;
+  final state = context.read<MechanismScreenState>();
+  final firstTransition = state.mechanismState.transitions.firstOrNull;
 
   if(firstTransition == null) return Container();
 
   // Code input
   if (firstTransition.expectedCodes.isNotEmpty) {
-    return MechanismCodeInput(
-      mechanism: mechanism,
-      state: state,
-      onNewState: onNewState,
-    );
+    return MechanismCodeInput();
 
     // Items combination
   } else if (firstTransition.expectedItemList.isNotEmpty) {
-    return MechanismItemsCombination(
-      mechanism: mechanism,
-      state: state,
-      onNewState: onNewState,
-    );
+    return MechanismItemsCombination();
 
   // Back button
   } else {
     return Container();
   }
 }
-
-typedef OnNewState(BuildContext context, {MechanismState givenState});
