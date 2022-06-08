@@ -1,7 +1,7 @@
 {
   "details": {
     "title": "Le trésor des trois frères",
-    "duration": 80,
+    "duration": 60,
     "endText": "Félicitations ! Vous avez réussi à trouver la position du trésor !\n\n A présent, rejoignez l'organisateur à la position indiquée et dites-lui le mot de passe : \n\nAUGURE"
   },
   "items": [
@@ -10,6 +10,7 @@
       "title": "Massue",
       "description": "Une masse bien lourde.",
       "image": "assets/images/tresor/massue.png",
+      "isPickedUp": true,
       "hasQrCode": true
     },
     {
@@ -17,13 +18,15 @@
       "title": "Clé de l'horloge",
       "description": "Une clé servant à remonter une horloge.",
       "foundDescription": "Une clé à remonter une horloge se cachait au fond de l'engin.",
-      "image": "assets/images/tresor/cle_horloge.png"
+      "image": "assets/images/tresor/cle_horloge.png",
+      "isPickedUp": true
     },
     {
       "id": 102,
       "title": "Lance",
       "description": "Une lance de décoration.",
       "image": "assets/images/tresor/spear.png",
+      "isPickedUp": true,
       "hasQrCode": true
     },
     {
@@ -31,13 +34,15 @@
       "title": "Pion reine carreau",
       "description": "Un pion de reine, avec un symbole.",
       "foundDescription": "Au fond du coffre, au milieu d'autres babioles, se trouve un pion de reine avec un symbole de carreau.",
-      "image": "assets/images/tresor/pion_reine_carreau.png"
+      "image": "assets/images/tresor/pion_reine_carreau.png",
+      "isPickedUp": true
     },
     {
       "id": 104,
       "title": "Pion reine pique",
       "description": "Un pion de reine, avec un symbole.",
-      "image": "assets/images/tresor/pion_reine_pique.png"
+      "image": "assets/images/tresor/pion_reine_pique.png",
+      "isPickedUp": true
     },
     {
       "id": 105,
@@ -45,6 +50,7 @@
       "description": "Un pion de reine, avec un symbole.",
       "foundDescription": "Vous trouvez un pion de reine d'échecs, avec un symbole de trèfle dessus.",
       "image": "assets/images/tresor/pion_reine_trefle.png",
+      "isPickedUp": true,
       "hasQrCode": true
     },
     {
@@ -52,7 +58,8 @@
       "title": "Pion reine coeur",
       "description": "Un pion de reine, avec un symbole.",
       "foundDescription": "Au fond du tiroir, vous trouvez un pion de reine avec un symbole de coeur.",
-      "image": "assets/images/tresor/pion_reine_coeur.png"
+      "image": "assets/images/tresor/pion_reine_coeur.png",
+      "isPickedUp": true
     },
     {
       "id": 107,
@@ -60,6 +67,7 @@
       "description": "Une clé finement ouvragée.",
       "foundDescription": "La boîte semblait cacher une clé finement ouvragée.",
       "image": "assets/images/tresor/cle_avec_code.png",
+      "isPickedUp": true,
       "isTrack": true
     },
     {
@@ -157,7 +165,8 @@
       "title": "Enigme",
       "description": "Cela resemble fort à une énigme...",
       "image": "assets/images/tresor/indice_secret.png",
-      "isTrack": true,
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -165,41 +174,47 @@
       "title": "Détails du pont-levis",
       "description": "Un papier donnant toutes les caractéristiques du pont-levis.",
       "image": "assets/images/tresor/instructions_pont_levis.png",
-      "isTrack": true,
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
       "id": 200,
       "title": "Chiffon déchiré",
       "description": "Un chiffon déchiré.",
-      "image": "assets/images/tresor/tissu.png"
+      "image": "assets/images/tresor/tissu.png",
+      "isPickedUp": true
     },
     {
       "id": 201,
       "title": "Bougie éteinte",
       "description": "Une bougie éteinte.",
       "foundDescription": "A l'intérieur du placard, vous trouvez une bougie éteinte.",
-      "image": "assets/images/tresor/bougie_eteinte.png"
+      "image": "assets/images/tresor/bougie_eteinte.png",
+      "isPickedUp": true
     },
     {
       "id": 202,
       "title": "Longue vue",
       "description": "Une longue vue. Elle semble fragile...",
       "foundDescription": "Au fond du placard, vous trouvez une longue-vue.",
-      "image": "assets/images/tresor/longue_vue.png"
+      "image": "assets/images/tresor/longue_vue.png",
+      "isPickedUp": true
     },
     {
       "id": 203,
       "title": "Lentille concave",
       "description": "Une lentille concave.",
       "foundDescription": "Alors que vous regardez le centre-ville, sa lentille se détache. Vous la rattrapez avant qu'elle ne se casse, heureusement.",
-      "image": "assets/images/tresor/lentille_concave.png"
+      "image": "assets/images/tresor/lentille_concave.png",
+      "isPickedUp": true
     },
     {
       "id": 204,
       "title": "Bougie allumé",
       "description": "Une bougie allumée.",
-      "image": "assets/images/tresor/bougie_allume.png"
+      "image": "assets/images/tresor/bougie_allume.png",
+      "isPickedUp": true
     },
     {
       "id": 250,
@@ -269,7 +284,7 @@
       "title": "Piano",
       "description": "Un piano avec une trappe ouverte",
       "foundDescription": "En tappant la dernière note, vous entendez une trappe s'ouvrir sous le piano.\n\nUn bout de tissu déchiré en tombe.",
-      "image": "assets/images/tresor/piano_queue.png",
+      "image": "assets/images/tresor/transparent/piano_queue.png",
       "loots": [
         {
           "interactionText": "Ramasser le tissu",
@@ -307,7 +322,8 @@
       "title": "Heure de l'église",
       "description": "L'heure affiché sur l'horloge de l'église.",
       "image": "assets/images/tresor/vue_horloge.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 271,
@@ -315,21 +331,24 @@
       "description": "Une partition de musique.",
       "foundDescription": "Vous trouvez une partition de musique",
       "image": "assets/images/tresor/partition.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 272,
       "title": "Tissu quadrillé",
       "description": "Un tissu avec un quadrillage.",
       "image": "assets/images/tresor/carte_nseo.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 274,
       "title": "Cours de solfège",
       "description": "Une page d'un cours de solfège.",
       "image": "assets/images/tresor/guide_musique.png",
-      "isTrack": true,
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -337,19 +356,22 @@
       "title": "Papier illisible",
       "description": "Un papier. En passant les doigts dessus, vous sentez des formes de lettres. Il faudrait repasser dessus.",
       "image": "assets/images/tresor/transparent/papier_illisible.png",
+      "isPickedUp": true,
       "hasQrCode": true
     },
     {
       "id": 301,
       "title": "Encre",
       "description": "Un pot d'encre.",
-      "image": "assets/images/tresor/encre.png"
+      "image": "assets/images/tresor/encre.png",
+      "isPickedUp": true
     },
     {
       "id": 302,
       "title": "Plume",
       "description": "Un plume d'écriture.",
-      "image": "assets/images/tresor/plume.png"
+      "image": "assets/images/tresor/plume.png",
+      "isPickedUp": true
     },
     {
       "id": 350,
@@ -462,14 +484,16 @@
       "description": "Une page avec pleins de symbole bizarre...",
       "foundDescription": "Au milieu de papiers dispersés, une page aux symboles étranges attire votre attention.",
       "image": "assets/images/tresor/lexique_demineur.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 371,
       "title": "Bout de liste d'animaux",
       "description": "Un bout de document avec des animaux représentés",
       "image": "assets/images/tresor/liste_animaux_bout.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 372,
@@ -477,28 +501,32 @@
       "description": "Un bout de papier avec des symboles.",
       "foundDescription": "Au fond de l'alcove vous trouver un bout de papier avec des symboles.",
       "image": "assets/images/tresor/indice_biblio.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 373,
       "title": "Citation",
       "description": "Une citation d'un auteur connu.",
       "image": "assets/images/tresor/indice_opus.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 374,
       "title": "Addition",
       "description": "Un papier avec une addition.",
       "image": "assets/images/tresor/papier_addition.png",
-      "isTrack": true
+      "isPickedUp": true,
+      "isZoomable": true
     },
     {
       "id": 375,
       "title": "Liste d'animaux",
       "description": "Un document troué, avec plusieurs animaux dessus.",
       "image": "assets/images/tresor/liste_animaux_base.png",
-      "isTrack": true,
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -506,24 +534,30 @@
       "title": "Chevalière du 1er frère",
       "description": "La chevalière du 1er frère.",
       "foundDescription": "Vous y trouvez la chevalière du 1er frère.",
-      "image": "assets/images/tresor/chevaliere.jpg"
+      "image": "assets/images/tresor/chevaliere.jpg",
+      "isPickedUp": true
     },
     {
       "id": 402,
       "title": "Pendentif du 2ème frère",
       "description": "Le pendentif du 2ème frère.",
       "foundDescription": "A l'intérieur, vous trouvez le pendentif du 2ème frère.",
-      "image": "assets/images/tresor/pendentif.png"
+      "image": "assets/images/tresor/pendentif.png",
+      "isPickedUp": true
     },
     {
       "id": 403,
       "title": "Collier du 3ème frère",
       "description": "Le collier du 3ème frère.",
       "foundDescription": "Sur une table dans la pièce, vous trouvez le collier du 3ème frère.",
-      "image": "assets/images/tresor/collier.jpg"
+      "image": "assets/images/tresor/collier.jpg",
+      "isPickedUp": true
     },
     {
       "id": 450,
+      "title": "",
+      "description": "",
+      "image": "",
       "endTrack": true
     }
   ],
@@ -556,6 +590,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 152
         }
       ]
@@ -571,7 +607,6 @@
           "start": true,
           "clues": [
             "Regardez bien autour de l'engin, il y a sans doute quelque chose pour vous indiquer le code de ce cryptex.",
-            "L'énigme a une réponse en 6 lettres.",
             "Pour résoudre l'énigme, pensez à un \"mystère\", quelque chose de caché, ou d'intime."
           ],
           "codeHint": "Ex: coffre",
@@ -589,6 +624,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 157
         }
       ]
@@ -614,6 +651,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 153
         }
       ]
@@ -639,6 +678,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 154
         }
       ]
@@ -664,6 +705,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 155
         }
       ]
@@ -695,7 +738,7 @@
           "description": "La pendule est à présente remonté et ouverte. Mais l'heure affiché n'est pas bonne.",
           "image": "assets/images/tresor/horloge_ouverte.png",
           "clues": [
-            "L'heure affiché n'est pas correct, il faut trouver dans le chateau un endroit où se trouve la bonne heure."
+            "L'heure affiché n'est pas correct, il faut trouver un endroit qui affiche la bonne heure."
           ],
           "codeHint": "Ex: 08:30",
           "transitions": [
@@ -713,6 +756,8 @@
         },
         {
           "id": 3,
+          "description": "",
+          "image": "",
           "endTrack": 151
         }
       ]
@@ -723,7 +768,6 @@
       "states": [
         {
           "id": 1,
-
           "description": "Un coffret ouvragé, avec sur le côté plusieurs blasons. Un système de combinaison à chiffre a été installé dessus...",
           "image": "assets/images/tresor/transparent/coffret_blasons.png",
           "start": true,
@@ -748,6 +792,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 156
         }
       ]
@@ -758,7 +804,6 @@
       "states": [
         {
           "id": 1,
-
           "description": "Un bouclier de décoration avec une lance qui le croise.",
           "image": "assets/images/tresor/bouclier_lance_mur.png",
           "start": true,
@@ -778,6 +823,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 158
         }
       ]
@@ -826,15 +873,21 @@
               "transitionTo": 3,
               "expectedCodes": [
                 "A5B2C4E3",
+                "A5 B2 C4 E3",
                 "A5B2C4D1E3",
+                "A5 B2 C4 D1 E3",
                 "1D2B3E4C5A",
-                "2B3E4C5A"
+                "1D 2B 3E 4C 5A",
+                "2B3E4C5A",
+                "2B 3E 4C 5A"
               ]
             }
           ]
         },
         {
           "id": 3,
+          "description": "",
+          "image": "",
           "endTrack": 150
         }
       ]
@@ -846,7 +899,7 @@
         {
           "id": 1,
           "description": "Un beau piano à queue. Si on jouait un morceau ?",
-          "image": "assets/images/tresor/piano_queue.png",
+          "image": "assets/images/tresor/transparent/piano_queue.png",
           "start": true,
           "clues": [
             "Il faut jouer un morceau de quatre notes.",
@@ -870,6 +923,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 255
         }
       ]
@@ -884,7 +939,7 @@
           "image": "assets/images/tresor/tableau_sale.png",
           "start": true,
           "clues": [
-            "Si le tableau est sale, il faut trouver un chiffon pour le nettoyer."
+            "Il faudrait trouver un chiffon pour le nettoyer."
           ],
           "transitions": [
             {
@@ -898,6 +953,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 251
         }
       ]
@@ -908,11 +965,11 @@
       "states": [
         {
           "id": 1,
-          "description": "Une fenêtre ouverte sur un beau ciel ensoleillé. Ce soleil peut être utile...",
+          "description": "Une fenêtre ouverte sur un beau ciel ensoleillé. Ce soleil iradiant peut être utile...",
           "image": "assets/images/tresor/fenetre_soleil.png",
           "start": true,
           "clues": [
-            "Ce beau soleil peut servir à quelque chose...",
+            "Des rayons du soleil concentrés peuvent démarrer un feu",
             "Vous rappelez-vous enfant quand vous aviez une loupe et qu'il faisait beau ?"
           ],
           "transitions": [
@@ -931,6 +988,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 256
         }
       ]
@@ -959,6 +1018,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 252
         }
       ]
@@ -1004,6 +1065,8 @@
         },
         {
           "id": 3,
+          "description": "",
+          "image": "",
           "endTrack": 254
         }
       ]
@@ -1032,6 +1095,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 253
         }
       ]
@@ -1079,6 +1144,8 @@
         },
         {
           "id": 3,
+          "description": "",
+          "image": "",
           "endTrack": 257
         }
       ]
@@ -1114,6 +1181,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 356
         }
       ]
@@ -1139,6 +1208,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 352
         }
       ]
@@ -1188,6 +1259,8 @@
         },
         {
           "id": 3,
+          "description": "",
+          "image": "",
           "endTrack": 357
         }
       ]
@@ -1223,6 +1296,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 358
         }
       ]
@@ -1258,6 +1333,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 355
         }
       ]
@@ -1289,6 +1366,8 @@
         },
         {
           "id": 2,
+          "description": "",
+          "image": "",
           "endTrack": 450
         }
       ]

@@ -22,7 +22,9 @@ class _$ScenarioLootTearOff {
   const _$ScenarioLootTearOff();
 
   _ScenarioLoot call(
-      {required int id, required LootType type, String? interactionText}) {
+      {required int id,
+      LootType type = LootType.item,
+      String? interactionText}) {
     return _ScenarioLoot(
       id: id,
       type: type,
@@ -136,7 +138,7 @@ class __$ScenarioLootCopyWithImpl<$Res> extends _$ScenarioLootCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ScenarioLoot extends _ScenarioLoot with DiagnosticableTreeMixin {
   const _$_ScenarioLoot(
-      {required this.id, required this.type, this.interactionText})
+      {required this.id, this.type = LootType.item, this.interactionText})
       : super._();
 
   factory _$_ScenarioLoot.fromJson(Map<String, dynamic> json) =>
@@ -144,6 +146,7 @@ class _$_ScenarioLoot extends _ScenarioLoot with DiagnosticableTreeMixin {
 
   @override
   final int id;
+  @JsonKey()
   @override
   final LootType type;
   @override
@@ -196,7 +199,7 @@ class _$_ScenarioLoot extends _ScenarioLoot with DiagnosticableTreeMixin {
 abstract class _ScenarioLoot extends ScenarioLoot {
   const factory _ScenarioLoot(
       {required int id,
-      required LootType type,
+      LootType type,
       String? interactionText}) = _$_ScenarioLoot;
   const _ScenarioLoot._() : super._();
 

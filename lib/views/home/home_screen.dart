@@ -7,7 +7,7 @@ import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
 import 'package:airscaper/views/home/scan_screen.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
-import 'package:airscaper/views/inventory/inventory_details_screen.dart';
+import 'package:airscaper/views/inventory/item_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';

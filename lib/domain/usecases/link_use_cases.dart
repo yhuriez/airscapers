@@ -13,10 +13,10 @@ class InterpretLinkUseCase {
 
   InterpretLinkUseCase(this._repository, this._addLootUseCase, this._scenarioStateStorage);
 
-  Future<NavigationIntent> execute(BuildContext context, ScenarioLoot loot) async {
+  Future<NavigationIntent> execute(ScenarioLoot loot) async {
 
     switch(loot.type) {
-      case LootType.item: return _interpretItem(context, loot);
+      case LootType.item: return _interpretItem( loot);
       case LootType.mechanism: return _interpretMechanism(loot);
       default: return NavigationIntent.dialog(arguments: DialogArguments(
           "QR code invalide", "Ce QR code n'existe pas pour ce scénario"));
@@ -35,7 +35,7 @@ class InterpretLinkUseCase {
   }
 
 
-  Future<NavigationIntent> _interpretItem(BuildContext context, ScenarioLoot loot) async {
+  Future<NavigationIntent> _interpretItem(ScenarioLoot loot) async {
     final scenarioItem = _repository.getItem(loot.id);
 
     if (scenarioItem != null) {
@@ -46,7 +46,7 @@ class InterpretLinkUseCase {
         return NavigationIntent.success();
       }
 
-      final response = await _addLootUseCase.execute(context, [loot]);
+      final response = await _addLootUseCase.execute([loot]);
 
       if (response == AddLootResponse.ERROR) {
         return NavigationIntent.dialog(arguments: DialogArguments("Erreur", "Une erreur est survenue"));

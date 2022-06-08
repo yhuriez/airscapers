@@ -9,7 +9,8 @@ part of 'scenario_loot.dart';
 _$_ScenarioLoot _$$_ScenarioLootFromJson(Map<String, dynamic> json) =>
     _$_ScenarioLoot(
       id: json['id'] as int,
-      type: $enumDecode(_$LootTypeEnumMap, json['type']),
+      type:
+          $enumDecodeNullable(_$LootTypeEnumMap, json['type']) ?? LootType.item,
       interactionText: json['interactionText'] as String?,
     );
 

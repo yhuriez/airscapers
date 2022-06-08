@@ -5,9 +5,11 @@ import 'package:airscaper/models/scenario_loot.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
+import 'package:airscaper/views/common/nfc_write_dialog.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../injection.dart';
@@ -26,15 +28,24 @@ class InventoryDetailsFragment extends StatelessWidget {
   const InventoryDetailsFragment({Key? key, required this.item}) : super(key: key);
 
 
-
   @override
   Widget build(BuildContext context) {
     return ARSScaffold(
         title: item.title,
+        actions: [
+          if(kDebugMode) IconButton(
+              onPressed: () => onDisplayWriteNfcDialog(context),
+              icon: Icon(Icons.nfc, color: Colors.white,)
+          )
+        ],
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: ScenarioElementView(item: item),
         ));
+  }
+
+  onDisplayWriteNfcDialog(BuildContext context) {
+    showDialog(context: context, builder: (_) => NfcWriteDialog(link: "airscapers://item/${item.id}"));
   }
 }
 
@@ -127,7 +138,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   }
 
   _onLootClicked(ScenarioLoot loot) async {
-    final intent = await widget._interpretLinkUseCase.execute(context, loot);
+    final intent = await widget._interpretLinkUseCase.execute(loot);
 
     await navigateTo(context, intent);
 

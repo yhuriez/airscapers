@@ -1,7 +1,7 @@
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/views/common/dialog_content.dart';
 import 'package:airscaper/views/home/success_screen.dart';
-import 'package:airscaper/views/inventory/inventory_details_screen.dart';
+import 'package:airscaper/views/inventory/item_screen.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen.dart';
 import 'package:flutter/material.dart';
 

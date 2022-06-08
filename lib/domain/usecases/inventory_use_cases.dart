@@ -8,20 +8,18 @@ class AddLootUseCase {
 
   AddLootUseCase(this._localSource);
 
-  Future<AddLootResponse> execute(BuildContext context, Iterable<ScenarioLoot> loots) async {
+  Future<AddLootResponse> execute(Iterable<ScenarioLoot> loots) async {
     var existingElement = false;
 
     try {
 
       loots.forEach((loot) {
-        if (loot.type == LootType.item) {
-          final result = _localSource.loadItem(loot.id);
-          if (result != null) {
-            existingElement = true;
+        final result = _localSource.loadItem(loot.id);
+        if (result != null) {
+          existingElement = true;
 
-          } else {
-            _localSource.insertItem(loot.id, true);
-          }
+        } else {
+          _localSource.insertItem(loot.id, true);
         }
       });
 
@@ -49,11 +47,6 @@ class FilterAvailableLootUseCase {
 
     final itemIds = (_inventory.loadAllItems()).map((it) => it.id).toList();
 
-    return baseLoot.where((loot) {
-      if (loot.type == LootType.item)
-        return !itemIds.contains(loot.id);
-      else
-        return false;
-    }).toList();
+    return baseLoot.where((loot) => !itemIds.contains(loot.id)).toList();
   }
 }

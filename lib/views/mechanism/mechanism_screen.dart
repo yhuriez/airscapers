@@ -1,10 +1,12 @@
 import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
+import 'package:airscaper/views/common/nfc_write_dialog.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/mechanism/clue_dialog.dart';
 import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen_state.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +49,14 @@ class MechanismStateRepresentation extends StatelessWidget {
 
     return ARSScaffold(
       title: state.mechanism.name,
-      actions: [_createClueAction(context)],
+      actions: [
+        _createClueAction(context),
+
+        if(kDebugMode) IconButton(
+            onPressed: () => onDisplayWriteNfcDialog(context, state.mechanism.id),
+            icon: Icon(Icons.nfc, color: Colors.white,)
+        )
+      ],
       child: ARSDetailsBox(
         interactionsBuilder: (_) => createMechanismInteraction(context),
         imageUrl: state.mechanismState.image ?? "",
@@ -63,6 +72,10 @@ class MechanismStateRepresentation extends StatelessWidget {
       icon: Icon(Icons.help_outline),
       onPressed: () => _onClueClicked(context),
     );
+  }
+
+  onDisplayWriteNfcDialog(BuildContext context, int mechanismId) {
+    showDialog(context: context, builder: (_) => NfcWriteDialog(link: "airscapers://mechanism/$mechanismId"));
   }
 
   _onClueClicked(BuildContext context) {

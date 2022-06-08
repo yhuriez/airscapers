@@ -13,7 +13,7 @@ class ScenarioLoot with _$ScenarioLoot {
 
   const factory ScenarioLoot({
     required int id,
-    required LootType type,
+    @Default(LootType.item) LootType type,
     String? interactionText
   }) = _ScenarioLoot;
 
