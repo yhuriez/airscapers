@@ -144,15 +144,22 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
 
   Future<void> _onTagDiscovered(NfcTag tag) async {
     final ndefTag = Ndef.from(tag);
-    final result = await ndefTag?.read();
 
-    var record = result?.records.first;
+    try {
 
-    if (record != null) {
-      final languageCodeLength = record.payload.first;
-      final nextLink = utf8.decode(record.payload.sublist(1 + languageCodeLength));
+      final result = await ndefTag?.read();
 
-      parseLink(context, nextLink);
+      var record = result?.records.first;
+
+      if (record != null) {
+        final languageCodeLength = record.payload.first;
+        final nextLink = utf8.decode(record.payload.sublist(1 + languageCodeLength));
+
+        parseLink(context, nextLink);
+      }
+
+    } catch (e, stack) {
+      print(stack);
     }
   }
 

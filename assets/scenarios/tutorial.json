@@ -2,6 +2,7 @@
   "details": {
     "title": "Tutoriel",
     "duration": 10,
+    "maxDuration": 15,
     "endText": "Vous avez réussi à sortir de la pièce !"
   },
   "items": [
