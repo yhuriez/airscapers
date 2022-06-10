@@ -29,6 +29,8 @@ class ScenarioRepository {
 
   int get durationInMinute => scenario.details.duration;
 
+  int get maxDurationInMinute => scenario.details.maxDuration;
+
   List<ScenarioItem> get items => scenario.items;
 
   List<ScenarioMechanism> get mechanisms => scenario.mechanisms;

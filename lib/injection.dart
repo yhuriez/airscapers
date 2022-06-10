@@ -1,5 +1,4 @@
 import 'package:airscaper/domain/configuration/hive_configuration.dart';
-import 'package:airscaper/domain/managers/timer_manager.dart';
 import 'package:airscaper/domain/storage/inventory_local_source.dart';
 import 'package:airscaper/domain/storage/scenario_storage.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
@@ -42,13 +41,8 @@ Future<void> init() async {
   sl.registerLazySingleton<UseClueUseCase>(() => UseClueUseCase(sl(), sl()));
   // endregion
 
-
   // region Repositories
   sl.registerLazySingleton<ScenarioRepository>(() => ScenarioRepository());
-  // endregion
-
-  // region Managers
-  sl.registerLazySingleton<TimerManager>(() => TimerManager());
   // endregion
 
   // region Storage

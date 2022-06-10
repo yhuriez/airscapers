@@ -13,18 +13,20 @@ import 'package:flutter/material.dart';
 class TimerState extends ChangeNotifier {
 
   Duration? _durationLeft;
+  Duration? _maxDurationLeft;
   Timer? _globalTimer;
 
   ScenarioRepository get _repository => sl();
   InitStartDateUseCase get _initStartDateUseCase => sl();
 
   int get _timeLeft => _durationLeft?.inSeconds ?? 0;
+  int get _maxTimeLeft => _durationLeft?.inSeconds ?? 0;
 
   bool get end {
-    if(_durationLeft == null) {
+    if(_durationLeft == null || _maxDurationLeft == null) {
       initTimer();
     }
-    return _timeLeft < 0;
+    return _maxTimeLeft < 0;
   }
 
   String get durationLeft {
@@ -42,8 +44,10 @@ class TimerState extends ChangeNotifier {
     try {
       final initialDate = _initStartDateUseCase.execute();
       final scenarioDuration = Duration(minutes: _repository.durationInMinute);
+      final scenarioMaxDuration = Duration(minutes: _repository.maxDurationInMinute);
 
       _durationLeft = scenarioDuration - DateTime.now().difference(initialDate);
+      _maxDurationLeft = scenarioMaxDuration - DateTime.now().difference(initialDate);
 
       if(_globalTimer != null) {
         _globalTimer?.cancel();
@@ -60,6 +64,7 @@ class TimerState extends ChangeNotifier {
 
   _tickTimer() {
     _durationLeft = Duration(seconds: _timeLeft - 1);
+    _maxDurationLeft = Duration(seconds: _maxTimeLeft - 1);
 
     if (_timeLeft < 0) {
       endTimer();

@@ -22,10 +22,14 @@ class _$ScenarioDetailsTearOff {
   const _$ScenarioDetailsTearOff();
 
   _ScenarioDetails call(
-      {required String title, required int duration, required String endText}) {
+      {required String title,
+      required int duration,
+      required int maxDuration,
+      required String endText}) {
     return _ScenarioDetails(
       title: title,
       duration: duration,
+      maxDuration: maxDuration,
       endText: endText,
     );
   }
@@ -42,6 +46,7 @@ const $ScenarioDetails = _$ScenarioDetailsTearOff();
 mixin _$ScenarioDetails {
   String get title => throw _privateConstructorUsedError;
   int get duration => throw _privateConstructorUsedError;
+  int get maxDuration => throw _privateConstructorUsedError;
   String get endText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +60,7 @@ abstract class $ScenarioDetailsCopyWith<$Res> {
   factory $ScenarioDetailsCopyWith(
           ScenarioDetails value, $Res Function(ScenarioDetails) then) =
       _$ScenarioDetailsCopyWithImpl<$Res>;
-  $Res call({String title, int duration, String endText});
+  $Res call({String title, int duration, int maxDuration, String endText});
 }
 
 /// @nodoc
@@ -71,6 +76,7 @@ class _$ScenarioDetailsCopyWithImpl<$Res>
   $Res call({
     Object? title = freezed,
     Object? duration = freezed,
+    Object? maxDuration = freezed,
     Object? endText = freezed,
   }) {
     return _then(_value.copyWith(
@@ -81,6 +87,10 @@ class _$ScenarioDetailsCopyWithImpl<$Res>
       duration: duration == freezed
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxDuration: maxDuration == freezed
+          ? _value.maxDuration
+          : maxDuration // ignore: cast_nullable_to_non_nullable
               as int,
       endText: endText == freezed
           ? _value.endText
@@ -97,7 +107,7 @@ abstract class _$ScenarioDetailsCopyWith<$Res>
           _ScenarioDetails value, $Res Function(_ScenarioDetails) then) =
       __$ScenarioDetailsCopyWithImpl<$Res>;
   @override
-  $Res call({String title, int duration, String endText});
+  $Res call({String title, int duration, int maxDuration, String endText});
 }
 
 /// @nodoc
@@ -115,6 +125,7 @@ class __$ScenarioDetailsCopyWithImpl<$Res>
   $Res call({
     Object? title = freezed,
     Object? duration = freezed,
+    Object? maxDuration = freezed,
     Object? endText = freezed,
   }) {
     return _then(_ScenarioDetails(
@@ -125,6 +136,10 @@ class __$ScenarioDetailsCopyWithImpl<$Res>
       duration: duration == freezed
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxDuration: maxDuration == freezed
+          ? _value.maxDuration
+          : maxDuration // ignore: cast_nullable_to_non_nullable
               as int,
       endText: endText == freezed
           ? _value.endText
@@ -138,7 +153,10 @@ class __$ScenarioDetailsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ScenarioDetails extends _ScenarioDetails with DiagnosticableTreeMixin {
   const _$_ScenarioDetails(
-      {required this.title, required this.duration, required this.endText})
+      {required this.title,
+      required this.duration,
+      required this.maxDuration,
+      required this.endText})
       : super._();
 
   factory _$_ScenarioDetails.fromJson(Map<String, dynamic> json) =>
@@ -149,11 +167,13 @@ class _$_ScenarioDetails extends _ScenarioDetails with DiagnosticableTreeMixin {
   @override
   final int duration;
   @override
+  final int maxDuration;
+  @override
   final String endText;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ScenarioDetails(title: $title, duration: $duration, endText: $endText)';
+    return 'ScenarioDetails(title: $title, duration: $duration, maxDuration: $maxDuration, endText: $endText)';
   }
 
   @override
@@ -163,6 +183,7 @@ class _$_ScenarioDetails extends _ScenarioDetails with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'ScenarioDetails'))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('duration', duration))
+      ..add(DiagnosticsProperty('maxDuration', maxDuration))
       ..add(DiagnosticsProperty('endText', endText));
   }
 
@@ -173,6 +194,8 @@ class _$_ScenarioDetails extends _ScenarioDetails with DiagnosticableTreeMixin {
             other is _ScenarioDetails &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.duration, duration) &&
+            const DeepCollectionEquality()
+                .equals(other.maxDuration, maxDuration) &&
             const DeepCollectionEquality().equals(other.endText, endText));
   }
 
@@ -181,6 +204,7 @@ class _$_ScenarioDetails extends _ScenarioDetails with DiagnosticableTreeMixin {
       runtimeType,
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(duration),
+      const DeepCollectionEquality().hash(maxDuration),
       const DeepCollectionEquality().hash(endText));
 
   @JsonKey(ignore: true)
@@ -198,6 +222,7 @@ abstract class _ScenarioDetails extends ScenarioDetails {
   const factory _ScenarioDetails(
       {required String title,
       required int duration,
+      required int maxDuration,
       required String endText}) = _$_ScenarioDetails;
   const _ScenarioDetails._() : super._();
 
@@ -208,6 +233,8 @@ abstract class _ScenarioDetails extends ScenarioDetails {
   String get title;
   @override
   int get duration;
+  @override
+  int get maxDuration;
   @override
   String get endText;
   @override

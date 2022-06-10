@@ -14,6 +14,7 @@ class ScenarioDetails with _$ScenarioDetails {
   const factory ScenarioDetails({
     required String title,
     required int duration,
+    required int maxDuration,
     required String endText,
   }) = _ScenarioDetails;
 
