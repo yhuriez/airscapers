@@ -124,7 +124,8 @@
           "image": "assets/images/tutorial/electric_board.png",
           "start": true,
           "clues": [
-            "La grille semble électrifié, mais il manque quelque chose pour connecter les picots..."
+            "La grille semble électrifié, mais il manque quelque chose pour connecter les picots...",
+            "Il faut ajouter un fil électrique et visser le tout avec le tournevis"
           ],
           "transitions": [
             {
@@ -147,7 +148,8 @@
           "codeHint": "Ex: AB",
           "clues": [
             "Le schéma de branchement doit se situer quelque part dans la pièce.",
-            "Les picots du centre doivent être reliés."
+            "Les picots du centre doivent être reliés.",
+            "Le code est : CD"
           ],
           "transitions": [
             {
@@ -177,7 +179,8 @@
           "start": true,
           "image": "assets/images/tutorial/tv_off.png",
           "clues": [
-            "Sans courant, cet écran ne sert à rien."
+            "Sans courant, cet écran ne sert à rien.",
+            "Vous devez d'abord activer le courant avec le panneau électrique"
           ],
           "transitions": [
             {
@@ -203,7 +206,9 @@
           "image": "assets/images/tutorial/exit_door.png",
           "codeHint": "Ex: 1234",
           "clues": [
-            "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte."
+            "Une fois le code du digicode trouvé, observez bien le mot EXIT sur la porte.",
+            "Comparez les couleurs du code et celles du mot EXIT.",
+            "Le code est : 9372"
           ],
           "transitions": [
             {

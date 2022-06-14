@@ -120,6 +120,8 @@ class _ClueDialogState extends State<ClueDialog> {
     String message = "Souhaitez-vous un autre indice ?";
     if (availableClues.length == 0) {
       message = "Souhaitez-vous obtenir un indice ?";
+    } else if (availableClues.length == nbExistingClues - 1) {
+      message = "Souhaitez-vous révéler la solution ?";
     }
 
     return ARSConfirmDialog(

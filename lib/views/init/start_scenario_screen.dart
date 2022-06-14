@@ -46,6 +46,7 @@ class StartScenarioScreen extends StatelessWidget {
           centerTitle: true,
           elevation: 0
       ),
+
       body: Container(
         child: Column(
           children: <Widget>[
@@ -63,29 +64,10 @@ class StartScenarioScreen extends StatelessWidget {
               ),
             ),
 
-            (scenario.name == "Tutoriel")
-                ? createTutorialPDFAccessButton()
-                : Container(),
-
             createStartScenarioButton(scenario)
 
           ],
         ),
-      ),
-    );
-  }
-
-  Widget createTutorialPDFAccessButton() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ARSButton(
-        backgroundColor: Colors.green,
-        text: Text(
-          "Accéder aux QR codes",
-          style: TextStyle(color: Colors.white, fontSize: 16, fontStyle: FontStyle.italic),
-        ),
-        onClick: _launchUrl,
-        height: 50,
       ),
     );
   }
@@ -112,22 +94,5 @@ class StartScenarioScreen extends StatelessWidget {
 
     Navigator.of(context, rootNavigator: true)
         .pushAndRemoveUntil(HomeScreen.createRoute(), (route) => false);
-  }
-
-  _launchUrl(BuildContext context) async {
-    final url = Uri.parse("https://drive.google.com/file/d/1UU6Erdvv3bm_IoO_ft-tDvU6AMBAROFh/view?usp=sharing");
-    if (await canLaunchUrl(url))
-      launchUrl(url);
-    else {
-      showDialog<String>(context: context,
-          builder: (context) {
-            return ARSDialogBase(child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Une erreur est survenue, merci de vérifier votre connexion internet",
-                textAlign: TextAlign.center,),
-            ),);
-          });
-    }
   }
 }

@@ -1,20 +1,16 @@
-import 'dart:convert';
-
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:airscaper/domain/usecases/end_use_cases.dart';
 import 'package:airscaper/domain/usecases/link_use_cases.dart';
 import 'package:airscaper/models/navigation_intent.dart';
-import 'package:airscaper/views/common/ars_button.dart';
+import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
+import 'package:airscaper/views/home/nfc_reader_view.dart';
 import 'package:airscaper/views/home/scenario_content_fragment.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
-import 'package:app_settings/app_settings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 
 import '../../injection.dart';
 
@@ -41,7 +37,7 @@ class MainScanBody extends StatelessWidget {
     return ARSScaffold(
       title: _repository.title,
       actions: [
-        if(kDebugMode) IconButton(onPressed: () => onUseDebugMenu(context), icon: Icon(Icons.menu_book)),
+        IconButton(onPressed: () => onUseDebugMenu(context), icon: Icon(Icons.menu_book)),
 
         _createQuitAction(context),
       ],
@@ -62,10 +58,22 @@ class MainScanBody extends StatelessWidget {
   }
 
   onUseDebugMenu(BuildContext context) async {
-    if (_repository.isTutorial || kDebugMode) {
+    if (_repository.isTutorial || kDebugMode || await askDebugPassword(context)) {
       final String? scanResult = await Navigator.of(context).pushNamed(ScenarioContentFragment.routeName);
       parseLink(context, scanResult);
     }
+  }
+
+  Future<bool> askDebugPassword(BuildContext context) async {
+    final result = await showDialog<bool>(
+        context: context,
+        builder: (_) => ARSConfirmDialog(
+            child: Text("Cette option permet d'acceder au objets et énigmes du scénario en direct (sans scan) et ne doit être utilisé qu'en cas de problème.\n\nEtes-vous sûr de vouloir accéder à ce menu ?"),
+            onOkClicked: (_) => Navigator.of(context).pop(true),
+            onCancelClicked: (_) => Navigator.of(context).pop(false),
+        )
+    );
+    return result == true;
   }
 
   _onQuitClicked(BuildContext context) {
@@ -90,147 +98,6 @@ class MainScanBody extends StatelessWidget {
         Duration.zero,
             () => Navigator.of(context, rootNavigator: true)
             .pushAndRemoveUntil(WelcomeScreen.createRoute(), (route) => false));
-  }
-}
-
-class NfcReaderView extends StatefulWidget {
-
-  @override
-  State<NfcReaderView> createState() => _NfcReaderViewState();
-}
-
-class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserver {
-
-  bool isAvailable = true;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addObserver(this);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    refreshNfc();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    Widget child = NfcReadWaitingView();
-
-    if(!isAvailable) {
-      child = NfcDisabledView();
-    }
-
-    return Center(child: child);
-  }
-
-  refreshNfc () async {
-    // Check availability
-    final availability = await NfcManager.instance.isAvailable();
-    setState(() {
-      isAvailable = availability;
-    });
-
-    // Start Session
-    if(availability) {
-      NfcManager.instance.startSession(
-        onDiscovered: _onTagDiscovered
-      );
-    }
-  }
-
-  Future<void> _onTagDiscovered(NfcTag tag) async {
-    final ndefTag = Ndef.from(tag);
-
-    try {
-
-      final result = await ndefTag?.read();
-
-      var record = result?.records.first;
-
-      if (record != null) {
-        final languageCodeLength = record.payload.first;
-        final nextLink = utf8.decode(record.payload.sublist(1 + languageCodeLength));
-
-        parseLink(context, nextLink);
-      }
-
-    } catch (e, stack) {
-      print(stack);
-    }
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if(state == AppLifecycleState.paused) {
-      NfcManager.instance.stopSession();
-
-    } else if(state == AppLifecycleState.resumed) {
-      refreshNfc();
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    NfcManager.instance.stopSession();
-    WidgetsBinding.instance?.removeObserver(this);
-  }
-}
-
-class NfcReadWaitingView extends StatelessWidget {
-  const NfcReadWaitingView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        LoadingAnimationWidget.beat(color: Colors.white, size: 150.0),
-
-        SizedBox(height: 80,),
-
-        Text(
-            "Passez l'appareil devant un marqueur pour le visualiser",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)
-        )
-      ],
-    );
-  }
-}
-
-class NfcDisabledView extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-            "Activez le NFC sur l'appareil pour pouvoir utiliser l'application",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white)
-        ),
-
-        SizedBox(height: 36,),
-
-        ARSButton(onClick: onActivateNfc,
-          text: Text("Activer", style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
-          backgroundColor: Colors.green,)
-      ],
-    );
-  }
-
-  onActivateNfc(BuildContext context) {
-    AppSettings.openNFCSettings();
   }
 }
 
