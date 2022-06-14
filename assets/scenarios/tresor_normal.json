@@ -636,7 +636,7 @@
           "start": true,
           "clues": [
             "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?",
-            "S'ouvre une fois le pont levis ouvert."
+            "La cache s'ouvre une fois le pont levis ouvert."
           ],
           "transitions": [
             {
@@ -664,7 +664,7 @@
           "start": true,
           "clues": [
             "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?",
-            "S'ouvre une fois le pont levis ouvert."
+            "La cache s'ouvre une fois le pont levis ouvert."
           ],
           "transitions": [
             {
@@ -692,7 +692,7 @@
           "start": true,
           "clues": [
             "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?",
-            "S'ouvre une fois le pont levis ouvert."
+            "La cache s'ouvre une fois le pont levis ouvert."
           ],
           "transitions": [
             {
@@ -719,6 +719,7 @@
           "image": "assets/images/tresor/horloge_ferme.png",
           "start": true,
           "clues": [
+            "Autrefois les horloges utilisaient des ressorts pour fonctionner.",
             "La pendule a besoin d'être remonté avant d'être utilisée."
           ],
           "transitions": [
@@ -787,7 +788,8 @@
           "start": true,
           "clues": [
             "Vous ne trouvez pas que cette décoration manque de symétrie ?",
-            "L'objet manquant n'est pas loin d'ici, cherchez quelque chose de long."
+            "L'objet manquant n'est pas loin d'ici, cherchez quelque chose de long.",
+            "Mettez une lance supplémentaire derrière le bouclier"
           ],
           "transitions": [
             {
@@ -817,7 +819,8 @@
           "image": "assets/images/tresor/echiquier.png",
           "start": true,
           "clues": [
-            "Il vous faut quatre objets qui, habituellement, vont sur un échiquier."
+            "Il vous faut quatre objets qui, habituellement, vont sur un échiquier.",
+            "Mettez les quatres reines trouvées sur l'échiquier."
           ],
           "transitions": [
             {
@@ -893,6 +896,7 @@
           "image": "assets/images/tresor/tableau_sale.png",
           "start": true,
           "clues": [
+            "Avec quoi nettoyer quelque chose de sale ?",
             "Il faudrait trouver un chiffon pour le nettoyer."
           ],
           "transitions": [
@@ -1034,7 +1038,7 @@
           "start": true,
           "clues": [
             "Un mécanisme dans la pièce doit pouvoir ouvrir cette dalle.",
-            "Regardez du côté de la cheminée"
+            "Regardez du côté de la cheminée, elle cache l'élément permettant d'ouvrir la dalle."
           ],
           "transitions": [
             {
@@ -1085,7 +1089,8 @@
           "clues": [
             "Ces chiffres à ces positions, vous ne les avez pas déjà vu quelque part ?",
             "Pour trouvez le code, il vous faut trouver deux morceaux d'un document avec des animaux. Fouillez bien le chateau pour trouver le 2ème morceau.",
-            "Pour savoir quels animaux choisir, mettez-vous à leur hauteur et baissez la tête."
+            "Pour savoir quels animaux choisir, mettez-vous à leur hauteur et baissez la tête.",
+            "le code est : 9589"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -1121,7 +1126,8 @@
           "start": true,
           "clues": [
             "Vous apercevez quelque chose derrière le tableau, mais impossible de le bouger. Quelque chose d'autre dans cette pièce le fera peut-être pour vous ?",
-            "Le meuble à tiroirs à côté semble lié d'une certaine manière."
+            "Le meuble à tiroirs à côté semble lié d'une certaine manière.",
+            "Résoudre l'énigme des tiroirs permet de voir ce que cache ce tableau."
           ],
           "transitions": [
             {
@@ -1149,7 +1155,8 @@
           "start": true,
           "clues": [
             "Parfois, il ne faut pas hésiter à utiliser la méthode \"barbare\".",
-            "Vous trouverez dans le chateau un instrument adapté pour \"ouvrir\" la vitre de cette bibliothèque."
+            "Vous trouverez dans le chateau un instrument adapté pour \"ouvrir\" la vitre de cette bibliothèque.",
+            "Utilisez une massue pour briser la vitre."
           ],
           "transitions": [
             {
@@ -1274,6 +1281,9 @@
           "description": "Une statue grec. On peut y insérer trois bijoux.",
           "image": "assets/images/tresor/statue_fin.jpg",
           "start": true,
+          "clues": [
+            "Trois bijoux doivent être insérés, trois pièces sont à explorer... Y aurait-il une coincidance ?"
+          ],
           "transitions": [
             {
               "transitionTo": 2,
