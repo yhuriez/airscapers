@@ -574,7 +574,8 @@
           "start": true,
           "clues": [
             "La configuration du pont peut servir ici.",
-            "Verifier bien la LOngeur et le POids du pont-levis sur la feuille de configuration."
+            "Verifier bien la LOngeur et le POids du pont-levis sur la feuille de configuration.",
+            "LO.PO = Longueur du Pont, PO.HE = Poids des Herses"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -598,8 +599,8 @@
       ]
     },
     {
-      "id": 131,
       "name": "Cryptex",
+      "id": 131,
       "states": [
         {
           "id": 1,
@@ -608,7 +609,8 @@
           "start": true,
           "clues": [
             "Regardez bien autour de l'engin, il y a sans doute quelque chose pour vous indiquer le code de ce cryptex.",
-            "Pour résoudre l'énigme, pensez à un \"mystère\", quelque chose de caché, ou d'intime."
+            "Pour résoudre l'énigme, pensez à un \"mystère\", quelque chose de caché, ou d'intime.",
+            "Le code est : SECRET"
           ],
           "codeHint": "Ex: coffre",
           "transitions": [
@@ -641,7 +643,8 @@
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
           "clues": [
-            "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?"
+            "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?",
+            "La cache s'ouvre une fois le pont levis ouvert."
           ],
           "transitions": [
             {
@@ -668,7 +671,8 @@
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
           "clues": [
-            "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?"
+            "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?",
+            "La cache s'ouvre une fois le pont levis ouvert."
           ],
           "transitions": [
             {
@@ -695,7 +699,8 @@
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
           "clues": [
-            "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?"
+            "Dans un château, lorsque l'on reçoit des invités, qu'est-ce qui s'ouvre ?",
+            "La cache s'ouvre une fois le pont levis ouvert."
           ],
           "transitions": [
             {
@@ -722,7 +727,8 @@
           "image": "assets/images/tresor/horloge_ferme.png",
           "start": true,
           "clues": [
-            "La pendule a besoin d'être remonté avant d'être utilisée."
+            "Autrefois les horloges utilisaient des ressorts pour fonctionner.",
+            "La pendule a besoin d'être remonté avec une clé avant d'être utilisée."
           ],
           "transitions": [
             {
@@ -739,7 +745,8 @@
           "description": "La pendule est à présente remonté et ouverte. Mais l'heure affiché n'est pas bonne.",
           "image": "assets/images/tresor/horloge_ouverte.png",
           "clues": [
-            "L'heure affiché n'est pas correct, il faut trouver un endroit qui affiche la bonne heure."
+            "L'heure affiché n'est pas correct, il faut trouver un endroit qui affiche la bonne heure.",
+            "Vous pouvez trouver l'heure affichée sur l'église du village, au loin."
           ],
           "codeHint": "Ex: 08:30",
           "transitions": [
@@ -776,7 +783,8 @@
             "Cherchez les blasons du code dans les escaliers, ils vous indiqueront les chiffres à entrer.",
             "Pour déchiffrer les quadrillages à chiffres, vous avez besoin d'un guide qui vous explique comment faire.",
             "Les chiffres des quadrillages indiquent combien de cases noires il y a à côté d'elle.",
-            "Comptez bien le nombre de cases noires des quadrillages."
+            "Comptez bien le nombre de cases noires des quadrillages.",
+            "Le code attendu est : 4535"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -810,7 +818,8 @@
           "start": true,
           "clues": [
             "Vous ne trouvez pas que cette décoration manque de symétrie ?",
-            "L'objet manquant n'est pas loin d'ici, cherchez quelque chose de long."
+            "L'objet manquant n'est pas loin d'ici, cherchez quelque chose de long.",
+            "Mettez une lance supplémentaire derrière le bouclier"
           ],
           "transitions": [
             {
@@ -840,7 +849,8 @@
           "image": "assets/images/tresor/echiquier.png",
           "start": true,
           "clues": [
-            "Il vous faut quatre objets qui, habituellement, vont sur un échiquier."
+            "Il vous faut quatre objets qui, habituellement, vont sur un échiquier.",
+            "Mettez les quatres reines trouvées sur l'échiquier."
           ],
           "transitions": [
             {
@@ -866,7 +876,9 @@
           "image": "assets/images/tresor/echiquier.png",
           "clues": [
             "Une des reines se trouve en A5.",
-            "Une autre reine se trouve en E3."
+            "Une autre reine se trouve en E3.",
+            "L'avant dernière reine se trouve en B2.",
+            "La dernière reine se trouve en C4."
           ],
           "codeHint": "Ex:  A1B2C3D4",
           "transitions": [
@@ -905,7 +917,8 @@
           "clues": [
             "Il faut jouer un morceau de quatre notes.",
             "Il vous faut trois indices : une partition, un cours de solfège et un document avec des \"ondes\".",
-            "Observez bien les \"ondes\" et la partition, vous ne remarquez rien ?"
+            "Observez bien la partition, vous ne remarquez rien ?",
+            "Il vous faut jouer : MI MI SI DO"
           ],
           "codeHint": "Ex: DO RE MI FA",
           "transitions": [
@@ -940,6 +953,7 @@
           "image": "assets/images/tresor/tableau_sale.png",
           "start": true,
           "clues": [
+            "Avec quoi nettoyer quelque chose de sale ?",
             "Il faudrait trouver un chiffon pour le nettoyer."
           ],
           "transitions": [
@@ -971,7 +985,8 @@
           "start": true,
           "clues": [
             "Saviez-vous que des rayons de soleil concentrés peuvent démarrer un feu ?",
-            "Vous rappelez-vous enfant quand vous aviez une loupe et qu'il faisait beau ?"
+            "Vous rappelez-vous enfant quand vous aviez une loupe et qu'il faisait beau ?",
+            "Utilisez une loupe devant le soleil pour allumer la bougie."
           ],
           "transitions": [
             {
@@ -1005,7 +1020,8 @@
           "image": "assets/images/tresor/fenetre_vue_village.png",
           "start": true,
           "clues": [
-            "Les habitations semblent loin, il faudrait quelque chose pour les rendre plus visible, plus gros..."
+            "Les habitations semblent loin, il faudrait quelque chose pour les rendre plus visible, plus gros...",
+            "Avec une longue vue, tout deviendrait plus facile à voir."
           ],
           "transitions": [
             {
@@ -1035,7 +1051,8 @@
           "image": "assets/images/tresor/coffret.png",
           "start": true,
           "clues": [
-            "Le coffre est assez ouvragé, et nécessite une clé tout aussi \"ouvragé\". Peut-être dans la salle des gardes ?"
+            "Le coffre est assez ouvragé, et nécessite une clé tout aussi \"ouvragé\". Peut-être dans la salle des gardes ?",
+            "Vous trouverez la clé en résolvant les énigmes de la tour de gardes."
           ],
           "transitions": [
             {
@@ -1049,7 +1066,9 @@
           "description": "La clef ne rentre pas... mais vous remarquez des boutons près de la serrure.",
           "image": "assets/images/tresor/serrure_boite.png",
           "clues": [
-            "Les boutons doivent être appuyé dans un certain ordre. La clé donne peut-être un indice ? N'hésitez pas à zoomer sur l'image."
+            "Les boutons doivent être appuyé dans un certain ordre. La clé donne peut-être un indice ? N'hésitez pas à zoomer sur l'image.",
+            "La forme au bout de la clé est assez spéciale...",
+            "Le code est : 1243"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -1082,7 +1101,8 @@
           "image": "assets/images/tresor/cheminee.png",
           "start": true,
           "clues": [
-            "Cette cheminée cache quelque chose, il faudrait l'éclairer un peu."
+            "Cette cheminée cache quelque chose, il faudrait l'éclairer un peu.",
+            "Une simple bougie allumée pourrait lancer le feu de cheminée."
           ],
           "transitions": [
             {
@@ -1112,7 +1132,8 @@
           "image": "assets/images/tresor/dalle_secrete.jpg",
           "start": true,
           "clues": [
-            "Un mécanisme dans la pièce doit pouvoir ouvrir cette dalle."
+            "Un mécanisme dans la pièce doit pouvoir ouvrir cette dalle.",
+            "Regardez du côté de la cheminée, elle cache l'élément permettant d'ouvrir la dalle."
           ],
           "transitions": [
             {
@@ -1163,7 +1184,8 @@
           "clues": [
             "Ces chiffres à ces positions, vous ne les avez pas déjà vu quelque part ?",
             "Pour trouvez le code, il vous faut trouver deux morceaux d'un document avec des animaux. Fouillez bien le chateau pour trouver le 2ème morceau.",
-            "Pour savoir quels animaux choisir, regardez-bien à leur hauteur et baissez la tête."
+            "Pour savoir quels animaux choisir, mettez-vous à leur hauteur et baissez la tête.",
+            "le code est : 9589"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -1198,7 +1220,9 @@
           "image": "assets/images/tresor/tableau_systeme.png",
           "start": true,
           "clues": [
-            "Vous apercevez quelque chose derrière le tableau, mais impossible de le bouger. Quelque chose d'autre dans cette pièce le fera peut-être pour vous ?"
+            "Vous apercevez quelque chose derrière le tableau, mais impossible de le bouger. Quelque chose d'autre dans cette pièce le fera peut-être pour vous ?",
+            "Le meuble à tiroirs à côté semble lié d'une certaine manière.",
+            "Résoudre l'énigme des tiroirs permet de voir ce que cache ce tableau."
           ],
           "transitions": [
             {
@@ -1226,7 +1250,8 @@
           "start": true,
           "clues": [
             "Parfois, il ne faut pas hésiter à utiliser la méthode \"barbare\".",
-            "Vous trouverez dans le chateau un instrument adapté pour \"ouvrir\" la vitre de cette bibliothèque."
+            "Vous trouverez dans le chateau un instrument adapté pour \"ouvrir\" la vitre de cette bibliothèque.",
+            "Utilisez une massue pour briser la vitre."
           ],
           "transitions": [
             {
@@ -1272,12 +1297,13 @@
       "states": [
         {
           "id": 1,
-          "description": "Une table d'écriture.",
+          "description": "Une table d'écriture. Il y a des reliefs sur la table, mais illisibles en l'état.",
           "image": "assets/images/tresor/table_ecriture.png",
           "start": true,
           "clues": [
             "N'y a t-il pas un document que vous avez trouvé qui aurait bien besoin d'écritures ?",
-            "Pour écrire, vous aurez besoin d'une plume et d'encre."
+            "Pour écrire, vous aurez besoin d'une plume et d'encre.",
+            "Le papier que vous avez trouvé peut être réécrit avec la plume et l'encre."
           ],
           "transitions": [
             {
@@ -1316,7 +1342,8 @@
             "Un mot à 5 lettres, 5 chiffres à rentrer... n'y aurait-il pas une correspondance ?",
             "Vous devez trouver 4 lettres avec des chiffres dans la bibliothèque.",
             "En remplacant des lettres par des chiffres, une certaine addition prend un tout autre sens...",
-            "Cherchez bien partout : sur vos documents, sur des énigmes déjà résolu, sur les murs..."
+            "Cherchez bien partout : sur vos documents, sur des énigmes déjà résolu, sur les murs...",
+            "Le code est : 68302"
           ],
           "codeHint": "Ex: 12345",
           "transitions": [
@@ -1349,6 +1376,9 @@
           "description": "Une statue grec. On peut y insérer plusieurs bijoux.",
           "image": "assets/images/tresor/statue_fin.jpg",
           "start": true,
+          "clues": [
+            "Trois bijoux doivent être insérés, trois pièces sont à explorer... Y aurait-il une coincidance ?"
+          ],
           "transitions": [
             {
               "transitionTo": 2,
