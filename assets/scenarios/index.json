@@ -6,7 +6,7 @@
       "image": "",
       "code": "tuto",
       "linkedFile": "tutorial.json",
-      "description": "Ceci est un tutoriel destiné à vous apprendre comment fonctionne l'application et le jeu.\n\nPour pouvoir jouer, vous devez vous procurer les QR codes du tutoriel, que vous pouvez trouver en cliquant sur le bouton \"Accéder aux QR codes\" en dessous.\n\nVous pouvez imprimer le PDF ou jouer avec le PDF sur un autre écran.\n\nVotre objectif : trouver la sortie du bureau !"
+      "description": "Ceci est un tutoriel destiné à vous apprendre comment fonctionne l'application et le jeu.\n\nPour pouvoir jouer, vous devez vous procurer les supports NFC du tutoriel.\n\nVotre objectif : trouver la sortie du bureau !"
     },
     {
       "id": "duke_treasure_normal_id",

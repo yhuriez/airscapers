@@ -9,6 +9,8 @@ class ScenarioStateStorage  {
   static const ScenarioKey currentIdKey = "CURRENT_ID_KEY";
   static const ScenarioKey startDateKey = "START_DATE_KEY";
   static const ScenarioKey endDateKey = "END_DATE_KEY";
+  static const ScenarioKey notesKey = "NOTES_KEY";
+
 
   static const Map<ScenarioKey, dynamic> defaultValues = {
   };

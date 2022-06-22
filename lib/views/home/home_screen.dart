@@ -2,6 +2,7 @@ import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_clock.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
+import 'package:airscaper/views/home/notes/notes_page.dart';
 import 'package:airscaper/views/home/state/inventory_state.dart';
 import 'package:airscaper/views/home/game_over_screen.dart';
 import 'package:airscaper/views/home/main_scan_fragment.dart';
@@ -61,13 +62,12 @@ class HomeScreenContent extends StatelessWidget {
     final state = context.watch<InventoryState>();
 
     final List<ScenarioItem> items = state.items;
-    final selectedItem = state.selectedItem;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          _createBottomBar(context, selectedItem),
+          _createBottomBar(context),
           ARSPaginatedGrid(
             items: items,
             selectedItem: state.selectedItem?.id,
@@ -95,20 +95,29 @@ class HomeScreenContent extends StatelessWidget {
     );
   }
 
-  Widget _createBottomBar(BuildContext context, ScenarioItem? selectedItem) {
+  Widget _createBottomBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           // Selected item name
-          Text(
-            selectedItem?.title ?? "",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                color: textColor),
+          InkWell(
+            onTap: () => Navigator.of(context).push(NotesPage.route()),
+            child: Row(
+              children: [
+                Icon(Icons.text_snippet_outlined, color: Colors.white),
+                SizedBox(width: 8,),
+                Text("Notes",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic
+                  )
+                )
+              ],
+            ),
           ),
 
           // Spacing components
@@ -137,9 +146,7 @@ class HomeScreenContent extends StatelessWidget {
     // Select the new item
     state.selectItem(selectedItem.id);
 
-    if (selectedItem.isZoomable) {
-      await _homeNavigatorKey.currentState?.push(InventoryDetailsFragment.route(selectedItem));
-      state.unselectItem(selectedItem.id);
-    }
+    await _homeNavigatorKey.currentState?.push(InventoryDetailsFragment.route(selectedItem));
+    state.unselectItem(selectedItem.id);
   }
 }
