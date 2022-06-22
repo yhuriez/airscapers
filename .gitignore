@@ -188,3 +188,5 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter,androidstudio
 /.idea/codeStyles/Project.xml
+
+android/keys.properties
