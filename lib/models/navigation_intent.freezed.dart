@@ -27,9 +27,11 @@ class _$NavigationIntentTearOff {
     );
   }
 
-  _NavigationIntentItemDetails itemDetails({required ScenarioItem item}) {
+  _NavigationIntentItemDetails itemDetails(
+      {required ScenarioItem item, bool found = false}) {
     return _NavigationIntentItemDetails(
       item: item,
+      found: found,
     );
   }
 
@@ -49,7 +51,7 @@ mixin _$NavigationIntent {
   TResult when<TResult extends Object?>({
     required TResult Function() success,
     required TResult Function(ScenarioMechanism mechanism) mechanism,
-    required TResult Function(ScenarioItem item) itemDetails,
+    required TResult Function(ScenarioItem item, bool found) itemDetails,
     required TResult Function(DialogArguments arguments) dialog,
   }) =>
       throw _privateConstructorUsedError;
@@ -57,7 +59,7 @@ mixin _$NavigationIntent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +67,7 @@ mixin _$NavigationIntent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
     required TResult orElse(),
   }) =>
@@ -165,7 +167,7 @@ class _$_NavigationIntentSuccess extends _NavigationIntentSuccess
   TResult when<TResult extends Object?>({
     required TResult Function() success,
     required TResult Function(ScenarioMechanism mechanism) mechanism,
-    required TResult Function(ScenarioItem item) itemDetails,
+    required TResult Function(ScenarioItem item, bool found) itemDetails,
     required TResult Function(DialogArguments arguments) dialog,
   }) {
     return success();
@@ -176,7 +178,7 @@ class _$_NavigationIntentSuccess extends _NavigationIntentSuccess
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
   }) {
     return success?.call();
@@ -187,7 +189,7 @@ class _$_NavigationIntentSuccess extends _NavigationIntentSuccess
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
     required TResult orElse(),
   }) {
@@ -328,7 +330,7 @@ class _$_NavigationIntentMechanism extends _NavigationIntentMechanism
   TResult when<TResult extends Object?>({
     required TResult Function() success,
     required TResult Function(ScenarioMechanism mechanism) mechanism,
-    required TResult Function(ScenarioItem item) itemDetails,
+    required TResult Function(ScenarioItem item, bool found) itemDetails,
     required TResult Function(DialogArguments arguments) dialog,
   }) {
     return mechanism(this.mechanism);
@@ -339,7 +341,7 @@ class _$_NavigationIntentMechanism extends _NavigationIntentMechanism
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
   }) {
     return mechanism?.call(this.mechanism);
@@ -350,7 +352,7 @@ class _$_NavigationIntentMechanism extends _NavigationIntentMechanism
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
     required TResult orElse(),
   }) {
@@ -415,7 +417,7 @@ abstract class _$NavigationIntentItemDetailsCopyWith<$Res> {
           _NavigationIntentItemDetails value,
           $Res Function(_NavigationIntentItemDetails) then) =
       __$NavigationIntentItemDetailsCopyWithImpl<$Res>;
-  $Res call({ScenarioItem item});
+  $Res call({ScenarioItem item, bool found});
 
   $ScenarioItemCopyWith<$Res> get item;
 }
@@ -436,12 +438,17 @@ class __$NavigationIntentItemDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? item = freezed,
+    Object? found = freezed,
   }) {
     return _then(_NavigationIntentItemDetails(
       item: item == freezed
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
               as ScenarioItem,
+      found: found == freezed
+          ? _value.found
+          : found // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -457,14 +464,18 @@ class __$NavigationIntentItemDetailsCopyWithImpl<$Res>
 
 class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
     with DiagnosticableTreeMixin {
-  const _$_NavigationIntentItemDetails({required this.item}) : super._();
+  const _$_NavigationIntentItemDetails({required this.item, this.found = false})
+      : super._();
 
   @override
   final ScenarioItem item;
+  @JsonKey()
+  @override
+  final bool found;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NavigationIntent.itemDetails(item: $item)';
+    return 'NavigationIntent.itemDetails(item: $item, found: $found)';
   }
 
   @override
@@ -472,7 +483,8 @@ class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NavigationIntent.itemDetails'))
-      ..add(DiagnosticsProperty('item', item));
+      ..add(DiagnosticsProperty('item', item))
+      ..add(DiagnosticsProperty('found', found));
   }
 
   @override
@@ -480,12 +492,15 @@ class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _NavigationIntentItemDetails &&
-            const DeepCollectionEquality().equals(other.item, item));
+            const DeepCollectionEquality().equals(other.item, item) &&
+            const DeepCollectionEquality().equals(other.found, found));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(item));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(item),
+      const DeepCollectionEquality().hash(found));
 
   @JsonKey(ignore: true)
   @override
@@ -498,10 +513,10 @@ class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
   TResult when<TResult extends Object?>({
     required TResult Function() success,
     required TResult Function(ScenarioMechanism mechanism) mechanism,
-    required TResult Function(ScenarioItem item) itemDetails,
+    required TResult Function(ScenarioItem item, bool found) itemDetails,
     required TResult Function(DialogArguments arguments) dialog,
   }) {
-    return itemDetails(item);
+    return itemDetails(item, found);
   }
 
   @override
@@ -509,10 +524,10 @@ class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
   }) {
-    return itemDetails?.call(item);
+    return itemDetails?.call(item, found);
   }
 
   @override
@@ -520,12 +535,12 @@ class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
     required TResult orElse(),
   }) {
     if (itemDetails != null) {
-      return itemDetails(item);
+      return itemDetails(item, found);
     }
     return orElse();
   }
@@ -569,11 +584,13 @@ class _$_NavigationIntentItemDetails extends _NavigationIntentItemDetails
 }
 
 abstract class _NavigationIntentItemDetails extends NavigationIntent {
-  const factory _NavigationIntentItemDetails({required ScenarioItem item}) =
-      _$_NavigationIntentItemDetails;
+  const factory _NavigationIntentItemDetails(
+      {required ScenarioItem item,
+      bool found}) = _$_NavigationIntentItemDetails;
   const _NavigationIntentItemDetails._() : super._();
 
   ScenarioItem get item;
+  bool get found;
   @JsonKey(ignore: true)
   _$NavigationIntentItemDetailsCopyWith<_NavigationIntentItemDetails>
       get copyWith => throw _privateConstructorUsedError;
@@ -656,7 +673,7 @@ class _$_NavigationIntentDialog extends _NavigationIntentDialog
   TResult when<TResult extends Object?>({
     required TResult Function() success,
     required TResult Function(ScenarioMechanism mechanism) mechanism,
-    required TResult Function(ScenarioItem item) itemDetails,
+    required TResult Function(ScenarioItem item, bool found) itemDetails,
     required TResult Function(DialogArguments arguments) dialog,
   }) {
     return dialog(arguments);
@@ -667,7 +684,7 @@ class _$_NavigationIntentDialog extends _NavigationIntentDialog
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
   }) {
     return dialog?.call(arguments);
@@ -678,7 +695,7 @@ class _$_NavigationIntentDialog extends _NavigationIntentDialog
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
     TResult Function(ScenarioMechanism mechanism)? mechanism,
-    TResult Function(ScenarioItem item)? itemDetails,
+    TResult Function(ScenarioItem item, bool found)? itemDetails,
     TResult Function(DialogArguments arguments)? dialog,
     required TResult orElse(),
   }) {

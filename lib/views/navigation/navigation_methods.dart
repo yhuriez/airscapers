@@ -25,7 +25,7 @@ Future _doNavigate(BuildContext context, NavigationIntent intent, bool replace) 
       mechanism: (mechanism) => _pushTo(context, MechanismFragment.route(mechanism), replace),
 
       // Show item details pages
-      itemDetails: (item) => _pushTo(context, InventoryDetailsFragment.route(item), replace),
+      itemDetails: (item, found) => _pushTo(context, InventoryDetailsFragment.route(item, found: found), replace),
 
       // Show dialog
       dialog: (arguments) => navigateShowDialog(context, arguments)

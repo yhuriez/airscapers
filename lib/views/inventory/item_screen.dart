@@ -18,14 +18,15 @@ class InventoryDetailsFragment extends StatelessWidget {
   static const routeName = "/details";
 
   final ScenarioItem item;
+  final bool found;
 
-  static Route route(ScenarioItem item) {
+  static Route route(ScenarioItem item, {bool found = false}) {
     return FadeBlackPageRoute(
-        builder: (_) => InventoryDetailsFragment(item: item),
+        builder: (_) => InventoryDetailsFragment(item: item, found : found),
         settings: const RouteSettings(name: routeName));
   }
 
-  const InventoryDetailsFragment({Key? key, required this.item}) : super(key: key);
+  const InventoryDetailsFragment({Key? key, required this.item, this.found = false}) : super(key: key);
 
 
   @override
@@ -40,7 +41,7 @@ class InventoryDetailsFragment extends StatelessWidget {
         ],
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ScenarioElementView(item: item),
+          child: ScenarioElementView(item: item, found: found,),
         ));
   }
 
@@ -50,12 +51,14 @@ class InventoryDetailsFragment extends StatelessWidget {
 }
 
 class ScenarioElementView extends StatefulWidget {
+
   final ScenarioItem item;
+  final bool found;
 
   FilterAvailableLootUseCase get _filterAvailableLootUseCase => sl();
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
-  ScenarioElementView({Key? key, required this.item}) : super(key: key);
+  ScenarioElementView({Key? key, required this.item, required this.found}) : super(key: key);
 
   @override
   _ScenarioElementViewState createState() => _ScenarioElementViewState();
@@ -75,7 +78,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   Widget build(BuildContext context) {
 
     String description = widget.item.description;
-    if(availableLoots.isNotEmpty && widget.item.foundDescription != null) {
+    if(widget.item.foundDescription != null && (widget.found || availableLoots.isNotEmpty)) {
       description = widget.item.foundDescription!;
     }
 
@@ -114,7 +117,9 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     child: ARSButton(
       onClick: (context) => _onSearchClicked(context),
       text: Text(
-        "Fouiller",
+        (availableLoots.length == 1)
+            ? availableLoots.first.interactionText ?? "Fouiller"
+            : "Fouiller",
         style: TextStyle(color: Colors.white),
       ),
       backgroundColor: Colors.green,

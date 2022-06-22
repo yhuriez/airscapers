@@ -400,6 +400,7 @@
       "title": "Tapis",
       "description": "Un magnifique tapis.",
       "image": "assets/images/tresor/tapis_animaux.png",
+      "isPickedUp": true,
       "hasQrCode": true
     },
     {
@@ -453,8 +454,7 @@
     {
       "id": 356,
       "title": "Meuble à tiroirs",
-      "description": "Un meuble avec beaucoup de tiroirs",
-      "foundDescription": "Bravo ! Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur à côté...",
+      "description": "Bravo ! Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur à côté...",
       "image": "assets/images/tresor/buffet_code_bruit.png"
     },
     {
@@ -1201,7 +1201,8 @@
               ],
               "removedItems": [
                 375,
-                371
+                371,
+                351
               ]
             }
           ]
@@ -1272,7 +1273,8 @@
           "clues": [
             "Il vous faut tirer quatre livres dans le bon ordre. Observez bien les couleurs et les lettres sur les livres.",
             "Deux documents vous donnent les infos nécessaires : un avec les quatre couleurs, un avec les quatres lettres.",
-            "Regardez bien les documents en votre possession : n'y a t-il pas un avec des LETTRES inhabituelles ?"
+            "Regardez bien les documents en votre possession : n'y a t-il pas un avec des LETTRES inhabituelles ?",
+            "Le code est : 7361"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -1358,7 +1360,9 @@
               ],
               "removedItems": [
                 373,
-                374
+                374,
+                353,
+                354
               ]
             }
           ]
