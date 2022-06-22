@@ -67,10 +67,10 @@ class MainScanBody extends StatelessWidget {
   Future<bool> askDebugPassword(BuildContext context) async {
     final result = await showDialog<bool>(
         context: context,
-        builder: (_) => ARSConfirmDialog(
+        builder: (dialogContext) => ARSConfirmDialog(
             child: Text("Cette option permet d'acceder au objets et énigmes du scénario en direct (sans scan) et ne doit être utilisé qu'en cas de problème.\n\nEtes-vous sûr de vouloir accéder à ce menu ?"),
-            onOkClicked: (_) => Navigator.of(context).pop(true),
-            onCancelClicked: (_) => Navigator.of(context).pop(false),
+            onOkClicked: (_) => Navigator.of(dialogContext).pop(true),
+            onCancelClicked: (_) => Navigator.of(dialogContext).pop(false),
         )
     );
     return result == true;
@@ -107,11 +107,6 @@ parseLink(BuildContext context, String? scanResult) async {
   NavigationIntent? nextIntent;
   if (link != null) {
     nextIntent = await sl<InterpretLinkUseCase>().execute(link);
-
-  } else {
-    nextIntent = NavigationIntent.dialog(arguments: DialogArguments(
-        "Code invalide", "Ce code n'existe pas dans l'application"));
+    navigateTo(context, nextIntent);
   }
-
-  navigateTo(context, nextIntent);
 }

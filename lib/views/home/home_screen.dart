@@ -134,32 +134,12 @@ class HomeScreenContent extends StatelessWidget {
 
     final state = context.read<InventoryState>();
 
-    var isTrackScreen = false;
-    _homeNavigatorKey.currentState?.popUntil((route) {
-      final routeName = route.settings.name;
+    // Select the new item
+    state.selectItem(selectedItem.id);
 
-      // TODO
-      // if (routeName == InventoryDetailsFragment.routeName) {
-      //   if (route.settings.arguments is ScenarioElementDesc) {
-      //     final desc = route.settings.arguments as ScenarioElementDesc;
-      //     isTrackScreen = desc.isCurrentTrack;
-      //   }
-      // }
-      return true; // Will prevent pop
-    });
-
-    if (isTrackScreen) {
+    if (selectedItem.isZoomable) {
+      await _homeNavigatorKey.currentState?.push(InventoryDetailsFragment.route(selectedItem));
       state.unselectItem(selectedItem.id);
-      _homeNavigatorKey.currentState?.pop();
-
-    } else {
-      // Select the new item
-      state.selectItem(selectedItem.id);
-
-      if (selectedItem.isZoomable) {
-        await _homeNavigatorKey.currentState?.push(InventoryDetailsFragment.route(selectedItem));
-        state.unselectItem(selectedItem.id);
-      }
     }
   }
 }

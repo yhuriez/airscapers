@@ -424,6 +424,8 @@
       "title": "Armure",
       "description": "Une armure de chevalier.",
       "image": "assets/images/tresor/armure_biblio.png",
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -431,6 +433,8 @@
       "title": "Mur",
       "description": "Un mur de pierre, avec une écriture à la craie.",
       "image": "assets/images/tresor/mur_biblio.png",
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -1263,7 +1267,7 @@
         },
         {
           "id": 2,
-          "description": "La vitre cassée, les livres sont maintenant accessible. Certains semblent reliés à un mécanisme...",
+          "description": "La vitre cassée, les livres sont maintenant accessible. Certains semblent reliés à un mécanisme, en les tirant un cliquetis s'entend.",
           "image": "assets/images/tresor/biblio_opened.png",
           "clues": [
             "Il vous faut tirer quatre livres dans le bon ordre. Observez bien les couleurs et les lettres sur les livres.",

@@ -8,11 +8,13 @@ import 'package:airscaper/domain/usecases/link_use_cases.dart';
 import 'package:airscaper/injection.dart';
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/views/common/ars_button.dart';
+import 'package:airscaper/views/home/state/inventory_state.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:provider/provider.dart';
 
 class NfcReaderView extends StatefulWidget {
 
@@ -24,6 +26,7 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
 
   bool isAvailable = true;
   bool isScanning = (Platform.isAndroid);
+  bool isReading = false;
 
   @override
   void initState() {
@@ -71,6 +74,7 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
   }
 
   startScan() {
+    print("Start NFC scanning...");
     NfcManager.instance.startSession(
         onDiscovered: _onTagDiscovered
     );
@@ -80,6 +84,7 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
   }
 
   stopScan() {
+    print("Stopped NFC scanning.");
     NfcManager.instance.stopSession();
     setState(() {
       isScanning = true;
@@ -87,6 +92,11 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
   }
 
   Future<void> _onTagDiscovered(NfcTag tag) async {
+
+    setState(() {
+      isReading = true;
+    });
+
     final ndefTag = Ndef.from(tag);
 
     try {
@@ -100,10 +110,17 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
         final nextLink = utf8.decode(record.payload.sublist(1 + languageCodeLength));
 
         parseLink(context, nextLink);
+      } else {
+        setState(() {
+          isReading = false;
+        });
       }
 
     } catch (e, stack) {
       print(stack);
+      setState(() {
+        isReading = false;
+      });
     }
   }
 
@@ -112,19 +129,22 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
 
     NavigationIntent? nextIntent;
     if (link != null) {
-      nextIntent = await sl<InterpretLinkUseCase>().execute(link);
-      stopScan();
+      nextIntent = sl<InterpretLinkUseCase>().execute(link);
 
     } else {
       nextIntent = NavigationIntent.dialog(arguments: DialogArguments(
           "Code invalide", "Ce code n'existe pas dans l'application"));
     }
 
-    await navigateTo(context, nextIntent);
+    setState(() {
+      isReading = false;
+    });
 
-    if(Platform.isAndroid) {
-      startScan();
+    if(Platform.isIOS) {
+      stopScan();
     }
+
+    await navigateTo(context, nextIntent);
   }
 
 

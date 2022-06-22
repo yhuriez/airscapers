@@ -8,7 +8,7 @@ class AddLootUseCase {
 
   AddLootUseCase(this._localSource);
 
-  Future<AddLootResponse> execute(Iterable<ScenarioLoot> loots) async {
+  AddLootResponse execute(Iterable<ScenarioLoot> loots) {
     var existingElement = false;
 
     try {

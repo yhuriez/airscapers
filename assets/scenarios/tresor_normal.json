@@ -391,6 +391,8 @@
       "title": "Tapis",
       "description": "Un magnifique tapis.",
       "image": "assets/images/tresor/tapis_animaux.png",
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -415,6 +417,8 @@
       "title": "Armure",
       "description": "Une armure de chevalier.",
       "image": "assets/images/tresor/armure_biblio.png",
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -422,6 +426,8 @@
       "title": "Mur",
       "description": "Sur ce mur de pierre est écrit quelque chose à la craie.",
       "image": "assets/images/tresor/mur_biblio_alt.png",
+      "isPickedUp": true,
+      "isZoomable": true,
       "hasQrCode": true
     },
     {
@@ -440,8 +446,7 @@
     {
       "id": 356,
       "title": "Meuble à tiroirs",
-      "description": "Un meuble avec beaucoup de tiroirs",
-      "foundDescription": "Bravo ! Le dernier tiroir bougé, quelque chose semble avoir glissé sur un mur à côté...",
+      "description": "Bravo ! Le dernier tiroir bougé, vous entendez quelque chose glisser sur un mur à côté...",
       "image": "assets/images/tresor/buffet_code_bruit.png"
     },
     {
@@ -631,7 +636,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Une curieuse ouverture, fermée par une plaque. Un message est écrit : 'Ouvert aux invités.'",
+          "description": "Une curieuse ouverture, fermée par une plaque. Un message est écrit : \"Ouvert aux invités.\"",
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
           "clues": [
@@ -659,7 +664,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Une curieuse ouverture, fermée par une plaque. Un message est écrit : 'Ouvert aux invités.'",
+          "description": "Une curieuse ouverture, fermée par une plaque. Un message est écrit : \"Ouvert aux invités.\"",
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
           "clues": [
@@ -687,7 +692,7 @@
       "states": [
         {
           "id": 1,
-          "description": "Une curieuse ouverture, fermée par une plaque. Un message est écrit : 'Ouvert aux invités.'",
+          "description": "Une curieuse ouverture, fermée par une plaque. Un message est écrit : \"Ouvert aux invités.\"",
           "image": "assets/images/tresor/cache_demineur_vide.png",
           "start": true,
           "clues": [
@@ -841,7 +846,7 @@
           ]
         },
         {
-          "id": 3,
+          "id": 2,
           "description": "",
           "image": "",
           "endTrack": 150
@@ -990,6 +995,7 @@
       "states": [
         {
           "id": 1,
+          "start": true,
           "description": "",
           "image": "",
           "endTrack": 254
@@ -1168,7 +1174,7 @@
         },
         {
           "id": 2,
-          "description": "La vitre cassée, les livres sont maintenant accessible.",
+          "description": "La vitre cassée, les livres sont maintenant accessible. Certains semblent reliés à un mécanisme, en les tirant un cliquetis s'entend.",
           "image": "assets/images/tresor/biblio_opened.png",
           "clues": [
             "Il vous faut tirer quatre livres dans le bon ordre. Observez bien les couleurs et les lettres sur les livres.",

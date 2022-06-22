@@ -73,10 +73,16 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
 
   @override
   Widget build(BuildContext context) {
+
+    String description = widget.item.description;
+    if(availableLoots.isNotEmpty && widget.item.foundDescription != null) {
+      description = widget.item.foundDescription!;
+    }
+
     return ARSDetailsBox(
       interactionsBuilder: _createInteraction,
       imageUrl: widget.item.image,
-      description: widget.item.description,
+      description: description,
       name: widget.item.title
     );
   }
@@ -138,7 +144,7 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
   }
 
   _onLootClicked(ScenarioLoot loot) async {
-    final intent = await widget._interpretLinkUseCase.execute(loot);
+    final intent = widget._interpretLinkUseCase.execute(loot);
 
     await navigateTo(context, intent);
 

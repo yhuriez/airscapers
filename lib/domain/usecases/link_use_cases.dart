@@ -4,7 +4,6 @@ import 'package:airscaper/domain/storage/scenario_storage.dart';
 import 'package:airscaper/domain/usecases/inventory_use_cases.dart';
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/models/scenario_loot.dart';
-import 'package:flutter/material.dart';
 
 class InterpretLinkUseCase {
   final ScenarioRepository _repository;
@@ -13,7 +12,7 @@ class InterpretLinkUseCase {
 
   InterpretLinkUseCase(this._repository, this._addLootUseCase, this._scenarioStateStorage);
 
-  Future<NavigationIntent> execute(ScenarioLoot loot) async {
+  NavigationIntent execute(ScenarioLoot loot) {
 
     switch(loot.type) {
       case LootType.item: return _interpretItem( loot);
@@ -23,7 +22,7 @@ class InterpretLinkUseCase {
     }
   }
 
-  Future<NavigationIntent> _interpretMechanism(ScenarioLoot loot) async {
+  NavigationIntent _interpretMechanism(ScenarioLoot loot) {
     final scenarioMechanism = _repository.getMechanism(loot.id);
 
     if (scenarioMechanism != null) {
@@ -35,18 +34,18 @@ class InterpretLinkUseCase {
   }
 
 
-  Future<NavigationIntent> _interpretItem(ScenarioLoot loot) async {
+  NavigationIntent _interpretItem(ScenarioLoot loot) {
     final scenarioItem = _repository.getItem(loot.id);
 
     if (scenarioItem != null) {
 
       // If end track, mark as ended and go to end screen
       if(scenarioItem.endTrack) {
-        await _scenarioStateStorage.setEndDate(DateTime.now());
+        _scenarioStateStorage.setEndDate(DateTime.now());
         return NavigationIntent.success();
       }
 
-      final response = await _addLootUseCase.execute([loot]);
+      final response = _addLootUseCase.execute([loot]);
 
       if (response == AddLootResponse.ERROR) {
         return NavigationIntent.dialog(arguments: DialogArguments("Erreur", "Une erreur est survenue"));
