@@ -10,12 +10,14 @@ class AddLootUseCase {
 
   AddLootResponse execute(Iterable<ScenarioLoot> loots) {
     var existingElement = false;
+    var usedElement = false;
 
     try {
 
       loots.forEach((loot) {
         final result = _localSource.loadItem(loot.id);
         if (result != null) {
+          usedElement = result.used;
           existingElement = true;
 
         } else {
@@ -23,9 +25,10 @@ class AddLootUseCase {
         }
       });
 
-      return (existingElement)
-          ? AddLootResponse.ALREADY_FOUND
-          : AddLootResponse.ADDED;
+      if (usedElement) return AddLootResponse.ALREADY_USED;
+      if (existingElement) return AddLootResponse.ALREADY_FOUND;
+      return AddLootResponse.ADDED;
+
     } catch (exception, stack) {
       debugPrintStack(stackTrace: stack);
       return AddLootResponse.ERROR;
@@ -33,7 +36,7 @@ class AddLootUseCase {
   }
 }
 
-enum AddLootResponse { ADDED, ALREADY_FOUND, ERROR }
+enum AddLootResponse { ADDED, ALREADY_FOUND, ALREADY_USED, ERROR }
 
 
 

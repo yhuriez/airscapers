@@ -50,8 +50,11 @@ class InterpretLinkUseCase {
       if (response == AddLootResponse.ERROR) {
         return NavigationIntent.dialog(arguments: DialogArguments("Erreur", "Une erreur est survenue"));
 
+      } else if (response == AddLootResponse.ALREADY_USED) {
+        return NavigationIntent.dialog(arguments: DialogArguments("Déjà utilisé", "Vous avez déjà utilisé cet objet ou cet indice"));
+
       } else if (response == AddLootResponse.ALREADY_FOUND) {
-        return NavigationIntent.dialog(arguments: DialogArguments("Objet déjà trouvé", "Vous possédez déjà cet objet"));
+        return NavigationIntent.itemDetails(item: scenarioItem, found: false);
 
       } else {
         return NavigationIntent.itemDetails(item: scenarioItem, found: true);
