@@ -8,13 +8,11 @@ import 'package:airscaper/domain/usecases/link_use_cases.dart';
 import 'package:airscaper/injection.dart';
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/views/common/ars_button.dart';
-import 'package:airscaper/views/home/state/inventory_state.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-import 'package:provider/provider.dart';
 
 class NfcReaderView extends StatefulWidget {
 
@@ -67,6 +65,7 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
 
     // Start Session
     if(availability && isScanning) {
+      print("Refresh NFC scanning...");
       NfcManager.instance.startSession(
           onDiscovered: _onTagDiscovered
       );
@@ -87,7 +86,7 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
     print("Stopped NFC scanning.");
     NfcManager.instance.stopSession();
     setState(() {
-      isScanning = true;
+      isScanning = false;
     });
   }
 
@@ -108,6 +107,8 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
       if (record != null) {
         final languageCodeLength = record.payload.first;
         final nextLink = utf8.decode(record.payload.sublist(1 + languageCodeLength));
+
+        print("Tag discovered : $nextLink");
 
         parseLink(context, nextLink);
       } else {
@@ -152,9 +153,11 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if(state == AppLifecycleState.paused) {
+      print("Stopped NFC reader from lifecycle");
       NfcManager.instance.stopSession();
 
     } else if(state == AppLifecycleState.resumed) {
+      print("Resumed NFC reader from lifecycle, refresh NFC");
       refreshNfc();
     }
   }
