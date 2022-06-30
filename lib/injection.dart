@@ -24,6 +24,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ComputeCompletionUseCase>(() => ComputeCompletionUseCase(sl(), sl()));
   sl.registerLazySingleton<CountCluesUseCase>(() => CountCluesUseCase(sl()));
   sl.registerLazySingleton<TimeUsedUseCase>(() => TimeUsedUseCase(sl()));
+  sl.registerLazySingleton<FinalScoreUseCase>(() => FinalScoreUseCase(sl(), sl(), sl()));
 
   sl.registerLazySingleton<AddLootUseCase>(() => AddLootUseCase(sl()));
   sl.registerLazySingleton<FilterAvailableLootUseCase>(() => FilterAvailableLootUseCase(sl()));

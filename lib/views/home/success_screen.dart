@@ -17,6 +17,7 @@ class SuccessScreen extends StatelessWidget {
   EndScenarioUseCase get _endScenarioUseCase => sl();
   CountCluesUseCase get _countCluesUseCase => sl();
   TimeUsedUseCase get _timeUsedUseCase => sl();
+  FinalScoreUseCase get _finalScoreUseCase => sl();
 
   static Route<void> createRoute() {
     return createFadeRoute<void>(SuccessScreen(), SuccessScreen.routeName);
@@ -54,6 +55,11 @@ class SuccessScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: _createTimeUsedRow(),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
+                child: _createFinalScore(),
               ),
             ],
           ),
@@ -97,6 +103,25 @@ class SuccessScreen extends StatelessWidget {
         Text(formattedTime,
             style: TextStyle(
                 fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: textColor)),
+      ],
+    );
+  }
+
+  Widget _createFinalScore() {
+
+    final score = _finalScoreUseCase.execute();
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Votre score final : ",
+            style: TextStyle(fontSize: 24, color: textColor, fontWeight: FontWeight.bold)),
+        Text(score.toString(),
+            style: TextStyle(
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: textColor)),
       ],

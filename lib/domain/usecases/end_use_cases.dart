@@ -68,3 +68,26 @@ class TimeUsedUseCase {
     return durationLeft.inSeconds;
   }
 }
+
+
+class FinalScoreUseCase {
+
+  final TimeUsedUseCase _timeUsedUseCase;
+  final ScenarioRepository _repository;
+  final CountCluesUseCase _countCluesUseCase;
+
+  FinalScoreUseCase(this._timeUsedUseCase, this._countCluesUseCase, this._repository);
+
+  int execute() {
+    final timeUsedSeconds = _timeUsedUseCase.execute();
+    final timeUsedDuration = Duration(seconds: timeUsedSeconds);
+
+    final maxScenarioDuration = _repository.maxDurationInMinute;
+    final minuteLeft = maxScenarioDuration - timeUsedDuration.inMinutes;
+
+    final minutePoints = minuteLeft * 10;
+    final clueMalus = _countCluesUseCase.execute() * 2;
+
+    return minutePoints - clueMalus;
+  }
+}
