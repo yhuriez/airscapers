@@ -11,6 +11,11 @@ List<D> mapTypedList<D>(dynamic value, D Function(dynamic) transform) {
 
 
 String formatDuration(Duration duration) {
+  if(duration.isNegative) {
+    final minutes = duration.inMinutes.abs();
+    final seconds = duration.inSeconds.abs();
+    return "- ${twoDigits(minutes)} : ${twoDigits(seconds.remainder(60))}";
+  }
   return "${twoDigits(duration.inMinutes)} : ${twoDigits(duration.inSeconds.remainder(60))}";
 }
 

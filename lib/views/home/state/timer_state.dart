@@ -20,7 +20,7 @@ class TimerState extends ChangeNotifier {
   InitStartDateUseCase get _initStartDateUseCase => sl();
 
   int get _timeLeft => _durationLeft?.inSeconds ?? 0;
-  int get _maxTimeLeft => _durationLeft?.inSeconds ?? 0;
+  int get _maxTimeLeft => _maxDurationLeft?.inSeconds ?? 0;
 
   bool get end {
     if(_durationLeft == null || _maxDurationLeft == null) {
@@ -66,7 +66,7 @@ class TimerState extends ChangeNotifier {
     _durationLeft = Duration(seconds: _timeLeft - 1);
     _maxDurationLeft = Duration(seconds: _maxTimeLeft - 1);
 
-    if (_timeLeft < 0) {
+    if (_maxTimeLeft < 0) {
       endTimer();
     }
 
