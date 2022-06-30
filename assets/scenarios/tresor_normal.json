@@ -242,7 +242,8 @@
       "title": "Tableau nettoyé",
       "description": "Un tableau propre, avec un mot marqué dessus.",
       "foundDescription": "Une fois le tableau nettoyé, vous voyez un mot marqué dessus...",
-      "image": "assets/images/tresor/tableau_avec_SONS.png"
+      "image": "assets/images/tresor/tableau_avec_SONS.png",
+      "isPickedUp": true
     },
     {
       "id": 252,
@@ -1060,7 +1061,8 @@
           "clues": [
             "Ce pentagramme, ne l'avez-vous pas vu ailleurs ?",
             "Le tissu avec quadrillage possède une rose des vents. Est-ce qu'il n'y a pas un autre élément qui vous indique des points cardinaux ?",
-            "Nord = N, Sud = S, Ouest = O, Est = E."
+            "Nord = N, Sud = S, Ouest = O, Est = E.",
+            "Le code est : 6878"
           ],
           "codeHint": "Ex: 1234",
           "transitions": [
@@ -1070,7 +1072,8 @@
                 "6878"
               ],
               "removedItems": [
-                272
+                272,
+                251
               ]
             }
           ]

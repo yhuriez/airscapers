@@ -35,12 +35,12 @@ class SuccessScreen extends StatelessWidget {
             children: [
               // Description
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 32.0),
+                padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
                 child: Text(
                   _repository.endText,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 20,
-
                       fontWeight: FontWeight.bold,
                       color: textColor),
                 ),
