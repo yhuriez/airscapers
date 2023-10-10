@@ -252,7 +252,7 @@ class NfcDisabledView extends StatelessWidget {
   }
 
   onActivateNfc(BuildContext context) {
-    AppSettings.openNFCSettings();
+    AppSettings.openAppSettings(type: AppSettingsType.nfc);
   }
 }
 

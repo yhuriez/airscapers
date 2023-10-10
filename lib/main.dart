@@ -47,7 +47,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Airscapers',
-        theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
+        theme: ThemeData(
+          primaryColor: Colors.black,
+          colorScheme: ThemeData().colorScheme.copyWith(
+            secondary: Colors.white,
+          ),
+        ),
         debugShowCheckedModeBanner: false,
         home: child);
   }

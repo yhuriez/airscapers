@@ -11,7 +11,7 @@ description: Escame game with QR codes
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.2.1+4
+version: 0.2.2+5
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
@@ -22,55 +22,55 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.6
 
   # Service locator
-  get_it: ^7.2.0
+  get_it: ^7.6.4
 
   progress_indicators: ^1.0.0
 
-  intl: ^0.17.0
+  intl: ^0.18.1
 
-  http: ^0.13.4
+  http: ^1.1.0
 
-  collection: ^1.15.0
+  collection: ^1.17.2
 
   # Freezed
-  freezed_annotation: ^1.0.0 # Give additional methods to data classes (copy, equals, sealed classes...)
+  freezed_annotation: ^2.4.1
 
-  provider: ^6.0.1
+  provider: ^6.0.5
 
-  hive: ^2.0.0
+  hive: ^2.2.3
   hive_flutter: ^1.0.0
 
   # To interpret SVG
-  flutter_svg: ^1.0.3
+  flutter_svg: ^2.0.7
 
-  flutter_keyboard_visibility: ^5.2.0
+  flutter_keyboard_visibility: ^5.4.1
 
   page_view_indicators: ^2.0.0
 
-  photo_view: ^0.13.0
+  photo_view: ^0.14.0
 
-  url_launcher: ^6.1.2
-  nfc_manager: ^3.1.1
-  app_settings: ^4.1.6
-  loading_animation_widget: ^1.2.0+1
-  async: ^2.8.2
-
+  url_launcher: ^6.1.14
+  nfc_manager: ^3.3.0
+  app_settings: ^5.1.1
+  loading_animation_widget: ^1.2.0+4
+  async: ^2.11.0
+  file: ^7.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^2.1.5
-  flutter_i18n: ^0.22.4
+  build_runner: ^2.4.6
+  flutter_i18n: ^0.34.0
 
   # Give additional methods to data classes (copy, equals, sealed classes...)
-  freezed: ^1.0.2
-  flutter_gen: ^4.1.2
-  analyzer: ^2.8.0
-  json_serializable: ^6.1.1
+  freezed: ^2.4.4
+  flutter_gen: ^5.3.2
+  analyzer: ^6.2.0
+  json_serializable: ^6.7.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
