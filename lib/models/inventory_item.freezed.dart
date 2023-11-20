@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'inventory_item.dart';
 
@@ -11,40 +12,15 @@ part of 'inventory_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 InventoryItem _$InventoryItemFromJson(Map<String, dynamic> json) {
   return _InventoryItem.fromJson(json);
 }
 
 /// @nodoc
-class _$InventoryItemTearOff {
-  const _$InventoryItemTearOff();
-
-  _InventoryItem call(
-      {required int id,
-      required DateTime creationDate,
-      required bool isPickedUp,
-      bool used = false}) {
-    return _InventoryItem(
-      id: id,
-      creationDate: creationDate,
-      isPickedUp: isPickedUp,
-      used: used,
-    );
-  }
-
-  InventoryItem fromJson(Map<String, Object?> json) {
-    return InventoryItem.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $InventoryItem = _$InventoryItemTearOff();
-
-/// @nodoc
 mixin _$InventoryItem {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   DateTime get creationDate => throw _privateConstructorUsedError;
   bool get isPickedUp => throw _privateConstructorUsedError;
   bool get used => throw _privateConstructorUsedError;
@@ -59,89 +35,91 @@ mixin _$InventoryItem {
 abstract class $InventoryItemCopyWith<$Res> {
   factory $InventoryItemCopyWith(
           InventoryItem value, $Res Function(InventoryItem) then) =
-      _$InventoryItemCopyWithImpl<$Res>;
-  $Res call({int id, DateTime creationDate, bool isPickedUp, bool used});
+      _$InventoryItemCopyWithImpl<$Res, InventoryItem>;
+  @useResult
+  $Res call({String id, DateTime creationDate, bool isPickedUp, bool used});
 }
 
 /// @nodoc
-class _$InventoryItemCopyWithImpl<$Res>
+class _$InventoryItemCopyWithImpl<$Res, $Val extends InventoryItem>
     implements $InventoryItemCopyWith<$Res> {
   _$InventoryItemCopyWithImpl(this._value, this._then);
 
-  final InventoryItem _value;
   // ignore: unused_field
-  final $Res Function(InventoryItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? creationDate = freezed,
-    Object? isPickedUp = freezed,
-    Object? used = freezed,
+    Object? id = null,
+    Object? creationDate = null,
+    Object? isPickedUp = null,
+    Object? used = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      creationDate: creationDate == freezed
+              as String,
+      creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isPickedUp: isPickedUp == freezed
+      isPickedUp: null == isPickedUp
           ? _value.isPickedUp
           : isPickedUp // ignore: cast_nullable_to_non_nullable
               as bool,
-      used: used == freezed
+      used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$InventoryItemCopyWith<$Res>
+abstract class _$$InventoryItemImplCopyWith<$Res>
     implements $InventoryItemCopyWith<$Res> {
-  factory _$InventoryItemCopyWith(
-          _InventoryItem value, $Res Function(_InventoryItem) then) =
-      __$InventoryItemCopyWithImpl<$Res>;
+  factory _$$InventoryItemImplCopyWith(
+          _$InventoryItemImpl value, $Res Function(_$InventoryItemImpl) then) =
+      __$$InventoryItemImplCopyWithImpl<$Res>;
   @override
-  $Res call({int id, DateTime creationDate, bool isPickedUp, bool used});
+  @useResult
+  $Res call({String id, DateTime creationDate, bool isPickedUp, bool used});
 }
 
 /// @nodoc
-class __$InventoryItemCopyWithImpl<$Res>
-    extends _$InventoryItemCopyWithImpl<$Res>
-    implements _$InventoryItemCopyWith<$Res> {
-  __$InventoryItemCopyWithImpl(
-      _InventoryItem _value, $Res Function(_InventoryItem) _then)
-      : super(_value, (v) => _then(v as _InventoryItem));
+class __$$InventoryItemImplCopyWithImpl<$Res>
+    extends _$InventoryItemCopyWithImpl<$Res, _$InventoryItemImpl>
+    implements _$$InventoryItemImplCopyWith<$Res> {
+  __$$InventoryItemImplCopyWithImpl(
+      _$InventoryItemImpl _value, $Res Function(_$InventoryItemImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _InventoryItem get _value => super._value as _InventoryItem;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? creationDate = freezed,
-    Object? isPickedUp = freezed,
-    Object? used = freezed,
+    Object? id = null,
+    Object? creationDate = null,
+    Object? isPickedUp = null,
+    Object? used = null,
   }) {
-    return _then(_InventoryItem(
-      id: id == freezed
+    return _then(_$InventoryItemImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      creationDate: creationDate == freezed
+              as String,
+      creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isPickedUp: isPickedUp == freezed
+      isPickedUp: null == isPickedUp
           ? _value.isPickedUp
           : isPickedUp // ignore: cast_nullable_to_non_nullable
               as bool,
-      used: used == freezed
+      used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -151,25 +129,25 @@ class __$InventoryItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_InventoryItem extends _InventoryItem with DiagnosticableTreeMixin {
-  const _$_InventoryItem(
+class _$InventoryItemImpl extends _InventoryItem with DiagnosticableTreeMixin {
+  const _$InventoryItemImpl(
       {required this.id,
       required this.creationDate,
       required this.isPickedUp,
       this.used = false})
       : super._();
 
-  factory _$_InventoryItem.fromJson(Map<String, dynamic> json) =>
-      _$$_InventoryItemFromJson(json);
+  factory _$InventoryItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InventoryItemImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final DateTime creationDate;
   @override
   final bool isPickedUp;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool used;
 
   @override
@@ -192,47 +170,47 @@ class _$_InventoryItem extends _InventoryItem with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _InventoryItem &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.creationDate, creationDate) &&
-            const DeepCollectionEquality()
-                .equals(other.isPickedUp, isPickedUp) &&
-            const DeepCollectionEquality().equals(other.used, used));
+            other is _$InventoryItemImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate) &&
+            (identical(other.isPickedUp, isPickedUp) ||
+                other.isPickedUp == isPickedUp) &&
+            (identical(other.used, used) || other.used == used));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(creationDate),
-      const DeepCollectionEquality().hash(isPickedUp),
-      const DeepCollectionEquality().hash(used));
 
   @JsonKey(ignore: true)
   @override
-  _$InventoryItemCopyWith<_InventoryItem> get copyWith =>
-      __$InventoryItemCopyWithImpl<_InventoryItem>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, id, creationDate, isPickedUp, used);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InventoryItemImplCopyWith<_$InventoryItemImpl> get copyWith =>
+      __$$InventoryItemImplCopyWithImpl<_$InventoryItemImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InventoryItemToJson(this);
+    return _$$InventoryItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _InventoryItem extends InventoryItem {
   const factory _InventoryItem(
-      {required int id,
-      required DateTime creationDate,
-      required bool isPickedUp,
-      bool used}) = _$_InventoryItem;
+      {required final String id,
+      required final DateTime creationDate,
+      required final bool isPickedUp,
+      final bool used}) = _$InventoryItemImpl;
   const _InventoryItem._() : super._();
 
   factory _InventoryItem.fromJson(Map<String, dynamic> json) =
-      _$_InventoryItem.fromJson;
+      _$InventoryItemImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   DateTime get creationDate;
   @override
@@ -241,6 +219,6 @@ abstract class _InventoryItem extends InventoryItem {
   bool get used;
   @override
   @JsonKey(ignore: true)
-  _$InventoryItemCopyWith<_InventoryItem> get copyWith =>
+  _$$InventoryItemImplCopyWith<_$InventoryItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

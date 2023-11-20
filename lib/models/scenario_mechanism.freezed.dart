@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'scenario_mechanism.dart';
 
@@ -11,40 +12,22 @@ part of 'scenario_mechanism.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ScenarioMechanism _$ScenarioMechanismFromJson(Map<String, dynamic> json) {
   return _ScenarioMechanism.fromJson(json);
 }
 
 /// @nodoc
-class _$ScenarioMechanismTearOff {
-  const _$ScenarioMechanismTearOff();
-
-  _ScenarioMechanism call(
-      {required int id,
-      required String name,
-      List<MechanismState> states = const []}) {
-    return _ScenarioMechanism(
-      id: id,
-      name: name,
-      states: states,
-    );
-  }
-
-  ScenarioMechanism fromJson(Map<String, Object?> json) {
-    return ScenarioMechanism.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ScenarioMechanism = _$ScenarioMechanismTearOff();
-
-/// @nodoc
 mixin _$ScenarioMechanism {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<MechanismState> get states => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  MechanismSolving get solving => throw _privateConstructorUsedError;
+  String? get transitionId => throw _privateConstructorUsedError;
+  bool get endTrack => throw _privateConstructorUsedError;
+  List<String> get clues => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,108 +39,213 @@ mixin _$ScenarioMechanism {
 abstract class $ScenarioMechanismCopyWith<$Res> {
   factory $ScenarioMechanismCopyWith(
           ScenarioMechanism value, $Res Function(ScenarioMechanism) then) =
-      _$ScenarioMechanismCopyWithImpl<$Res>;
-  $Res call({int id, String name, List<MechanismState> states});
+      _$ScenarioMechanismCopyWithImpl<$Res, ScenarioMechanism>;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? description,
+      String? image,
+      MechanismSolving solving,
+      String? transitionId,
+      bool endTrack,
+      List<String> clues});
+
+  $MechanismSolvingCopyWith<$Res> get solving;
 }
 
 /// @nodoc
-class _$ScenarioMechanismCopyWithImpl<$Res>
+class _$ScenarioMechanismCopyWithImpl<$Res, $Val extends ScenarioMechanism>
     implements $ScenarioMechanismCopyWith<$Res> {
   _$ScenarioMechanismCopyWithImpl(this._value, this._then);
 
-  final ScenarioMechanism _value;
   // ignore: unused_field
-  final $Res Function(ScenarioMechanism) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? states = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? image = freezed,
+    Object? solving = null,
+    Object? transitionId = freezed,
+    Object? endTrack = null,
+    Object? clues = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: name == freezed
+              as String,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      states: states == freezed
-          ? _value.states
-          : states // ignore: cast_nullable_to_non_nullable
-              as List<MechanismState>,
-    ));
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      solving: null == solving
+          ? _value.solving
+          : solving // ignore: cast_nullable_to_non_nullable
+              as MechanismSolving,
+      transitionId: freezed == transitionId
+          ? _value.transitionId
+          : transitionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endTrack: null == endTrack
+          ? _value.endTrack
+          : endTrack // ignore: cast_nullable_to_non_nullable
+              as bool,
+      clues: null == clues
+          ? _value.clues
+          : clues // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MechanismSolvingCopyWith<$Res> get solving {
+    return $MechanismSolvingCopyWith<$Res>(_value.solving, (value) {
+      return _then(_value.copyWith(solving: value) as $Val);
+    });
   }
 }
 
 /// @nodoc
-abstract class _$ScenarioMechanismCopyWith<$Res>
+abstract class _$$ScenarioMechanismImplCopyWith<$Res>
     implements $ScenarioMechanismCopyWith<$Res> {
-  factory _$ScenarioMechanismCopyWith(
-          _ScenarioMechanism value, $Res Function(_ScenarioMechanism) then) =
-      __$ScenarioMechanismCopyWithImpl<$Res>;
+  factory _$$ScenarioMechanismImplCopyWith(_$ScenarioMechanismImpl value,
+          $Res Function(_$ScenarioMechanismImpl) then) =
+      __$$ScenarioMechanismImplCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String name, List<MechanismState> states});
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String? description,
+      String? image,
+      MechanismSolving solving,
+      String? transitionId,
+      bool endTrack,
+      List<String> clues});
+
+  @override
+  $MechanismSolvingCopyWith<$Res> get solving;
 }
 
 /// @nodoc
-class __$ScenarioMechanismCopyWithImpl<$Res>
-    extends _$ScenarioMechanismCopyWithImpl<$Res>
-    implements _$ScenarioMechanismCopyWith<$Res> {
-  __$ScenarioMechanismCopyWithImpl(
-      _ScenarioMechanism _value, $Res Function(_ScenarioMechanism) _then)
-      : super(_value, (v) => _then(v as _ScenarioMechanism));
+class __$$ScenarioMechanismImplCopyWithImpl<$Res>
+    extends _$ScenarioMechanismCopyWithImpl<$Res, _$ScenarioMechanismImpl>
+    implements _$$ScenarioMechanismImplCopyWith<$Res> {
+  __$$ScenarioMechanismImplCopyWithImpl(_$ScenarioMechanismImpl _value,
+      $Res Function(_$ScenarioMechanismImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _ScenarioMechanism get _value => super._value as _ScenarioMechanism;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? states = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? description = freezed,
+    Object? image = freezed,
+    Object? solving = null,
+    Object? transitionId = freezed,
+    Object? endTrack = null,
+    Object? clues = null,
   }) {
-    return _then(_ScenarioMechanism(
-      id: id == freezed
+    return _then(_$ScenarioMechanismImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: name == freezed
+              as String,
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      states: states == freezed
-          ? _value.states
-          : states // ignore: cast_nullable_to_non_nullable
-              as List<MechanismState>,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      solving: null == solving
+          ? _value.solving
+          : solving // ignore: cast_nullable_to_non_nullable
+              as MechanismSolving,
+      transitionId: freezed == transitionId
+          ? _value.transitionId
+          : transitionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endTrack: null == endTrack
+          ? _value.endTrack
+          : endTrack // ignore: cast_nullable_to_non_nullable
+              as bool,
+      clues: null == clues
+          ? _value._clues
+          : clues // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ScenarioMechanism extends _ScenarioMechanism
+class _$ScenarioMechanismImpl extends _ScenarioMechanism
     with DiagnosticableTreeMixin {
-  const _$_ScenarioMechanism(
-      {required this.id, required this.name, this.states = const []})
-      : super._();
+  const _$ScenarioMechanismImpl(
+      {required this.id,
+      required this.name,
+      this.description,
+      this.image,
+      required this.solving,
+      this.transitionId,
+      this.endTrack = false,
+      final List<String> clues = const []})
+      : _clues = clues,
+        super._();
 
-  factory _$_ScenarioMechanism.fromJson(Map<String, dynamic> json) =>
-      _$$_ScenarioMechanismFromJson(json);
+  factory _$ScenarioMechanismImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ScenarioMechanismImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String name;
-  @JsonKey()
   @override
-  final List<MechanismState> states;
+  final String? description;
+  @override
+  final String? image;
+  @override
+  final MechanismSolving solving;
+  @override
+  final String? transitionId;
+  @override
+  @JsonKey()
+  final bool endTrack;
+  final List<String> _clues;
+  @override
+  @JsonKey()
+  List<String> get clues {
+    if (_clues is EqualUnmodifiableListView) return _clues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_clues);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ScenarioMechanism(id: $id, name: $name, states: $states)';
+    return 'ScenarioMechanism(id: $id, name: $name, description: $description, image: $image, solving: $solving, transitionId: $transitionId, endTrack: $endTrack, clues: $clues)';
   }
 
   @override
@@ -167,691 +255,100 @@ class _$_ScenarioMechanism extends _ScenarioMechanism
       ..add(DiagnosticsProperty('type', 'ScenarioMechanism'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('states', states));
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('solving', solving))
+      ..add(DiagnosticsProperty('transitionId', transitionId))
+      ..add(DiagnosticsProperty('endTrack', endTrack))
+      ..add(DiagnosticsProperty('clues', clues));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ScenarioMechanism &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.states, states));
+            other is _$ScenarioMechanismImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.solving, solving) || other.solving == solving) &&
+            (identical(other.transitionId, transitionId) ||
+                other.transitionId == transitionId) &&
+            (identical(other.endTrack, endTrack) ||
+                other.endTrack == endTrack) &&
+            const DeepCollectionEquality().equals(other._clues, _clues));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(states));
 
   @JsonKey(ignore: true)
   @override
-  _$ScenarioMechanismCopyWith<_ScenarioMechanism> get copyWith =>
-      __$ScenarioMechanismCopyWithImpl<_ScenarioMechanism>(this, _$identity);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      image,
+      solving,
+      transitionId,
+      endTrack,
+      const DeepCollectionEquality().hash(_clues));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScenarioMechanismImplCopyWith<_$ScenarioMechanismImpl> get copyWith =>
+      __$$ScenarioMechanismImplCopyWithImpl<_$ScenarioMechanismImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ScenarioMechanismToJson(this);
+    return _$$ScenarioMechanismImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ScenarioMechanism extends ScenarioMechanism {
   const factory _ScenarioMechanism(
-      {required int id,
-      required String name,
-      List<MechanismState> states}) = _$_ScenarioMechanism;
+      {required final String id,
+      required final String name,
+      final String? description,
+      final String? image,
+      required final MechanismSolving solving,
+      final String? transitionId,
+      final bool endTrack,
+      final List<String> clues}) = _$ScenarioMechanismImpl;
   const _ScenarioMechanism._() : super._();
 
   factory _ScenarioMechanism.fromJson(Map<String, dynamic> json) =
-      _$_ScenarioMechanism.fromJson;
+      _$ScenarioMechanismImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get name;
-  @override
-  List<MechanismState> get states;
-  @override
-  @JsonKey(ignore: true)
-  _$ScenarioMechanismCopyWith<_ScenarioMechanism> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-MechanismState _$MechanismStateFromJson(Map<String, dynamic> json) {
-  return _MechanismState.fromJson(json);
-}
-
-/// @nodoc
-class _$MechanismStateTearOff {
-  const _$MechanismStateTearOff();
-
-  _MechanismState call(
-      {required int id,
-      String? description,
-      String? image,
-      bool start = false,
-      int? endTrack,
-      List<MechanismTransition> transitions = const [],
-      List<String> clues = const [],
-      String? codeHint}) {
-    return _MechanismState(
-      id: id,
-      description: description,
-      image: image,
-      start: start,
-      endTrack: endTrack,
-      transitions: transitions,
-      clues: clues,
-      codeHint: codeHint,
-    );
-  }
-
-  MechanismState fromJson(Map<String, Object?> json) {
-    return MechanismState.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $MechanismState = _$MechanismStateTearOff();
-
-/// @nodoc
-mixin _$MechanismState {
-  int get id => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
-  bool get start => throw _privateConstructorUsedError;
-  int? get endTrack => throw _privateConstructorUsedError;
-  List<MechanismTransition> get transitions =>
-      throw _privateConstructorUsedError;
-  List<String> get clues => throw _privateConstructorUsedError;
-  String? get codeHint => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $MechanismStateCopyWith<MechanismState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MechanismStateCopyWith<$Res> {
-  factory $MechanismStateCopyWith(
-          MechanismState value, $Res Function(MechanismState) then) =
-      _$MechanismStateCopyWithImpl<$Res>;
-  $Res call(
-      {int id,
-      String? description,
-      String? image,
-      bool start,
-      int? endTrack,
-      List<MechanismTransition> transitions,
-      List<String> clues,
-      String? codeHint});
-}
-
-/// @nodoc
-class _$MechanismStateCopyWithImpl<$Res>
-    implements $MechanismStateCopyWith<$Res> {
-  _$MechanismStateCopyWithImpl(this._value, this._then);
-
-  final MechanismState _value;
-  // ignore: unused_field
-  final $Res Function(MechanismState) _then;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? description = freezed,
-    Object? image = freezed,
-    Object? start = freezed,
-    Object? endTrack = freezed,
-    Object? transitions = freezed,
-    Object? clues = freezed,
-    Object? codeHint = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      start: start == freezed
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as bool,
-      endTrack: endTrack == freezed
-          ? _value.endTrack
-          : endTrack // ignore: cast_nullable_to_non_nullable
-              as int?,
-      transitions: transitions == freezed
-          ? _value.transitions
-          : transitions // ignore: cast_nullable_to_non_nullable
-              as List<MechanismTransition>,
-      clues: clues == freezed
-          ? _value.clues
-          : clues // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      codeHint: codeHint == freezed
-          ? _value.codeHint
-          : codeHint // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$MechanismStateCopyWith<$Res>
-    implements $MechanismStateCopyWith<$Res> {
-  factory _$MechanismStateCopyWith(
-          _MechanismState value, $Res Function(_MechanismState) then) =
-      __$MechanismStateCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {int id,
-      String? description,
-      String? image,
-      bool start,
-      int? endTrack,
-      List<MechanismTransition> transitions,
-      List<String> clues,
-      String? codeHint});
-}
-
-/// @nodoc
-class __$MechanismStateCopyWithImpl<$Res>
-    extends _$MechanismStateCopyWithImpl<$Res>
-    implements _$MechanismStateCopyWith<$Res> {
-  __$MechanismStateCopyWithImpl(
-      _MechanismState _value, $Res Function(_MechanismState) _then)
-      : super(_value, (v) => _then(v as _MechanismState));
-
-  @override
-  _MechanismState get _value => super._value as _MechanismState;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? description = freezed,
-    Object? image = freezed,
-    Object? start = freezed,
-    Object? endTrack = freezed,
-    Object? transitions = freezed,
-    Object? clues = freezed,
-    Object? codeHint = freezed,
-  }) {
-    return _then(_MechanismState(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      start: start == freezed
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as bool,
-      endTrack: endTrack == freezed
-          ? _value.endTrack
-          : endTrack // ignore: cast_nullable_to_non_nullable
-              as int?,
-      transitions: transitions == freezed
-          ? _value.transitions
-          : transitions // ignore: cast_nullable_to_non_nullable
-              as List<MechanismTransition>,
-      clues: clues == freezed
-          ? _value.clues
-          : clues // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      codeHint: codeHint == freezed
-          ? _value.codeHint
-          : codeHint // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_MechanismState extends _MechanismState with DiagnosticableTreeMixin {
-  const _$_MechanismState(
-      {required this.id,
-      this.description,
-      this.image,
-      this.start = false,
-      this.endTrack,
-      this.transitions = const [],
-      this.clues = const [],
-      this.codeHint})
-      : super._();
-
-  factory _$_MechanismState.fromJson(Map<String, dynamic> json) =>
-      _$$_MechanismStateFromJson(json);
-
-  @override
-  final int id;
-  @override
-  final String? description;
-  @override
-  final String? image;
-  @JsonKey()
-  @override
-  final bool start;
-  @override
-  final int? endTrack;
-  @JsonKey()
-  @override
-  final List<MechanismTransition> transitions;
-  @JsonKey()
-  @override
-  final List<String> clues;
-  @override
-  final String? codeHint;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MechanismState(id: $id, description: $description, image: $image, start: $start, endTrack: $endTrack, transitions: $transitions, clues: $clues, codeHint: $codeHint)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'MechanismState'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('image', image))
-      ..add(DiagnosticsProperty('start', start))
-      ..add(DiagnosticsProperty('endTrack', endTrack))
-      ..add(DiagnosticsProperty('transitions', transitions))
-      ..add(DiagnosticsProperty('clues', clues))
-      ..add(DiagnosticsProperty('codeHint', codeHint));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _MechanismState &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.start, start) &&
-            const DeepCollectionEquality().equals(other.endTrack, endTrack) &&
-            const DeepCollectionEquality()
-                .equals(other.transitions, transitions) &&
-            const DeepCollectionEquality().equals(other.clues, clues) &&
-            const DeepCollectionEquality().equals(other.codeHint, codeHint));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(start),
-      const DeepCollectionEquality().hash(endTrack),
-      const DeepCollectionEquality().hash(transitions),
-      const DeepCollectionEquality().hash(clues),
-      const DeepCollectionEquality().hash(codeHint));
-
-  @JsonKey(ignore: true)
-  @override
-  _$MechanismStateCopyWith<_MechanismState> get copyWith =>
-      __$MechanismStateCopyWithImpl<_MechanismState>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_MechanismStateToJson(this);
-  }
-}
-
-abstract class _MechanismState extends MechanismState {
-  const factory _MechanismState(
-      {required int id,
-      String? description,
-      String? image,
-      bool start,
-      int? endTrack,
-      List<MechanismTransition> transitions,
-      List<String> clues,
-      String? codeHint}) = _$_MechanismState;
-  const _MechanismState._() : super._();
-
-  factory _MechanismState.fromJson(Map<String, dynamic> json) =
-      _$_MechanismState.fromJson;
-
-  @override
-  int get id;
   @override
   String? get description;
   @override
   String? get image;
   @override
-  bool get start;
+  MechanismSolving get solving;
   @override
-  int? get endTrack;
+  String? get transitionId;
   @override
-  List<MechanismTransition> get transitions;
+  bool get endTrack;
   @override
   List<String> get clues;
   @override
-  String? get codeHint;
-  @override
   @JsonKey(ignore: true)
-  _$MechanismStateCopyWith<_MechanismState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-MechanismTransition _$MechanismTransitionFromJson(Map<String, dynamic> json) {
-  return _MechanismTransition.fromJson(json);
-}
-
-/// @nodoc
-class _$MechanismTransitionTearOff {
-  const _$MechanismTransitionTearOff();
-
-  _MechanismTransition call(
-      {required int transitionTo,
-      int? expectedItem,
-      List<int> expectedItemList = const [],
-      List<String> expectedCodes = const [],
-      List<int> removedItems = const []}) {
-    return _MechanismTransition(
-      transitionTo: transitionTo,
-      expectedItem: expectedItem,
-      expectedItemList: expectedItemList,
-      expectedCodes: expectedCodes,
-      removedItems: removedItems,
-    );
-  }
-
-  MechanismTransition fromJson(Map<String, Object?> json) {
-    return MechanismTransition.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $MechanismTransition = _$MechanismTransitionTearOff();
-
-/// @nodoc
-mixin _$MechanismTransition {
-  int get transitionTo => throw _privateConstructorUsedError;
-  int? get expectedItem => throw _privateConstructorUsedError;
-  List<int> get expectedItemList => throw _privateConstructorUsedError;
-  List<String> get expectedCodes => throw _privateConstructorUsedError;
-  List<int> get removedItems => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $MechanismTransitionCopyWith<MechanismTransition> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MechanismTransitionCopyWith<$Res> {
-  factory $MechanismTransitionCopyWith(
-          MechanismTransition value, $Res Function(MechanismTransition) then) =
-      _$MechanismTransitionCopyWithImpl<$Res>;
-  $Res call(
-      {int transitionTo,
-      int? expectedItem,
-      List<int> expectedItemList,
-      List<String> expectedCodes,
-      List<int> removedItems});
-}
-
-/// @nodoc
-class _$MechanismTransitionCopyWithImpl<$Res>
-    implements $MechanismTransitionCopyWith<$Res> {
-  _$MechanismTransitionCopyWithImpl(this._value, this._then);
-
-  final MechanismTransition _value;
-  // ignore: unused_field
-  final $Res Function(MechanismTransition) _then;
-
-  @override
-  $Res call({
-    Object? transitionTo = freezed,
-    Object? expectedItem = freezed,
-    Object? expectedItemList = freezed,
-    Object? expectedCodes = freezed,
-    Object? removedItems = freezed,
-  }) {
-    return _then(_value.copyWith(
-      transitionTo: transitionTo == freezed
-          ? _value.transitionTo
-          : transitionTo // ignore: cast_nullable_to_non_nullable
-              as int,
-      expectedItem: expectedItem == freezed
-          ? _value.expectedItem
-          : expectedItem // ignore: cast_nullable_to_non_nullable
-              as int?,
-      expectedItemList: expectedItemList == freezed
-          ? _value.expectedItemList
-          : expectedItemList // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      expectedCodes: expectedCodes == freezed
-          ? _value.expectedCodes
-          : expectedCodes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      removedItems: removedItems == freezed
-          ? _value.removedItems
-          : removedItems // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$MechanismTransitionCopyWith<$Res>
-    implements $MechanismTransitionCopyWith<$Res> {
-  factory _$MechanismTransitionCopyWith(_MechanismTransition value,
-          $Res Function(_MechanismTransition) then) =
-      __$MechanismTransitionCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {int transitionTo,
-      int? expectedItem,
-      List<int> expectedItemList,
-      List<String> expectedCodes,
-      List<int> removedItems});
-}
-
-/// @nodoc
-class __$MechanismTransitionCopyWithImpl<$Res>
-    extends _$MechanismTransitionCopyWithImpl<$Res>
-    implements _$MechanismTransitionCopyWith<$Res> {
-  __$MechanismTransitionCopyWithImpl(
-      _MechanismTransition _value, $Res Function(_MechanismTransition) _then)
-      : super(_value, (v) => _then(v as _MechanismTransition));
-
-  @override
-  _MechanismTransition get _value => super._value as _MechanismTransition;
-
-  @override
-  $Res call({
-    Object? transitionTo = freezed,
-    Object? expectedItem = freezed,
-    Object? expectedItemList = freezed,
-    Object? expectedCodes = freezed,
-    Object? removedItems = freezed,
-  }) {
-    return _then(_MechanismTransition(
-      transitionTo: transitionTo == freezed
-          ? _value.transitionTo
-          : transitionTo // ignore: cast_nullable_to_non_nullable
-              as int,
-      expectedItem: expectedItem == freezed
-          ? _value.expectedItem
-          : expectedItem // ignore: cast_nullable_to_non_nullable
-              as int?,
-      expectedItemList: expectedItemList == freezed
-          ? _value.expectedItemList
-          : expectedItemList // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      expectedCodes: expectedCodes == freezed
-          ? _value.expectedCodes
-          : expectedCodes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      removedItems: removedItems == freezed
-          ? _value.removedItems
-          : removedItems // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_MechanismTransition extends _MechanismTransition
-    with DiagnosticableTreeMixin {
-  const _$_MechanismTransition(
-      {required this.transitionTo,
-      this.expectedItem,
-      this.expectedItemList = const [],
-      this.expectedCodes = const [],
-      this.removedItems = const []})
-      : super._();
-
-  factory _$_MechanismTransition.fromJson(Map<String, dynamic> json) =>
-      _$$_MechanismTransitionFromJson(json);
-
-  @override
-  final int transitionTo;
-  @override
-  final int? expectedItem;
-  @JsonKey()
-  @override
-  final List<int> expectedItemList;
-  @JsonKey()
-  @override
-  final List<String> expectedCodes;
-  @JsonKey()
-  @override
-  final List<int> removedItems;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MechanismTransition(transitionTo: $transitionTo, expectedItem: $expectedItem, expectedItemList: $expectedItemList, expectedCodes: $expectedCodes, removedItems: $removedItems)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'MechanismTransition'))
-      ..add(DiagnosticsProperty('transitionTo', transitionTo))
-      ..add(DiagnosticsProperty('expectedItem', expectedItem))
-      ..add(DiagnosticsProperty('expectedItemList', expectedItemList))
-      ..add(DiagnosticsProperty('expectedCodes', expectedCodes))
-      ..add(DiagnosticsProperty('removedItems', removedItems));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _MechanismTransition &&
-            const DeepCollectionEquality()
-                .equals(other.transitionTo, transitionTo) &&
-            const DeepCollectionEquality()
-                .equals(other.expectedItem, expectedItem) &&
-            const DeepCollectionEquality()
-                .equals(other.expectedItemList, expectedItemList) &&
-            const DeepCollectionEquality()
-                .equals(other.expectedCodes, expectedCodes) &&
-            const DeepCollectionEquality()
-                .equals(other.removedItems, removedItems));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(transitionTo),
-      const DeepCollectionEquality().hash(expectedItem),
-      const DeepCollectionEquality().hash(expectedItemList),
-      const DeepCollectionEquality().hash(expectedCodes),
-      const DeepCollectionEquality().hash(removedItems));
-
-  @JsonKey(ignore: true)
-  @override
-  _$MechanismTransitionCopyWith<_MechanismTransition> get copyWith =>
-      __$MechanismTransitionCopyWithImpl<_MechanismTransition>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_MechanismTransitionToJson(this);
-  }
-}
-
-abstract class _MechanismTransition extends MechanismTransition {
-  const factory _MechanismTransition(
-      {required int transitionTo,
-      int? expectedItem,
-      List<int> expectedItemList,
-      List<String> expectedCodes,
-      List<int> removedItems}) = _$_MechanismTransition;
-  const _MechanismTransition._() : super._();
-
-  factory _MechanismTransition.fromJson(Map<String, dynamic> json) =
-      _$_MechanismTransition.fromJson;
-
-  @override
-  int get transitionTo;
-  @override
-  int? get expectedItem;
-  @override
-  List<int> get expectedItemList;
-  @override
-  List<String> get expectedCodes;
-  @override
-  List<int> get removedItems;
-  @override
-  @JsonKey(ignore: true)
-  _$MechanismTransitionCopyWith<_MechanismTransition> get copyWith =>
+  _$$ScenarioMechanismImplCopyWith<_$ScenarioMechanismImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 MechanismClue _$MechanismClueFromJson(Map<String, dynamic> json) {
   return _MechanismClue.fromJson(json);
 }
-
-/// @nodoc
-class _$MechanismClueTearOff {
-  const _$MechanismClueTearOff();
-
-  _MechanismClue call({required String id, required String description}) {
-    return _MechanismClue(
-      id: id,
-      description: description,
-    );
-  }
-
-  MechanismClue fromJson(Map<String, Object?> json) {
-    return MechanismClue.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $MechanismClue = _$MechanismClueTearOff();
 
 /// @nodoc
 mixin _$MechanismClue {
@@ -868,69 +365,71 @@ mixin _$MechanismClue {
 abstract class $MechanismClueCopyWith<$Res> {
   factory $MechanismClueCopyWith(
           MechanismClue value, $Res Function(MechanismClue) then) =
-      _$MechanismClueCopyWithImpl<$Res>;
+      _$MechanismClueCopyWithImpl<$Res, MechanismClue>;
+  @useResult
   $Res call({String id, String description});
 }
 
 /// @nodoc
-class _$MechanismClueCopyWithImpl<$Res>
+class _$MechanismClueCopyWithImpl<$Res, $Val extends MechanismClue>
     implements $MechanismClueCopyWith<$Res> {
   _$MechanismClueCopyWithImpl(this._value, this._then);
 
-  final MechanismClue _value;
   // ignore: unused_field
-  final $Res Function(MechanismClue) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? description = freezed,
+    Object? id = null,
+    Object? description = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$MechanismClueCopyWith<$Res>
+abstract class _$$MechanismClueImplCopyWith<$Res>
     implements $MechanismClueCopyWith<$Res> {
-  factory _$MechanismClueCopyWith(
-          _MechanismClue value, $Res Function(_MechanismClue) then) =
-      __$MechanismClueCopyWithImpl<$Res>;
+  factory _$$MechanismClueImplCopyWith(
+          _$MechanismClueImpl value, $Res Function(_$MechanismClueImpl) then) =
+      __$$MechanismClueImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String description});
 }
 
 /// @nodoc
-class __$MechanismClueCopyWithImpl<$Res>
-    extends _$MechanismClueCopyWithImpl<$Res>
-    implements _$MechanismClueCopyWith<$Res> {
-  __$MechanismClueCopyWithImpl(
-      _MechanismClue _value, $Res Function(_MechanismClue) _then)
-      : super(_value, (v) => _then(v as _MechanismClue));
+class __$$MechanismClueImplCopyWithImpl<$Res>
+    extends _$MechanismClueCopyWithImpl<$Res, _$MechanismClueImpl>
+    implements _$$MechanismClueImplCopyWith<$Res> {
+  __$$MechanismClueImplCopyWithImpl(
+      _$MechanismClueImpl _value, $Res Function(_$MechanismClueImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _MechanismClue get _value => super._value as _MechanismClue;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? description = freezed,
+    Object? id = null,
+    Object? description = null,
   }) {
-    return _then(_MechanismClue(
-      id: id == freezed
+    return _then(_$MechanismClueImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
@@ -940,12 +439,12 @@ class __$MechanismClueCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MechanismClue extends _MechanismClue with DiagnosticableTreeMixin {
-  const _$_MechanismClue({required this.id, required this.description})
+class _$MechanismClueImpl extends _MechanismClue with DiagnosticableTreeMixin {
+  const _$MechanismClueImpl({required this.id, required this.description})
       : super._();
 
-  factory _$_MechanismClue.fromJson(Map<String, dynamic> json) =>
-      _$$_MechanismClueFromJson(json);
+  factory _$MechanismClueImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MechanismClueImplFromJson(json);
 
   @override
   final String id;
@@ -970,36 +469,38 @@ class _$_MechanismClue extends _MechanismClue with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MechanismClue &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description));
+            other is _$MechanismClueImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(description));
 
   @JsonKey(ignore: true)
   @override
-  _$MechanismClueCopyWith<_MechanismClue> get copyWith =>
-      __$MechanismClueCopyWithImpl<_MechanismClue>(this, _$identity);
+  int get hashCode => Object.hash(runtimeType, id, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MechanismClueImplCopyWith<_$MechanismClueImpl> get copyWith =>
+      __$$MechanismClueImplCopyWithImpl<_$MechanismClueImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MechanismClueToJson(this);
+    return _$$MechanismClueImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MechanismClue extends MechanismClue {
   const factory _MechanismClue(
-      {required String id, required String description}) = _$_MechanismClue;
+      {required final String id,
+      required final String description}) = _$MechanismClueImpl;
   const _MechanismClue._() : super._();
 
   factory _MechanismClue.fromJson(Map<String, dynamic> json) =
-      _$_MechanismClue.fromJson;
+      _$MechanismClueImpl.fromJson;
 
   @override
   String get id;
@@ -1007,6 +508,6 @@ abstract class _MechanismClue extends MechanismClue {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$MechanismClueCopyWith<_MechanismClue> get copyWith =>
+  _$$MechanismClueImplCopyWith<_$MechanismClueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

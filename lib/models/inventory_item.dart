@@ -1,9 +1,7 @@
-import 'package:airscaper/models/scenario_loot.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'inventory_item.freezed.dart';
-
 part 'inventory_item.g.dart';
 
 
@@ -13,7 +11,7 @@ class InventoryItem with _$InventoryItem {
   const InventoryItem._();
 
   const factory InventoryItem({
-    required int id,
+    required String id,
     required DateTime creationDate,
     required bool isPickedUp,
     @Default(false) bool used,

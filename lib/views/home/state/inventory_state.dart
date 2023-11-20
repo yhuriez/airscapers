@@ -16,8 +16,8 @@ class InventoryState extends ChangeNotifier {
 
   List<ScenarioItem> _items = [];
   bool _loading = true;
-  int? _selectedItem;
-  int? _newItem;
+  String? _selectedItem;
+  String? _newItem;
 
   StreamSubscription? _subscription;
 
@@ -43,21 +43,19 @@ class InventoryState extends ChangeNotifier {
   _updateItemList() {
     final inventoryItems = _localSource.loadUnusedItems();
     inventoryItems.sort((first, second) => first.creationDate.compareTo(second.creationDate));
-    _items = _repository.getItems(inventoryItems)
-        .where((element) => element.isPickedUp)
-        .toList();
+    _items = _repository.getItems(inventoryItems).toList();
     notifyListeners();
   }
 
-  addItem(int itemId) {
+  addItem(String itemId) {
     _localSource.insertItem(itemId, true);
   }
 
-  removeItem(List<int> itemIds) {
+  removeItem(List<String> itemIds) {
     itemIds.forEach((itemId) => _localSource.updateItemUsed(itemId));
   }
 
-  selectItem(int itemId) {
+  selectItem(String itemId) {
     if (_selectedItem == itemId) {
       _selectedItem = null;
 
@@ -68,7 +66,7 @@ class InventoryState extends ChangeNotifier {
   }
 
 
-  unselectItem(int itemId) {
+  unselectItem(String itemId) {
     _selectedItem = null;
     notifyListeners();
   }

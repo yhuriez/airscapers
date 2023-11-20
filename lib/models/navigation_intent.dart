@@ -18,8 +18,7 @@ class NavigationIntent with _$NavigationIntent {
   }) = _NavigationIntentMechanism;
 
   const factory NavigationIntent.itemDetails({
-    required ScenarioItem item,
-    @Default(false) bool found
+    required ScenarioItem item
   }) = _NavigationIntentItemDetails;
 
   const factory NavigationIntent.dialog({

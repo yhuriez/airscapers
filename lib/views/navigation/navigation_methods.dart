@@ -22,10 +22,10 @@ Future _doNavigate(BuildContext context, NavigationIntent intent, bool replace) 
       success: () => _pushTo(context, SuccessScreen.createRoute(), replace, root: true),
 
       // Show mechanism page
-      mechanism: (mechanism) => _pushTo(context, MechanismFragment.route(mechanism), replace),
+      mechanism: (mechanism) => _pushTo(context, MechanismFragment.route(mechanism.id), replace),
 
       // Show item details pages
-      itemDetails: (item, found) => _pushTo(context, InventoryDetailsFragment.route(item, found: found), replace),
+      itemDetails: (item) => _pushTo(context, InventoryDetailsFragment.route(item), replace),
 
       // Show dialog
       dialog: (arguments) => navigateShowDialog(context, arguments)

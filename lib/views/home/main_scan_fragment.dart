@@ -1,6 +1,7 @@
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
-import 'package:airscaper/domain/usecases/end_use_cases.dart';
-import 'package:airscaper/domain/usecases/link_use_cases.dart';
+import 'package:airscaper/domain/usecases/end/end_scenario_use_case.dart';
+import 'package:airscaper/domain/usecases/link/interpret_link_use_case.dart';
+import 'package:airscaper/domain/usecases/link/parse_link_use_case.dart';
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
@@ -101,12 +102,12 @@ class MainScanBody extends StatelessWidget {
   }
 }
 
-parseLink(BuildContext context, String? scanResult) async {
+parseLink(BuildContext context, String? scanResult) {
   final link = sl<ParseLinkUseCase>().execute(scanResult);
 
   NavigationIntent? nextIntent;
   if (link != null) {
-    nextIntent = await sl<InterpretLinkUseCase>().execute(link);
+    nextIntent = sl<InterpretLinkUseCase>().execute(link);
     navigateTo(context, nextIntent);
   }
 }

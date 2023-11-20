@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'inventory_clue.dart';
 
@@ -11,30 +12,11 @@ part of 'inventory_clue.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 InventoryClue _$InventoryClueFromJson(Map<String, dynamic> json) {
   return _InventoryClue.fromJson(json);
 }
-
-/// @nodoc
-class _$InventoryClueTearOff {
-  const _$InventoryClueTearOff();
-
-  _InventoryClue call({required String id, required DateTime creationDate}) {
-    return _InventoryClue(
-      id: id,
-      creationDate: creationDate,
-    );
-  }
-
-  InventoryClue fromJson(Map<String, Object?> json) {
-    return InventoryClue.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $InventoryClue = _$InventoryClueTearOff();
 
 /// @nodoc
 mixin _$InventoryClue {
@@ -51,69 +33,71 @@ mixin _$InventoryClue {
 abstract class $InventoryClueCopyWith<$Res> {
   factory $InventoryClueCopyWith(
           InventoryClue value, $Res Function(InventoryClue) then) =
-      _$InventoryClueCopyWithImpl<$Res>;
+      _$InventoryClueCopyWithImpl<$Res, InventoryClue>;
+  @useResult
   $Res call({String id, DateTime creationDate});
 }
 
 /// @nodoc
-class _$InventoryClueCopyWithImpl<$Res>
+class _$InventoryClueCopyWithImpl<$Res, $Val extends InventoryClue>
     implements $InventoryClueCopyWith<$Res> {
   _$InventoryClueCopyWithImpl(this._value, this._then);
 
-  final InventoryClue _value;
   // ignore: unused_field
-  final $Res Function(InventoryClue) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? creationDate = freezed,
+    Object? id = null,
+    Object? creationDate = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      creationDate: creationDate == freezed
+      creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$InventoryClueCopyWith<$Res>
+abstract class _$$InventoryClueImplCopyWith<$Res>
     implements $InventoryClueCopyWith<$Res> {
-  factory _$InventoryClueCopyWith(
-          _InventoryClue value, $Res Function(_InventoryClue) then) =
-      __$InventoryClueCopyWithImpl<$Res>;
+  factory _$$InventoryClueImplCopyWith(
+          _$InventoryClueImpl value, $Res Function(_$InventoryClueImpl) then) =
+      __$$InventoryClueImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, DateTime creationDate});
 }
 
 /// @nodoc
-class __$InventoryClueCopyWithImpl<$Res>
-    extends _$InventoryClueCopyWithImpl<$Res>
-    implements _$InventoryClueCopyWith<$Res> {
-  __$InventoryClueCopyWithImpl(
-      _InventoryClue _value, $Res Function(_InventoryClue) _then)
-      : super(_value, (v) => _then(v as _InventoryClue));
+class __$$InventoryClueImplCopyWithImpl<$Res>
+    extends _$InventoryClueCopyWithImpl<$Res, _$InventoryClueImpl>
+    implements _$$InventoryClueImplCopyWith<$Res> {
+  __$$InventoryClueImplCopyWithImpl(
+      _$InventoryClueImpl _value, $Res Function(_$InventoryClueImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _InventoryClue get _value => super._value as _InventoryClue;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? creationDate = freezed,
+    Object? id = null,
+    Object? creationDate = null,
   }) {
-    return _then(_InventoryClue(
-      id: id == freezed
+    return _then(_$InventoryClueImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      creationDate: creationDate == freezed
+      creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -123,12 +107,12 @@ class __$InventoryClueCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_InventoryClue extends _InventoryClue with DiagnosticableTreeMixin {
-  const _$_InventoryClue({required this.id, required this.creationDate})
+class _$InventoryClueImpl extends _InventoryClue with DiagnosticableTreeMixin {
+  const _$InventoryClueImpl({required this.id, required this.creationDate})
       : super._();
 
-  factory _$_InventoryClue.fromJson(Map<String, dynamic> json) =>
-      _$$_InventoryClueFromJson(json);
+  factory _$InventoryClueImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InventoryClueImplFromJson(json);
 
   @override
   final String id;
@@ -153,36 +137,38 @@ class _$_InventoryClue extends _InventoryClue with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _InventoryClue &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.creationDate, creationDate));
+            other is _$InventoryClueImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(creationDate));
 
   @JsonKey(ignore: true)
   @override
-  _$InventoryClueCopyWith<_InventoryClue> get copyWith =>
-      __$InventoryClueCopyWithImpl<_InventoryClue>(this, _$identity);
+  int get hashCode => Object.hash(runtimeType, id, creationDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InventoryClueImplCopyWith<_$InventoryClueImpl> get copyWith =>
+      __$$InventoryClueImplCopyWithImpl<_$InventoryClueImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InventoryClueToJson(this);
+    return _$$InventoryClueImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _InventoryClue extends InventoryClue {
   const factory _InventoryClue(
-      {required String id, required DateTime creationDate}) = _$_InventoryClue;
+      {required final String id,
+      required final DateTime creationDate}) = _$InventoryClueImpl;
   const _InventoryClue._() : super._();
 
   factory _InventoryClue.fromJson(Map<String, dynamic> json) =
-      _$_InventoryClue.fromJson;
+      _$InventoryClueImpl.fromJson;
 
   @override
   String get id;
@@ -190,6 +176,6 @@ abstract class _InventoryClue extends InventoryClue {
   DateTime get creationDate;
   @override
   @JsonKey(ignore: true)
-  _$InventoryClueCopyWith<_InventoryClue> get copyWith =>
+  _$$InventoryClueImplCopyWith<_$InventoryClueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

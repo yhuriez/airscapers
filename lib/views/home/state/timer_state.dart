@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:airscaper/common/helpers.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
-import 'package:airscaper/domain/usecases/init_use_cases.dart';
+import 'package:airscaper/domain/usecases/init/init_start_date_use_case.dart';
 import 'package:airscaper/injection.dart';
 import 'package:flutter/material.dart';
 

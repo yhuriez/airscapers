@@ -1,7 +1,8 @@
 import 'dart:math';
 
+import 'package:airscaper/domain/usecases/clues/load_available_clues_use_cases.dart';
+import 'package:airscaper/domain/usecases/clues/use_clue_use_cases.dart';
 import 'package:airscaper/models/scenario_mechanism.dart';
-import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/common/ars_dialog_base.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,12 @@ import '../../injection.dart';
 
 class ClueDialog extends StatefulWidget {
 
-  final int mechanismId;
-  final MechanismState state;
+  final ScenarioMechanism mechanism;
 
   LoadAvailableCluesUseCase get _loadClueUseCase => sl();
   UseClueUseCase get _useClueUseCase => sl();
 
-  ClueDialog({Key? key, required this.state, required this.mechanismId}) : super(key: key);
+  ClueDialog({Key? key, required this.mechanism}) : super(key: key);
 
   @override
   _ClueDialogState createState() => _ClueDialogState();
@@ -34,8 +34,8 @@ class _ClueDialogState extends State<ClueDialog> {
   @override
   void initState() {
     super.initState();
-    nbExistingClues = widget.state.clues.length;
-    availableClues = widget._loadClueUseCase.execute(widget.mechanismId, widget.state);
+    nbExistingClues = widget.mechanism.clues.length;
+    availableClues = widget._loadClueUseCase.execute(widget.mechanism);
     showConfirm = availableClues.isEmpty;
     currentClueIndex = max(0, availableClues.length - 1);
   }
@@ -136,7 +136,7 @@ class _ClueDialogState extends State<ClueDialog> {
   }
 
   useClue() {
-    final newClues = widget._useClueUseCase.execute(widget.mechanismId, widget.state);
+    final newClues = widget._useClueUseCase.execute(widget.mechanism);
     setState(() {
       availableClues = newClues;
       currentClueIndex = availableClues.length - 1;

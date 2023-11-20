@@ -1,4 +1,4 @@
-import 'package:airscaper/domain/usecases/init_use_cases.dart';
+
 import 'package:airscaper/views/home/state/inventory_state.dart';
 import 'package:airscaper/views/home/state/timer_state.dart';
 import 'package:airscaper/views/home/home_screen.dart';
@@ -7,6 +7,7 @@ import 'package:airscaper/views/init/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'domain/usecases/init/init_app_use_case.dart';
 import 'injection.dart';
 
 Future<void> main() async {

@@ -5,16 +5,13 @@ import 'package:airscaper/models/inventory_mechanism_state.dart';
 import 'package:collection/collection.dart';
 import 'package:hive/hive.dart';
 
-
 class InventoryLocalSource {
-
   static const itemDbName = "items";
   static const mechanismDbName = "mechanisms";
   static const clueDbName = "clues";
 
-
   final Box<InventoryItem> _itemDb;
-  final Box<InventoryMechanismState> _mechanismDb;
+  final Box<InventoryMechanism> _mechanismDb;
   final Box<InventoryClue> _clueDb;
 
   static Future<Box<InventoryItem>> createItemBox(int typeId) async {
@@ -23,10 +20,10 @@ class InventoryLocalSource {
     return Hive.openBox<InventoryItem>(itemDbName);
   }
 
-  static Future<Box<InventoryMechanismState>> createMechanismBox(int typeId) async {
-    Hive.registerAdapter(JsonTypeAdapter<InventoryMechanismState>(
-        typeId, (json) => InventoryMechanismState.fromJson(json), (obj) => obj.toJson()));
-    return Hive.openBox<InventoryMechanismState>(mechanismDbName);
+  static Future<Box<InventoryMechanism>> createMechanismBox(int typeId) async {
+    Hive.registerAdapter(JsonTypeAdapter<InventoryMechanism>(
+        typeId, (json) => InventoryMechanism.fromJson(json), (obj) => obj.toJson()));
+    return Hive.openBox<InventoryMechanism>(mechanismDbName);
   }
 
   static Future<Box<InventoryClue>> createClueBox(int typeId) async {
@@ -37,33 +34,32 @@ class InventoryLocalSource {
 
   InventoryLocalSource(this._itemDb, this._mechanismDb, this._clueDb);
 
-
   List<InventoryItem> loadUnusedItems() {
     return _itemDb.values.where((it) => it.used == (false)).toList();
   }
 
-  InventoryItem? loadItem(int id)  {
+  InventoryItem? loadItem(String id) {
     return _itemDb.get(id);
   }
 
-  List<InventoryItem> loadAllItems()  {
+  List<InventoryItem> loadAllItems() {
     return _itemDb.values.toList();
   }
 
-  InventoryMechanismState? loadMechanismState(int mechanismId)  {
+  InventoryMechanism? loadResolvedMechanism(String mechanismId) {
     return _mechanismDb.values.firstWhereOrNull((it) => it.mechanismId == mechanismId);
   }
 
-  bool insertItem(int id, bool isPickedUp)  {
-    if(_itemDb.containsKey(id)) return false;
+  bool insertItem(String id, bool isPickedUp) {
+    if (_itemDb.containsKey(id)) return false;
 
     _itemDb.put(id, InventoryItem(id: id, creationDate: DateTime.now(), isPickedUp: isPickedUp));
     return true;
   }
 
-  updateItemUsed(int id) {
+  updateItemUsed(String id) {
     final item = _itemDb.get(id);
-    if(item != null) {
+    if (item != null) {
       _itemDb.put(id, item.copyWith(used: true));
     }
   }
@@ -72,34 +68,28 @@ class InventoryLocalSource {
     return _clueDb.values.toList();
   }
 
-  InventoryClue? loadClue(int id) {
+  InventoryClue? loadClue(String id) {
     return _clueDb.get(id);
   }
 
   bool insertClue(String id) {
-    if(_clueDb.containsKey(id)) return false;
+    if (_clueDb.containsKey(id)) return false;
 
     _clueDb.put(id, InventoryClue(id: id, creationDate: DateTime.now()));
     return true;
   }
 
-  insertOrUpdateMechanismState(int mechanismId, int stateId) {
+  insertMechanism(String mechanismId) {
+    InventoryMechanism? existingState = _mechanismDb.get(mechanismId);
 
-    InventoryMechanismState? existingState = _mechanismDb.get(mechanismId);
-
-    if(existingState == null) {
-      _mechanismDb.put(mechanismId, InventoryMechanismState(
-          mechanismId: mechanismId,
-          creationDate: DateTime.now(),
-          currentStateId: stateId)
+    if (existingState == null) {
+      _mechanismDb.put(
+          mechanismId, InventoryMechanism(mechanismId: mechanismId, creationDate: DateTime.now())
       );
-    } else {
-      _mechanismDb.put(mechanismId, existingState.copyWith(currentStateId: stateId));
     }
   }
 
   Stream watchItems() => _itemDb.watch();
-
 
   Future<bool> clear() async {
     await _itemDb.clear();

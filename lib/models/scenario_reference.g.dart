@@ -6,8 +6,9 @@ part of 'scenario_reference.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ScenarioReference _$$_ScenarioReferenceFromJson(Map<String, dynamic> json) =>
-    _$_ScenarioReference(
+_$ScenarioReferenceImpl _$$ScenarioReferenceImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ScenarioReferenceImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       image: json['image'] as String?,
@@ -16,8 +17,8 @@ _$_ScenarioReference _$$_ScenarioReferenceFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
     );
 
-Map<String, dynamic> _$$_ScenarioReferenceToJson(
-        _$_ScenarioReference instance) =>
+Map<String, dynamic> _$$ScenarioReferenceImplToJson(
+        _$ScenarioReferenceImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

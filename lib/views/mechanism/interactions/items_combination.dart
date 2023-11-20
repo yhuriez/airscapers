@@ -1,4 +1,4 @@
-import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
+import 'package:airscaper/models/mechanism_solving.dart';
 import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen_state.dart';
@@ -6,32 +6,30 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../injection.dart';
-
 const GRID_HEIGHT = 60.0;
 const ITEM_SIZE = 50.0;
 
 class MechanismItemsCombination extends StatefulWidget {
+  final MechanismSolvingCombine _solving;
+
+  MechanismItemsCombination(this._solving);
 
   @override
   _MechanismItemsCombinationState createState() => _MechanismItemsCombinationState();
 }
 
 class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
-  late List<int> expectedItemList;
+  late List<String> expectedItemList;
   Map<int, ScenarioItem> selectedItems = {};
 
   @override
   void initState() {
     super.initState();
 
-    final state = context.read<MechanismScreenState>();
-
-    expectedItemList = state.mechanismState.transitions.first.expectedItemList;
+    expectedItemList = widget._solving.expectedItemList;
 
     if (expectedItemList.isEmpty) {
-      throw Exception(
-          "Transition with expectedItemList is expected at this point");
+      throw Exception("Transition with expectedItemList is expected at this point");
     }
     expectedItemList.sort();
   }
@@ -60,8 +58,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
               draggable: false,
               onItemClicked: onItemClicked)
           : ARSGridEmptyItem(
-              onAcceptedData: (context, data) =>
-                  onItemDropped(context, index, data));
+              onAcceptedData: (context, data) => onItemDropped(context, index, data));
 
       result.add(widget);
     }
@@ -77,7 +74,6 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
     doUpdateState(newSelectedItems);
   }
 
-
   onItemDropped(BuildContext context, int index, ScenarioItem item) {
     final newSelectedItems = Map<int, ScenarioItem>.from(selectedItems);
     newSelectedItems[index] = item;
@@ -85,10 +81,8 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
     doUpdateState(newSelectedItems);
   }
 
-
   doUpdateState(Map<int, ScenarioItem> newSelectedItems) async {
-    final itemSet =
-        newSelectedItems.values.map((elem) => elem.id).toSet().toList();
+    final itemSet = newSelectedItems.values.map((elem) => elem.id).toSet().toList();
     itemSet.sort();
 
     print("Item Set is : $itemSet");

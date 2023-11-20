@@ -1,4 +1,3 @@
-import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/common/nfc_write_dialog.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
@@ -16,20 +15,20 @@ import '../navigation/navigation_methods.dart';
 class MechanismFragment extends StatelessWidget {
   static const routeName = "/mechanism";
 
-  final ScenarioMechanism mechanism;
+  final String mechanismId;
 
-  const MechanismFragment({Key? key, required this.mechanism});
+  const MechanismFragment({Key? key, required this.mechanismId});
 
-  static Route route(ScenarioMechanism mechanism) {
+  static Route route(String mechanismId) {
     return FadeBlackPageRoute(
-        builder: (_) => MechanismFragment(mechanism: mechanism),
+        builder: (_) => MechanismFragment(mechanismId: mechanismId),
         settings: const RouteSettings(name: routeName));
   }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => MechanismScreenState(mechanism),
+        create: (context) => MechanismScreenState(mechanismId),
         child: MechanismStateRepresentation());
   }
 }
@@ -41,7 +40,7 @@ class MechanismStateRepresentation extends StatelessWidget {
     final state = context.watch<MechanismScreenState>();
 
     if (state.nextIntent != null) {
-      SchedulerBinding.instance?.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         navigateReplaceTo(context, state.nextIntent!);
       });
       return Container();
@@ -59,8 +58,8 @@ class MechanismStateRepresentation extends StatelessWidget {
       ],
       child: ARSDetailsBox(
         interactionsBuilder: (_) => createMechanismInteraction(context),
-        imageUrl: state.mechanismState.image ?? "",
-        description: state.mechanismState.description ?? "",
+        imageUrl: state.mechanism.image ?? "",
+        description: state.mechanism.description ?? "",
         name: state.mechanism.name,
         onAcceptedDropData: (_, item) => state.onItemUsed(item),
       ),
@@ -74,8 +73,8 @@ class MechanismStateRepresentation extends StatelessWidget {
     );
   }
 
-  onDisplayWriteNfcDialog(BuildContext context, int mechanismId) {
-    showDialog(context: context, builder: (_) => NfcWriteDialog(link: "airscapers://mechanism/$mechanismId"));
+  onDisplayWriteNfcDialog(BuildContext context, String mechanismId) {
+    showDialog(context: context, builder: (_) => NfcWriteDialog(link: "airscapers://$mechanismId"));
   }
 
   _onClueClicked(BuildContext context) {
@@ -83,6 +82,6 @@ class MechanismStateRepresentation extends StatelessWidget {
 
     showDialog(
         context: context,
-        builder: (_) => ClueDialog(mechanismId: state.mechanism.id, state: state.mechanismState));
+        builder: (_) => ClueDialog(mechanism: state.mechanism));
   }
 }

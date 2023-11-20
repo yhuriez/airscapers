@@ -6,7 +6,8 @@ part of 'scenario.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Scenario _$$_ScenarioFromJson(Map<String, dynamic> json) => _$_Scenario(
+_$ScenarioImpl _$$ScenarioImplFromJson(Map<String, dynamic> json) =>
+    _$ScenarioImpl(
       details:
           ScenarioDetails.fromJson(json['details'] as Map<String, dynamic>),
       items: (json['items'] as List<dynamic>)
@@ -17,9 +18,9 @@ _$_Scenario _$$_ScenarioFromJson(Map<String, dynamic> json) => _$_Scenario(
           .toList(),
     );
 
-Map<String, dynamic> _$$_ScenarioToJson(_$_Scenario instance) =>
+Map<String, dynamic> _$$ScenarioImplToJson(_$ScenarioImpl instance) =>
     <String, dynamic>{
-      'details': instance.details,
-      'items': instance.items,
-      'mechanisms': instance.mechanisms,
+      'details': instance.details.toJson(),
+      'items': instance.items.map((e) => e.toJson()).toList(),
+      'mechanisms': instance.mechanisms.map((e) => e.toJson()).toList(),
     };

@@ -1,23 +1,20 @@
-import 'package:airscaper/models/scenario_loot.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'inventory_mechanism_state.freezed.dart';
-
 part 'inventory_mechanism_state.g.dart';
 
 
 @freezed
-class InventoryMechanismState with _$InventoryMechanismState {
+class InventoryMechanism with _$InventoryMechanism {
 
-  const InventoryMechanismState._();
+  const InventoryMechanism._();
 
-  const factory InventoryMechanismState({
-    required int mechanismId,
-    required DateTime creationDate,
-    required int currentStateId,
+  const factory InventoryMechanism({
+    required String mechanismId,
+    required DateTime creationDate
   }) = _InventoryMechanismState;
 
-  factory InventoryMechanismState.fromJson(Map<String, dynamic> json) =>
-      _$InventoryMechanismStateFromJson(json);
+  factory InventoryMechanism.fromJson(Map<String, dynamic> json) =>
+      _$InventoryMechanismFromJson(json);
 }

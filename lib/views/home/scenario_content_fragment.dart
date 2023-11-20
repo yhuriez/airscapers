@@ -1,7 +1,6 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:airscaper/injection.dart';
-import 'package:airscaper/models/scenario_loot.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
 import 'package:flutter/material.dart';
 
@@ -36,22 +35,19 @@ class ScenarioContentFragment extends StatelessWidget {
                 onTap: () => _onElementClicked(context, element.link),
                 child: Container(
                   height: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(6.0)),
+                  decoration:
+                      BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6.0)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        if(element.imageLink != null) Image.asset(element.imageLink!),
-
+                        if (element.imageLink != null) Image.asset(element.imageLink!),
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
                             element.name,
-                            style:
-                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -68,15 +64,9 @@ class ScenarioContentFragment extends StatelessWidget {
     List<ScenarioElement> result = [];
 
     final repo = _repository;
-    result += repo.items
-        .where((element) => element.hasQrCode && !element.endTrack)
-        .map((element) =>
-            ScenarioElement(element.title, "${LootType.item.name}/${element.id}", element.image))
-        .toList();
 
-
-    result += repo.mechanisms.map((mechanism) => ScenarioElement(
-        mechanism.name, "${LootType.mechanism.name}/${mechanism.id}", mechanism.states.first.image))
+    result += repo.mechanisms
+        .map((mechanism) => ScenarioElement(mechanism.name, mechanism.id, mechanism.image))
         .toList();
 
     return result;

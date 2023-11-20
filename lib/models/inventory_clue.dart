@@ -1,9 +1,7 @@
-import 'package:airscaper/models/scenario_loot.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'inventory_clue.freezed.dart';
-
 part 'inventory_clue.g.dart';
 
 

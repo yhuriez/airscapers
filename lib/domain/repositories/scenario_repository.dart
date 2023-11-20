@@ -41,7 +41,7 @@ class ScenarioRepository {
 
   bool get isTutorial => title == "Tutoriel";
 
-  ScenarioItem? getItem(int itemId) => items.firstWhereOrNull((element) => element.id == itemId);
+  ScenarioItem? getItem(String itemId) => items.firstWhereOrNull((element) => element.id == itemId);
 
   List<ScenarioItem> getItems(List<InventoryItem> inventoryItems) =>
       inventoryItems.map((inventoryItem) {
@@ -50,13 +50,12 @@ class ScenarioRepository {
         });
       } ).toList();
 
-  ScenarioMechanism? getMechanism(int mechanismId)
+  ScenarioMechanism? getMechanism(String mechanismId)
       => mechanisms.firstWhereOrNull((element) => element.id == mechanismId);
 
   Future<bool> initIndex() async {
     try {
-      final indexJsonStr =
-          await rootBundle.loadString("assets/scenarios/index.json");
+      final indexJsonStr = await rootBundle.loadString("assets/scenarios/index.json");
       final indexJson = jsonDecode(indexJsonStr);
       _index = ScenarioIndex.fromJson(indexJson);
       return true;

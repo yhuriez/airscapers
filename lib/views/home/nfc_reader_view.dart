@@ -4,7 +4,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:airscaper/domain/usecases/link_use_cases.dart';
+import 'package:airscaper/domain/usecases/link/interpret_link_use_case.dart';
+import 'package:airscaper/domain/usecases/link/parse_link_use_case.dart';
 import 'package:airscaper/injection.dart';
 import 'package:airscaper/models/navigation_intent.dart';
 import 'package:airscaper/views/common/ars_button.dart';

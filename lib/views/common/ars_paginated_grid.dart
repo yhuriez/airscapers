@@ -11,8 +11,8 @@ const double ITEM_SIZE = 50;
 
 class ARSPaginatedGrid extends StatelessWidget {
   final List<ScenarioItem> items;
-  final int? selectedItem;
-  final int? newItem;
+  final String? selectedItem;
+  final String? newItem;
   final Function(BuildContext, ScenarioItem, bool) onItemClicked;
 
   // pageNotifier is external because we want to keep selected page index across widget update

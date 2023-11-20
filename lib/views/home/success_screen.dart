@@ -1,7 +1,10 @@
 import 'package:airscaper/common/colors.dart';
 import 'package:airscaper/common/helpers.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
-import 'package:airscaper/domain/usecases/end_use_cases.dart';
+import 'package:airscaper/domain/usecases/end/count_clues_use_case.dart';
+import 'package:airscaper/domain/usecases/end/end_scenario_use_case.dart';
+import 'package:airscaper/domain/usecases/end/final_score_use_case.dart';
+import 'package:airscaper/domain/usecases/end/time_used_use_case.dart';
 import 'package:airscaper/views/common/ars_button.dart';
 import 'package:airscaper/views/common/ars_confirm_dialog.dart';
 import 'package:airscaper/views/init/welcome_screen.dart';

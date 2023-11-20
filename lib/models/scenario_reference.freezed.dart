@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'scenario_reference.dart';
 
@@ -11,40 +12,11 @@ part of 'scenario_reference.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ScenarioReference _$ScenarioReferenceFromJson(Map<String, dynamic> json) {
   return _ScenarioReference.fromJson(json);
 }
-
-/// @nodoc
-class _$ScenarioReferenceTearOff {
-  const _$ScenarioReferenceTearOff();
-
-  _ScenarioReference call(
-      {required String id,
-      required String name,
-      String? image,
-      required String code,
-      String? linkedFile,
-      required String description}) {
-    return _ScenarioReference(
-      id: id,
-      name: name,
-      image: image,
-      code: code,
-      linkedFile: linkedFile,
-      description: description,
-    );
-  }
-
-  ScenarioReference fromJson(Map<String, Object?> json) {
-    return ScenarioReference.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ScenarioReference = _$ScenarioReferenceTearOff();
 
 /// @nodoc
 mixin _$ScenarioReference {
@@ -65,7 +37,8 @@ mixin _$ScenarioReference {
 abstract class $ScenarioReferenceCopyWith<$Res> {
   factory $ScenarioReferenceCopyWith(
           ScenarioReference value, $Res Function(ScenarioReference) then) =
-      _$ScenarioReferenceCopyWithImpl<$Res>;
+      _$ScenarioReferenceCopyWithImpl<$Res, ScenarioReference>;
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -76,59 +49,62 @@ abstract class $ScenarioReferenceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ScenarioReferenceCopyWithImpl<$Res>
+class _$ScenarioReferenceCopyWithImpl<$Res, $Val extends ScenarioReference>
     implements $ScenarioReferenceCopyWith<$Res> {
   _$ScenarioReferenceCopyWithImpl(this._value, this._then);
 
-  final ScenarioReference _value;
   // ignore: unused_field
-  final $Res Function(ScenarioReference) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? image = freezed,
-    Object? code = freezed,
+    Object? code = null,
     Object? linkedFile = freezed,
-    Object? description = freezed,
+    Object? description = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      linkedFile: linkedFile == freezed
+      linkedFile: freezed == linkedFile
           ? _value.linkedFile
           : linkedFile // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$ScenarioReferenceCopyWith<$Res>
+abstract class _$$ScenarioReferenceImplCopyWith<$Res>
     implements $ScenarioReferenceCopyWith<$Res> {
-  factory _$ScenarioReferenceCopyWith(
-          _ScenarioReference value, $Res Function(_ScenarioReference) then) =
-      __$ScenarioReferenceCopyWithImpl<$Res>;
+  factory _$$ScenarioReferenceImplCopyWith(_$ScenarioReferenceImpl value,
+          $Res Function(_$ScenarioReferenceImpl) then) =
+      __$$ScenarioReferenceImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String name,
@@ -139,47 +115,45 @@ abstract class _$ScenarioReferenceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ScenarioReferenceCopyWithImpl<$Res>
-    extends _$ScenarioReferenceCopyWithImpl<$Res>
-    implements _$ScenarioReferenceCopyWith<$Res> {
-  __$ScenarioReferenceCopyWithImpl(
-      _ScenarioReference _value, $Res Function(_ScenarioReference) _then)
-      : super(_value, (v) => _then(v as _ScenarioReference));
+class __$$ScenarioReferenceImplCopyWithImpl<$Res>
+    extends _$ScenarioReferenceCopyWithImpl<$Res, _$ScenarioReferenceImpl>
+    implements _$$ScenarioReferenceImplCopyWith<$Res> {
+  __$$ScenarioReferenceImplCopyWithImpl(_$ScenarioReferenceImpl _value,
+      $Res Function(_$ScenarioReferenceImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _ScenarioReference get _value => super._value as _ScenarioReference;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
+    Object? id = null,
+    Object? name = null,
     Object? image = freezed,
-    Object? code = freezed,
+    Object? code = null,
     Object? linkedFile = freezed,
-    Object? description = freezed,
+    Object? description = null,
   }) {
-    return _then(_ScenarioReference(
-      id: id == freezed
+    return _then(_$ScenarioReferenceImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      linkedFile: linkedFile == freezed
+      linkedFile: freezed == linkedFile
           ? _value.linkedFile
           : linkedFile // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
@@ -189,9 +163,9 @@ class __$ScenarioReferenceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ScenarioReference extends _ScenarioReference
+class _$ScenarioReferenceImpl extends _ScenarioReference
     with DiagnosticableTreeMixin {
-  const _$_ScenarioReference(
+  const _$ScenarioReferenceImpl(
       {required this.id,
       required this.name,
       this.image,
@@ -200,8 +174,8 @@ class _$_ScenarioReference extends _ScenarioReference
       required this.description})
       : super._();
 
-  factory _$_ScenarioReference.fromJson(Map<String, dynamic> json) =>
-      _$$_ScenarioReferenceFromJson(json);
+  factory _$ScenarioReferenceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ScenarioReferenceImplFromJson(json);
 
   @override
   final String id;
@@ -238,50 +212,49 @@ class _$_ScenarioReference extends _ScenarioReference
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ScenarioReference &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.code, code) &&
-            const DeepCollectionEquality()
-                .equals(other.linkedFile, linkedFile) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description));
+            other is _$ScenarioReferenceImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.linkedFile, linkedFile) ||
+                other.linkedFile == linkedFile) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(linkedFile),
-      const DeepCollectionEquality().hash(description));
 
   @JsonKey(ignore: true)
   @override
-  _$ScenarioReferenceCopyWith<_ScenarioReference> get copyWith =>
-      __$ScenarioReferenceCopyWithImpl<_ScenarioReference>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, image, code, linkedFile, description);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScenarioReferenceImplCopyWith<_$ScenarioReferenceImpl> get copyWith =>
+      __$$ScenarioReferenceImplCopyWithImpl<_$ScenarioReferenceImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ScenarioReferenceToJson(this);
+    return _$$ScenarioReferenceImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ScenarioReference extends ScenarioReference {
   const factory _ScenarioReference(
-      {required String id,
-      required String name,
-      String? image,
-      required String code,
-      String? linkedFile,
-      required String description}) = _$_ScenarioReference;
+      {required final String id,
+      required final String name,
+      final String? image,
+      required final String code,
+      final String? linkedFile,
+      required final String description}) = _$ScenarioReferenceImpl;
   const _ScenarioReference._() : super._();
 
   factory _ScenarioReference.fromJson(Map<String, dynamic> json) =
-      _$_ScenarioReference.fromJson;
+      _$ScenarioReferenceImpl.fromJson;
 
   @override
   String get id;
@@ -297,6 +270,6 @@ abstract class _ScenarioReference extends ScenarioReference {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$ScenarioReferenceCopyWith<_ScenarioReference> get copyWith =>
+  _$$ScenarioReferenceImplCopyWith<_$ScenarioReferenceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

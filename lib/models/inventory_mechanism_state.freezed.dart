@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'inventory_mechanism_state.dart';
 
@@ -11,218 +12,177 @@ part of 'inventory_mechanism_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-InventoryMechanismState _$InventoryMechanismStateFromJson(
-    Map<String, dynamic> json) {
+InventoryMechanism _$InventoryMechanismFromJson(Map<String, dynamic> json) {
   return _InventoryMechanismState.fromJson(json);
 }
 
 /// @nodoc
-class _$InventoryMechanismStateTearOff {
-  const _$InventoryMechanismStateTearOff();
-
-  _InventoryMechanismState call(
-      {required int mechanismId,
-      required DateTime creationDate,
-      required int currentStateId}) {
-    return _InventoryMechanismState(
-      mechanismId: mechanismId,
-      creationDate: creationDate,
-      currentStateId: currentStateId,
-    );
-  }
-
-  InventoryMechanismState fromJson(Map<String, Object?> json) {
-    return InventoryMechanismState.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $InventoryMechanismState = _$InventoryMechanismStateTearOff();
-
-/// @nodoc
-mixin _$InventoryMechanismState {
-  int get mechanismId => throw _privateConstructorUsedError;
+mixin _$InventoryMechanism {
+  String get mechanismId => throw _privateConstructorUsedError;
   DateTime get creationDate => throw _privateConstructorUsedError;
-  int get currentStateId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InventoryMechanismStateCopyWith<InventoryMechanismState> get copyWith =>
+  $InventoryMechanismCopyWith<InventoryMechanism> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InventoryMechanismStateCopyWith<$Res> {
-  factory $InventoryMechanismStateCopyWith(InventoryMechanismState value,
-          $Res Function(InventoryMechanismState) then) =
-      _$InventoryMechanismStateCopyWithImpl<$Res>;
-  $Res call({int mechanismId, DateTime creationDate, int currentStateId});
+abstract class $InventoryMechanismCopyWith<$Res> {
+  factory $InventoryMechanismCopyWith(
+          InventoryMechanism value, $Res Function(InventoryMechanism) then) =
+      _$InventoryMechanismCopyWithImpl<$Res, InventoryMechanism>;
+  @useResult
+  $Res call({String mechanismId, DateTime creationDate});
 }
 
 /// @nodoc
-class _$InventoryMechanismStateCopyWithImpl<$Res>
-    implements $InventoryMechanismStateCopyWith<$Res> {
-  _$InventoryMechanismStateCopyWithImpl(this._value, this._then);
+class _$InventoryMechanismCopyWithImpl<$Res, $Val extends InventoryMechanism>
+    implements $InventoryMechanismCopyWith<$Res> {
+  _$InventoryMechanismCopyWithImpl(this._value, this._then);
 
-  final InventoryMechanismState _value;
   // ignore: unused_field
-  final $Res Function(InventoryMechanismState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mechanismId = freezed,
-    Object? creationDate = freezed,
-    Object? currentStateId = freezed,
+    Object? mechanismId = null,
+    Object? creationDate = null,
   }) {
     return _then(_value.copyWith(
-      mechanismId: mechanismId == freezed
+      mechanismId: null == mechanismId
           ? _value.mechanismId
           : mechanismId // ignore: cast_nullable_to_non_nullable
-              as int,
-      creationDate: creationDate == freezed
+              as String,
+      creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      currentStateId: currentStateId == freezed
-          ? _value.currentStateId
-          : currentStateId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$InventoryMechanismStateCopyWith<$Res>
-    implements $InventoryMechanismStateCopyWith<$Res> {
-  factory _$InventoryMechanismStateCopyWith(_InventoryMechanismState value,
-          $Res Function(_InventoryMechanismState) then) =
-      __$InventoryMechanismStateCopyWithImpl<$Res>;
+abstract class _$$InventoryMechanismStateImplCopyWith<$Res>
+    implements $InventoryMechanismCopyWith<$Res> {
+  factory _$$InventoryMechanismStateImplCopyWith(
+          _$InventoryMechanismStateImpl value,
+          $Res Function(_$InventoryMechanismStateImpl) then) =
+      __$$InventoryMechanismStateImplCopyWithImpl<$Res>;
   @override
-  $Res call({int mechanismId, DateTime creationDate, int currentStateId});
+  @useResult
+  $Res call({String mechanismId, DateTime creationDate});
 }
 
 /// @nodoc
-class __$InventoryMechanismStateCopyWithImpl<$Res>
-    extends _$InventoryMechanismStateCopyWithImpl<$Res>
-    implements _$InventoryMechanismStateCopyWith<$Res> {
-  __$InventoryMechanismStateCopyWithImpl(_InventoryMechanismState _value,
-      $Res Function(_InventoryMechanismState) _then)
-      : super(_value, (v) => _then(v as _InventoryMechanismState));
+class __$$InventoryMechanismStateImplCopyWithImpl<$Res>
+    extends _$InventoryMechanismCopyWithImpl<$Res,
+        _$InventoryMechanismStateImpl>
+    implements _$$InventoryMechanismStateImplCopyWith<$Res> {
+  __$$InventoryMechanismStateImplCopyWithImpl(
+      _$InventoryMechanismStateImpl _value,
+      $Res Function(_$InventoryMechanismStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _InventoryMechanismState get _value =>
-      super._value as _InventoryMechanismState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? mechanismId = freezed,
-    Object? creationDate = freezed,
-    Object? currentStateId = freezed,
+    Object? mechanismId = null,
+    Object? creationDate = null,
   }) {
-    return _then(_InventoryMechanismState(
-      mechanismId: mechanismId == freezed
+    return _then(_$InventoryMechanismStateImpl(
+      mechanismId: null == mechanismId
           ? _value.mechanismId
           : mechanismId // ignore: cast_nullable_to_non_nullable
-              as int,
-      creationDate: creationDate == freezed
+              as String,
+      creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      currentStateId: currentStateId == freezed
-          ? _value.currentStateId
-          : currentStateId // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_InventoryMechanismState extends _InventoryMechanismState
+class _$InventoryMechanismStateImpl extends _InventoryMechanismState
     with DiagnosticableTreeMixin {
-  const _$_InventoryMechanismState(
-      {required this.mechanismId,
-      required this.creationDate,
-      required this.currentStateId})
+  const _$InventoryMechanismStateImpl(
+      {required this.mechanismId, required this.creationDate})
       : super._();
 
-  factory _$_InventoryMechanismState.fromJson(Map<String, dynamic> json) =>
-      _$$_InventoryMechanismStateFromJson(json);
+  factory _$InventoryMechanismStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InventoryMechanismStateImplFromJson(json);
 
   @override
-  final int mechanismId;
+  final String mechanismId;
   @override
   final DateTime creationDate;
-  @override
-  final int currentStateId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InventoryMechanismState(mechanismId: $mechanismId, creationDate: $creationDate, currentStateId: $currentStateId)';
+    return 'InventoryMechanism(mechanismId: $mechanismId, creationDate: $creationDate)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'InventoryMechanismState'))
+      ..add(DiagnosticsProperty('type', 'InventoryMechanism'))
       ..add(DiagnosticsProperty('mechanismId', mechanismId))
-      ..add(DiagnosticsProperty('creationDate', creationDate))
-      ..add(DiagnosticsProperty('currentStateId', currentStateId));
+      ..add(DiagnosticsProperty('creationDate', creationDate));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _InventoryMechanismState &&
-            const DeepCollectionEquality()
-                .equals(other.mechanismId, mechanismId) &&
-            const DeepCollectionEquality()
-                .equals(other.creationDate, creationDate) &&
-            const DeepCollectionEquality()
-                .equals(other.currentStateId, currentStateId));
+            other is _$InventoryMechanismStateImpl &&
+            (identical(other.mechanismId, mechanismId) ||
+                other.mechanismId == mechanismId) &&
+            (identical(other.creationDate, creationDate) ||
+                other.creationDate == creationDate));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(mechanismId),
-      const DeepCollectionEquality().hash(creationDate),
-      const DeepCollectionEquality().hash(currentStateId));
 
   @JsonKey(ignore: true)
   @override
-  _$InventoryMechanismStateCopyWith<_InventoryMechanismState> get copyWith =>
-      __$InventoryMechanismStateCopyWithImpl<_InventoryMechanismState>(
-          this, _$identity);
+  int get hashCode => Object.hash(runtimeType, mechanismId, creationDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InventoryMechanismStateImplCopyWith<_$InventoryMechanismStateImpl>
+      get copyWith => __$$InventoryMechanismStateImplCopyWithImpl<
+          _$InventoryMechanismStateImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InventoryMechanismStateToJson(this);
+    return _$$InventoryMechanismStateImplToJson(
+      this,
+    );
   }
 }
 
-abstract class _InventoryMechanismState extends InventoryMechanismState {
+abstract class _InventoryMechanismState extends InventoryMechanism {
   const factory _InventoryMechanismState(
-      {required int mechanismId,
-      required DateTime creationDate,
-      required int currentStateId}) = _$_InventoryMechanismState;
+      {required final String mechanismId,
+      required final DateTime creationDate}) = _$InventoryMechanismStateImpl;
   const _InventoryMechanismState._() : super._();
 
   factory _InventoryMechanismState.fromJson(Map<String, dynamic> json) =
-      _$_InventoryMechanismState.fromJson;
+      _$InventoryMechanismStateImpl.fromJson;
 
   @override
-  int get mechanismId;
+  String get mechanismId;
   @override
   DateTime get creationDate;
   @override
-  int get currentStateId;
-  @override
   @JsonKey(ignore: true)
-  _$InventoryMechanismStateCopyWith<_InventoryMechanismState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$InventoryMechanismStateImplCopyWith<_$InventoryMechanismStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

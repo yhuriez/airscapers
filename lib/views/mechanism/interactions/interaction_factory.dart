@@ -1,29 +1,25 @@
 
-import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/views/mechanism/interactions/code_input.dart';
 import 'package:airscaper/views/mechanism/interactions/items_combination.dart';
+import 'package:airscaper/views/mechanism/interactions/pick_button_view.dart';
+import 'package:airscaper/views/mechanism/interactions/search_interaction_view.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen_state.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Widget createMechanismInteraction(BuildContext context) {
 
   final state = context.read<MechanismScreenState>();
-  final firstTransition = state.mechanismState.transitions.firstOrNull;
-
-  if(firstTransition == null) return Container();
+  final solving = state.mechanism.solving;
 
   // Code input
-  if (firstTransition.expectedCodes.isNotEmpty) {
-    return MechanismCodeInput();
+  final widget = solving.mapOrNull(
+      pick: (it) => PickButtonView(it),
+      search: (it) => SearchInteractionView(it),
+      code: (it) => MechanismCodeInput(it),
+      combine: (it) => MechanismItemsCombination(it)
+      // visual and activation don't have interactions,
+  );
 
-    // Items combination
-  } else if (firstTransition.expectedItemList.isNotEmpty) {
-    return MechanismItemsCombination();
-
-  // Back button
-  } else {
-    return Container();
-  }
+    return widget ?? Container();
 }

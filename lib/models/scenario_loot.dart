@@ -12,16 +12,10 @@ class ScenarioLoot with _$ScenarioLoot {
   const ScenarioLoot._();
 
   const factory ScenarioLoot({
-    required int id,
-    @Default(LootType.item) LootType type,
+    required String id,
     String? interactionText
   }) = _ScenarioLoot;
 
   factory ScenarioLoot.fromJson(Map<String, dynamic> json) =>
       _$ScenarioLootFromJson(json);
-}
-
-enum LootType {
-  item,
-  mechanism
 }

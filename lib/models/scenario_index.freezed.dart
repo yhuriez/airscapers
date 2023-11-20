@@ -1,6 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'scenario_index.dart';
 
@@ -11,29 +12,11 @@ part of 'scenario_index.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ScenarioIndex _$ScenarioIndexFromJson(Map<String, dynamic> json) {
   return _ScenarioIndex.fromJson(json);
 }
-
-/// @nodoc
-class _$ScenarioIndexTearOff {
-  const _$ScenarioIndexTearOff();
-
-  _ScenarioIndex call({required List<ScenarioReference> scenarios}) {
-    return _ScenarioIndex(
-      scenarios: scenarios,
-    );
-  }
-
-  ScenarioIndex fromJson(Map<String, Object?> json) {
-    return ScenarioIndex.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ScenarioIndex = _$ScenarioIndexTearOff();
 
 /// @nodoc
 mixin _$ScenarioIndex {
@@ -49,60 +32,62 @@ mixin _$ScenarioIndex {
 abstract class $ScenarioIndexCopyWith<$Res> {
   factory $ScenarioIndexCopyWith(
           ScenarioIndex value, $Res Function(ScenarioIndex) then) =
-      _$ScenarioIndexCopyWithImpl<$Res>;
+      _$ScenarioIndexCopyWithImpl<$Res, ScenarioIndex>;
+  @useResult
   $Res call({List<ScenarioReference> scenarios});
 }
 
 /// @nodoc
-class _$ScenarioIndexCopyWithImpl<$Res>
+class _$ScenarioIndexCopyWithImpl<$Res, $Val extends ScenarioIndex>
     implements $ScenarioIndexCopyWith<$Res> {
   _$ScenarioIndexCopyWithImpl(this._value, this._then);
 
-  final ScenarioIndex _value;
   // ignore: unused_field
-  final $Res Function(ScenarioIndex) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scenarios = freezed,
+    Object? scenarios = null,
   }) {
     return _then(_value.copyWith(
-      scenarios: scenarios == freezed
+      scenarios: null == scenarios
           ? _value.scenarios
           : scenarios // ignore: cast_nullable_to_non_nullable
               as List<ScenarioReference>,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$ScenarioIndexCopyWith<$Res>
+abstract class _$$ScenarioIndexImplCopyWith<$Res>
     implements $ScenarioIndexCopyWith<$Res> {
-  factory _$ScenarioIndexCopyWith(
-          _ScenarioIndex value, $Res Function(_ScenarioIndex) then) =
-      __$ScenarioIndexCopyWithImpl<$Res>;
+  factory _$$ScenarioIndexImplCopyWith(
+          _$ScenarioIndexImpl value, $Res Function(_$ScenarioIndexImpl) then) =
+      __$$ScenarioIndexImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<ScenarioReference> scenarios});
 }
 
 /// @nodoc
-class __$ScenarioIndexCopyWithImpl<$Res>
-    extends _$ScenarioIndexCopyWithImpl<$Res>
-    implements _$ScenarioIndexCopyWith<$Res> {
-  __$ScenarioIndexCopyWithImpl(
-      _ScenarioIndex _value, $Res Function(_ScenarioIndex) _then)
-      : super(_value, (v) => _then(v as _ScenarioIndex));
+class __$$ScenarioIndexImplCopyWithImpl<$Res>
+    extends _$ScenarioIndexCopyWithImpl<$Res, _$ScenarioIndexImpl>
+    implements _$$ScenarioIndexImplCopyWith<$Res> {
+  __$$ScenarioIndexImplCopyWithImpl(
+      _$ScenarioIndexImpl _value, $Res Function(_$ScenarioIndexImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _ScenarioIndex get _value => super._value as _ScenarioIndex;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? scenarios = freezed,
+    Object? scenarios = null,
   }) {
-    return _then(_ScenarioIndex(
-      scenarios: scenarios == freezed
-          ? _value.scenarios
+    return _then(_$ScenarioIndexImpl(
+      scenarios: null == scenarios
+          ? _value._scenarios
           : scenarios // ignore: cast_nullable_to_non_nullable
               as List<ScenarioReference>,
     ));
@@ -111,14 +96,21 @@ class __$ScenarioIndexCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ScenarioIndex extends _ScenarioIndex with DiagnosticableTreeMixin {
-  const _$_ScenarioIndex({required this.scenarios}) : super._();
+class _$ScenarioIndexImpl extends _ScenarioIndex with DiagnosticableTreeMixin {
+  const _$ScenarioIndexImpl({required final List<ScenarioReference> scenarios})
+      : _scenarios = scenarios,
+        super._();
 
-  factory _$_ScenarioIndex.fromJson(Map<String, dynamic> json) =>
-      _$$_ScenarioIndexFromJson(json);
+  factory _$ScenarioIndexImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ScenarioIndexImplFromJson(json);
 
+  final List<ScenarioReference> _scenarios;
   @override
-  final List<ScenarioReference> scenarios;
+  List<ScenarioReference> get scenarios {
+    if (_scenarios is EqualUnmodifiableListView) return _scenarios;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_scenarios);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -137,37 +129,42 @@ class _$_ScenarioIndex extends _ScenarioIndex with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ScenarioIndex &&
-            const DeepCollectionEquality().equals(other.scenarios, scenarios));
+            other is _$ScenarioIndexImpl &&
+            const DeepCollectionEquality()
+                .equals(other._scenarios, _scenarios));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(scenarios));
 
   @JsonKey(ignore: true)
   @override
-  _$ScenarioIndexCopyWith<_ScenarioIndex> get copyWith =>
-      __$ScenarioIndexCopyWithImpl<_ScenarioIndex>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_scenarios));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ScenarioIndexImplCopyWith<_$ScenarioIndexImpl> get copyWith =>
+      __$$ScenarioIndexImplCopyWithImpl<_$ScenarioIndexImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ScenarioIndexToJson(this);
+    return _$$ScenarioIndexImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ScenarioIndex extends ScenarioIndex {
-  const factory _ScenarioIndex({required List<ScenarioReference> scenarios}) =
-      _$_ScenarioIndex;
+  const factory _ScenarioIndex(
+      {required final List<ScenarioReference> scenarios}) = _$ScenarioIndexImpl;
   const _ScenarioIndex._() : super._();
 
   factory _ScenarioIndex.fromJson(Map<String, dynamic> json) =
-      _$_ScenarioIndex.fromJson;
+      _$ScenarioIndexImpl.fromJson;
 
   @override
   List<ScenarioReference> get scenarios;
   @override
   @JsonKey(ignore: true)
-  _$ScenarioIndexCopyWith<_ScenarioIndex> get copyWith =>
+  _$$ScenarioIndexImplCopyWith<_$ScenarioIndexImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
