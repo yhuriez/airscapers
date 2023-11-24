@@ -45,12 +45,13 @@ mixin _$MechanismSolving {
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) =>
@@ -61,10 +62,13 @@ mixin _$MechanismSolving {
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) =>
@@ -75,10 +79,13 @@ mixin _$MechanismSolving {
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
@@ -172,11 +179,11 @@ class __$$MechanismSolvingPickImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingPickImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingPick {
+class _$MechanismSolvingPickImpl extends MechanismSolvingPick
+    with DiagnosticableTreeMixin {
   const _$MechanismSolvingPickImpl(this.newItem, {final String? $type})
-      : $type = $type ?? 'pick';
+      : $type = $type ?? 'pick',
+        super._();
 
   factory _$MechanismSolvingPickImpl.fromJson(Map<String, dynamic> json) =>
       _$$MechanismSolvingPickImplFromJson(json);
@@ -227,12 +234,13 @@ class _$MechanismSolvingPickImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
@@ -246,10 +254,13 @@ class _$MechanismSolvingPickImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
@@ -263,10 +274,13 @@ class _$MechanismSolvingPickImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
@@ -331,9 +345,10 @@ class _$MechanismSolvingPickImpl
   }
 }
 
-abstract class MechanismSolvingPick implements MechanismSolving {
+abstract class MechanismSolvingPick extends MechanismSolving {
   const factory MechanismSolvingPick(final String newItem) =
       _$MechanismSolvingPickImpl;
+  const MechanismSolvingPick._() : super._();
 
   factory MechanismSolvingPick.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingPickImpl.fromJson;
@@ -379,13 +394,13 @@ class __$$MechanismSolvingSearchImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingSearchImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingSearch {
+class _$MechanismSolvingSearchImpl extends MechanismSolvingSearch
+    with DiagnosticableTreeMixin {
   const _$MechanismSolvingSearchImpl(final List<ScenarioLoot> loots,
       {final String? $type})
       : _loots = loots,
-        $type = $type ?? 'search';
+        $type = $type ?? 'search',
+        super._();
 
   factory _$MechanismSolvingSearchImpl.fromJson(Map<String, dynamic> json) =>
       _$$MechanismSolvingSearchImplFromJson(json);
@@ -441,12 +456,13 @@ class _$MechanismSolvingSearchImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
@@ -460,10 +476,13 @@ class _$MechanismSolvingSearchImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
@@ -477,10 +496,13 @@ class _$MechanismSolvingSearchImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
@@ -545,9 +567,10 @@ class _$MechanismSolvingSearchImpl
   }
 }
 
-abstract class MechanismSolvingSearch implements MechanismSolving {
+abstract class MechanismSolvingSearch extends MechanismSolving {
   const factory MechanismSolvingSearch(final List<ScenarioLoot> loots) =
       _$MechanismSolvingSearchImpl;
+  const MechanismSolvingSearch._() : super._();
 
   factory MechanismSolvingSearch.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingSearchImpl.fromJson;
@@ -578,11 +601,11 @@ class __$$MechanismSolvingVisualImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingVisualImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingVisual {
+class _$MechanismSolvingVisualImpl extends MechanismSolvingVisual
+    with DiagnosticableTreeMixin {
   const _$MechanismSolvingVisualImpl({final String? $type})
-      : $type = $type ?? 'visual';
+      : $type = $type ?? 'visual',
+        super._();
 
   factory _$MechanismSolvingVisualImpl.fromJson(Map<String, dynamic> json) =>
       _$$MechanismSolvingVisualImplFromJson(json);
@@ -619,12 +642,13 @@ class _$MechanismSolvingVisualImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
@@ -638,10 +662,13 @@ class _$MechanismSolvingVisualImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
@@ -655,10 +682,13 @@ class _$MechanismSolvingVisualImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
@@ -723,8 +753,9 @@ class _$MechanismSolvingVisualImpl
   }
 }
 
-abstract class MechanismSolvingVisual implements MechanismSolving {
+abstract class MechanismSolvingVisual extends MechanismSolving {
   const factory MechanismSolvingVisual() = _$MechanismSolvingVisualImpl;
+  const MechanismSolvingVisual._() : super._();
 
   factory MechanismSolvingVisual.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingVisualImpl.fromJson;
@@ -739,7 +770,8 @@ abstract class _$$MechanismSolvingCodeImplCopyWith<$Res> {
   $Res call(
       {List<String> expectedCodes,
       String? codeHint,
-      List<String> removedItems});
+      List<String> removedItems,
+      List<String> needfulHintIds});
 }
 
 /// @nodoc
@@ -756,6 +788,7 @@ class __$$MechanismSolvingCodeImplCopyWithImpl<$Res>
     Object? expectedCodes = null,
     Object? codeHint = freezed,
     Object? removedItems = null,
+    Object? needfulHintIds = null,
   }) {
     return _then(_$MechanismSolvingCodeImpl(
       null == expectedCodes
@@ -766,9 +799,13 @@ class __$$MechanismSolvingCodeImplCopyWithImpl<$Res>
           ? _value.codeHint
           : codeHint // ignore: cast_nullable_to_non_nullable
               as String?,
-      null == removedItems
+      removedItems: null == removedItems
           ? _value._removedItems
           : removedItems // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      needfulHintIds: null == needfulHintIds
+          ? _value._needfulHintIds
+          : needfulHintIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -776,15 +813,18 @@ class __$$MechanismSolvingCodeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingCodeImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingCode {
-  const _$MechanismSolvingCodeImpl(final List<String> expectedCodes,
-      this.codeHint, final List<String> removedItems,
-      {final String? $type})
+class _$MechanismSolvingCodeImpl extends MechanismSolvingCode
+    with DiagnosticableTreeMixin {
+  const _$MechanismSolvingCodeImpl(
+      final List<String> expectedCodes, this.codeHint,
+      {final List<String> removedItems = const [],
+      final List<String> needfulHintIds = const [],
+      final String? $type})
       : _expectedCodes = expectedCodes,
         _removedItems = removedItems,
-        $type = $type ?? 'code';
+        _needfulHintIds = needfulHintIds,
+        $type = $type ?? 'code',
+        super._();
 
   factory _$MechanismSolvingCodeImpl.fromJson(Map<String, dynamic> json) =>
       _$$MechanismSolvingCodeImplFromJson(json);
@@ -801,10 +841,20 @@ class _$MechanismSolvingCodeImpl
   final String? codeHint;
   final List<String> _removedItems;
   @override
+  @JsonKey()
   List<String> get removedItems {
     if (_removedItems is EqualUnmodifiableListView) return _removedItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_removedItems);
+  }
+
+  final List<String> _needfulHintIds;
+  @override
+  @JsonKey()
+  List<String> get needfulHintIds {
+    if (_needfulHintIds is EqualUnmodifiableListView) return _needfulHintIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_needfulHintIds);
   }
 
   @JsonKey(name: 'type')
@@ -812,7 +862,7 @@ class _$MechanismSolvingCodeImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MechanismSolving.code(expectedCodes: $expectedCodes, codeHint: $codeHint, removedItems: $removedItems)';
+    return 'MechanismSolving.code(expectedCodes: $expectedCodes, codeHint: $codeHint, removedItems: $removedItems, needfulHintIds: $needfulHintIds)';
   }
 
   @override
@@ -822,7 +872,8 @@ class _$MechanismSolvingCodeImpl
       ..add(DiagnosticsProperty('type', 'MechanismSolving.code'))
       ..add(DiagnosticsProperty('expectedCodes', expectedCodes))
       ..add(DiagnosticsProperty('codeHint', codeHint))
-      ..add(DiagnosticsProperty('removedItems', removedItems));
+      ..add(DiagnosticsProperty('removedItems', removedItems))
+      ..add(DiagnosticsProperty('needfulHintIds', needfulHintIds));
   }
 
   @override
@@ -835,7 +886,9 @@ class _$MechanismSolvingCodeImpl
             (identical(other.codeHint, codeHint) ||
                 other.codeHint == codeHint) &&
             const DeepCollectionEquality()
-                .equals(other._removedItems, _removedItems));
+                .equals(other._removedItems, _removedItems) &&
+            const DeepCollectionEquality()
+                .equals(other._needfulHintIds, _needfulHintIds));
   }
 
   @JsonKey(ignore: true)
@@ -844,7 +897,8 @@ class _$MechanismSolvingCodeImpl
       runtimeType,
       const DeepCollectionEquality().hash(_expectedCodes),
       codeHint,
-      const DeepCollectionEquality().hash(_removedItems));
+      const DeepCollectionEquality().hash(_removedItems),
+      const DeepCollectionEquality().hash(_needfulHintIds));
 
   @JsonKey(ignore: true)
   @override
@@ -861,16 +915,17 @@ class _$MechanismSolvingCodeImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
-    return code(expectedCodes, codeHint, removedItems);
+    return code(expectedCodes, codeHint, removedItems, needfulHintIds);
   }
 
   @override
@@ -880,14 +935,17 @@ class _$MechanismSolvingCodeImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
-    return code?.call(expectedCodes, codeHint, removedItems);
+    return code?.call(expectedCodes, codeHint, removedItems, needfulHintIds);
   }
 
   @override
@@ -897,16 +955,19 @@ class _$MechanismSolvingCodeImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
   }) {
     if (code != null) {
-      return code(expectedCodes, codeHint, removedItems);
+      return code(expectedCodes, codeHint, removedItems, needfulHintIds);
     }
     return orElse();
   }
@@ -965,11 +1026,12 @@ class _$MechanismSolvingCodeImpl
   }
 }
 
-abstract class MechanismSolvingCode implements MechanismSolving {
+abstract class MechanismSolvingCode extends MechanismSolving {
   const factory MechanismSolvingCode(
-      final List<String> expectedCodes,
-      final String? codeHint,
-      final List<String> removedItems) = _$MechanismSolvingCodeImpl;
+      final List<String> expectedCodes, final String? codeHint,
+      {final List<String> removedItems,
+      final List<String> needfulHintIds}) = _$MechanismSolvingCodeImpl;
+  const MechanismSolvingCode._() : super._();
 
   factory MechanismSolvingCode.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingCodeImpl.fromJson;
@@ -977,6 +1039,7 @@ abstract class MechanismSolvingCode implements MechanismSolving {
   List<String> get expectedCodes;
   String? get codeHint;
   List<String> get removedItems;
+  List<String> get needfulHintIds;
   @JsonKey(ignore: true)
   _$$MechanismSolvingCodeImplCopyWith<_$MechanismSolvingCodeImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -988,7 +1051,10 @@ abstract class _$$MechanismSolvingUseImplCopyWith<$Res> {
           $Res Function(_$MechanismSolvingUseImpl) then) =
       __$$MechanismSolvingUseImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String expectedItem, List<String> removedItems});
+  $Res call(
+      {String expectedItem,
+      List<String> removedItems,
+      List<String> needfulHintIds});
 }
 
 /// @nodoc
@@ -1004,15 +1070,20 @@ class __$$MechanismSolvingUseImplCopyWithImpl<$Res>
   $Res call({
     Object? expectedItem = null,
     Object? removedItems = null,
+    Object? needfulHintIds = null,
   }) {
     return _then(_$MechanismSolvingUseImpl(
       null == expectedItem
           ? _value.expectedItem
           : expectedItem // ignore: cast_nullable_to_non_nullable
               as String,
-      null == removedItems
+      removedItems: null == removedItems
           ? _value._removedItems
           : removedItems // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      needfulHintIds: null == needfulHintIds
+          ? _value._needfulHintIds
+          : needfulHintIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -1020,14 +1091,16 @@ class __$$MechanismSolvingUseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingUseImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingUse {
-  const _$MechanismSolvingUseImpl(
-      this.expectedItem, final List<String> removedItems,
-      {final String? $type})
+class _$MechanismSolvingUseImpl extends MechanismSolvingUse
+    with DiagnosticableTreeMixin {
+  const _$MechanismSolvingUseImpl(this.expectedItem,
+      {final List<String> removedItems = const [],
+      final List<String> needfulHintIds = const [],
+      final String? $type})
       : _removedItems = removedItems,
-        $type = $type ?? 'use';
+        _needfulHintIds = needfulHintIds,
+        $type = $type ?? 'use',
+        super._();
 
   factory _$MechanismSolvingUseImpl.fromJson(Map<String, dynamic> json) =>
       _$$MechanismSolvingUseImplFromJson(json);
@@ -1036,10 +1109,20 @@ class _$MechanismSolvingUseImpl
   final String expectedItem;
   final List<String> _removedItems;
   @override
+  @JsonKey()
   List<String> get removedItems {
     if (_removedItems is EqualUnmodifiableListView) return _removedItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_removedItems);
+  }
+
+  final List<String> _needfulHintIds;
+  @override
+  @JsonKey()
+  List<String> get needfulHintIds {
+    if (_needfulHintIds is EqualUnmodifiableListView) return _needfulHintIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_needfulHintIds);
   }
 
   @JsonKey(name: 'type')
@@ -1047,7 +1130,7 @@ class _$MechanismSolvingUseImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MechanismSolving.use(expectedItem: $expectedItem, removedItems: $removedItems)';
+    return 'MechanismSolving.use(expectedItem: $expectedItem, removedItems: $removedItems, needfulHintIds: $needfulHintIds)';
   }
 
   @override
@@ -1056,7 +1139,8 @@ class _$MechanismSolvingUseImpl
     properties
       ..add(DiagnosticsProperty('type', 'MechanismSolving.use'))
       ..add(DiagnosticsProperty('expectedItem', expectedItem))
-      ..add(DiagnosticsProperty('removedItems', removedItems));
+      ..add(DiagnosticsProperty('removedItems', removedItems))
+      ..add(DiagnosticsProperty('needfulHintIds', needfulHintIds));
   }
 
   @override
@@ -1067,13 +1151,18 @@ class _$MechanismSolvingUseImpl
             (identical(other.expectedItem, expectedItem) ||
                 other.expectedItem == expectedItem) &&
             const DeepCollectionEquality()
-                .equals(other._removedItems, _removedItems));
+                .equals(other._removedItems, _removedItems) &&
+            const DeepCollectionEquality()
+                .equals(other._needfulHintIds, _needfulHintIds));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, expectedItem,
-      const DeepCollectionEquality().hash(_removedItems));
+  int get hashCode => Object.hash(
+      runtimeType,
+      expectedItem,
+      const DeepCollectionEquality().hash(_removedItems),
+      const DeepCollectionEquality().hash(_needfulHintIds));
 
   @JsonKey(ignore: true)
   @override
@@ -1089,16 +1178,17 @@ class _$MechanismSolvingUseImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
-    return use(expectedItem, removedItems);
+    return use(expectedItem, removedItems, needfulHintIds);
   }
 
   @override
@@ -1108,14 +1198,17 @@ class _$MechanismSolvingUseImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
-    return use?.call(expectedItem, removedItems);
+    return use?.call(expectedItem, removedItems, needfulHintIds);
   }
 
   @override
@@ -1125,16 +1218,19 @@ class _$MechanismSolvingUseImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
   }) {
     if (use != null) {
-      return use(expectedItem, removedItems);
+      return use(expectedItem, removedItems, needfulHintIds);
     }
     return orElse();
   }
@@ -1193,16 +1289,18 @@ class _$MechanismSolvingUseImpl
   }
 }
 
-abstract class MechanismSolvingUse implements MechanismSolving {
-  const factory MechanismSolvingUse(
-          final String expectedItem, final List<String> removedItems) =
-      _$MechanismSolvingUseImpl;
+abstract class MechanismSolvingUse extends MechanismSolving {
+  const factory MechanismSolvingUse(final String expectedItem,
+      {final List<String> removedItems,
+      final List<String> needfulHintIds}) = _$MechanismSolvingUseImpl;
+  const MechanismSolvingUse._() : super._();
 
   factory MechanismSolvingUse.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingUseImpl.fromJson;
 
   String get expectedItem;
   List<String> get removedItems;
+  List<String> get needfulHintIds;
   @JsonKey(ignore: true)
   _$$MechanismSolvingUseImplCopyWith<_$MechanismSolvingUseImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1215,7 +1313,10 @@ abstract class _$$MechanismSolvingCombineImplCopyWith<$Res> {
           $Res Function(_$MechanismSolvingCombineImpl) then) =
       __$$MechanismSolvingCombineImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> expectedItemList, List<String> removedItems});
+  $Res call(
+      {List<String> expectedItemList,
+      List<String> removedItems,
+      List<String> needfulHintIds});
 }
 
 /// @nodoc
@@ -1232,15 +1333,20 @@ class __$$MechanismSolvingCombineImplCopyWithImpl<$Res>
   $Res call({
     Object? expectedItemList = null,
     Object? removedItems = null,
+    Object? needfulHintIds = null,
   }) {
     return _then(_$MechanismSolvingCombineImpl(
       null == expectedItemList
           ? _value._expectedItemList
           : expectedItemList // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      null == removedItems
+      removedItems: null == removedItems
           ? _value._removedItems
           : removedItems // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      needfulHintIds: null == needfulHintIds
+          ? _value._needfulHintIds
+          : needfulHintIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -1248,15 +1354,17 @@ class __$$MechanismSolvingCombineImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingCombineImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingCombine {
-  const _$MechanismSolvingCombineImpl(
-      final List<String> expectedItemList, final List<String> removedItems,
-      {final String? $type})
+class _$MechanismSolvingCombineImpl extends MechanismSolvingCombine
+    with DiagnosticableTreeMixin {
+  const _$MechanismSolvingCombineImpl(final List<String> expectedItemList,
+      {final List<String> removedItems = const [],
+      final List<String> needfulHintIds = const [],
+      final String? $type})
       : _expectedItemList = expectedItemList,
         _removedItems = removedItems,
-        $type = $type ?? 'combine';
+        _needfulHintIds = needfulHintIds,
+        $type = $type ?? 'combine',
+        super._();
 
   factory _$MechanismSolvingCombineImpl.fromJson(Map<String, dynamic> json) =>
       _$$MechanismSolvingCombineImplFromJson(json);
@@ -1272,10 +1380,20 @@ class _$MechanismSolvingCombineImpl
 
   final List<String> _removedItems;
   @override
+  @JsonKey()
   List<String> get removedItems {
     if (_removedItems is EqualUnmodifiableListView) return _removedItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_removedItems);
+  }
+
+  final List<String> _needfulHintIds;
+  @override
+  @JsonKey()
+  List<String> get needfulHintIds {
+    if (_needfulHintIds is EqualUnmodifiableListView) return _needfulHintIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_needfulHintIds);
   }
 
   @JsonKey(name: 'type')
@@ -1283,7 +1401,7 @@ class _$MechanismSolvingCombineImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MechanismSolving.combine(expectedItemList: $expectedItemList, removedItems: $removedItems)';
+    return 'MechanismSolving.combine(expectedItemList: $expectedItemList, removedItems: $removedItems, needfulHintIds: $needfulHintIds)';
   }
 
   @override
@@ -1292,7 +1410,8 @@ class _$MechanismSolvingCombineImpl
     properties
       ..add(DiagnosticsProperty('type', 'MechanismSolving.combine'))
       ..add(DiagnosticsProperty('expectedItemList', expectedItemList))
-      ..add(DiagnosticsProperty('removedItems', removedItems));
+      ..add(DiagnosticsProperty('removedItems', removedItems))
+      ..add(DiagnosticsProperty('needfulHintIds', needfulHintIds));
   }
 
   @override
@@ -1303,7 +1422,9 @@ class _$MechanismSolvingCombineImpl
             const DeepCollectionEquality()
                 .equals(other._expectedItemList, _expectedItemList) &&
             const DeepCollectionEquality()
-                .equals(other._removedItems, _removedItems));
+                .equals(other._removedItems, _removedItems) &&
+            const DeepCollectionEquality()
+                .equals(other._needfulHintIds, _needfulHintIds));
   }
 
   @JsonKey(ignore: true)
@@ -1311,7 +1432,8 @@ class _$MechanismSolvingCombineImpl
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_expectedItemList),
-      const DeepCollectionEquality().hash(_removedItems));
+      const DeepCollectionEquality().hash(_removedItems),
+      const DeepCollectionEquality().hash(_needfulHintIds));
 
   @JsonKey(ignore: true)
   @override
@@ -1327,16 +1449,17 @@ class _$MechanismSolvingCombineImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
-    return combine(expectedItemList, removedItems);
+    return combine(expectedItemList, removedItems, needfulHintIds);
   }
 
   @override
@@ -1346,14 +1469,17 @@ class _$MechanismSolvingCombineImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
-    return combine?.call(expectedItemList, removedItems);
+    return combine?.call(expectedItemList, removedItems, needfulHintIds);
   }
 
   @override
@@ -1363,16 +1489,19 @@ class _$MechanismSolvingCombineImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
   }) {
     if (combine != null) {
-      return combine(expectedItemList, removedItems);
+      return combine(expectedItemList, removedItems, needfulHintIds);
     }
     return orElse();
   }
@@ -1431,15 +1560,18 @@ class _$MechanismSolvingCombineImpl
   }
 }
 
-abstract class MechanismSolvingCombine implements MechanismSolving {
+abstract class MechanismSolvingCombine extends MechanismSolving {
   const factory MechanismSolvingCombine(final List<String> expectedItemList,
-      final List<String> removedItems) = _$MechanismSolvingCombineImpl;
+      {final List<String> removedItems,
+      final List<String> needfulHintIds}) = _$MechanismSolvingCombineImpl;
+  const MechanismSolvingCombine._() : super._();
 
   factory MechanismSolvingCombine.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingCombineImpl.fromJson;
 
   List<String> get expectedItemList;
   List<String> get removedItems;
+  List<String> get needfulHintIds;
   @JsonKey(ignore: true)
   _$$MechanismSolvingCombineImplCopyWith<_$MechanismSolvingCombineImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1481,13 +1613,13 @@ class __$$MechanismSolvingActivationImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MechanismSolvingActivationImpl
-    with DiagnosticableTreeMixin
-    implements MechanismSolvingActivation {
+class _$MechanismSolvingActivationImpl extends MechanismSolvingActivation
+    with DiagnosticableTreeMixin {
   const _$MechanismSolvingActivationImpl(final List<String> mechanismIds,
       {final String? $type})
       : _mechanismIds = mechanismIds,
-        $type = $type ?? 'activation';
+        $type = $type ?? 'activation',
+        super._();
 
   factory _$MechanismSolvingActivationImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -1545,12 +1677,13 @@ class _$MechanismSolvingActivationImpl
     required TResult Function(List<ScenarioLoot> loots) search,
     required TResult Function() visual,
     required TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)
+            List<String> removedItems, List<String> needfulHintIds)
         code,
-    required TResult Function(String expectedItem, List<String> removedItems)
+    required TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)
         use,
-    required TResult Function(
-            List<String> expectedItemList, List<String> removedItems)
+    required TResult Function(List<String> expectedItemList,
+            List<String> removedItems, List<String> needfulHintIds)
         combine,
     required TResult Function(List<String> mechanismIds) activation,
   }) {
@@ -1564,10 +1697,13 @@ class _$MechanismSolvingActivationImpl
     TResult? Function(List<ScenarioLoot> loots)? search,
     TResult? Function()? visual,
     TResult? Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult? Function(String expectedItem, List<String> removedItems)? use,
-    TResult? Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult? Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult? Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult? Function(List<String> mechanismIds)? activation,
   }) {
@@ -1581,10 +1717,13 @@ class _$MechanismSolvingActivationImpl
     TResult Function(List<ScenarioLoot> loots)? search,
     TResult Function()? visual,
     TResult Function(List<String> expectedCodes, String? codeHint,
-            List<String> removedItems)?
+            List<String> removedItems, List<String> needfulHintIds)?
         code,
-    TResult Function(String expectedItem, List<String> removedItems)? use,
-    TResult Function(List<String> expectedItemList, List<String> removedItems)?
+    TResult Function(String expectedItem, List<String> removedItems,
+            List<String> needfulHintIds)?
+        use,
+    TResult Function(List<String> expectedItemList, List<String> removedItems,
+            List<String> needfulHintIds)?
         combine,
     TResult Function(List<String> mechanismIds)? activation,
     required TResult orElse(),
@@ -1649,9 +1788,10 @@ class _$MechanismSolvingActivationImpl
   }
 }
 
-abstract class MechanismSolvingActivation implements MechanismSolving {
+abstract class MechanismSolvingActivation extends MechanismSolving {
   const factory MechanismSolvingActivation(final List<String> mechanismIds) =
       _$MechanismSolvingActivationImpl;
+  const MechanismSolvingActivation._() : super._();
 
   factory MechanismSolvingActivation.fromJson(Map<String, dynamic> json) =
       _$MechanismSolvingActivationImpl.fromJson;

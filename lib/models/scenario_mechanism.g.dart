@@ -10,13 +10,14 @@ _$ScenarioMechanismImpl _$$ScenarioMechanismImplFromJson(
         Map<String, dynamic> json) =>
     _$ScenarioMechanismImpl(
       id: json['id'] as String,
-      name: json['name'] as String,
+      title: json['title'] as String,
       description: json['description'] as String?,
       image: json['image'] as String?,
       solving:
           MechanismSolving.fromJson(json['solving'] as Map<String, dynamic>),
       transitionId: json['transitionId'] as String?,
       endTrack: json['endTrack'] as bool? ?? false,
+      isEntryPoint: json['isEntryPoint'] as bool? ?? false,
       clues:
           (json['clues'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
@@ -26,12 +27,13 @@ Map<String, dynamic> _$$ScenarioMechanismImplToJson(
         _$ScenarioMechanismImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
+      'title': instance.title,
       'description': instance.description,
       'image': instance.image,
       'solving': instance.solving.toJson(),
       'transitionId': instance.transitionId,
       'endTrack': instance.endTrack,
+      'isEntryPoint': instance.isEntryPoint,
       'clues': instance.clues,
     };
 

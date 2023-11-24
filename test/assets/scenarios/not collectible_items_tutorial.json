@@ -51,7 +51,7 @@
         "type": "pick",
         "newItem": "11"
       },
-      "hasQrCode": true
+      "isEntryPoint": true
     },
     {
       "id": "160",
@@ -71,10 +71,7 @@
       "foundDescription": "Le courant est rétabli à présent ! Peut-être cela aura-t-il un effet dans la pièce ?",
       "image": "assets/images/tutorial/electricity_back.jpg",
       "solving": {
-        "type": "activation",
-        "mechanismIds": [
-          "42"
-        ]
+        "type": "visual"
       }
     },
     {
@@ -84,8 +81,7 @@
       "foundDescription": "Sur le côté du coffre se trouve une étrange indication...",
       "image": "assets/images/tutorial/furniture_clue.png",
       "solving": {
-        "type": "pick",
-        "newItem": "35"
+        "type": "visual"
       },
       "isPickedUp": true,
       "isZoomable": true
@@ -96,8 +92,7 @@
       "description": "Au fond du coffre, vous trouvez un tournevis d'électricien.",
       "image": "assets/images/tutorial/tournevis.jpg",
       "solving": {
-        "type": "pick",
-        "newItem": "39"
+        "type": "visual"
       },
       "isPickedUp": true
     },
@@ -138,7 +133,7 @@
     },
     {
       "title": "Coffre",
-      "id": "35",
+      "id": "30",
       "description": "Un coffre fermé à clé.\n\nVous pouvez interagir avec ce coffre en glissant un objet dessus.",
       "start": true,
       "image": "assets/images/tutorial/furniture_closed.png",
@@ -150,11 +145,10 @@
         "expectedItem": "11",
         "removedItems": [
           "11"
-        ],
-        "expectedHints": [
         ]
       },
-      "transitionTo": "46"
+      "transitionId": "46",
+      "isEntryPoint": true
     },
     {
       "title": "Panneau électrique",
@@ -174,11 +168,10 @@
         "removedItems": [
           "16",
           "39"
-        ],
-        "expectedHints": [
         ]
       },
-      "transitionTo": "70"
+      "transitionId": "70",
+      "isEntryPoint": true
     },
     {
       "title": "Panneau électrique",
@@ -198,11 +191,9 @@
         ],
         "removedItems": [
           "35"
-        ],
-        "expectedHints": [
-          "35"
         ]
-      }
+      },
+      "transitionId": "250"
     },
     {
       "title": "Ecran",
@@ -215,9 +206,13 @@
         "Vous devez d'abord activer le courant avec le panneau électrique"
       ],
       "solving": {
-        "type": "visual"
+        "type": "activation",
+        "mechanismIds": [
+          "250"
+        ]
       },
-      "transitionTo": "48"
+      "transitionId": "48",
+      "isEntryPoint": true
     },
     {
       "title": "Porte",
@@ -236,14 +231,12 @@
         "expectedCodes": [
           "9372"
         ],
-        "removedItems": [
-          "42"
-        ],
-        "expectedHints": [
-          "42"
+        "needfulHintIds": [
+          "48"
         ]
       },
-      "transitionId": "1"
+      "transitionId": "1",
+      "isEntryPoint": true
     }
   ]
 }

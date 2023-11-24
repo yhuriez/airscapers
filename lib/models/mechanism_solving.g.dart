@@ -53,7 +53,14 @@ _$MechanismSolvingCodeImpl _$$MechanismSolvingCodeImplFromJson(
     _$MechanismSolvingCodeImpl(
       (json['expectedCodes'] as List<dynamic>).map((e) => e as String).toList(),
       json['codeHint'] as String?,
-      (json['removedItems'] as List<dynamic>).map((e) => e as String).toList(),
+      removedItems: (json['removedItems'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      needfulHintIds: (json['needfulHintIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       $type: json['type'] as String?,
     );
 
@@ -63,6 +70,7 @@ Map<String, dynamic> _$$MechanismSolvingCodeImplToJson(
       'expectedCodes': instance.expectedCodes,
       'codeHint': instance.codeHint,
       'removedItems': instance.removedItems,
+      'needfulHintIds': instance.needfulHintIds,
       'type': instance.$type,
     };
 
@@ -70,7 +78,14 @@ _$MechanismSolvingUseImpl _$$MechanismSolvingUseImplFromJson(
         Map<String, dynamic> json) =>
     _$MechanismSolvingUseImpl(
       json['expectedItem'] as String,
-      (json['removedItems'] as List<dynamic>).map((e) => e as String).toList(),
+      removedItems: (json['removedItems'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      needfulHintIds: (json['needfulHintIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       $type: json['type'] as String?,
     );
 
@@ -79,6 +94,7 @@ Map<String, dynamic> _$$MechanismSolvingUseImplToJson(
     <String, dynamic>{
       'expectedItem': instance.expectedItem,
       'removedItems': instance.removedItems,
+      'needfulHintIds': instance.needfulHintIds,
       'type': instance.$type,
     };
 
@@ -88,7 +104,14 @@ _$MechanismSolvingCombineImpl _$$MechanismSolvingCombineImplFromJson(
       (json['expectedItemList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      (json['removedItems'] as List<dynamic>).map((e) => e as String).toList(),
+      removedItems: (json['removedItems'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      needfulHintIds: (json['needfulHintIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       $type: json['type'] as String?,
     );
 
@@ -97,6 +120,7 @@ Map<String, dynamic> _$$MechanismSolvingCombineImplToJson(
     <String, dynamic>{
       'expectedItemList': instance.expectedItemList,
       'removedItems': instance.removedItems,
+      'needfulHintIds': instance.needfulHintIds,
       'type': instance.$type,
     };
 

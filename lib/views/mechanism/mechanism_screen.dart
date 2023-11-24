@@ -47,7 +47,7 @@ class MechanismStateRepresentation extends StatelessWidget {
     }
 
     return ARSScaffold(
-      title: state.mechanism.name,
+      title: state.mechanism.title,
       actions: [
         _createClueAction(context),
 
@@ -60,7 +60,7 @@ class MechanismStateRepresentation extends StatelessWidget {
         interactionsBuilder: (_) => createMechanismInteraction(context),
         imageUrl: state.mechanism.image ?? "",
         description: state.mechanism.description ?? "",
-        name: state.mechanism.name,
+        name: state.mechanism.title,
         onAcceptedDropData: (_, item) => state.onItemUsed(item),
       ),
     );

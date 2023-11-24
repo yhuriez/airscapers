@@ -7,7 +7,7 @@ void main() {
     test('should convert a complete ScenarioMechanism instance into a JSON map', () {
       final mechanism = ScenarioMechanism(
         id: "1",
-        name: 'Test Mechanism',
+        title: 'Test Mechanism',
         description: 'A test mechanism description',
         image: 'image.png',
         transitionId: "2",
@@ -46,7 +46,7 @@ void main() {
       final mechanism = ScenarioMechanism.fromJson(json);
 
       expect(mechanism.id, "1");
-      expect(mechanism.name, 'Test Mechanism');
+      expect(mechanism.title, 'Test Mechanism');
       expect(mechanism.description, 'A test mechanism description');
       expect(mechanism.image, 'image.png');
       expect(mechanism.transitionId, "2");

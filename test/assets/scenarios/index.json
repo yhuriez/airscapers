@@ -1,0 +1,12 @@
+{
+  "scenarios": [
+    {
+      "id": "tutorial_id",
+      "name": "Tutoriel",
+      "image": "",
+      "code": "tuto",
+      "linkedFile": "valid_tutorial.json",
+      "description": "Ceci est un tutoriel destiné à vous apprendre comment fonctionne l'application et le jeu.\n\nPour pouvoir jouer, vous devez vous procurer les supports NFC du tutoriel.\n\nVotre objectif : trouver la sortie du bureau !"
+    }
+  ]
+}

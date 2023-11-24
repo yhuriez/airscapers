@@ -21,12 +21,13 @@ ScenarioMechanism _$ScenarioMechanismFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ScenarioMechanism {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   MechanismSolving get solving => throw _privateConstructorUsedError;
   String? get transitionId => throw _privateConstructorUsedError;
   bool get endTrack => throw _privateConstructorUsedError;
+  bool get isEntryPoint => throw _privateConstructorUsedError;
   List<String> get clues => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,12 +44,13 @@ abstract class $ScenarioMechanismCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
+      String title,
       String? description,
       String? image,
       MechanismSolving solving,
       String? transitionId,
       bool endTrack,
+      bool isEntryPoint,
       List<String> clues});
 
   $MechanismSolvingCopyWith<$Res> get solving;
@@ -68,12 +70,13 @@ class _$ScenarioMechanismCopyWithImpl<$Res, $Val extends ScenarioMechanism>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? title = null,
     Object? description = freezed,
     Object? image = freezed,
     Object? solving = null,
     Object? transitionId = freezed,
     Object? endTrack = null,
+    Object? isEntryPoint = null,
     Object? clues = null,
   }) {
     return _then(_value.copyWith(
@@ -81,9 +84,9 @@ class _$ScenarioMechanismCopyWithImpl<$Res, $Val extends ScenarioMechanism>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
           ? _value.description
@@ -104,6 +107,10 @@ class _$ScenarioMechanismCopyWithImpl<$Res, $Val extends ScenarioMechanism>
       endTrack: null == endTrack
           ? _value.endTrack
           : endTrack // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isEntryPoint: null == isEntryPoint
+          ? _value.isEntryPoint
+          : isEntryPoint // ignore: cast_nullable_to_non_nullable
               as bool,
       clues: null == clues
           ? _value.clues
@@ -131,12 +138,13 @@ abstract class _$$ScenarioMechanismImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
+      String title,
       String? description,
       String? image,
       MechanismSolving solving,
       String? transitionId,
       bool endTrack,
+      bool isEntryPoint,
       List<String> clues});
 
   @override
@@ -155,12 +163,13 @@ class __$$ScenarioMechanismImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? title = null,
     Object? description = freezed,
     Object? image = freezed,
     Object? solving = null,
     Object? transitionId = freezed,
     Object? endTrack = null,
+    Object? isEntryPoint = null,
     Object? clues = null,
   }) {
     return _then(_$ScenarioMechanismImpl(
@@ -168,9 +177,9 @@ class __$$ScenarioMechanismImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       description: freezed == description
           ? _value.description
@@ -192,6 +201,10 @@ class __$$ScenarioMechanismImplCopyWithImpl<$Res>
           ? _value.endTrack
           : endTrack // ignore: cast_nullable_to_non_nullable
               as bool,
+      isEntryPoint: null == isEntryPoint
+          ? _value.isEntryPoint
+          : isEntryPoint // ignore: cast_nullable_to_non_nullable
+              as bool,
       clues: null == clues
           ? _value._clues
           : clues // ignore: cast_nullable_to_non_nullable
@@ -206,12 +219,13 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
     with DiagnosticableTreeMixin {
   const _$ScenarioMechanismImpl(
       {required this.id,
-      required this.name,
+      required this.title,
       this.description,
       this.image,
       required this.solving,
       this.transitionId,
       this.endTrack = false,
+      this.isEntryPoint = false,
       final List<String> clues = const []})
       : _clues = clues,
         super._();
@@ -222,7 +236,7 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
   @override
   final String id;
   @override
-  final String name;
+  final String title;
   @override
   final String? description;
   @override
@@ -234,6 +248,9 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
   @override
   @JsonKey()
   final bool endTrack;
+  @override
+  @JsonKey()
+  final bool isEntryPoint;
   final List<String> _clues;
   @override
   @JsonKey()
@@ -245,7 +262,7 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ScenarioMechanism(id: $id, name: $name, description: $description, image: $image, solving: $solving, transitionId: $transitionId, endTrack: $endTrack, clues: $clues)';
+    return 'ScenarioMechanism(id: $id, title: $title, description: $description, image: $image, solving: $solving, transitionId: $transitionId, endTrack: $endTrack, isEntryPoint: $isEntryPoint, clues: $clues)';
   }
 
   @override
@@ -254,12 +271,13 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
     properties
       ..add(DiagnosticsProperty('type', 'ScenarioMechanism'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('solving', solving))
       ..add(DiagnosticsProperty('transitionId', transitionId))
       ..add(DiagnosticsProperty('endTrack', endTrack))
+      ..add(DiagnosticsProperty('isEntryPoint', isEntryPoint))
       ..add(DiagnosticsProperty('clues', clues));
   }
 
@@ -269,7 +287,7 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
         (other.runtimeType == runtimeType &&
             other is _$ScenarioMechanismImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.image, image) || other.image == image) &&
@@ -278,6 +296,8 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
                 other.transitionId == transitionId) &&
             (identical(other.endTrack, endTrack) ||
                 other.endTrack == endTrack) &&
+            (identical(other.isEntryPoint, isEntryPoint) ||
+                other.isEntryPoint == isEntryPoint) &&
             const DeepCollectionEquality().equals(other._clues, _clues));
   }
 
@@ -286,12 +306,13 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      name,
+      title,
       description,
       image,
       solving,
       transitionId,
       endTrack,
+      isEntryPoint,
       const DeepCollectionEquality().hash(_clues));
 
   @JsonKey(ignore: true)
@@ -312,12 +333,13 @@ class _$ScenarioMechanismImpl extends _ScenarioMechanism
 abstract class _ScenarioMechanism extends ScenarioMechanism {
   const factory _ScenarioMechanism(
       {required final String id,
-      required final String name,
+      required final String title,
       final String? description,
       final String? image,
       required final MechanismSolving solving,
       final String? transitionId,
       final bool endTrack,
+      final bool isEntryPoint,
       final List<String> clues}) = _$ScenarioMechanismImpl;
   const _ScenarioMechanism._() : super._();
 
@@ -327,7 +349,7 @@ abstract class _ScenarioMechanism extends ScenarioMechanism {
   @override
   String get id;
   @override
-  String get name;
+  String get title;
   @override
   String? get description;
   @override
@@ -338,6 +360,8 @@ abstract class _ScenarioMechanism extends ScenarioMechanism {
   String? get transitionId;
   @override
   bool get endTrack;
+  @override
+  bool get isEntryPoint;
   @override
   List<String> get clues;
   @override

@@ -66,7 +66,7 @@ class ScenarioContentFragment extends StatelessWidget {
     final repo = _repository;
 
     result += repo.mechanisms
-        .map((mechanism) => ScenarioElement(mechanism.name, mechanism.id, mechanism.image))
+        .map((mechanism) => ScenarioElement(mechanism.title, mechanism.id, mechanism.image))
         .toList();
 
     return result;

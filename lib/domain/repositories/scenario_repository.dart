@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:airscaper/common/tools/abs_assets_reader.dart';
+import 'package:airscaper/models/inventory_item.dart';
 import 'package:airscaper/models/scenario.dart';
 import 'package:airscaper/models/scenario_index.dart';
 import 'package:airscaper/models/scenario_item.dart';
@@ -7,14 +9,15 @@ import 'package:airscaper/models/scenario_mechanism.dart';
 import 'package:airscaper/models/scenario_reference.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
-import '../../models/inventory_item.dart';
 
 class ScenarioRepository {
 
+  final AbsAssetsReader _assetsReader;
+
   ScenarioIndex? _index;
   Scenario? _scenario;
+
+  ScenarioRepository(this._assetsReader);
 
   List<ScenarioReference> get scenarios => _index?.scenarios ?? [];
 
@@ -55,7 +58,7 @@ class ScenarioRepository {
 
   Future<bool> initIndex() async {
     try {
-      final indexJsonStr = await rootBundle.loadString("assets/scenarios/index.json");
+      final indexJsonStr = await _assetsReader.readAssetFile("scenarios/index.json");
       final indexJson = jsonDecode(indexJsonStr);
       _index = ScenarioIndex.fromJson(indexJson);
       return true;
@@ -67,8 +70,7 @@ class ScenarioRepository {
 
   Future<bool> initScenario(ScenarioReference reference) async {
     try {
-      final indexJsonStr = await rootBundle
-          .loadString("assets/scenarios/${reference.linkedFile}");
+      final indexJsonStr = await _assetsReader.readAssetFile("scenarios/${reference.linkedFile}");
       final indexJson = jsonDecode(indexJsonStr);
       _scenario = Scenario.fromJson(indexJson);
       return true;

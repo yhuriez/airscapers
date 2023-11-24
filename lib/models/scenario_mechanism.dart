@@ -13,12 +13,13 @@ class ScenarioMechanism with _$ScenarioMechanism {
 
   const factory ScenarioMechanism(
       {required String id,
-      required String name,
+      required String title,
       String? description,
       String? image,
       required MechanismSolving solving,
       String? transitionId,
       @Default(false) bool endTrack,
+      @Default(false) bool isEntryPoint,
       @Default([]) List<String> clues}) = _ScenarioMechanism;
 
   factory ScenarioMechanism.fromJson(Map<String, dynamic> json) =>

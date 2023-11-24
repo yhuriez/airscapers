@@ -1,27 +1,38 @@
+import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../common/tools/test_assets_reader.dart';
 
 
 void main() {
   group('ScenarioRepository Tests', () {
-    // Mock de vos dépendances ici, par exemple:
-    // final MockYourDependency mockYourDependency = MockYourDependency();
+    late ScenarioRepository scenarioRepository;
+    late TestAssetsReader testAssetsReader;
 
     setUp(() {
-      // Configuration initiale de votre mock ici
+      testAssetsReader = TestAssetsReader();
+      scenarioRepository = ScenarioRepository(testAssetsReader);
     });
 
-    test('initIndex should load index data correctly', () async {
-      // Écrire le test pour initIndex
+    test('initIndex Success', () async {
+      final result = await scenarioRepository.initIndex();
+
+      expect(result, isTrue);
+      expect(scenarioRepository.isScenarioInit, isFalse);
+      expect(scenarioRepository.isIndexInit, isTrue);
+      expect(scenarioRepository.scenarios.length, equals(1));
     });
 
-    test('title should return correct title after scenario is initialized', () {
-      // Écrire le test pour la propriété title
-    });
+    test('initScenario Success', () async {
+      await scenarioRepository.initIndex();
+      final result = await scenarioRepository.initScenario(scenarioRepository.scenarios.first);
 
-    // Autres tests...
-
-    tearDown(() {
-      // Nettoyage après chaque test si nécessaire
+      expect(result, isTrue);
+      expect(scenarioRepository.isScenarioInit, isTrue);
+      expect(scenarioRepository.scenario.items.length, equals(4));
+      expect(scenarioRepository.scenario.mechanisms.length, equals(13));
+      expect(scenarioRepository.durationInMinute, equals(10));
+      expect(scenarioRepository.isTutorial, isTrue);
     });
   });
 }

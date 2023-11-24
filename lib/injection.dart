@@ -1,3 +1,4 @@
+import 'package:airscaper/common/tools/main_assets_reader.dart';
 import 'package:airscaper/domain/configuration/hive_configuration.dart';
 import 'package:airscaper/domain/repositories/scenario_repository.dart';
 import 'package:airscaper/domain/storage/inventory_local_source.dart';
@@ -57,7 +58,7 @@ Future<void> init() async {
   // endregion
 
   // region Repositories
-  sl.registerLazySingleton<ScenarioRepository>(() => ScenarioRepository());
+  sl.registerLazySingleton<ScenarioRepository>(() => ScenarioRepository(MainAssetsReader()));
   // endregion
 
   // region Storage
