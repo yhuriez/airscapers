@@ -22,14 +22,14 @@ class NfcReaderView extends StatefulWidget {
 
 class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserver {
 
-  bool isAvailable = true;
+  bool isAvailable = false;
   bool isScanning = (Platform.isAndroid);
   bool isReading = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -152,7 +152,7 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if(state == AppLifecycleState.paused) {
+    if (state == AppLifecycleState.paused) {
       print("Stopped NFC reader from lifecycle");
       NfcManager.instance.stopSession();
 
@@ -165,8 +165,10 @@ class _NfcReaderViewState extends State<NfcReaderView> with WidgetsBindingObserv
   @override
   void dispose() {
     super.dispose();
-    NfcManager.instance.stopSession();
-    WidgetsBinding.instance?.removeObserver(this);
+    if (isAvailable) {
+      NfcManager.instance.stopSession();
+    }
+    WidgetsBinding.instance.removeObserver(this);
   }
 }
 
@@ -176,6 +178,7 @@ class NfcReadWaitingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key("nfc_read_waiting_layout"),
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -202,6 +205,7 @@ class NfcActivationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key("nfc_activation_layout"),
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -232,6 +236,7 @@ class NfcDisabledView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key("nfc_disabled_layout"),
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,

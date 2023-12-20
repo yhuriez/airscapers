@@ -68,7 +68,8 @@ class HomeScreenContent extends StatelessWidget {
       child: Column(
         children: [
           _createBottomBar(context),
-          ARSPaginatedGrid(
+          ARSInventoryGrid(
+            key: const Key("home_inventory_grid"),
             items: items,
             selectedItem: state.selectedItem?.id,
             newItem: state.newItem?.id,
@@ -103,6 +104,7 @@ class HomeScreenContent extends StatelessWidget {
         children: [
           // Selected item name
           InkWell(
+            key: const Key("home_notes_button"),
             onTap: () => Navigator.of(context).push(NotesPage.route()),
             child: Row(
               children: [
@@ -127,6 +129,7 @@ class HomeScreenContent extends StatelessWidget {
           (KeyboardVisibilityProvider.isKeyboardVisible(context))
               ? Container()
               : ARSClock(
+                  key: const Key("home_clock"),
                   onEnd: _doGameOverScreen,
                 ),
         ],

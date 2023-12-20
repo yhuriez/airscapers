@@ -7,10 +7,7 @@ class ARSConfirmDialog extends StatelessWidget {
   final Function(BuildContext) onCancelClicked;
 
   const ARSConfirmDialog(
-      {Key? key,
-        required this.child,
-        required this.onOkClicked,
-        required this.onCancelClicked})
+      {Key? key, required this.child, required this.onOkClicked, required this.onCancelClicked})
       : super(key: key);
 
   @override
@@ -29,8 +26,16 @@ class ARSConfirmDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _createButton(context, "Non", onCancelClicked),
-                _createButton(context, "Oui", onOkClicked),
+                _ConfirmButton(
+                    key: const Key("dialog_confirm_no"),
+                    text: "Non",
+                    action: onCancelClicked
+                ),
+                _ConfirmButton(
+                    key: const Key("dialog_confirm_yes"),
+                    text: "Oui",
+                    action: onOkClicked
+                ),
               ],
             ),
           )
@@ -38,13 +43,21 @@ class ARSConfirmDialog extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _createButton(
-    BuildContext context,
-    String text,
-    Function(BuildContext) action,
-  ) =>
-      TextButton(
-          child: Text(text, style: TextStyle(fontSize: 20, color: Colors.black),),
-          onPressed: () => action(context));
+class _ConfirmButton extends StatelessWidget {
+  final String text;
+  final Function(BuildContext) action;
+
+  const _ConfirmButton({Key? key, required this.text, required this.action}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 20, color: Colors.black),
+        ),
+        onPressed: () => action(context));
+  }
 }

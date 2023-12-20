@@ -43,6 +43,7 @@ class ARSDetailsBox extends StatelessWidget {
         tag: ImageDetailsScreen.imageTag,
         child: Image.asset(
             this.imageUrl,
+            key: const Key("details_image"),
             fit: BoxFit.fill,
           ),
         ),

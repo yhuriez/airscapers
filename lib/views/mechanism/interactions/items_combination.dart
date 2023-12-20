@@ -1,12 +1,9 @@
-import 'package:airscaper/domain/usecases/mechanism_use_cases.dart';
 import 'package:airscaper/models/scenario_item.dart';
 import 'package:airscaper/views/common/ars_paginated_grid.dart';
 import 'package:airscaper/views/mechanism/mechanism_screen_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../injection.dart';
 
 const GRID_HEIGHT = 60.0;
 const ITEM_SIZE = 50.0;
@@ -52,6 +49,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
 
     for (var index = 0; index < expectedItemList.length; index++) {
       final selectedItem = selectedItems[index];
+      final expectedItem = expectedItemList[index];
 
       final widget = (selectedItem != null)
           ? ARSGridImageItem(
@@ -60,6 +58,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
               draggable: false,
               onItemClicked: onItemClicked)
           : ARSGridEmptyItem(
+              key: ValueKey("combination_slot_$expectedItem"),
               onAcceptedData: (context, data) =>
                   onItemDropped(context, index, data));
 

@@ -12,7 +12,7 @@ import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
-Future<void> init() async {
+Future<void> init({bool forTesting = false}) async {
 
   // region Use Cases
   sl.registerLazySingleton<InitAppUseCase>(() => InitAppUseCase(sl(), sl(), sl()));
@@ -47,7 +47,7 @@ Future<void> init() async {
   // endregion
 
   // region Storage
-  await initHive();
+  await initHive(forTesting: forTesting);
 
   final scenarioDb = await ScenarioStateStorage.createBox();
   final itemDb = await InventoryLocalSource.createItemBox(1);

@@ -48,6 +48,7 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+          key: const Key("mechanism_code_input"),
           style: TextStyle(fontSize: 16.0, backgroundColor: Colors.white),
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(
@@ -72,6 +73,7 @@ class _ARSCodeTextFieldState extends State<ARSCodeTextField> {
   );
 
   Widget createConfirmButton(BuildContext context) => SizedBox(
+    key: const Key("mechanism_code_confirm_button"),
     width: TEXT_FIELD_SIZE,
     height: TEXT_FIELD_SIZE,
     child: Container(

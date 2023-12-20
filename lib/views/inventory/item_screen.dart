@@ -9,6 +9,7 @@ import 'package:airscaper/views/common/nfc_write_dialog.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/navigation/fade_page_route.dart';
 import 'package:airscaper/views/navigation/navigation_methods.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -22,40 +23,47 @@ class InventoryDetailsFragment extends StatelessWidget {
 
   static Route route(ScenarioItem item, {bool found = false}) {
     return FadeBlackPageRoute(
-        builder: (_) => InventoryDetailsFragment(item: item, found : found),
+        builder: (_) => InventoryDetailsFragment(item: item, found: found),
         settings: const RouteSettings(name: routeName));
   }
 
-  const InventoryDetailsFragment({Key? key, required this.item, this.found = false}) : super(key: key);
-
+  const InventoryDetailsFragment({Key? key, required this.item, this.found = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ARSScaffold(
         title: item.title,
         actions: [
-          if(kDebugMode) IconButton(
-              onPressed: () => onDisplayWriteNfcDialog(context),
-              icon: Icon(Icons.nfc, color: Colors.white,)
-          )
+          if (kDebugMode)
+            IconButton(
+                onPressed: () => onDisplayWriteNfcDialog(context),
+                icon: Icon(
+                  Icons.nfc,
+                  color: Colors.white,
+                ))
         ],
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ScenarioElementView(item: item, found: found,),
+          child: ScenarioElementView(
+            item: item,
+            found: found,
+          ),
         ));
   }
 
   onDisplayWriteNfcDialog(BuildContext context) {
-    showDialog(context: context, builder: (_) => NfcWriteDialog(link: "airscapers://item/${item.id}"));
+    showDialog(
+        context: context, builder: (_) => NfcWriteDialog(link: "airscapers://item/${item.id}"));
   }
 }
 
 class ScenarioElementView extends StatefulWidget {
-
   final ScenarioItem item;
   final bool found;
 
   FilterAvailableLootUseCase get _filterAvailableLootUseCase => sl();
+
   InterpretLinkUseCase get _interpretLinkUseCase => sl();
 
   ScenarioElementView({Key? key, required this.item, required this.found}) : super(key: key);
@@ -76,28 +84,25 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
 
   @override
   Widget build(BuildContext context) {
-
     String description = widget.item.description;
-    if(widget.item.foundDescription != null && (widget.found || availableLoots.isNotEmpty)) {
+    if (widget.item.foundDescription != null && (widget.found || availableLoots.isNotEmpty)) {
       description = widget.item.foundDescription!;
     }
 
     return ARSDetailsBox(
-      interactionsBuilder: _createInteraction,
-      imageUrl: widget.item.image,
-      description: description,
-      name: widget.item.title
-    );
+        interactionsBuilder: _createInteraction,
+        imageUrl: widget.item.image,
+        description: description,
+        name: widget.item.title);
   }
 
   Widget _createInteraction(BuildContext context) =>
-      (availableLoots.isNotEmpty)
-          ? _searchButton
-          : _continueButton;
+      (availableLoots.isNotEmpty) ? _searchButton : _continueButton;
 
   Widget get _continueButton => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ARSButton(
+          key: const Key("details_continue_button"),
           onClick: _onContinueButtonClicked,
           text: Text(
             "Continuer",
@@ -111,23 +116,22 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
     Navigator.of(context).pop();
   }
 
-
-  Widget get _searchButton =>  Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-    child: ARSButton(
-      onClick: (context) => _onSearchClicked(context),
-      text: Text(
-        (availableLoots.length == 1)
-            ? availableLoots.first.interactionText ?? "Fouiller"
-            : "Fouiller",
-        style: TextStyle(color: Colors.white),
-      ),
-      backgroundColor: Colors.green,
-    ),
-  );
+  Widget get _searchButton => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: ARSButton(
+          key: const Key("details_search_button"),
+          onClick: (context) => _onSearchClicked(context),
+          text: Text(
+            (availableLoots.length == 1)
+                ? availableLoots.first.interactionText ?? "Fouiller"
+                : "Fouiller",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+        ),
+      );
 
   _onSearchClicked(BuildContext context) {
-
     final loots = widget._filterAvailableLootUseCase.execute(availableLoots);
 
     if (widget.item.loots.length > 1) {
@@ -136,12 +140,12 @@ class _ScenarioElementViewState extends State<ScenarioElementView> {
           barrierDismissible: true,
           barrierColor: Colors.black45,
           builder: (context) => SearchContent(
-            loots: loots,
-            onLootClicked: (loot) {
-              Navigator.of(context, rootNavigator: true).pop();
-              _onLootClicked(loot);
-            },
-          ));
+                loots: loots,
+                onLootClicked: (loot) {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  _onLootClicked(loot);
+                },
+              ));
     } else {
       // If only one loot, directly go to this one
       _onLootClicked(loots.first);
@@ -181,19 +185,33 @@ class SearchContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: loots
               .where((it) => it.interactionText != null)
-              .map((loot) => _createLootButton(loot))
+              .mapIndexed((index, loot) => _LootButton(
+                    key: Key("search_item_button_$index"),
+                    loot: loot,
+                    onLootClicked: onLootClicked,
+                  ))
               .toList()),
     ));
   }
+}
 
-  Widget _createLootButton(ScenarioLoot loot) => Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: ARSButton(
-            onClick: (context) => onLootClicked(loot),
-            text: Text(
-              loot.interactionText ?? "",
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.green),
-      );
+class _LootButton extends StatelessWidget {
+  final ScenarioLoot loot;
+  final Function(ScenarioLoot) onLootClicked;
+
+  const _LootButton({Key? key, required this.loot, required this.onLootClicked}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: ARSButton(
+          onClick: (context) => onLootClicked(loot),
+          text: Text(
+            loot.interactionText ?? "",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green),
+    );
+  }
 }

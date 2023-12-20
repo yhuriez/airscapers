@@ -32,32 +32,9 @@ class ScenarioContentFragment extends StatelessWidget {
 
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: InkWell(
-                onTap: () => _onElementClicked(context, element.link),
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(6.0)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        if(element.imageLink != null) Image.asset(element.imageLink!),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: Text(
-                            element.name,
-                            style:
-                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              child: ScenarioContentItem(
+                element,
+                key: ValueKey("content_item_$index"),
               ),
             );
           }),
@@ -74,12 +51,45 @@ class ScenarioContentFragment extends StatelessWidget {
             ScenarioElement(element.title, "${LootType.item.name}/${element.id}", element.image))
         .toList();
 
-
-    result += repo.mechanisms.map((mechanism) => ScenarioElement(
-        mechanism.name, "${LootType.mechanism.name}/${mechanism.id}", mechanism.states.first.image))
+    result += repo.mechanisms
+        .map((mechanism) => ScenarioElement(mechanism.name,
+            "${LootType.mechanism.name}/${mechanism.id}", mechanism.states.first.image))
         .toList();
 
     return result;
+  }
+}
+
+class ScenarioContentItem extends StatelessWidget {
+  final ScenarioElement element;
+
+  const ScenarioContentItem(this.element, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => _onElementClicked(context, element.link),
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6.0)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (element.imageLink != null) Image.asset(element.imageLink!),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  element.name,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   _onElementClicked(BuildContext context, String link) async {
