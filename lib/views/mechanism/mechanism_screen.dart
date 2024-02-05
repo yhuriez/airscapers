@@ -1,5 +1,7 @@
+import 'package:airscaper/domain/usecases/end/end_scenario_use_case.dart';
 import 'package:airscaper/views/common/ars_scaffold.dart';
 import 'package:airscaper/views/common/nfc_write_dialog.dart';
+import 'package:airscaper/views/home/success_screen.dart';
 import 'package:airscaper/views/inventory/ars_details_box.dart';
 import 'package:airscaper/views/mechanism/clue_dialog.dart';
 import 'package:airscaper/views/mechanism/interactions/interaction_factory.dart';
@@ -36,12 +38,13 @@ class MechanismFragment extends StatelessWidget {
 class MechanismStateRepresentation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     final state = context.watch<MechanismScreenState>();
 
-    if (state.nextIntent != null) {
+    if (state.mechanism.isEnd) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        navigateReplaceTo(context, state.nextIntent!);
+        Navigator.of(context, rootNavigator: true).pushReplacement(
+          SuccessScreen.createRoute()
+        );
       });
       return Container();
     }
@@ -50,11 +53,13 @@ class MechanismStateRepresentation extends StatelessWidget {
       title: state.mechanism.title,
       actions: [
         _createClueAction(context),
-
-        if(kDebugMode) IconButton(
-            onPressed: () => onDisplayWriteNfcDialog(context, state.mechanism.id),
-            icon: Icon(Icons.nfc, color: Colors.white,)
-        )
+        if (kDebugMode)
+          IconButton(
+              onPressed: () => onDisplayWriteNfcDialog(context, state.mechanism.id),
+              icon: Icon(
+                Icons.nfc,
+                color: Colors.white,
+              ))
       ],
       child: ARSDetailsBox(
         interactionsBuilder: (_) => createMechanismInteraction(context),
@@ -81,8 +86,6 @@ class MechanismStateRepresentation extends StatelessWidget {
   _onClueClicked(BuildContext context) {
     final state = context.read<MechanismScreenState>();
 
-    showDialog(
-        context: context,
-        builder: (_) => ClueDialog(mechanism: state.mechanism));
+    showDialog(context: context, builder: (_) => ClueDialog(mechanism: state.mechanism));
   }
 }

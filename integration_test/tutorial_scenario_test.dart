@@ -51,7 +51,7 @@ void main() {
       await robot.clickOnUpButton();
 
       await goToCleScreen(robot);
-      await clickOnContinue(robot);
+      await clickOnTake(robot);
 
       await goToCoffreScreen(robot);
       await useItem(robot, "11"); // id 11 => Clé
@@ -177,6 +177,10 @@ Future<void> clickOnContinue(ScenarioRobot robot) async {
   await robot.clickOn(const Key("details_continue_button"));
 }
 
+Future<void> clickOnTake(ScenarioRobot robot) async {
+  await robot.clickOn(const Key("details_pick_button"));
+}
+
 Future<void> useItem(ScenarioRobot robot, String itemId) async {
   await robot.dragOn(Key("inventory_item_$itemId"), Key("details_image"));
 }
@@ -184,15 +188,15 @@ Future<void> useItem(ScenarioRobot robot, String itemId) async {
 Future<void> checkSearch(ScenarioRobot robot) async {
   await robot.clickOn(const Key("details_search_button"));
   await robot.clickOn(const Key("search_item_button_0"));
-  await clickOnContinue(robot);
+  await clickOnTake(robot);
 
   await robot.clickOn(const Key("details_search_button"));
   await robot.clickOn(const Key("search_item_button_0"));
-  await clickOnContinue(robot);
+  await clickOnTake(robot);
 
   await robot.clickOn(const Key("details_search_button"));
   await robot.clickOn(const Key("search_item_button_0"));
-  await clickOnContinue(robot);
+  await clickOnTake(robot);
   await clickOnContinue(robot);
 }
 

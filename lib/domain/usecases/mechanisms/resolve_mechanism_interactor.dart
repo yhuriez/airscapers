@@ -13,7 +13,7 @@ class ResolveMechanismInteractor {
   ResolveMechanismInteractor(this._inventory, this._loadMechanismInteractor);
 
   ScenarioMechanism? execute(ScenarioMechanism mechanism) {
-    _inventory.insertMechanism(mechanism.id);
+    _inventory.resolveMechanism(mechanism.id);
 
     final removedItems = mechanism.solving.mapOrNull(
       code: (it) => it.removedItems,

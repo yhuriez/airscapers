@@ -47,14 +47,6 @@ class InventoryState extends ChangeNotifier {
     notifyListeners();
   }
 
-  addItem(String itemId) {
-    _localSource.insertItem(itemId, true);
-  }
-
-  removeItem(List<String> itemIds) {
-    itemIds.forEach((itemId) => _localSource.updateItemUsed(itemId));
-  }
-
   selectItem(String itemId) {
     if (_selectedItem == itemId) {
       _selectedItem = null;

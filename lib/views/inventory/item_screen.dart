@@ -42,7 +42,7 @@ class InventoryDetailsFragment extends StatelessWidget {
 
   onDisplayWriteNfcDialog(BuildContext context) {
     showDialog(
-        context: context, builder: (_) => NfcWriteDialog(link: "airscapers://item/${item.id}"));
+        context: context, builder: (_) => NfcWriteDialog(link: "airscapers://${item.id}"));
   }
 }
 

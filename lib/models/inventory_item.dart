@@ -12,8 +12,9 @@ class InventoryItem with _$InventoryItem {
 
   const factory InventoryItem({
     required String id,
+    required String originMechanismId,
+    required String inventoryMechanismId,
     required DateTime creationDate,
-    required bool isPickedUp,
     @Default(false) bool used,
   }) = _InventoryItem;
 

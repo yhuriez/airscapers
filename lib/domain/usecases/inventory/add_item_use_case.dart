@@ -1,22 +1,22 @@
 import 'package:airscaper/domain/storage/inventory_local_source.dart';
 import 'package:flutter/cupertino.dart';
 
-class AddLootUseCase {
+class AddItemUseCase {
   final InventoryLocalSource _localSource;
 
-  AddLootUseCase(this._localSource);
+  AddItemUseCase(this._localSource);
 
-  AddLootResponse execute(String loot) {
+  AddLootResponse execute(String itemId, String originMechanismId) {
     var existingElement = false;
     var usedElement = false;
 
     try {
-      final result = _localSource.loadItem(loot);
+      final result = _localSource.loadItem(itemId);
       if (result != null) {
         usedElement = result.used;
         existingElement = true;
       } else {
-        _localSource.insertItem(loot, true);
+        _localSource.insertItem(itemId, originMechanismId);
       }
 
       if (usedElement) return AddLootResponse.ALREADY_USED;

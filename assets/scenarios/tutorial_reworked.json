@@ -40,7 +40,7 @@
       "solving": {
         "type": "visual"
       },
-      "endTrack": true
+      "isEnd": true
     },
     {
       "id": "110",
@@ -51,7 +51,7 @@
         "type": "pick",
         "newItem": "11"
       },
-      "hasQrCode": true
+      "isEntryPoint": true
     },
     {
       "id": "160",
@@ -154,7 +154,8 @@
         "expectedHints": [
         ]
       },
-      "transitionTo": "46"
+      "transitionId": "46",
+      "isEntryPoint": true
     },
     {
       "title": "Panneau électrique",
@@ -178,7 +179,8 @@
         "expectedHints": [
         ]
       },
-      "transitionTo": "70"
+      "transitionId": "70",
+      "isEntryPoint": true
     },
     {
       "title": "Panneau électrique",
@@ -202,7 +204,8 @@
         "expectedHints": [
           "35"
         ]
-      }
+      },
+      "transitionId": "250"
     },
     {
       "title": "Ecran",
@@ -217,7 +220,8 @@
       "solving": {
         "type": "visual"
       },
-      "transitionTo": "48"
+      "transitionId": "48",
+      "isEntryPoint": true
     },
     {
       "title": "Porte",
@@ -243,7 +247,8 @@
           "42"
         ]
       },
-      "transitionId": "1"
+      "transitionId": "1",
+      "isEntryPoint": true
     }
   ]
 }

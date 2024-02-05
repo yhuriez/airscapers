@@ -21,8 +21,9 @@ InventoryItem _$InventoryItemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$InventoryItem {
   String get id => throw _privateConstructorUsedError;
+  String get originMechanismId => throw _privateConstructorUsedError;
+  String get inventoryMechanismId => throw _privateConstructorUsedError;
   DateTime get creationDate => throw _privateConstructorUsedError;
-  bool get isPickedUp => throw _privateConstructorUsedError;
   bool get used => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +38,12 @@ abstract class $InventoryItemCopyWith<$Res> {
           InventoryItem value, $Res Function(InventoryItem) then) =
       _$InventoryItemCopyWithImpl<$Res, InventoryItem>;
   @useResult
-  $Res call({String id, DateTime creationDate, bool isPickedUp, bool used});
+  $Res call(
+      {String id,
+      String originMechanismId,
+      String inventoryMechanismId,
+      DateTime creationDate,
+      bool used});
 }
 
 /// @nodoc
@@ -54,8 +60,9 @@ class _$InventoryItemCopyWithImpl<$Res, $Val extends InventoryItem>
   @override
   $Res call({
     Object? id = null,
+    Object? originMechanismId = null,
+    Object? inventoryMechanismId = null,
     Object? creationDate = null,
-    Object? isPickedUp = null,
     Object? used = null,
   }) {
     return _then(_value.copyWith(
@@ -63,14 +70,18 @@ class _$InventoryItemCopyWithImpl<$Res, $Val extends InventoryItem>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      originMechanismId: null == originMechanismId
+          ? _value.originMechanismId
+          : originMechanismId // ignore: cast_nullable_to_non_nullable
+              as String,
+      inventoryMechanismId: null == inventoryMechanismId
+          ? _value.inventoryMechanismId
+          : inventoryMechanismId // ignore: cast_nullable_to_non_nullable
+              as String,
       creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isPickedUp: null == isPickedUp
-          ? _value.isPickedUp
-          : isPickedUp // ignore: cast_nullable_to_non_nullable
-              as bool,
       used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
@@ -87,7 +98,12 @@ abstract class _$$InventoryItemImplCopyWith<$Res>
       __$$InventoryItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, DateTime creationDate, bool isPickedUp, bool used});
+  $Res call(
+      {String id,
+      String originMechanismId,
+      String inventoryMechanismId,
+      DateTime creationDate,
+      bool used});
 }
 
 /// @nodoc
@@ -102,8 +118,9 @@ class __$$InventoryItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? originMechanismId = null,
+    Object? inventoryMechanismId = null,
     Object? creationDate = null,
-    Object? isPickedUp = null,
     Object? used = null,
   }) {
     return _then(_$InventoryItemImpl(
@@ -111,14 +128,18 @@ class __$$InventoryItemImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      originMechanismId: null == originMechanismId
+          ? _value.originMechanismId
+          : originMechanismId // ignore: cast_nullable_to_non_nullable
+              as String,
+      inventoryMechanismId: null == inventoryMechanismId
+          ? _value.inventoryMechanismId
+          : inventoryMechanismId // ignore: cast_nullable_to_non_nullable
+              as String,
       creationDate: null == creationDate
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      isPickedUp: null == isPickedUp
-          ? _value.isPickedUp
-          : isPickedUp // ignore: cast_nullable_to_non_nullable
-              as bool,
       used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
@@ -132,8 +153,9 @@ class __$$InventoryItemImplCopyWithImpl<$Res>
 class _$InventoryItemImpl extends _InventoryItem with DiagnosticableTreeMixin {
   const _$InventoryItemImpl(
       {required this.id,
+      required this.originMechanismId,
+      required this.inventoryMechanismId,
       required this.creationDate,
-      required this.isPickedUp,
       this.used = false})
       : super._();
 
@@ -143,16 +165,18 @@ class _$InventoryItemImpl extends _InventoryItem with DiagnosticableTreeMixin {
   @override
   final String id;
   @override
-  final DateTime creationDate;
+  final String originMechanismId;
   @override
-  final bool isPickedUp;
+  final String inventoryMechanismId;
+  @override
+  final DateTime creationDate;
   @override
   @JsonKey()
   final bool used;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InventoryItem(id: $id, creationDate: $creationDate, isPickedUp: $isPickedUp, used: $used)';
+    return 'InventoryItem(id: $id, originMechanismId: $originMechanismId, inventoryMechanismId: $inventoryMechanismId, creationDate: $creationDate, used: $used)';
   }
 
   @override
@@ -161,8 +185,9 @@ class _$InventoryItemImpl extends _InventoryItem with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'InventoryItem'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('originMechanismId', originMechanismId))
+      ..add(DiagnosticsProperty('inventoryMechanismId', inventoryMechanismId))
       ..add(DiagnosticsProperty('creationDate', creationDate))
-      ..add(DiagnosticsProperty('isPickedUp', isPickedUp))
       ..add(DiagnosticsProperty('used', used));
   }
 
@@ -172,17 +197,19 @@ class _$InventoryItemImpl extends _InventoryItem with DiagnosticableTreeMixin {
         (other.runtimeType == runtimeType &&
             other is _$InventoryItemImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.originMechanismId, originMechanismId) ||
+                other.originMechanismId == originMechanismId) &&
+            (identical(other.inventoryMechanismId, inventoryMechanismId) ||
+                other.inventoryMechanismId == inventoryMechanismId) &&
             (identical(other.creationDate, creationDate) ||
                 other.creationDate == creationDate) &&
-            (identical(other.isPickedUp, isPickedUp) ||
-                other.isPickedUp == isPickedUp) &&
             (identical(other.used, used) || other.used == used));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, creationDate, isPickedUp, used);
+  int get hashCode => Object.hash(runtimeType, id, originMechanismId,
+      inventoryMechanismId, creationDate, used);
 
   @JsonKey(ignore: true)
   @override
@@ -201,8 +228,9 @@ class _$InventoryItemImpl extends _InventoryItem with DiagnosticableTreeMixin {
 abstract class _InventoryItem extends InventoryItem {
   const factory _InventoryItem(
       {required final String id,
+      required final String originMechanismId,
+      required final String inventoryMechanismId,
       required final DateTime creationDate,
-      required final bool isPickedUp,
       final bool used}) = _$InventoryItemImpl;
   const _InventoryItem._() : super._();
 
@@ -212,9 +240,11 @@ abstract class _InventoryItem extends InventoryItem {
   @override
   String get id;
   @override
-  DateTime get creationDate;
+  String get originMechanismId;
   @override
-  bool get isPickedUp;
+  String get inventoryMechanismId;
+  @override
+  DateTime get creationDate;
   @override
   bool get used;
   @override

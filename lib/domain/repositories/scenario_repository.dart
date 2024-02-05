@@ -56,6 +56,9 @@ class ScenarioRepository {
   ScenarioMechanism? getMechanism(String mechanismId)
       => mechanisms.firstWhereOrNull((element) => element.id == mechanismId);
 
+  bool isExistingMechanism(String mechanismId)
+      => mechanisms.any((element) => element.id == mechanismId);
+
   Future<bool> initIndex() async {
     try {
       final indexJsonStr = await _assetsReader.readAssetFile("scenarios/index.json");

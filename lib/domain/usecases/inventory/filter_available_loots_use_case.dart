@@ -9,7 +9,9 @@ class FilterAvailableLootUseCase {
   List<ScenarioLoot> execute(List<ScenarioLoot> baseLoot) {
     if (baseLoot.isEmpty) return [];
 
-    final itemIds = (_inventory.loadAllItems()).map((it) => it.id).toList();
+    final itemIds = (_inventory.loadAllItems())
+        .map((it) => it.originMechanismId)
+        .toList();
 
     return baseLoot.where((loot) => !itemIds.contains(loot.id)).toList();
   }

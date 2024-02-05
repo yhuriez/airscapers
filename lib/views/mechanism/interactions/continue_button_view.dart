@@ -9,6 +9,7 @@ class ContinueButtonView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ARSButton(
+        key: const Key("details_continue_button"),
         onClick: _onContinueButtonClicked,
         text: Text(
           "Continuer",

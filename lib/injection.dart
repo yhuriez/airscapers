@@ -18,7 +18,7 @@ import 'domain/usecases/init/init_app_use_case.dart';
 import 'domain/usecases/init/init_start_date_use_case.dart';
 import 'domain/usecases/init/load_all_scenarios_use_case.dart';
 import 'domain/usecases/init/start_scenario_use_case.dart';
-import 'domain/usecases/inventory/add_loot_use_case.dart';
+import 'domain/usecases/inventory/add_item_use_case.dart';
 import 'domain/usecases/inventory/filter_available_loots_use_case.dart';
 import 'domain/usecases/link/interpret_link_use_case.dart';
 import 'domain/usecases/link/parse_link_use_case.dart';
@@ -42,7 +42,7 @@ Future<void> init({bool forTesting = false}) async {
   sl.registerLazySingleton<TimeUsedUseCase>(() => TimeUsedUseCase(sl()));
   sl.registerLazySingleton<FinalScoreUseCase>(() => FinalScoreUseCase(sl(), sl(), sl()));
 
-  sl.registerLazySingleton<AddLootUseCase>(() => AddLootUseCase(sl()));
+  sl.registerLazySingleton<AddItemUseCase>(() => AddItemUseCase(sl()));
   sl.registerLazySingleton<FilterAvailableLootUseCase>(() => FilterAvailableLootUseCase(sl()));
 
   sl.registerLazySingleton<InterpretLinkUseCase>(() => InterpretLinkUseCase(sl(), sl()));

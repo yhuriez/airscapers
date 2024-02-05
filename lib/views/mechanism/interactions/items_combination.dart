@@ -26,7 +26,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
   void initState() {
     super.initState();
 
-    expectedItemList = widget._solving.expectedItemList;
+    expectedItemList = widget._solving.expectedItemList.toList();
 
     if (expectedItemList.isEmpty) {
       throw Exception("Transition with expectedItemList is expected at this point");

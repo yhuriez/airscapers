@@ -9,6 +9,7 @@ class MechanismBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ARSButton(
+      key: const Key("details_continue_button"),
       onClick: _onContinueButtonClicked,
       text: Text(
         "Retour",

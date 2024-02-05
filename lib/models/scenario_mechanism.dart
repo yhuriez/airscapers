@@ -9,6 +9,7 @@ part 'scenario_mechanism.g.dart';
 
 @freezed
 class ScenarioMechanism with _$ScenarioMechanism {
+
   const ScenarioMechanism._();
 
   const factory ScenarioMechanism(
@@ -18,7 +19,7 @@ class ScenarioMechanism with _$ScenarioMechanism {
       String? image,
       required MechanismSolving solving,
       String? transitionId,
-      @Default(false) bool endTrack,
+      @Default(false) bool isEnd,
       @Default(false) bool isEntryPoint,
       @Default([]) List<String> clues}) = _ScenarioMechanism;
 

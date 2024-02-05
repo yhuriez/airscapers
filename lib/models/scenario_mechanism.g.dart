@@ -16,7 +16,7 @@ _$ScenarioMechanismImpl _$$ScenarioMechanismImplFromJson(
       solving:
           MechanismSolving.fromJson(json['solving'] as Map<String, dynamic>),
       transitionId: json['transitionId'] as String?,
-      endTrack: json['endTrack'] as bool? ?? false,
+      isEnd: json['isEnd'] as bool? ?? false,
       isEntryPoint: json['isEntryPoint'] as bool? ?? false,
       clues:
           (json['clues'] as List<dynamic>?)?.map((e) => e as String).toList() ??
@@ -32,7 +32,7 @@ Map<String, dynamic> _$$ScenarioMechanismImplToJson(
       'image': instance.image,
       'solving': instance.solving.toJson(),
       'transitionId': instance.transitionId,
-      'endTrack': instance.endTrack,
+      'isEnd': instance.isEnd,
       'isEntryPoint': instance.isEntryPoint,
       'clues': instance.clues,
     };

@@ -1,3 +1,4 @@
+import 'package:airscaper/domain/storage/scenario_storage.dart';
 import 'package:airscaper/domain/usecases/mechanisms/load_mechanism_interactor.dart';
 import 'package:airscaper/domain/usecases/mechanisms/mechanism_code_input_use_case.dart';
 import 'package:airscaper/domain/usecases/mechanisms/mechanism_item_select_use_case.dart';
@@ -15,21 +16,25 @@ class MechanismScreenState extends ChangeNotifier {
   final LoadMechanismInteractor _loadMechanismInteractor = sl();
   final MechanismCodeInputUseCase _codeInputUseCase = sl();
   final ResolveMechanismInteractor _resolveMechanismInteractor = sl();
+  final ScenarioStateStorage _scenarioStateStorage = sl();
 
   final String mechanismId;
   late ScenarioMechanism mechanism;
-  NavigationIntent? nextIntent;
 
   MechanismScreenState(this.mechanismId) {
-    refreshState(_loadMechanismInteractor.execute(mechanism.id));
+    var mechanism = _loadMechanismInteractor.execute(mechanismId);
+    if (mechanism.isEnd) {
+      _scenarioStateStorage.setEndDate(DateTime.now());
+    }
+    refreshState(mechanism);
   }
 
-  refreshState(ScenarioMechanism mechanism) {
+  void refreshState(ScenarioMechanism mechanism) {
     this.mechanism = mechanism;
     notifyListeners();
   }
 
-  onItemUsed(ScenarioItem selectedItem) {
+  void onItemUsed(ScenarioItem selectedItem) {
     var solving = mechanism.solving;
     if (solving is MechanismSolvingUse) {
       final ScenarioMechanism? result =
@@ -49,7 +54,7 @@ class MechanismScreenState extends ChangeNotifier {
     return false;
   }
 
-  onStateResolved() {
+  void onStateResolved() {
     final newMechanism = _resolveMechanismInteractor.execute(mechanism);
     if (newMechanism != null) {
       refreshState(_loadMechanismInteractor.execute(mechanism.id));

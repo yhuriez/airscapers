@@ -37,7 +37,7 @@ class BuildGraphUseCase {
       _createMissingNodes(item.id, nodes, itemRequiredId[item.id] ?? {}, itemPickedIn[item.id], errors);
     });
 
-    final lastMechanism = scenario.mechanisms.firstWhereOrNull((element) => element.endTrack);
+    final lastMechanism = scenario.mechanisms.firstWhereOrNull((element) => element.isEnd);
     if (lastMechanism == null) {
       errors.missingEnd = true;
       return ScenarioTreeResult(nodes.values.first, errors);

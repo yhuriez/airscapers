@@ -1,5 +1,6 @@
 
 import 'package:airscaper/views/mechanism/interactions/code_input.dart';
+import 'package:airscaper/views/mechanism/interactions/continue_button_view.dart';
 import 'package:airscaper/views/mechanism/interactions/items_combination.dart';
 import 'package:airscaper/views/mechanism/interactions/pick_button_view.dart';
 import 'package:airscaper/views/mechanism/interactions/search_interaction_view.dart';
@@ -13,13 +14,13 @@ Widget createMechanismInteraction(BuildContext context) {
   final solving = state.mechanism.solving;
 
   // Code input
-  final widget = solving.mapOrNull(
-      pick: (it) => PickButtonView(it),
-      search: (it) => SearchInteractionView(it),
+  return solving.map(
+      pick: (it) => PickButtonView(state.mechanism, it),
+      search: (it) => SearchButton(it),
       code: (it) => MechanismCodeInput(it),
-      combine: (it) => MechanismItemsCombination(it)
-      // visual and activation don't have interactions,
+      combine: (it) => MechanismItemsCombination(it),
+      visual: (it) => ContinueButtonView(),
+      activation: (it) => ContinueButtonView(),
+      use: (it) => const Placeholder()
   );
-
-    return widget ?? Container();
 }

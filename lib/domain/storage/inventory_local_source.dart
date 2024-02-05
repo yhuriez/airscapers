@@ -50,10 +50,15 @@ class InventoryLocalSource {
     return _mechanismDb.values.firstWhereOrNull((it) => it.mechanismId == mechanismId);
   }
 
-  bool insertItem(String id, bool isPickedUp) {
+  bool insertItem(String id, String originMechanismId) {
     if (_itemDb.containsKey(id)) return false;
 
-    _itemDb.put(id, InventoryItem(id: id, creationDate: DateTime.now(), isPickedUp: isPickedUp));
+    _itemDb.put(id, InventoryItem(
+        id: id,
+        originMechanismId: originMechanismId,
+        inventoryMechanismId: originMechanismId,
+        creationDate: DateTime.now()
+    ));
     return true;
   }
 
@@ -79,7 +84,7 @@ class InventoryLocalSource {
     return true;
   }
 
-  insertMechanism(String mechanismId) {
+  resolveMechanism(String mechanismId) {
     InventoryMechanism? existingState = _mechanismDb.get(mechanismId);
 
     if (existingState == null) {
