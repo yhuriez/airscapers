@@ -26,6 +26,19 @@ class ScenarioRobot {
     expect(find.text(text), findsOneWidget, reason: "No widget with '$text' found");
   }
 
+  Future<void> checkVisible(Key key) async {
+    expect(find.byKey(key), findsOneWidget, reason: "No widget with '$key' found");
+  }
+
+  Future<void> checkNotVisible(Key key) async {
+    expect(find.byKey(key), findsNothing, reason: "A widget with '$key' was found but not expected");
+  }
+
+  Future<void> tapTopLeftScreen() async {
+    await tester.tapAt(Offset(100.0, 100.0));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> clickOn(Key viewKey) async {
     var viewClicked = find.byKey(viewKey);
     expect(viewClicked, findsOneWidget, reason: "No view with key '$viewKey' visible");
@@ -72,5 +85,11 @@ class ScenarioRobot {
     await tester.enterText(inputTextView, value);
     await tester.pumpAndSettle();
     expect(find.text(value), findsOneWidget);
+  }
+
+  Future<String?> getWidgetText(Key key) async {
+    final finder = find.byKey(key);
+    final widget = finder.evaluate().single.widget as Text;
+    return widget.data;
   }
 }

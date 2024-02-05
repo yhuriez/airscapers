@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import '../../injection.dart';
 
 class ClueDialog extends StatefulWidget {
-
   final int mechanismId;
   final MechanismState state;
 
   LoadAvailableCluesUseCase get _loadClueUseCase => sl();
+
   UseClueUseCase get _useClueUseCase => sl();
 
   ClueDialog({Key? key, required this.state, required this.mechanismId}) : super(key: key);
@@ -23,7 +23,6 @@ class ClueDialog extends StatefulWidget {
 }
 
 class _ClueDialogState extends State<ClueDialog> {
-
   late int nbExistingClues;
   late List<MechanismClue> availableClues;
   late int currentClueIndex;
@@ -50,30 +49,28 @@ class _ClueDialogState extends State<ClueDialog> {
       return ARSDialogBase(child: Text("Aucun indice n'est disponible ici."));
     }
 
-    return ARSDialogBase(child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          // Title
-          _createClueTitle(context),
+    return ARSDialogBase(
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            // Title
+            _createClueTitle(context),
 
-          // Description
-          _createClueText(context),
+            // Description
+            _createClueText(context),
 
-          // Previous - Next
-          _createButtonBar(context)
-        ])),);
+            // Previous - Next
+            _createButtonBar(context)
+          ])),
+    );
   }
 
   Widget _createClueTitle(BuildContext context) {
-    final title = (nbExistingClues > 1)
-        ? "Indice ${currentClueIndex + 1}"
-        : "Indice";
+    final title = (nbExistingClues > 1) ? "Indice ${currentClueIndex + 1}" : "Indice";
 
     return Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: Text(title,
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))
-    );
+        child: Text(title, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)));
   }
 
   Widget _createClueText(BuildContext context) {
@@ -90,31 +87,30 @@ class _ClueDialogState extends State<ClueDialog> {
         children: [
           (currentClueIndex == 0)
               ? Container()
-              : _createButton(context, "Précédent", (context) {
-            setState(() {
-              currentClueIndex--;
-            });
-          }),
+              : _ClueConfirmButton(
+                  key: const Key("clue_confirm_button_previous"),
+                  text: "Précédent",
+                  action: (context) {
+                      setState(() {
+                        currentClueIndex--;
+                      });
+                    }),
           (currentClueIndex >= nbExistingClues - 1)
               ? Container()
-              : _createButton(context, "Suivant", (context) {
-            setState(() {
-              if (currentClueIndex >= availableClues.length - 1) {
-                showConfirm = true;
-              } else {
-                currentClueIndex++;
-              }
-            });
-          })
+              : _ClueConfirmButton(
+                  key: const Key("clue_confirm_button_next"),
+                  text: "Suivant",
+                  action: (context) {
+                      setState(() {
+                        if (currentClueIndex >= availableClues.length - 1) {
+                          showConfirm = true;
+                        } else {
+                          currentClueIndex++;
+                        }
+                      });
+                    })
         ]);
   }
-
-  Widget _createButton(BuildContext context,
-      String text,
-      Function(BuildContext) action,) =>
-      TextButton(
-          child: Text(text, style: TextStyle(fontSize: 20, color: Colors.black),),
-          onPressed: () => action(context));
 
   _showConfirmDialog(BuildContext context) {
     String message = "Souhaitez-vous un autre indice ?";
@@ -127,7 +123,10 @@ class _ClueDialogState extends State<ClueDialog> {
     return ARSConfirmDialog(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(message, style: TextStyle(fontSize: 16),),
+          child: Text(
+            message,
+            style: TextStyle(fontSize: 16),
+          ),
         ),
         onCancelClicked: (context) => _dismissDialog(),
         onOkClicked: (context) {
@@ -152,5 +151,20 @@ class _ClueDialogState extends State<ClueDialog> {
         showConfirm = false;
       });
     }
+  }
+}
+
+class _ClueConfirmButton extends StatelessWidget {
+  final String text;
+  final Function(BuildContext) action;
+
+  const _ClueConfirmButton({Key? key, required this.text, required this.action}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        child: Text(text, style: const TextStyle(fontSize: 20, color: Colors.black),),
+        onPressed: () => action(context));
+
   }
 }

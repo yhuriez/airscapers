@@ -69,6 +69,7 @@ class MechanismStateRepresentation extends StatelessWidget {
 
   Widget _createClueAction(BuildContext context) {
     return IconButton(
+      key: const Key("clue_action_button"),
       icon: Icon(Icons.saved_search, color: Colors.white),
       onPressed: () => _onClueClicked(context),
     );
