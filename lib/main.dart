@@ -27,16 +27,28 @@ Future<void> main() async {
       break;
   }
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => ScenarioIndexState()),
-      ChangeNotifierProvider(create: (_) => InventoryState()),
-      ChangeNotifierProvider(create: (_) => TimerState())
-    ],
-    child: MainApp(
-      child: initialScreen,
-    ),
+  runApp(MainProviders(
+    child: initialScreen,
   ));
+}
+
+class MainProviders extends StatelessWidget {
+  final Widget child;
+
+  const MainProviders({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ScenarioIndexState()),
+          ChangeNotifierProvider(create: (_) => InventoryState()),
+          ChangeNotifierProvider(create: (_) => TimerState())
+        ],
+        child: MainApp(
+          child: child,
+        ));
+  }
 }
 
 class MainApp extends StatelessWidget {
@@ -51,8 +63,8 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.black,
           colorScheme: ThemeData().colorScheme.copyWith(
-            secondary: Colors.white,
-          ),
+                secondary: Colors.white,
+              ),
         ),
         debugShowCheckedModeBanner: false,
         home: child);

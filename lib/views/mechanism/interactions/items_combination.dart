@@ -50,6 +50,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
 
     for (var index = 0; index < expectedItemList.length; index++) {
       final selectedItem = selectedItems[index];
+      final expectedItem = expectedItemList[index];
 
       final widget = (selectedItem != null)
           ? ARSGridImageItem(
@@ -58,6 +59,7 @@ class _MechanismItemsCombinationState extends State<MechanismItemsCombination> {
               draggable: false,
               onItemClicked: onItemClicked)
           : ARSGridEmptyItem(
+              key: ValueKey("combination_slot_$expectedItem"),
               onAcceptedData: (context, data) => onItemDropped(context, index, data));
 
       result.add(widget);

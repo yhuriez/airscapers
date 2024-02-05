@@ -9,7 +9,7 @@ const int GRID_ITEM_PER_PAGE = 4;
 const double GRID_HEIGHT = 60;
 const double ITEM_SIZE = 50;
 
-class ARSPaginatedGrid extends StatelessWidget {
+class ARSInventoryGrid extends StatelessWidget {
   final List<ScenarioItem> items;
   final String? selectedItem;
   final String? newItem;
@@ -18,7 +18,7 @@ class ARSPaginatedGrid extends StatelessWidget {
   // pageNotifier is external because we want to keep selected page index across widget update
   final ValueNotifier<int> pageNotifier;
 
-  ARSPaginatedGrid(
+  ARSInventoryGrid(
       {Key? key,
       required this.items,
         required this.selectedItem,
@@ -80,6 +80,7 @@ class ARSPaginatedGrid extends StatelessWidget {
 
     final imageItems = items
         .map((item) => ARSGridImageItem(
+            key: Key("inventory_item_${item.id}"),
             item: item,
             selected: item.id == selectedItem,
             animated: newItem != null && newItem == item.id,

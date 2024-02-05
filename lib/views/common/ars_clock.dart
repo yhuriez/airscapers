@@ -19,7 +19,9 @@ class ARSClock extends StatelessWidget {
       return Container();
     }
 
-    return Text(state.durationLeft,
+    return Text(
+        state.durationLeft,
+        key: const Key("clock_text"),
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,

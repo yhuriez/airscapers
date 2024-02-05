@@ -6,8 +6,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 const hiveKey = "hive_key";
 
-Future<void> initHive() async {
-  await Hive.initFlutter("database");
+Future<void> initHive({bool forTesting = false}) async {
+  final dbName = (forTesting) ? "test_database" : "database";
+  await Hive.initFlutter(dbName);
 }
 
 class JsonTypeAdapter<T> extends TypeAdapter<T> {

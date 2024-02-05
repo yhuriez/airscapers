@@ -134,6 +134,7 @@ class SuccessScreen extends StatelessWidget {
   Widget get finishButton => Padding(
         padding: const EdgeInsets.all(16.0),
         child: ARSButton(
+          key: const Key("end_quit_button"),
           text: Text(
             "Quitter",
             style: TextStyle(color: Colors.black),

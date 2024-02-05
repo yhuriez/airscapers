@@ -26,10 +26,13 @@ class InventoryDetailsFragment extends StatelessWidget {
     return ARSScaffold(
         title: item.title,
         actions: [
-          if(kDebugMode) IconButton(
-              onPressed: () => onDisplayWriteNfcDialog(context),
-              icon: Icon(Icons.nfc, color: Colors.white,)
-          )
+          if (kDebugMode)
+            IconButton(
+                onPressed: () => onDisplayWriteNfcDialog(context),
+                icon: Icon(
+                  Icons.nfc,
+                  color: Colors.white,
+                ))
         ],
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -38,7 +41,8 @@ class InventoryDetailsFragment extends StatelessWidget {
   }
 
   onDisplayWriteNfcDialog(BuildContext context) {
-    showDialog(context: context, builder: (_) => NfcWriteDialog(link: "airscapers://item/${item.id}"));
+    showDialog(
+        context: context, builder: (_) => NfcWriteDialog(link: "airscapers://item/${item.id}"));
   }
 }
 

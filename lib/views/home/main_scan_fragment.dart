@@ -38,7 +38,9 @@ class MainScanBody extends StatelessWidget {
     return ARSScaffold(
       title: _repository.title,
       actions: [
-        IconButton(onPressed: () => onUseDebugMenu(context), icon: Icon(Icons.menu_book)),
+        IconButton(
+            key: const Key("home_debug_button"),
+            onPressed: () => onUseDebugMenu(context), icon: Icon(Icons.menu_book)),
 
         _createQuitAction(context),
       ],
@@ -53,6 +55,7 @@ class MainScanBody extends StatelessWidget {
 
   Widget _createQuitAction(BuildContext context) {
     return IconButton(
+      key: const Key("home_quit_button"),
       icon: Icon(Icons.clear),
       onPressed: () => _onQuitClicked(context),
     );
@@ -81,6 +84,7 @@ class MainScanBody extends StatelessWidget {
     showDialog(
         context: context,
         builder: (context) => ARSDialogConfirm(
+          key: const Key("quit_confirm_dialog"),
           title: "Etes-vous sûr de vouloir quitter ?",
           message:
           "Vous perdrez toute votre progression en quittant le scénario en cours.",
