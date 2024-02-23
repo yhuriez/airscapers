@@ -15,6 +15,7 @@ void main() {
   late ScenarioRobot robot;
 
   group("Tutorial scenario", ()  {
+
     setUp(() async {
       // Clear database
       await Hive.deleteFromDisk();
@@ -90,7 +91,7 @@ void main() {
       await robot.clickOnUpButton();
 
       await goToCleScreen(robot);
-      await clickOnContinue(robot);
+      await clickOnTake(robot);
 
       await goToCoffreScreen(robot);
       await checkAllClues(robot, 1);

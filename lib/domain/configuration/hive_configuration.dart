@@ -12,6 +12,8 @@ Future<void> initHive({bool forTesting = false}) async {
 }
 
 class JsonTypeAdapter<T> extends TypeAdapter<T> {
+
+  @override
   final int typeId;
   final T Function(Map<String, dynamic>) fromJson;
   final Map<String, dynamic> Function(T) toJson;

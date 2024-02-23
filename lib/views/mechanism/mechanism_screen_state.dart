@@ -23,14 +23,14 @@ class MechanismScreenState extends ChangeNotifier {
 
   MechanismScreenState(this.mechanismId) {
     var mechanism = _loadMechanismInteractor.execute(mechanismId);
-    if (mechanism.isEnd) {
-      _scenarioStateStorage.setEndDate(DateTime.now());
-    }
     refreshState(mechanism);
   }
 
   void refreshState(ScenarioMechanism mechanism) {
     this.mechanism = mechanism;
+    if (mechanism.isEnd) {
+      _scenarioStateStorage.setEndDate(DateTime.now());
+    }
     notifyListeners();
   }
 

@@ -15,20 +15,26 @@ class InventoryLocalSource {
   final Box<InventoryClue> _clueDb;
 
   static Future<Box<InventoryItem>> createItemBox(int typeId) async {
-    Hive.registerAdapter(JsonTypeAdapter<InventoryItem>(
-        typeId, (json) => InventoryItem.fromJson(json), (obj) => obj.toJson()));
+    if (!Hive.isAdapterRegistered(typeId)) {
+      Hive.registerAdapter(JsonTypeAdapter<InventoryItem>(
+          typeId, (json) => InventoryItem.fromJson(json), (obj) => obj.toJson()));
+    }
     return Hive.openBox<InventoryItem>(itemDbName);
   }
 
   static Future<Box<InventoryMechanism>> createMechanismBox(int typeId) async {
-    Hive.registerAdapter(JsonTypeAdapter<InventoryMechanism>(
-        typeId, (json) => InventoryMechanism.fromJson(json), (obj) => obj.toJson()));
+    if (!Hive.isAdapterRegistered(typeId)) {
+      Hive.registerAdapter(JsonTypeAdapter<InventoryMechanism>(
+          typeId, (json) => InventoryMechanism.fromJson(json), (obj) => obj.toJson()));
+    }
     return Hive.openBox<InventoryMechanism>(mechanismDbName);
   }
 
   static Future<Box<InventoryClue>> createClueBox(int typeId) async {
-    Hive.registerAdapter(JsonTypeAdapter<InventoryClue>(
-        typeId, (json) => InventoryClue.fromJson(json), (obj) => obj.toJson()));
+    if (!Hive.isAdapterRegistered(typeId)) {
+      Hive.registerAdapter(JsonTypeAdapter<InventoryClue>(
+          typeId, (json) => InventoryClue.fromJson(json), (obj) => obj.toJson()));
+    }
     return Hive.openBox<InventoryClue>(clueDbName);
   }
 
